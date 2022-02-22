@@ -26,6 +26,7 @@ import configuration from '../config/configuration';
       database: process.env.DB_NAME,
       entities: [ExampleEntity],
       synchronize: true,
+      keepConnectionAlive: true
     }),
     ExampleModule,
   ],

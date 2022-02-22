@@ -30,6 +30,5 @@ Then I received a <message> message
 Examples:
 | description | message |
 | "salut c'est moi" | "Success" |
-| "salut c'est moi" | "Cannot create empty example" |
 | "" | "Cannot create empty example" |
 
