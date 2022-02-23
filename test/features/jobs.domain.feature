@@ -2,13 +2,13 @@ Feature: Creating a job
 
   @FullJob
   Scenario Outline: Creates a job offer
-    Given creating a job offer with "<title>", "<address>", "<description>", "<salary>", "<contract_type>", "<author>", "<created_at>", "<updated_at>"
+    Given Creating a job offer with <title>, <address>, <description>, <salary>, <contract_type>, <author>
     When I save the job offer
-    Then I received a <message> message
+    Then I received a <message> created
 
-  Example:
-      | title           | address | description        | salary    | contract_type | author   | created_at | updated_at | message |
-      | developpeur web | paris   | dev web javascript | 5000 EURO | CDI           | wemanity | 23/02/2022 | 23/02/2022 | Success |
+    Examples:
+      | title             | address | description          | salary      | contract_type | author     | message   |
+      | "developpeur web" | "paris" | "dev web javascript" | "5000 EURO" | "CDI"         | "wemanity" | "Success" |
 
   @wip
   @IncompleteExample
@@ -17,7 +17,7 @@ Feature: Creating a job
     When I save the example
     Then I received a <message> message
 
-  Example:
+    Examples:
       | description | message                       |
       | ""          | "Cannot create empty example" |
 
@@ -29,7 +29,7 @@ Feature: Creating a job
     When I submit the example
     Then I received a <message> message
 
-  Example:
+    Examples:
       | description       | message                       |
       | "salut c'est moi" | "Success"                     |
       | ""                | "Cannot create empty example" |

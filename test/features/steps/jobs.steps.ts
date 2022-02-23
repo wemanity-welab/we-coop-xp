@@ -6,17 +6,8 @@ import { expect } from 'chai';
 import { JobsEntity } from '../../../src/domain/entities/jobs.entities';
 
 Given(
-  'creating a job offer with {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}',
-  function (
-    title,
-    address,
-    description,
-    salary,
-    contract_type,
-    author,
-    created_at,
-    updated_at,
-  ) {
+  'Creating a job offer with {string}, {string}, {string}, {string}, {string}, {string}',
+  function (title, address, description, salary, contract_type, author) {
     // Write code here that turns the phrase above into concrete actions
     this.jobModel = new JobsModel({
       title,
@@ -25,8 +16,8 @@ Given(
       salary,
       contract_type,
       author,
-      created_at: new Date(created_at),
-      updated_at: new Date(updated_at),
+      created_at: new Date(),
+      updated_at: new Date(),
     });
   },
 );
@@ -45,6 +36,6 @@ When('I save the job offer', function () {
   this.jobService = new JobsService(jobAdapter);
 });
 
-Then('I received a {string} message', function (message: string) {
+Then('I received a {string} created', function (message: string) {
   expect(this.jobService.create(this.jobModel)).to.equals(message);
 });

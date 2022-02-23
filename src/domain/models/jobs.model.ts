@@ -35,8 +35,6 @@ export class JobsModel {
     salary,
     contract_type,
     author,
-    created_at,
-    updated_at,
     description,
   }: {
     title: string;
@@ -44,8 +42,6 @@ export class JobsModel {
     salary: string;
     contract_type: string;
     author: string;
-    created_at: Date;
-    updated_at: Date;
     description: string;
   }) {
     this._title = title;
@@ -53,8 +49,8 @@ export class JobsModel {
     this._salary = salary;
     this._contract_type = contract_type;
     this._author = author;
-    this._created_at = created_at;
-    this._updated_at = updated_at;
+    this._created_at = new Date();
+    this._updated_at = new Date();
     this._description = description;
   }
 
