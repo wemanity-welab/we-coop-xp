@@ -3,11 +3,11 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { AppController } from './app.controller';
 import { AppService } from '../domain/services/app.service';
-import { ExampleController } from './example.controller';
-import { ExampleService } from '../domain/services/example.service';
-import { ExampleEntity } from '../domain/entities/example.entities';
-import { ExampleAdapter } from '../infrastructure/example.repository.adapter';
-import { ExampleModule } from '../infrastructure/example.module';
+import { JobsController } from './jobs.controller';
+import { JobsService } from '../domain/services/jobs.service';
+import { JobsEntity } from '../domain/entities/jobs.entities';
+import { JobsAdapter } from '../infrastructure/jobs.repository.adapter';
+import { JobsModule } from '../infrastructure/jobs.module';
 import { ConfigModule } from '@nestjs/config';
 import configuration from '../config/configuration';
 
@@ -24,17 +24,13 @@ import configuration from '../config/configuration';
       username: process.env.DB_USER,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
-      entities: [ExampleEntity],
+      entities: [JobsEntity],
       synchronize: true,
-      keepConnectionAlive: true
+      keepConnectionAlive: true,
     }),
-    ExampleModule,
+    JobsModule,
   ],
-  controllers: [AppController, ExampleController],
-  providers: [
-    AppService,
-    ExampleService,
-    ExampleAdapter,
-  ],
+  controllers: [AppController, JobsController],
+  providers: [AppService, JobsService, JobsAdapter],
 })
 export class AppModule {}
