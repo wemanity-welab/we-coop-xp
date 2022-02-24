@@ -1,4 +1,4 @@
-export class JobsModel {
+export class JobModel {
   private _id: number;
   private _title: string;
   private _address: string;
@@ -8,26 +8,6 @@ export class JobsModel {
   private _author: string;
   private _created_at: Date;
   private _updated_at: Date;
-
-  /*constructor(
-    title: string,
-    address: string,
-    salary: string,
-    contract_type: string,
-    author: string,
-    created_at: Date,
-    updated_at: Date,
-    description: string,
-  ) {
-    this._title = title;
-    this._address = address;
-    this._salary = salary;
-    this._contract_type = contract_type;
-    this._author = author;
-    this._created_at = created_at;
-    this._updated_at = updated_at;
-    this._description = description;
-  }*/
 
   constructor({
     title,

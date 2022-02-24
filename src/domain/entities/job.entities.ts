@@ -3,8 +3,8 @@ import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 // The property "name" sets the table name. This is usually implied from the
 // class name, however this can be overridden if needed.
 
-@Entity({ name: 'jobsTable' })
-export class JobsEntity {
+@Entity({ name: 'jobTable' })
+export class JobEntity {
   @PrimaryGeneratedColumn({ name: 'id' })
   id!: number;
 
