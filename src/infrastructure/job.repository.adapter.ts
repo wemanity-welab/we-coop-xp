@@ -13,12 +13,23 @@ export class JobAdapter implements JobRepository {
     private readonly jobEntityRepository: Repository<JobEntity>,
   ) {}
 
-  public save(job: JobModel) {
-    this.jobEntityRepository.save(job);
+  public async save(job: JobModel): Promise<string> {
+    await this.jobEntityRepository.save(job);
 
     return 'Success';
   }
   public getAll() {
     return this.jobEntityRepository.find();
+  }
+
+  public async remove(jobId: number): Promise<string> {
+    const job = await this.jobEntityRepository.findOne({ id: jobId });
+
+    if (job) {
+      await this.jobEntityRepository.delete(jobId);
+
+      return 'Job was removed';
+    }
+    return 'Job not found';
   }
 }

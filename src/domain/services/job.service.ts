@@ -16,4 +16,8 @@ export class JobService {
   getAll() {
     return this.jobRepositoryAdapter.getAll();
   }
+
+  removeJob(jobId: number) {
+    return this.jobRepositoryAdapter.remove(jobId);
+  }
 }
