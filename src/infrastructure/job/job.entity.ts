@@ -41,7 +41,7 @@ export class JobEntity {
     return new JobEntity(jobDomain);
   }
 
-  fromEntityToDomain(jobEntity: JobEntity): JobDomain {
+  static fromEntityToDomain(jobEntity: JobEntity): JobDomain {
     return new JobDomain(jobEntity);
   }
 }
