@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { JobEntity } from '../domain/entities/job.entities';
+import { JobEntity } from './job.entity';
 
 @Module({
   imports: [TypeOrmModule.forFeature([JobEntity])],

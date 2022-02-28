@@ -1,4 +1,4 @@
-export class JobModel {
+export class JobDomain {
   private _id: number;
   private _title: string;
   private _address: string;

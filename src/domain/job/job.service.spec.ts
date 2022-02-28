@@ -1,20 +1,20 @@
 import { JobService } from './job.service';
-import { JobModel } from '../models/job.model';
-import { JobRepository } from '../interfaces/job.repository';
-import { JobEntity } from '../entities/job.entities';
-import { JobAdapter } from '../../infrastructure/job.repository.adapter';
+import { JobDomain } from './job.domain';
 import { job } from '../../../test/jobOffer';
+import { JobAdapter } from '../../infrastructure/job/job.repository.adapter';
 
-const completeJobs = new JobModel(job);
+const completeJobs = new JobDomain(job);
+
+//TODO MOCK create class jobAdapter
 
 describe('should create job Offer', () => {
   const jobAdapter = new JobAdapter(undefined);
 
-  jobAdapter.save = (job: JobModel) => {
+  jobAdapter.save = (job: JobDomain) => {
     return 'Success';
   };
 
-  jobAdapter.getAll = (): Promise<JobEntity[]> => {
+  jobAdapter.getAll = (): Promise<JobDomain[]> => {
     throw new Error('Function not implemented.');
   };
 

@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { JobAdapter } from '../../infrastructure/job.repository.adapter';
-import { JobModel } from '../models/job.model';
+import { JobAdapter } from '../../infrastructure/job/job.repository.adapter';
+import { JobDomain } from './job.domain';
 
 @Injectable()
 export class JobService {
@@ -10,7 +10,7 @@ export class JobService {
     this.jobRepositoryAdapter = jobAdapter;
   }
 
-  create(job: JobModel) {
+  create(job: JobDomain) {
     return this.jobRepositoryAdapter.save(job);
   }
   getAll() {

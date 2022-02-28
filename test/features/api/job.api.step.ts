@@ -3,7 +3,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { expect } from 'chai';
 import * as request from 'supertest';
 
-import { AppModule } from '../../../src/exposition/app.module';
+import { AppModule } from '../../../src/app.module';
 
 Given('Writing a job with {string}', function (description: string) {
   // Write code here that turns the phrase above into concrete actions

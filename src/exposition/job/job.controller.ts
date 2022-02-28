@@ -4,22 +4,24 @@ import {
   Get,
   HttpStatus,
   Post,
-  Req,
   Res,
   Delete,
   Param,
 } from '@nestjs/common';
-import { Response, Request } from 'express';
-import { JobModel } from '../domain/models/job.model';
-import { JobService } from '../domain/services/job.service';
+import { Response } from 'express';
+import { JobDomain } from '../../domain/job/job.domain';
+import { JobService } from '../../domain/job/job.service';
 
 @Controller('jobs')
 export class JobController {
   constructor(private readonly jobService: JobService) {}
 
   @Post()
-  async create(@Body() job: JobModel, @Res() response: Response): Promise<string | void> {
-    const status = await this.jobService.create(new JobModel(job));
+  async create(
+    @Body() job: JobDomain,
+    @Res() response: Response,
+  ): Promise<string | void> {
+    const status = await this.jobService.create(new JobDomain(job));
     response.status(HttpStatus.CREATED).send(status);
   }
   @Get()
