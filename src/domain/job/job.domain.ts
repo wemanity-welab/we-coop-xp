@@ -1,5 +1,4 @@
 export class JobDomain {
-  private _id: number;
   private _title: string;
   private _address: string;
   private _salary: string;
@@ -32,13 +31,6 @@ export class JobDomain {
     this._created_at = new Date();
     this._updated_at = new Date();
     this._description = description;
-  }
-
-  public get id(): number {
-    return this._id;
-  }
-  public set id(value: number) {
-    this._id = value;
   }
 
   public get title(): string {

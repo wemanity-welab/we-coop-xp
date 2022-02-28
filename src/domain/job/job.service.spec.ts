@@ -3,7 +3,16 @@ import { JobDomain } from './job.domain';
 import { job } from '../../../test/jobOffer';
 import { JobAdapter } from '../../infrastructure/job/job.repository.adapter';
 
-const completeJobs = new JobDomain(job);
+// const completeJobs = new JobDomain(job);
+
+// // class JobAdapterMock {
+// //   create {
+
+// //   }
+// //   getall {
+
+// //   }
+// // }
 
 //TODO MOCK create class jobAdapter
 
