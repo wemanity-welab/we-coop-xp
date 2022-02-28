@@ -3,7 +3,6 @@ import { JobDomain } from '../../../src/domain/job/job.domain';
 import { JobService } from '../../../src/domain/job/job.service';
 import { JobAdapter } from '../../../src/infrastructure/job/job.repository.adapter';
 import { expect } from 'chai';
-import { JobEntity } from '../../../src/infrastructure/job/job.entity';
 
 Given(
   'Creating a job offer with {string}, {string}, {string}, {string}, {string}, {string}',
@@ -27,7 +26,7 @@ When('I save the job offer', function () {
     return 'Success';
   };
 
-  jobAdapter.getAll = (): Promise<JobEntity[]> => {
+  jobAdapter.getAll = (): Promise<JobDomain[]> => {
     throw new Error('Function not implemented.');
   };
 

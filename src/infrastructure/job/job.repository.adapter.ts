@@ -5,6 +5,7 @@ import { Repository } from 'typeorm';
 import { JobDomain } from '../../domain/job/job.domain';
 import { JobRepository } from '../../domain/job/job.repository';
 import { JobEntity } from './job.entity';
+import { JobMapper } from './job.mapper';
 
 @Injectable()
 export class JobAdapter implements JobRepository {
@@ -19,7 +20,8 @@ export class JobAdapter implements JobRepository {
     return 'Success';
   }
   public async getAll(): Promise<JobDomain[]> {
-    return await this.jobEntityRepository.find();
+    const jobs = await this.jobEntityRepository.find();
+    return JobMapper.mapper(jobs);
   }
 
   public async remove(jobId: number): Promise<string> {
