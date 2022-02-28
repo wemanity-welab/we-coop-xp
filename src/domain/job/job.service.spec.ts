@@ -5,11 +5,13 @@ import { JobAdapter } from '../../infrastructure/job/job.repository.adapter';
 
 // const completeJobs = new JobDomain(job);
 
-// // class JobAdapterMock {
-// //   create {
+// class JobAdapterMock {
+//     create {
 
-// //   }
-// //   getall {
+// }
+//     getall {
+
+//15min doc, prototyper pour ensuite estimer
 
 // //   }
 // // }
