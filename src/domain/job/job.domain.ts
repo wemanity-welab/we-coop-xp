@@ -1,14 +1,16 @@
 export class JobDomain {
-  private _title: string;
-  private _address: string;
-  private _salary: string;
-  private _contract_type: string;
-  private _description: string;
-  private _author: string;
-  private _created_at: Date;
-  private _updated_at: Date;
+  private id: number;
+  private title: string;
+  private address: string;
+  private salary: string;
+  private contract_type: string;
+  private description: string;
+  private author: string;
+  private created_at: Date;
+  private updated_at: Date;
 
   constructor({
+    id,
     title,
     address,
     salary,
@@ -16,6 +18,7 @@ export class JobDomain {
     author,
     description,
   }: {
+    id?: number;
     title: string;
     address: string;
     salary: string;
@@ -23,69 +26,77 @@ export class JobDomain {
     author: string;
     description: string;
   }) {
+    this.id = id;
     this.title = title;
-    this._address = address;
-    this._salary = salary;
-    this._contract_type = contract_type;
-    this._author = author;
-    this._created_at = new Date();
-    this._updated_at = new Date();
-    this._description = description;
+    this.address = address;
+    this.salary = salary;
+    this.contract_type = contract_type;
+    this.author = author;
+    this.created_at = new Date();
+    this.updated_at = new Date();
+    this.description = description;
   }
 
-  public get title(): string {
+  public get getId(): number {
+    return this.id;
+  }
+  public set setId(value: number) {
+    this.id = value;
+  }
+
+  public get getTitle(): string {
     return this.title;
   }
-  public set title(value: string) {
-    this._title = value;
+  public set setTitle(value: string) {
+    this.title = value;
   }
 
-  public get address(): string {
-    return this._address;
+  public get getAddress(): string {
+    return this.address;
   }
-  public set address(value: string) {
-    this._address = value;
-  }
-
-  public get salary(): string {
-    return this._salary;
-  }
-  public set salary(value: string) {
-    this._salary = value;
+  public set setAddress(value: string) {
+    this.address = value;
   }
 
-  public get contract_type(): string {
-    return this._contract_type;
+  public get getSalary(): string {
+    return this.salary;
   }
-  public set contract_type(value: string) {
-    this._contract_type = value;
-  }
-
-  public get author(): string {
-    return this._author;
-  }
-  public set author(value: string) {
-    this._author = value;
+  public set setSalary(value: string) {
+    this.salary = value;
   }
 
-  public get created_at(): Date {
-    return this._created_at;
+  public get getContract_type(): string {
+    return this.contract_type;
   }
-  public set created_at(value: Date) {
-    this._created_at = value;
-  }
-
-  public get updated_at(): Date {
-    return this._updated_at;
-  }
-  public set updated_at(value: Date) {
-    this._updated_at = value;
+  public set setContract_type(value: string) {
+    this.contract_type = value;
   }
 
-  public get description(): string {
-    return this._description;
+  public get getAuthor(): string {
+    return this.author;
   }
-  public set description(value: string) {
-    this._description = value;
+  public set setAuthor(value: string) {
+    this.author = value;
+  }
+
+  public get getCreated_at(): Date {
+    return this.created_at;
+  }
+  public set setCreated_at(value: Date) {
+    this.created_at = value;
+  }
+
+  public get setUpdated_at(): Date {
+    return this.updated_at;
+  }
+  public set getUpdated_at(value: Date) {
+    this.updated_at = value;
+  }
+
+  public get getDescription(): string {
+    return this.description;
+  }
+  public set setDescription(value: string) {
+    this.description = value;
   }
 }

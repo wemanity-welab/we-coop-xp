@@ -22,7 +22,7 @@ export class JobController {
     @Body() job: JobDomain,
     @Res() response: Response,
   ): Promise<string | void> {
-    const status = await this.jobService.create(new JobDomain(job));
+    const status = await this.jobService.create(job);
     response.status(HttpStatus.CREATED).send(status);
   }
   @Get()

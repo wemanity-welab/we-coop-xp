@@ -34,6 +34,5 @@ When('I save the job offer', function () {
 });
 
 Then('I received a {string} created', function (message: string) {
-  console.log(`!!MESSAGE :`, typeof message);
   expect(this.jobService.create(this.jobModel)).to.equals(message);
 });
