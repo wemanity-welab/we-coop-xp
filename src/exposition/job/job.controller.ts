@@ -46,16 +46,15 @@ export class JobController {
     @Param('id') jobId: number,
     @Body() job: JobDomain,
   ) {
-    let status = HttpStatus.OK;
     let resp;
     try {
       resp = await this.jobService.updateJob(jobId, job);
     } catch (error) {
       if (error == 'job not found') {
-        status = HttpStatus.BAD_REQUEST;
+        console.log(error);
       }
     }
 
-    resp.status(status).send(resp);
+    response.status(HttpStatus.OK).send(resp);
   }
 }

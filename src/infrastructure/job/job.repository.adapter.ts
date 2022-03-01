@@ -34,14 +34,14 @@ export class JobAdapter implements JobRepository {
     }
     return 'Job not found';
   }
-  public async update(jobId: number, job: JobDomain): Promise<string | void> {
+  public async update(jobId: number, job: JobDomain): Promise<JobEntity> {
     const jobFound = await this.jobEntityRepository.findOne({ id: jobId });
 
     if (jobFound) {
-      await this.jobEntityRepository.update(
-        +jobId,
-        JobEntity.fromDomainToEntity(job),
-      );
+      return await this.jobEntityRepository.save({
+        ...jobFound, // existing fields
+        ...job, // updated fields
+      });
     } else {
       throw new Error('job not updated');
     }
