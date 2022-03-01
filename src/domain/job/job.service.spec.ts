@@ -1,37 +1,78 @@
-import { JobService } from './job.service';
 import { JobDomain } from './job.domain';
-import { job } from '../../../test/jobOffer';
-import { JobAdapter } from '../../infrastructure/job/job.repository.adapter';
-
-// const completeJobs = new JobDomain(job);
-
-// class JobAdapterMock {
-//     create {
-
-// }
-//     getall {
+import { Test, TestingModule } from '@nestjs/testing';
+import { JobRepository } from './job.repository';
 
 //15min doc, prototyper pour ensuite estimer
 
-// //   }
-// // }
+class MockJobAdapter implements JobRepository {
+  private jobDomain: JobDomain;
+  constructor(jobDomain: JobDomain) {
+    this.jobDomain = jobDomain;
+  }
+
+  getAll(): Promise<JobDomain[]> {
+    throw new Error('Method not implemented.');
+  }
+  remove(jobId: number): Promise<string> {
+    throw new Error('Method not implemented.');
+  }
+  save(job: JobDomain): any {
+    if (job) {
+      return { job, message: 'success' };
+    }
+  }
+}
 
 //TODO MOCK create class jobAdapter
 
-describe('should create job Offer', () => {
-  const jobAdapter = new JobAdapter(undefined);
+describe('should test job adapter class', () => {
+  let mockedAdapter: MockJobAdapter;
+  let mockedJob: JobDomain;
 
-  jobAdapter.save = (job: JobDomain) => {
-    return 'Success';
-  };
+  beforeEach(() => {
+    mockedJob = new JobDomain({
+      title: 'dev',
+      address: 'rue de Paris',
+      salary: '2000',
+      contract_type: 'CDI',
+      author: 'Pole emploi',
+      description: 'Postule ici',
+    });
 
-  jobAdapter.getAll = (): Promise<JobDomain[]> => {
-    throw new Error('Function not implemented.');
-  };
+    mockedAdapter = new MockJobAdapter(mockedJob);
+  });
 
-  const jobService = new JobService(jobAdapter);
+  it('should return success', () => {
+    const result = 'success';
+    const message = mockedAdapter.save(mockedJob).message;
 
-  it('Should send message successfully', () => {
-    expect(jobService.create(completeJobs)).toBe('Success');
+    jest.spyOn(mockedAdapter, 'save').mockImplementation(() => result);
+
+    expect(message).toBe(result);
+  });
+
+  it('should return an object', () => {
+    const result = 'object';
+    const typeOfReturnedObject = typeof mockedAdapter.save(mockedJob).job;
+
+    jest.spyOn(mockedAdapter, 'save').mockImplementation(() => result);
+
+    expect(typeOfReturnedObject).toBe(result);
+  });
+
+  it('should return a job object', () => {
+    const result = new JobDomain({
+      title: 'dev',
+      address: 'rue de Paris',
+      salary: '2000',
+      contract_type: 'CDI',
+      author: 'Pole emploi',
+      description: 'Postule ici',
+    });
+    const returnedJob = mockedAdapter.save(mockedJob).job;
+
+    jest.spyOn(mockedAdapter, 'save').mockImplementation(() => result);
+
+    expect(returnedJob).toStrictEqual(result);
   });
 });
