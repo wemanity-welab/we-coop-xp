@@ -1,4 +1,10 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 import { JobDomain } from '../../domain/job/job.domain';
 
 // The property "name" sets the table name. This is usually implied from the
@@ -27,11 +33,18 @@ export class JobEntity {
   @Column({ name: 'description' })
   description!: string;
 
-  @Column({ name: 'created_at' })
-  created_at!: Date;
+  @CreateDateColumn({
+    type: 'timestamp',
+    default: () => 'CURRENT_TIMESTAMP(6)',
+  })
+  public created_at!: Date;
 
-  @Column({ name: 'updated_at' })
-  updated_at!: Date;
+  @UpdateDateColumn({
+    type: 'timestamp',
+    default: () => 'CURRENT_TIMESTAMP(6)',
+    onUpdate: 'CURRENT_TIMESTAMP(6)',
+  })
+  public updated_at!: Date;
 }
 
 export const fromDomainToEntity = (jobDomain: JobDomain): any => {

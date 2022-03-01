@@ -9,5 +9,5 @@ export default (): ConfigModule => ({
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
   entities: [JobEntity],
-  // synchronize: true,
+  synchronize: true,
 });
