@@ -15,7 +15,7 @@ import { JobDomain } from '../domain/job/job.domain';
       useFactory: configuration,
     }),
   ],
-  providers: [JobAdapter, JobEntity],
+  providers: [JobAdapter, JobEntity, JobDomain],
   exports: [],
 })
 export class RepositoriesModule {}

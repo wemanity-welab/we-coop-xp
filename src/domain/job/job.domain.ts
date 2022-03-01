@@ -23,7 +23,7 @@ export class JobDomain {
     author: string;
     description: string;
   }) {
-    this._title = title;
+    this.title = title;
     this._address = address;
     this._salary = salary;
     this._contract_type = contract_type;
@@ -34,7 +34,7 @@ export class JobDomain {
   }
 
   public get title(): string {
-    return this._title;
+    return this.title;
   }
   public set title(value: string) {
     this._title = value;

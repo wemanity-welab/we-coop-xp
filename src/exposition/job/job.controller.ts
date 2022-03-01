@@ -7,6 +7,7 @@ import {
   Res,
   Delete,
   Param,
+  Put,
 } from '@nestjs/common';
 import { Response } from 'express';
 import { JobDomain } from '../../domain/job/job.domain';
@@ -38,5 +39,23 @@ export class JobController {
     if (message === 'Job not found') status = 404;
 
     response.status(status).send(message);
+  }
+  @Put(':id')
+  async updateJob(
+    @Res() response: Response,
+    @Param('id') jobId: number,
+    @Body() job: JobDomain,
+  ) {
+    let status = HttpStatus.OK;
+    let resp;
+    try {
+      resp = await this.jobService.updateJob(jobId, job);
+    } catch (error) {
+      if (error == 'job not found') {
+        status = HttpStatus.BAD_REQUEST;
+      }
+    }
+
+    resp.status(status).send(resp);
   }
 }

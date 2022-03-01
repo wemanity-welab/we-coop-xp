@@ -21,6 +21,7 @@ import { JobAdapter } from '../../infrastructure/job/job.repository.adapter';
 describe('should create job Offer', () => {
   const jobAdapter = new JobAdapter(undefined);
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   jobAdapter.save = (job: JobDomain) => {
     return 'Success';
   };
