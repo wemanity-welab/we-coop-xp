@@ -5,6 +5,7 @@ import { Repository } from 'typeorm';
 import { JobDomain } from '../../domain/job/job.domain';
 import { JobRepository } from '../../domain/job/job.repository';
 import { JobEntity } from './job.entity';
+import { fromDomainToEntity, fromEntityToDomain } from './job.entity';
 
 @Injectable()
 export class JobAdapter implements JobRepository {
@@ -14,12 +15,13 @@ export class JobAdapter implements JobRepository {
   ) {}
 
   public save(job: JobDomain): string {
-    this.jobEntityRepository.save(JobEntity.fromDomainToEntity(job));
+    console.log(`!!JOB: `, job);
+    this.jobEntityRepository.save(fromDomainToEntity(job));
     return 'Success';
   }
   public async getAll(): Promise<JobDomain[]> {
     const jobs = await this.jobEntityRepository.find();
-    return jobs.map((job) => JobEntity.fromEntityToDomain(job));
+    return jobs.map((job) => fromEntityToDomain(job));
   }
 
   public async remove(jobId: number): Promise<string> {

@@ -5,6 +5,7 @@ import { JobEntity } from './job/job.entity';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import configuration from '../config/configuration';
 import { JobDomain } from '../domain/job/job.domain';
+import { JobService } from '../domain/job/job.service';
 
 @Module({
   imports: [
@@ -15,7 +16,7 @@ import { JobDomain } from '../domain/job/job.domain';
       useFactory: configuration,
     }),
   ],
-  providers: [JobAdapter, JobEntity],
+  providers: [],
   exports: [],
 })
 export class RepositoriesModule {}

@@ -8,6 +8,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import configuration from './config/configuration';
 import { RepositoriesModule } from './infrastructure/repositories.module';
+import { JobDomain } from './domain/job/job.domain';
 
 @Module({
   imports: [
@@ -18,7 +19,5 @@ import { RepositoriesModule } from './infrastructure/repositories.module';
     RepositoriesModule,
     JobModule,
   ],
-  controllers: [JobController],
-  providers: [JobService, JobAdapter],
 })
 export class AppModule {}
