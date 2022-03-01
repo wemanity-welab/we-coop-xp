@@ -20,4 +20,7 @@ export class JobService {
   removeJob(jobId: number) {
     return this.jobRepositoryAdapter.remove(jobId);
   }
+  updateJob(jobId: number, job: JobDomain) {
+    return this.jobRepositoryAdapter.update(jobId, job);
+  }
 }
