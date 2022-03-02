@@ -23,7 +23,11 @@ export class JobAdapter implements JobRepository {
     const jobs = await this.jobEntityRepository.find();
     return jobs.map((job) => fromEntityToDomain(job));
   }
-
+  public async getJob(jobId: number): Promise<JobDomain> {
+    const jobOne = await this.jobEntityRepository.find({ id: jobId });
+    const job = jobOne.map((job) => fromEntityToDomain(job));
+    return job[0];
+  }
   public async remove(jobId: number): Promise<string> {
     const job = await this.jobEntityRepository.findOne({ id: jobId });
 
