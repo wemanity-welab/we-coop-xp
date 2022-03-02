@@ -6,4 +6,5 @@ export interface JobRepository {
   getAll(): Promise<JobDomain[]>;
   remove(jobId: number): Promise<string>;
   update(jobId: number, job: JobDomain): Promise<JobEntity>;
+  getJob(jobId: number): Promise<JobDomain>;
 }
