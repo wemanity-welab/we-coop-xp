@@ -3,7 +3,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { expect } from 'chai';
 import * as request from 'supertest';
 
-import { AppModule } from '../../../src/app.module';
+import { AppModule } from '../../../src/modules/app.module';
 import { JobEntity } from '../../../src/infrastructure/job/job.entity';
 
 Given(
