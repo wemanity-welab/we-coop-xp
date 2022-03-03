@@ -15,7 +15,6 @@ export class JobAdapter implements JobRepository {
   ) {}
 
   public save(job: JobDomain): string {
-    console.log(`!!JOB: `, job);
     this.jobEntityRepository.save(fromDomainToEntity(job));
     return 'Success';
   }
