@@ -1,3 +1,4 @@
+import { JobDomain } from '../job.domain';
 import { JobService } from '../job.service';
 import mockedAdapter from './mock/mockedAdapter';
 import mockedJobs from './mock/mockedJobs';
@@ -10,9 +11,15 @@ describe('should test job adapter class', () => {
   });
 
   it('should return success', async () => {
-    const job = await jobService.getJob(2);
+    const job: JobDomain = new JobDomain({
+      title: 'dev web',
+      address: '6 Rue de Paris',
+      salary: '2k',
+      contract_type: 'CDD',
+      author: 'Adecco',
+      description: 'Post',
+    });
 
-    console.log(job);
-    expect(job.getTitle).toBe(mockedJobs[2].getTitle);
+    expect(await jobService.create(job)).toBe('success');
   });
 });

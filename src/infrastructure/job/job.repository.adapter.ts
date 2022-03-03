@@ -14,9 +14,8 @@ export class JobAdapter implements JobRepository {
     private readonly jobEntityRepository: Repository<JobEntity>,
   ) {}
 
-  public save(job: JobDomain): string {
-    console.log(`!!JOB: `, job);
-    this.jobEntityRepository.save(fromDomainToEntity(job));
+  public async save(job: JobDomain): Promise<string> {
+    await this.jobEntityRepository.save(fromDomainToEntity(job));
     return 'Success';
   }
   public async getAll(): Promise<JobDomain[]> {
