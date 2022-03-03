@@ -4,13 +4,24 @@ import { expect } from 'chai';
 import * as request from 'supertest';
 
 import { AppModule } from '../../../src/app.module';
+import { JobEntity } from '../../../src/infrastructure/job/job.entity';
 
-Given('Writing a job with {string}', function (description: string) {
-  // Write code here that turns the phrase above into concrete actions
-  this.payload = { description: description };
-});
+Given(
+  'Writing a job offer with {string}, {string}, {string}, {string}, {string}, {string}',
+  function (title, address, description, salary, contract_type, author) {
+    // Write code here that turns the phrase above into concrete actions
+    this.payload = {
+      title,
+      address,
+      description,
+      salary,
+      contract_type,
+      author,
+    };
+  },
+);
 
-When('I submit the job', async function () {
+When('I submit the job offer', async function () {
   const moduleFixture: TestingModule = await Test.createTestingModule({
     imports: [AppModule],
   }).compile();
@@ -20,7 +31,7 @@ When('I submit the job', async function () {
   await app.init();
 
   this.jobRequest = request(app.getHttpServer())
-    .post('/job')
+    .post('/jobs')
     .send(this.payload);
 });
 

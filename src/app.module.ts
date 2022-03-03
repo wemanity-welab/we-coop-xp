@@ -4,6 +4,7 @@ import { JobModule } from './infrastructure/job/job.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import configuration from './config/configuration';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { JobEntity } from './infrastructure/job/job.entity';
 
 @Module({
   imports: [

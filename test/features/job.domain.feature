@@ -1,5 +1,5 @@
 Feature: Creating a job
-
+  @wip
   @FullJob
   Scenario Outline: Creates a job offer
     Given Creating a job offer with <title>, <address>, <description>, <salary>, <contract_type>, <author>
@@ -13,24 +13,28 @@ Feature: Creating a job
   @wip
   @IncompleteExample
   Scenario Outline: Creates an incomplete example
-    Given Writing a example with <description>
-    When I save the example
+    Given Writing a description with <description>
+    When I save the description
     Then I received a <message> message
 
     Examples:
       | description | message                       |
       | ""          | "Cannot create empty example" |
 
-  @wip
   @api
   @PostExample
   Scenario Outline: Testing post request
-    Given Writing a example with <description>
-    When I submit the example
+    Given Writing a job offer with <title>, <address>, <description>, <salary>, <contract_type>, <author>
+    When I submit the job offer
     Then I received a <message> message
 
+
     Examples:
-      | description       | message                       |
-      | "salut c'est moi" | "Success"                     |
-      | ""                | "Cannot create empty example" |
+      | title             | address | description          | salary      | contract_type | author     | message   |
+      | "developpeur web" | "paris" | "dev web javascript" | "5000 EURO" | "CDI"         | "wemanity" | "Success" |
+
+# Examples:
+#   | description       | message                       |
+#   | "salut c'est moi" | "Success"                     |
+#   | ""                | "Cannot create empty example" |
 
