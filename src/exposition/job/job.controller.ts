@@ -7,7 +7,7 @@ import {
   Res,
   Delete,
   Param,
-  Put,
+  Patch,
 } from '@nestjs/common';
 import { Response } from 'express';
 import { JobDomain } from '../../domain/job/job.domain';
@@ -30,6 +30,12 @@ export class JobController {
     const jobs = await this.jobService.getAll();
     response.status(HttpStatus.OK).send(jobs);
   }
+  @Get(':id')
+  async getJob(@Res() response: Response, @Param('id') jobId: number) {
+    const message = await this.jobService.getJob(jobId);
+
+    response.status(HttpStatus.OK).send(message);
+  }
 
   @Delete(':id')
   async deleteJob(@Res() response: Response, @Param('id') jobId: number) {
@@ -40,7 +46,7 @@ export class JobController {
 
     response.status(status).send(message);
   }
-  @Put(':id')
+  @Patch(':id')
   async updateJob(
     @Res() response: Response,
     @Param('id') jobId: number,

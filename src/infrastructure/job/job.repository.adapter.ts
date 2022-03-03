@@ -23,7 +23,11 @@ export class JobAdapter implements JobRepository {
     const jobs = await this.jobEntityRepository.find();
     return jobs.map((job) => fromEntityToDomain(job));
   }
-
+  public async getJob(jobId: number): Promise<JobDomain> {
+    const jobOne = await this.jobEntityRepository.find({ id: jobId });
+    const job = jobOne.map((job) => fromEntityToDomain(job));
+    return job[0];
+  }
   public async remove(jobId: number): Promise<string> {
     const job = await this.jobEntityRepository.findOne({ id: jobId });
 
@@ -34,14 +38,15 @@ export class JobAdapter implements JobRepository {
     }
     return 'Job not found';
   }
-  public async update(jobId: number, job: JobDomain): Promise<JobEntity> {
+  public async update(jobId: number, job: JobDomain): Promise<JobDomain> {
     const jobFound = await this.jobEntityRepository.findOne({ id: jobId });
 
     if (jobFound) {
-      return await this.jobEntityRepository.save({
+      const fetchedJob = await this.jobEntityRepository.save({
         ...jobFound, // existing fields
         ...job, // updated fields
       });
+      return fromEntityToDomain(fetchedJob);
     } else {
       throw new Error('job not updated');
     }
