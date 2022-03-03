@@ -3,7 +3,7 @@ import { JobService } from '../job.service';
 import mockedAdapter from './mock/mockedAdapter';
 import mockedJobs from './mock/mockedJobs';
 
-describe('should test job adapter class', () => {
+describe('should test jobService class', () => {
   let jobService: JobService;
 
   beforeEach(() => {
