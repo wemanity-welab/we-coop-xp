@@ -1,12 +1,11 @@
-import { Injectable } from '@nestjs/common';
-import { JobAdapter } from '../../infrastructure/job/job.repository.adapter';
+import { Inject, Injectable } from '@nestjs/common';
 import { JobDomain } from './job.domain';
+import { JobRepository } from './job.repository';
 
 @Injectable()
 export class JobService {
-  private jobRepositoryAdapter: JobAdapter;
-
-  constructor(jobAdapter: JobAdapter) {
+  private jobRepositoryAdapter: JobRepository;
+  constructor(@Inject('JobRepository') jobAdapter: JobRepository) {
     this.jobRepositoryAdapter = jobAdapter;
   }
 

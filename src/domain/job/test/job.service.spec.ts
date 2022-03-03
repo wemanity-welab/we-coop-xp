@@ -18,7 +18,7 @@ describe('should test job adapter class', () => {
     author: '',
     description: '',
   });
-  const mockedAdapter: any = {
+  const mockedAdapter: JobRepository = {
     save: jest.fn((job: JobDomain) => 'success'),
     getAll: function (): Promise<JobDomain[]> {
       throw new Error('Function not implemented.');

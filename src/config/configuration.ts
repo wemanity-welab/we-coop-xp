@@ -1,5 +1,4 @@
 import { ConfigModule } from '@nestjs/config';
-import { JobEntity } from '../infrastructure/job/job.entity';
 
 export default (): ConfigModule => ({
   type: 'postgres',
@@ -8,6 +7,6 @@ export default (): ConfigModule => ({
   username: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
-  entities: [JobEntity],
+  entities: ['dist/**/*.entity{.ts,.js}'],
   synchronize: true,
 });

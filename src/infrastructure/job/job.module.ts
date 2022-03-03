@@ -8,7 +8,7 @@ import { JobAdapter } from './job.repository.adapter';
 @Module({
   imports: [TypeOrmModule.forFeature([JobEntity])],
   exports: [TypeOrmModule],
-  providers: [JobAdapter, JobService],
+  providers: [JobService, { provide: 'JobRepository', useClass: JobAdapter }],
   controllers: [JobController],
 })
 export class JobModule {}
