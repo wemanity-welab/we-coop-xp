@@ -26,7 +26,7 @@ describe('should test job adapter class', () => {
     remove: function (jobId: number): Promise<string> {
       throw new Error('Function not implemented.');
     },
-    update: function (jobId: number, job: JobDomain): Promise<JobEntity> {
+    update: function (jobId: number, job: JobDomain): Promise<JobDomain> {
       throw new Error('Function not implemented.');
     },
     getJob: function (jobId: number): Promise<JobDomain> {
