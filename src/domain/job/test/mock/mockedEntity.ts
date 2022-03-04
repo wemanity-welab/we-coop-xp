@@ -12,8 +12,8 @@ const mockedEntity = {
   }),
   findOne: jest.fn(async (id: number): Promise<JobDomain> => {
     const jobId: number = id;
-    const docs = await mockedJobs.find((job) => job.id === jobId);
-    return docs;
+    const job = await mockedJobs.find((job) => job.id === jobId);
+    return job;
   }),
   delete: jest.fn(async (id: number): Promise<JobDomain[]> => {
     const jobId = id;
