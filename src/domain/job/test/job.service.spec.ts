@@ -5,8 +5,6 @@ import { JobEntity } from '../../../infrastructure/job/job.entity';
 import { JobService } from '../job.service';
 import { JobAdapter } from '../../../infrastructure/job/job.repository.adapter';
 
-//15min doc, prototyper pour ensuite estimer
-
 describe('should test job adapter class', () => {
   let jobService: JobService;
   const job = new JobDomain({

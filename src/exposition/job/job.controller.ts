@@ -8,15 +8,24 @@ import {
   Delete,
   Param,
   Patch,
+  Query,
+  NotFoundException,
 } from '@nestjs/common';
+import {
+  ApiCreatedResponse,
+  ApiNotFoundResponse,
+  ApiQuery,
+  ApiTags,
+} from '@nestjs/swagger';
 import { Response } from 'express';
 import { JobDomain } from '../../domain/job/job.domain';
 import { JobService } from '../../domain/job/job.service';
-
+import { JobEntity } from '../../infrastructure/job/job.entity';
+@ApiTags('Jobs')
 @Controller('jobs')
 export class JobController {
   constructor(private readonly jobService: JobService) {}
-
+  @ApiCreatedResponse({ type: JobEntity })
   @Post()
   async create(
     @Body() job: JobDomain,
@@ -25,16 +34,25 @@ export class JobController {
     const status = await this.jobService.create(job);
     response.status(HttpStatus.CREATED).send(status);
   }
+  @ApiCreatedResponse({
+    type: JobEntity,
+    isArray: true,
+    description: 'Table of job',
+  })
   @Get()
-  async getAll(@Res() response: Response) {
+  async getAll(@Res() response: Response): Promise<void> {
     const jobs = await this.jobService.getAll();
     response.status(HttpStatus.OK).send(jobs);
   }
+  @ApiCreatedResponse({ type: JobEntity, description: 'the job' })
+  @ApiNotFoundResponse()
   @Get(':id')
   async getJob(@Res() response: Response, @Param('id') jobId: number) {
-    const message = await this.jobService.getJob(jobId);
-
-    response.status(HttpStatus.OK).send(message);
+    const job = await this.jobService.getJob(jobId);
+    if (!job) {
+      throw new NotFoundException();
+    }
+    return response.status(HttpStatus.OK).send(job);
   }
 
   @Delete(':id')
