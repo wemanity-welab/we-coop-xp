@@ -22,7 +22,7 @@ Given(
 When('I save the job offer', function () {
   const jobAdapter = new JobAdapter(undefined);
 
-  jobAdapter.save = (): string => {
+  jobAdapter.save = async (): Promise<string> => {
     return 'Success';
   };
 
@@ -30,7 +30,7 @@ When('I save the job offer', function () {
     throw new Error('Function not implemented.');
   };
 
-  this.jobService = new JobService(jobAdapter);
+  this.jobService = new JobService(undefined);
 });
 
 Then('I received a {string} created', function (message: string) {

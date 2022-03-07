@@ -1,7 +1,6 @@
-import { JobDomain } from '../job.domain';
-import { JobService } from '../job.service';
-import mockedAdapter from './mock/mockedAdapter';
-import mockedJobs from './mock/mockedJobs';
+import { JobDomain } from '../../src/domain/job/job.domain';
+import { JobService } from '../../src/domain/job/job.service';
+import mockedAdapter from '../mock/mockedAdapter';
 
 describe('should test jobService class', () => {
   let jobService: JobService;
@@ -20,6 +19,6 @@ describe('should test jobService class', () => {
       description: 'Post',
     });
 
-    expect(await jobService.create(job)).toBe('success');
+    expect(await jobService.create(job)).toBe('Job offer created successfully');
   });
 });

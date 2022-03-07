@@ -1,4 +1,4 @@
-import { JobDomain } from '../../job.domain';
+import { JobDomain } from '../../src/domain/job/job.domain';
 import { faker } from '@faker-js/faker';
 
 faker.locale = 'fr';
