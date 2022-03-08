@@ -1,7 +1,7 @@
 import { Given, Then, When } from '@cucumber/cucumber';
-import { JobDomain } from '../../../src/domain/job/job.domain';
-import { JobService } from '../../../src/domain/job/job.service';
-import { JobAdapter } from '../../../src/infrastructure/job/job.repository.adapter';
+import { JobDomain } from '../../../src/domain/job/JobDomain';
+import { JobService } from '../../../src/domain/job/JobService';
+import { JobRepositoryAdapter } from '../../../src/infrastructure/job/JobRepositoryAdapter';
 import { expect } from 'chai';
 
 Given(
@@ -20,7 +20,7 @@ Given(
 );
 
 When('I save the job offer', function () {
-  const jobAdapter = new JobAdapter(undefined);
+  const jobAdapter = new JobRepositoryAdapter(undefined);
 
   jobAdapter.save = async (): Promise<string> => {
     return 'Success';

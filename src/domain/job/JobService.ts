@@ -1,15 +1,16 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { JobDomain } from './job.domain';
-import { JobRepository } from './job.repository';
+import { JobDomain } from './JobDomain';
+import { IJobRepository } from './IJobRepository';
+import { IJobService } from './IJobService';
 
 @Injectable()
-export class JobService {
-  private jobRepositoryAdapter: JobRepository;
-  constructor(@Inject('JobRepository') jobAdapter: JobRepository) {
+export class JobService implements IJobService {
+  private jobRepositoryAdapter: IJobRepository;
+  constructor(@Inject('IJobRepository') jobAdapter: IJobRepository) {
     this.jobRepositoryAdapter = jobAdapter;
   }
 
-  create(job: JobDomain) {
+  save(job: JobDomain) {
     return this.jobRepositoryAdapter.save(job);
   }
   getAll() {
@@ -18,10 +19,10 @@ export class JobService {
   getJob(jobId: number) {
     return this.jobRepositoryAdapter.getJob(jobId);
   }
-  removeJob(jobId: number) {
+  remove(jobId: number) {
     return this.jobRepositoryAdapter.remove(jobId);
   }
-  updateJob(jobId: number, job: JobDomain) {
+  update(jobId: number, job: JobDomain) {
     return this.jobRepositoryAdapter.update(jobId, job);
   }
 }

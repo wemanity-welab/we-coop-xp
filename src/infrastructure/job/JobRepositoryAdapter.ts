@@ -2,13 +2,13 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
-import { JobDomain } from '../../domain/job/job.domain';
-import { JobRepository } from '../../domain/job/job.repository';
-import { JobEntity } from './job.entity';
-import { fromDomainToEntity, fromEntityToDomain } from './job.entity';
+import { JobDomain } from '../../domain/job/JobDomain';
+import { IJobRepository } from '../../domain/job/IJobRepository';
+import { JobEntity } from './JobEntity';
+import { fromDomainToEntity, fromEntityToDomain } from './JobEntity';
 
 @Injectable()
-export class JobAdapter implements JobRepository {
+export class JobRepositoryAdapter implements IJobRepository {
   constructor(
     @InjectRepository(JobEntity)
     private readonly jobEntityRepository: Repository<JobEntity>,
@@ -28,18 +28,15 @@ export class JobAdapter implements JobRepository {
     return job[0];
   }
   public async remove(jobId: number): Promise<string> {
-    const job = await this.jobEntityRepository.findOne({ id: jobId });
-
-    if (job) {
-      await this.jobEntityRepository.delete(jobId);
-
-      return 'Job was removed';
+    try {
+      const removeReturn = await this.jobEntityRepository.delete(jobId);
+      return removeReturn.affected === 0 ? 'Job not found' : 'Job deleted';
+    } catch (error) {
+      throw new Error(error);
     }
-    return 'Job not found';
   }
-  public async update(jobId: number, job: JobDomain): Promise<JobDomain> {
+  public async update(jobId: number, job: any): Promise<any> {
     const jobFound = await this.jobEntityRepository.findOne({ id: jobId });
-
     if (jobFound) {
       const fetchedJob = await this.jobEntityRepository.save({
         ...jobFound, // existing fields

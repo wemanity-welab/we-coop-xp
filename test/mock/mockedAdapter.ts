@@ -1,8 +1,8 @@
-import { JobDomain } from '../../src/domain/job/job.domain';
-import { JobRepository } from '../../src/domain/job/job.repository';
+import { JobDomain } from '../../src/domain/job/JobDomain';
+import { IJobRepository } from '../../src/domain/job/IJobRepository';
 import mockedEntityMethods from './mockedEntity';
 
-const mockedAdapter: JobRepository = {
+const mockedAdapter: IJobRepository = {
   save: jest.fn(async (job: JobDomain): Promise<string> => {
     await mockedEntityMethods.save(job);
     return 'Job offer created successfully';

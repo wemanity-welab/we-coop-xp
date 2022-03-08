@@ -4,7 +4,7 @@ import { expect } from 'chai';
 import * as request from 'supertest';
 
 import { AppModule } from '../../../src/modules/app.module';
-import { JobEntity } from '../../../src/infrastructure/job/job.entity';
+import { JobEntity } from '../../../src/infrastructure/job/JobEntity';
 
 Given(
   'Writing a job offer with {string}, {string}, {string}, {string}, {string}, {string}',

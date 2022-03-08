@@ -5,7 +5,7 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { JobDomain } from '../../domain/job/job.domain';
+import { JobDomain } from '../../src/domain/job/JobDomain';
 
 // The property "name" sets the table name. This is usually implied from the
 // class name, however this can be overridden if needed.
@@ -34,13 +34,13 @@ export class JobEntity {
   description!: string;
 
   @CreateDateColumn({
-    type: 'timestamp',
+    type: 'date',
     default: () => 'CURRENT_TIMESTAMP(6)',
   })
   public created_at!: Date;
 
   @UpdateDateColumn({
-    type: 'timestamp',
+    type: 'date',
     default: () => 'CURRENT_TIMESTAMP(6)',
     onUpdate: 'CURRENT_TIMESTAMP(6)',
   })

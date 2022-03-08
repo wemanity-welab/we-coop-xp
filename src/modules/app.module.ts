@@ -4,6 +4,7 @@ import { JobModule } from './job.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import configuration from '../config/configuration';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { JobApi } from '../exposition/job/JobApi';
 
 @Module({
   imports: [

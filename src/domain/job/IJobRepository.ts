@@ -1,6 +1,6 @@
-import { JobDomain } from './job.domain';
+import { JobDomain } from './JobDomain';
 
-export interface JobRepository {
+export interface IJobRepository {
   save(job: JobDomain): Promise<string>;
   getAll(): Promise<JobDomain[]>;
   remove(jobId: number): Promise<string>;

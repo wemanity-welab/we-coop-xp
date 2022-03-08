@@ -1,5 +1,5 @@
-import { JobDomain } from '../../src/domain/job/job.domain';
-import { JobService } from '../../src/domain/job/job.service';
+import { JobDomain } from '../../src/domain/job/JobDomain';
+import { JobService } from '../../src/domain/job/JobService';
 import mockedAdapter from '../mock/mockedAdapter';
 
 describe('should test jobService class', () => {

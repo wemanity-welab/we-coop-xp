@@ -1,4 +1,4 @@
-import { JobDomain } from '../../src/domain/job/job.domain';
+import { JobDomain } from '../../src/domain/job/JobDomain';
 import mockedJobs from './mockedJobs';
 
 const mockedEntityMethods = {
