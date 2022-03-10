@@ -10,19 +10,19 @@ export class JobService implements IJobService {
     this.jobRepositoryAdapter = jobAdapter;
   }
 
-  save(job: JobDomain) {
-    return this.jobRepositoryAdapter.save(job);
+  async save(job: JobDomain) {
+    return await this.jobRepositoryAdapter.save(job);
   }
-  getAll() {
-    return this.jobRepositoryAdapter.getAll();
+  async getAll() {
+    return await this.jobRepositoryAdapter.getAll();
   }
-  getJob(jobId: number) {
-    return this.jobRepositoryAdapter.getJob(jobId);
+  async getJob(jobId: number) {
+    return await this.jobRepositoryAdapter.getJob(jobId);
   }
-  remove(jobId: number) {
-    return this.jobRepositoryAdapter.remove(jobId);
+  async remove(jobId: number) {
+    return await this.jobRepositoryAdapter.remove(jobId);
   }
-  update(jobId: number, job: JobDomain) {
-    return this.jobRepositoryAdapter.update(jobId, job);
+  async update(jobId: number, job: JobDomain) {
+    return await this.jobRepositoryAdapter.update(jobId, job);
   }
 }

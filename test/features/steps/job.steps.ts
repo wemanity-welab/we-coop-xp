@@ -1,38 +1,33 @@
 import { Given, Then, When } from '@cucumber/cucumber';
 import { JobDomain } from '../../../src/domain/job/JobDomain';
 import { JobService } from '../../../src/domain/job/JobService';
-import { JobRepositoryAdapter } from '../../../src/infrastructure/job/JobRepositoryAdapter';
 import { expect } from 'chai';
+import mockedAdapter from '../../mock/mockedAdapter';
+import mockedJobs from '../../mock/mockedJobs';
 
-Given(
-  'Creating a job offer with {string}, {string}, {string}, {string}, {string}, {string}',
-  function (title, address, description, salary, contract_type, author) {
-    // Write code here that turns the phrase above into concrete actions
-    return (this.jobModel = new JobDomain({
-      title,
-      address,
-      description,
-      salary,
-      contract_type,
-      author,
-    }));
-  },
-);
+let jobService;
+let jobOffer;
 
-When('I save the job offer', function () {
-  const jobAdapter = new JobRepositoryAdapter(undefined);
-
-  jobAdapter.save = async (): Promise<string> => {
-    return 'Success';
-  };
-
-  jobAdapter.getAll = (): Promise<JobDomain[]> => {
-    throw new Error('Function not implemented.');
-  };
-
-  this.jobService = new JobService(undefined);
+Given('Employer has an offer', async function () {
+  jobOffer = await new JobDomain({
+    id: 5,
+    title: 'dev',
+    address: 'paris',
+    description: 'full stack',
+    salary: '5000',
+    contract_type: 'cdd',
+    author: 'wema',
+  });
 });
 
-Then('I received a {string} created', function (message: string) {
-  expect(this.jobService.create(this.jobModel)).to.equals(message);
+When('The job offer has been created', function () {
+  jobService = new JobService(mockedAdapter);
+  // await mockedJobs.push(jobOffer);
+});
+
+Then('The job is created', async () => {
+  expect(await jobService.save(jobOffer)).to.equals(
+    'Job offer created successfully',
+  );
+  console.log(await jobService.getJob(jobOffer.id));
 });

@@ -14,7 +14,7 @@ import { JobDomain } from '../../domain/job/JobDomain';
 import { JobServiceAdapter } from './JobServiceAdapter';
 
 @Controller('jobs')
-export class JobApi {
+export class JobController {
   constructor(private readonly jobServiceAdapter: JobServiceAdapter) {}
 
   @Post()

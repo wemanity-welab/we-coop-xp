@@ -1,40 +1,18 @@
 Feature: Creating a job
-  @wip
+
   @FullJob
-  Scenario Outline: Creates a job offer
-    Given Creating a job offer with <title>, <address>, <description>, <salary>, <contract_type>, <author>
-    When I save the job offer
-    Then I received a <message> created
-
-    Examples:
-      | title             | address | description          | salary      | contract_type | author     | message   |
-      | "developpeur web" | "paris" | "dev web javascript" | "5000 EURO" | "CDI"         | "wemanity" | "Success" |
-
-  @wip
-  @IncompleteExample
-  Scenario Outline: Creates an incomplete example
-    Given Writing a description with <description>
-    When I save the description
-    Then I received a <message> message
-
-    Examples:
-      | description | message                       |
-      | ""          | "Cannot create empty example" |
-
-  @api
-  @PostExample
-  Scenario Outline: Testing post request
-    Given Writing a job offer with <title>, <address>, <description>, <salary>, <contract_type>, <author>
-    When I submit the job offer
-    Then I received a <message> message
+  Scenario Outline: employers wants to created a job offer
+    Given Employer has an offer
+    When  The job offer has been created
+    Then The job is created
 
 
-    Examples:
-      | title             | address | description          | salary      | contract_type | author     | message   |
-      | "developpeur web" | "paris" | "dev web javascript" | "5000 EURO" | "CDI"         | "wemanity" | "Success" |
+# Scenario Outline: employers wants to created a job offer
+#     Given Employer <title>, <address>, <description>, <salary>, <contract_type>, <author>
+#     And Wants to created a job offer
+#     When  The job offer has been created
+#     Then The job  <message> is created
 
-# Examples:
-#   | description       | message                       |
-#   | "salut c'est moi" | "Success"                     |
-#   | ""                | "Cannot create empty example" |
-
+#     Examples:
+#       | title             | address | description          | salary      | contract_type | author     | message   |
+#       | "developpeur web" | "paris" | "dev web javascript" | "5000 EURO" | "CDI"         | "wemanity" | "Success" |

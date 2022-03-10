@@ -1,5 +1,4 @@
-import { Inject, Injectable } from '@nestjs/common';
-import { IJobService } from '../../domain/job/IJobService';
+import { Injectable } from '@nestjs/common';
 import { JobDomain } from '../../domain/job/JobDomain';
 import { JobService } from '../../domain/job/JobService';
 
