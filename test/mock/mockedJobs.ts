@@ -1,7 +1,7 @@
 import { JobDomain } from '../../src/domain/job/JobDomain';
 import { faker } from '@faker-js/faker';
 
-faker.locale = 'fr';
+// faker.locale = 'fr';
 faker.seed(123456789);
 
 const mockedJobs = [];

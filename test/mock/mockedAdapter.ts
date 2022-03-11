@@ -34,10 +34,17 @@ import mockedJobs from './mockedJobs';
 //   }),
 // };
 
+class JobAdapter {
+  jobs: JobDomain[];
+  constructor(jobs: JobDomain[]) {
+    this.jobs = jobs;
+  }
+}
+
 const mockedAdapter: IJobRepository = {
   save: async (job: JobDomain): Promise<string> => {
     mockedJobs.push(job);
-    return await 'Job offer created successfully';
+    return await 'Success';
   },
   getAll: async (): Promise<JobDomain[]> => {
     return mockedJobs;
@@ -53,6 +60,10 @@ const mockedAdapter: IJobRepository = {
   },
   update: async (jobId: number, job: JobDomain): Promise<JobDomain> => {
     const jobFound = await mockedJobs.find((job) => job.id === jobId);
+    if (!jobFound) {
+      throw new Error('JOB NOT FOUND');
+    }
+
     const indexOfJobFound = mockedJobs.indexOf(jobFound);
 
     mockedJobs[indexOfJobFound].setTitle = job.getTitle;
