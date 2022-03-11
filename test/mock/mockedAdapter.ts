@@ -66,12 +66,33 @@ const mockedAdapter: IJobRepository = {
 
     const indexOfJobFound = mockedJobs.indexOf(jobFound);
 
-    mockedJobs[indexOfJobFound].setTitle = job.getTitle;
-    mockedJobs[indexOfJobFound].setAddress = job.getAddress;
-    mockedJobs[indexOfJobFound].setSalary = job.getSalary;
-    mockedJobs[indexOfJobFound].setContract_type = job.getContract_type;
-    mockedJobs[indexOfJobFound].setAuthor = job.getAuthor;
-    mockedJobs[indexOfJobFound].setDescription = job.getDescription;
+    mockedJobs[indexOfJobFound].setTitle =
+      job.getTitle !== '' ? job.getTitle : mockedJobs[indexOfJobFound].getTitle;
+
+    mockedJobs[indexOfJobFound].setAddress =
+      job.getAddress !== ''
+        ? job.getAddress
+        : mockedJobs[indexOfJobFound].getAddress;
+
+    mockedJobs[indexOfJobFound].setSalary =
+      job.getSalary !== ''
+        ? job.getSalary
+        : mockedJobs[indexOfJobFound].getSalary;
+
+    mockedJobs[indexOfJobFound].setContract_type =
+      job.getContract_type !== ''
+        ? job.getContract_type
+        : mockedJobs[indexOfJobFound].getContract_type;
+
+    mockedJobs[indexOfJobFound].setAuthor =
+      job.getAuthor !== ''
+        ? job.getAuthor
+        : mockedJobs[indexOfJobFound].getAuthor;
+
+    mockedJobs[indexOfJobFound].setDescription =
+      job.getDescription !== ''
+        ? job.getDescription
+        : mockedJobs[indexOfJobFound].getDescription;
 
     return mockedJobs[indexOfJobFound];
   },

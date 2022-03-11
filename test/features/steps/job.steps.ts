@@ -35,14 +35,13 @@ Then(
 );
 
 /**
- * Updating job scenario
+ * Updating job entirely scenario
  */
 Given(
   'The employer wants to change a job offer which exist already',
   async function () {
     this.jobService = new JobService(mockedAdapter);
     this.jobOffer = await this.jobService.getJob(3);
-    console.log(this.jobOffer);
   },
 );
 
@@ -56,7 +55,6 @@ When(
     new_contract_type,
     new_author,
   ) {
-    this.jobService = await new JobService(mockedAdapter);
     try {
       await this.jobService.update(
         this.jobOffer.getId,
@@ -70,19 +68,99 @@ When(
           author: new_author,
         }),
       );
-      this.jobOffer = await this.jobService.getJob(1);
     } catch (error) {
       console.error(error);
     }
-    console.log(await this.jobService.getJob(3));
   },
 );
 
 Then(
-  'The job offer must be modified and {string}, {string}, {string}, {string}, {string}, {string} is return ',
-  async function (<new_title>, new_address, new_description, new_salary, new_contract_type, new_author) {
-    expect(await this.jobOffer.getTitle).to.equals(
-      
-    );
+  'The job offer must be modified {string}, {string}, {string}, {string}, {string}, {string} is return',
+  async function (
+    new_title,
+    new_address,
+    new_description,
+    new_salary,
+    new_contract_type,
+    new_author,
+  ) {
+    expect(await this.jobOffer.getTitle).to.equals(new_title);
+    expect(await this.jobOffer.getAddress).to.equals(new_address);
+    expect(await this.jobOffer.getDescription).to.equals(new_description);
+    expect(await this.jobOffer.getSalary).to.equals(new_salary);
+    expect(await this.jobOffer.getContract_type).to.equals(new_contract_type);
+    expect(await this.jobOffer.getAuthor).to.equals(new_author);
   },
 );
+
+/**
+ * Updating job partially scenario
+ */
+Given(
+  'The employer wants to change a job offer which exist',
+  async function () {
+    this.jobService = new JobService(mockedAdapter);
+    this.jobOffer = await this.jobService.getJob(3);
+  },
+);
+When(
+  'The employer update the job offer {string}, {string}',
+  async function (new_title, new_address) {
+    try {
+      await this.jobService.update(
+        this.jobOffer.getId,
+        new JobDomain({
+          ...this.jobOffer,
+          title: new_title,
+          address: new_address,
+        }),
+      );
+    } catch (error) {
+      console.error(error);
+    }
+  },
+);
+Then(
+  'The job offer must be modified {string}, {string} is return',
+  async function (new_title, new_address) {
+    expect(await this.jobOffer.getTitle).to.equals(new_title);
+    expect(await this.jobOffer.getAddress).to.equals(new_address);
+  },
+);
+
+/**
+ * Deleting job scenario
+ */
+Given(
+  'The employer wants to delete a job offer which exist with an id {int}',
+  async function (id) {
+    this.id = id;
+    this.jobService = new JobService(mockedAdapter);
+    this.jobOffer = await this.jobService.getJob(id);
+  },
+);
+When('The employer delete the job offer', async function () {
+  this.response = await this.jobService.remove(this.jobOffer.getId);
+});
+Then('The job offer must not appear in the list', async function () {
+  expect(await this.jobService.getJob(this.id)).to.equals(undefined);
+  expect(this.response).to.equals('Job offer removed');
+});
+
+/**
+ * Reading jobs
+ */
+Given(
+  'The employer want to read a job offer wich exist with an id {int}',
+  async function (id) {
+    this.id = id;
+    this.jobService = new JobService(mockedAdapter);
+    this.jobOffer = await this.jobService.getJob(id);
+  },
+);
+When('The employer find the job offer', async function () {
+  this.response = await this.jobService.getJob(this.jobOffer.getId);
+});
+Then('The job offer must appear', async function () {
+  expect(await this.jobService.getJob(this.id)).to.equals(this.jobOffer);
+});
