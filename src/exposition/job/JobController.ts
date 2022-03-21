@@ -17,8 +17,8 @@ import {
 } from '@nestjs/swagger';
 import { Response } from 'express';
 import { JobDomain } from '../../domain/job/JobDomain';
+import { JobEntity } from '../../infrastructure/job/JobEntity';
 import { JobServiceAdapter } from './JobServiceAdapter';
-import { JobEntity } from '../../infrastructure/job/jobEntity';
 @ApiTags('Jobs')
 @Controller('jobs')
 export class JobController {
