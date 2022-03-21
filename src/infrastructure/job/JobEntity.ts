@@ -1,3 +1,4 @@
+import { ApiProperty } from '@nestjs/swagger';
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -14,31 +15,31 @@ import { JobDomain } from '../../domain/job/JobDomain';
 export class JobEntity {
   @PrimaryGeneratedColumn({ name: 'id' })
   id!: number;
-
+  @ApiProperty()
   @Column({ name: 'title' })
   title!: string;
-
+  @ApiProperty()
   @Column({ name: 'address' })
   address!: string;
-
+  @ApiProperty()
   @Column({ name: 'salary' })
   salary!: string;
-
+  @ApiProperty()
   @Column({ name: 'contract_type' })
   contract_type!: string;
-
+  @ApiProperty()
   @Column({ name: 'author' })
   author!: string;
-
+  @ApiProperty()
   @Column({ name: 'description' })
   description!: string;
-
+  @ApiProperty({ required: false })
   @CreateDateColumn({
     type: 'timestamp',
     default: () => 'CURRENT_TIMESTAMP(6)',
   })
   public created_at!: Date;
-
+  @ApiProperty({ required: false })
   @UpdateDateColumn({
     type: 'timestamp',
     default: () => 'CURRENT_TIMESTAMP(6)',
