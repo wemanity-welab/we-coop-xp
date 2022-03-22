@@ -1,30 +1,42 @@
 // import { getConnection } from 'typeorm';
+import { JobDomain } from '../../src/domain/job/JobDomain';
 import { JobService } from '../../src/domain/job/JobService';
-import { dbConnection } from '../mock/inMemorydb';
+import Mock from '../mock/mockedAdapter';
 // import mockedAdapter from '../mock/mockedAdapter';
 // import { testDatasetSeed } from '../mock/mockedJobs';
+const job = new JobDomain({
+  id: 1,
+  title: 'pouet',
+  address: 'address',
+  salary: 'salary',
+  contract_type: 'contract_type',
+  author: 'author',
+  description: 'description',
+});
 
 describe('should test jobService class', () => {
   let jobService: JobService;
+  let adapter: any;
 
-  beforeEach(async () => {
-    await dbConnection();
-    // await testDatasetSeed();
+  beforeAll(async () => {
+    adapter = new Mock();
+    jobService = new JobService(adapter);
   });
 
   it('should return success', async () => {
-    // const test = await jobService.getAll();
-    // console.log(test);
-    // const job: JobDomain = new JobDomain({
-    //   title: 'dev web',
-    //   address: '6 Rue de Paris',
-    //   salary: '2k',
-    //   contract_type: 'CDD',
-    //   author: 'Adecco',
-    //   description: 'Post',
-    // });
-    // const test = await jobService.create(job);
-    // console.log(test);
-    // expect(await jobService.create(job)).toBe('Job offer created successfully');
+    expect(await jobService.save(job)).toBe('Success');
+  });
+
+  it('should update an object ', async () => {
+    const newjob = new JobDomain({
+      title: 'test',
+      address: 'address',
+      salary: 'salary',
+      contract_type: 'contract_type',
+      author: 'author',
+      description: 'description',
+    });
+    const resp = await jobService.update(1, newjob);
+    expect(resp).toBe(newjob);
   });
 });

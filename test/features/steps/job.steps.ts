@@ -2,7 +2,7 @@ import { Given, Then, When } from '@cucumber/cucumber';
 import { JobDomain } from '../../../src/domain/job/JobDomain';
 import { JobService } from '../../../src/domain/job/JobService';
 import { expect } from 'chai';
-import mockedAdapter from '../../mock/mockedAdapter';
+import Mock from '../../mock/mockedAdapter';
 import mockedJobs from '../../mock/mockedJobs';
 
 /**
@@ -24,7 +24,7 @@ Given(
 );
 
 When('The job offer has been created', async function () {
-  return (this.jobService = await new JobService(mockedAdapter));
+  return (this.jobService = await new JobService(new Mock()));
 });
 
 Then(
@@ -40,7 +40,7 @@ Then(
 Given(
   'The employer wants to change a job offer which exist already',
   async function () {
-    this.jobService = new JobService(mockedAdapter);
+    this.jobService = new JobService(new Mock());
     this.jobOffer = await this.jobService.getJob(3);
   },
 );
@@ -99,7 +99,7 @@ Then(
 Given(
   'The employer wants to change a job offer which exist',
   async function () {
-    this.jobService = new JobService(mockedAdapter);
+    this.jobService = new JobService(new Mock());
     this.jobOffer = await this.jobService.getJob(3);
   },
 );
@@ -135,7 +135,7 @@ Given(
   'The employer wants to delete a job offer which exist with an id {int}',
   async function (id) {
     this.id = id;
-    this.jobService = new JobService(mockedAdapter);
+    this.jobService = new JobService(new Mock());
     this.jobOffer = await this.jobService.getJob(id);
   },
 );
@@ -154,7 +154,7 @@ Given(
   'The employer want to read a job offer wich exist with an id {int}',
   async function (id) {
     this.id = id;
-    this.jobService = new JobService(mockedAdapter);
+    this.jobService = new JobService(new Mock());
     this.jobOffer = await this.jobService.getJob(id);
   },
 );
