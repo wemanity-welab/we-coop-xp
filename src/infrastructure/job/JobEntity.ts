@@ -1,11 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  CreateDateColumn,
-  UpdateDateColumn,
-} from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 import { JobDomain } from '../../domain/job/JobDomain';
 
 // The property "name" sets the table name. This is usually implied from the
@@ -33,19 +27,12 @@ export class JobEntity {
   @ApiProperty()
   @Column({ name: 'description' })
   description!: string;
-  @ApiProperty({ required: false })
-  @CreateDateColumn({
-    type: 'timestamp',
-    default: () => 'CURRENT_TIMESTAMP(6)',
-  })
-  public created_at!: Date;
-  @ApiProperty({ required: false })
-  @UpdateDateColumn({
-    type: 'timestamp',
-    default: () => 'CURRENT_TIMESTAMP(6)',
-    onUpdate: 'CURRENT_TIMESTAMP(6)',
-  })
-  public updated_at!: Date;
+  @ApiProperty()
+  @Column({ name: 'created_at', nullable: true })
+  created_at!: string;
+  @ApiProperty()
+  @Column({ name: 'updated_at', nullable: true })
+  updated_at!: string;
 }
 
 export const fromDomainToEntity = (jobDomain: JobDomain): any => {
