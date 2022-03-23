@@ -11,7 +11,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { JobEntity } from './mock/entity';
 import { JobModule } from './mock/job.module';
 import { JobDomain } from '../src/domain/job/JobDomain';
-import { doesNotMatch } from 'assert';
 import { getConnection } from 'typeorm';
 
 describe('AppController (e2e)', () => {
@@ -21,7 +20,7 @@ describe('AppController (e2e)', () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [
         TypeOrmModule.forRoot({
-          type: 'sqlite',
+          type: 'better-sqlite3',
           database: ':memory:',
           entities: [JobEntity],
           logging: true,
