@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS jobOffer (
     contract_type VARCHAR (128) NOT NULL,
     description TEXT NOT NULL,
     author VARCHAR (128) NOT NULL,
-    created_at DATE  NOT NULL,
-    updated_at DATE  NOT NULL,
+    created_at VARCHAR (128),
+    updated_at VARCHAR (128),
 );
 
