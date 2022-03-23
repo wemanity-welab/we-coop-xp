@@ -1,6 +1,5 @@
 Feature: CRUD JOB
 
-
   @CreateJob
   Scenario Outline: Employers wants to created a job offer
     Given Writing a job offer with <id>, <title>, <address>, <description>, <salary>, <contract_type>, <author>

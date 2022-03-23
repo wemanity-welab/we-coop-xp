@@ -41,6 +41,7 @@ Given(
   'The employer wants to change a job offer which exist already',
   async function () {
     this.jobService = new JobService(new Mock());
+    mockedJobs.forEach((job) => this.jobService.save(job));
     this.jobOffer = await this.jobService.getJob(3);
   },
 );
@@ -76,20 +77,22 @@ When(
 
 Then(
   'The job offer must be modified {string}, {string}, {string}, {string}, {string}, {string} is return',
-  async function (
-    new_title,
-    new_address,
-    new_description,
-    new_salary,
-    new_contract_type,
-    new_author,
-  ) {
-    expect(await this.jobOffer.getTitle).to.equals(new_title);
-    expect(await this.jobOffer.getAddress).to.equals(new_address);
-    expect(await this.jobOffer.getDescription).to.equals(new_description);
-    expect(await this.jobOffer.getSalary).to.equals(new_salary);
-    expect(await this.jobOffer.getContract_type).to.equals(new_contract_type);
-    expect(await this.jobOffer.getAuthor).to.equals(new_author);
+  async function (title, address, description, salary, contract_type, author) {
+    this.newJob = await this.jobService.getJob(3);
+    this.job = {
+      title,
+      address,
+      description,
+      salary,
+      contract_type,
+      author,
+    };
+    expect(this.job.title).to.equals(this.newJob.title);
+    expect(this.job.address).to.equals(this.newJob.address);
+    expect(this.job.description).to.equals(this.newJob.description);
+    expect(this.job.salary).to.equals(this.newJob.salary);
+    expect(this.job.contract_type).to.equals(this.newJob.contract_type);
+    expect(this.job.author).to.equals(this.newJob.author);
   },
 );
 
@@ -100,6 +103,7 @@ Given(
   'The employer wants to change a job offer which exist',
   async function () {
     this.jobService = new JobService(new Mock());
+    mockedJobs.forEach((job) => this.jobService.save(job));
     this.jobOffer = await this.jobService.getJob(3);
   },
 );
@@ -123,8 +127,10 @@ When(
 Then(
   'The job offer must be modified {string}, {string} is return',
   async function (new_title, new_address) {
-    expect(await this.jobOffer.getTitle).to.equals(new_title);
-    expect(await this.jobOffer.getAddress).to.equals(new_address);
+    this.newJob = await this.jobService.getJob(3);
+
+    expect(await this.newJob.title).to.equals(new_title);
+    expect(await this.newJob.address).to.equals(new_address);
   },
 );
 
@@ -136,6 +142,7 @@ Given(
   async function (id) {
     this.id = id;
     this.jobService = new JobService(new Mock());
+    mockedJobs.forEach((job) => this.jobService.save(job));
     this.jobOffer = await this.jobService.getJob(id);
   },
 );
@@ -144,7 +151,7 @@ When('The employer delete the job offer', async function () {
 });
 Then('The job offer must not appear in the list', async function () {
   expect(await this.jobService.getJob(this.id)).to.equals(undefined);
-  expect(this.response).to.equals('Job offer removed');
+  expect(this.response).to.equals('DATA REMOVED');
 });
 
 /**
@@ -155,6 +162,7 @@ Given(
   async function (id) {
     this.id = id;
     this.jobService = new JobService(new Mock());
+    mockedJobs.forEach((job) => this.jobService.save(job));
     this.jobOffer = await this.jobService.getJob(id);
   },
 );

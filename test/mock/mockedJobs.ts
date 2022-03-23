@@ -4,7 +4,7 @@ import { faker } from '@faker-js/faker';
 // faker.locale = 'fr';
 faker.seed(123456789);
 
-const mockedJobs = [];
+const mockedJobs: JobDomain[] = [];
 
 for (let i = 0; i < 5; i++) {
   mockedJobs.push(
