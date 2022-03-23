@@ -6,8 +6,8 @@ export class JobDomain {
   private contract_type: string;
   private description: string;
   private author: string;
-  private created_at: Date;
-  private updated_at: Date;
+  // private created_at: string;
+  // private updated_at: string;
 
   constructor({
     id,
@@ -32,8 +32,10 @@ export class JobDomain {
     this.salary = salary;
     this.contract_type = contract_type;
     this.author = author;
-    this.created_at = new Date();
-    this.updated_at = new Date();
+    // this.created_at = created_at;
+    // this.updated_at = updated_at;
+    // this.created_at = `${new Date().getDate()} - ${new Date().getMonth()} - ${new Date().getFullYear()}`;
+    // this.updated_at = `${new Date().getDate()} - ${new Date().getMonth()} - ${new Date().getFullYear()}`;
     this.description = description;
   }
 
@@ -79,19 +81,19 @@ export class JobDomain {
     this.author = value;
   }
 
-  public get getCreated_at(): Date {
-    return this.created_at;
-  }
-  public set setCreated_at(value: Date) {
-    this.created_at = value;
-  }
+  // public get getCreated_at(): string {
+  //   return this.created_at;
+  // }
+  // public set setCreated_at(value: string) {
+  //   this.created_at = value;
+  // }
 
-  public get setUpdated_at(): Date {
-    return this.updated_at;
-  }
-  public set getUpdated_at(value: Date) {
-    this.updated_at = value;
-  }
+  // public get setUpdated_at(): string {
+  //   return this.updated_at;
+  // }
+  // public set getUpdated_at(value: string) {
+  //   this.updated_at = value;
+  // }
 
   public get getDescription(): string {
     return this.description;
