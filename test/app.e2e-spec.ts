@@ -32,9 +32,6 @@ describe('AppController (e2e)', () => {
 
     app = moduleFixture.createNestApplication();
     await app.init();
-    await app.listen(8080, () => {
-      console.log('SERVER IS LISTENING');
-    });
 
     const connection = await getConnection();
     const entityManager = connection.createEntityManager();
