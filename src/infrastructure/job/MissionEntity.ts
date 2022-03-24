@@ -1,12 +1,12 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
-import { JobDomain } from '../../domain/job/JobDomain';
+import { MissionDomain } from '../../domain/mission/MissionDomain';
 
 // The property "name" sets the table name. This is usually implied from the
 // class name, however this can be overridden if needed.
 
-@Entity({ name: 'jobTable' })
-export class JobEntity {
+@Entity({ name: 'missionTable' })
+export class MissionEntity {
   @PrimaryGeneratedColumn({ name: 'id' })
   id!: number;
   @ApiProperty()
@@ -35,10 +35,12 @@ export class JobEntity {
   updated_at!: string;
 }
 
-export const fromDomainToEntity = (jobDomain: JobDomain): any => {
-  return { ...jobDomain };
+export const fromDomainToEntity = (missionDomain: MissionDomain): any => {
+  return { ...missionDomain };
 };
 
-export const fromEntityToDomain = (jobEntity: JobEntity): JobDomain => {
-  return new JobDomain(jobEntity);
+export const fromEntityToDomain = (
+  missionEntity: MissionEntity,
+): MissionDomain => {
+  return new MissionDomain(missionEntity);
 };

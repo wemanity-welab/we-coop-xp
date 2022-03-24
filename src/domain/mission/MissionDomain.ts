@@ -1,4 +1,4 @@
-export class JobDomain {
+export class MissionDomain {
   private id: number;
   private title: string;
   private address: string;

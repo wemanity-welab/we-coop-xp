@@ -1,17 +1,11 @@
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  CreateDateColumn,
-  UpdateDateColumn,
-} from 'typeorm';
-import { JobDomain } from '../../src/domain/job/JobDomain';
+import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { MissionDomain } from '../../src/domain/mission/MissionDomain';
 
 // The property "name" sets the table name. This is usually implied from the
 // class name, however this can be overridden if needed.
 
-@Entity({ name: 'jobTable' })
-export class JobEntity {
+@Entity({ name: 'missionTable' })
+export class MissionEntity {
   @PrimaryGeneratedColumn({ name: 'id' })
   id!: number;
 
@@ -34,10 +28,12 @@ export class JobEntity {
   description!: string;
 }
 
-export const fromDomainToEntity = (jobDomain: JobDomain): any => {
-  return { ...jobDomain };
+export const fromDomainToEntity = (missionDomain: MissionDomain): any => {
+  return { ...missionDomain };
 };
 
-export const fromEntityToDomain = (jobEntity: JobEntity): JobDomain => {
-  return new JobDomain(jobEntity);
+export const fromEntityToDomain = (
+  missionEntity: MissionEntity,
+): MissionDomain => {
+  return new MissionDomain(missionEntity);
 };

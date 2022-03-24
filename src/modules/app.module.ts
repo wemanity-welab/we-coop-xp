@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 
-import { JobModule } from './job.module';
+import { MissionModule } from './mission.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import configuration from '../config/configuration';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -16,7 +16,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       inject: [ConfigService],
       useFactory: configuration,
     }),
-    JobModule,
+    MissionModule,
   ],
 })
 export class AppModule {}

@@ -1,8 +1,3 @@
-import { IJobRepository } from '../../src/domain/job/IJobRepository';
-import { IJobService } from '../../src/domain/job/IJobService';
-import { JobDomain } from '../../src/domain/job/JobDomain';
-import { JobService } from '../../src/domain/job/JobService';
-
 class Mock {
   datas: any[];
 
@@ -38,7 +33,7 @@ class Mock {
     };
     return (this.datas[indexOfDataFound] = obj);
   }
-  async getJob(id: any): Promise<any> {
+  async getOne(id: any): Promise<any> {
     return await this.datas.find((data) => data.id === id);
   }
 }

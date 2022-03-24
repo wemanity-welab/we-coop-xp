@@ -1,14 +1,14 @@
-import { JobDomain } from '../../src/domain/job/JobDomain';
+import { MissionDomain } from '../../src/domain/mission/MissionDomain';
 import { faker } from '@faker-js/faker';
 
 // faker.locale = 'fr';
 faker.seed(123456789);
 
-const mockedJobs: JobDomain[] = [];
+const mockedMissions: MissionDomain[] = [];
 
 for (let i = 0; i < 5; i++) {
-  mockedJobs.push(
-    new JobDomain({
+  mockedMissions.push(
+    new MissionDomain({
       id: i,
       title: faker.name.jobTitle(),
       address: faker.name.jobArea(),
@@ -20,4 +20,4 @@ for (let i = 0; i < 5; i++) {
   );
 }
 
-export default mockedJobs;
+export default mockedMissions;

@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS jobOffer (
+CREATE TABLE IF NOT EXISTS mission (
     id bigserial PRIMARY KEY,
     title VARCHAR (128) NOT NULL,
     address VARCHAR (128) NOT NULL,
