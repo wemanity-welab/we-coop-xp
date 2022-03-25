@@ -16,28 +16,28 @@ Feature: CRUD MISSION
 
   @UpdateJobEntirely
   Scenario Outline: Employer wants to update his mission
-    Given The employer wants to change a mission which exist already
+    Given The employer wants to change entierly the mission n°<id>
     When The employer update the mission <new_title>, <new_address>, <new_description>, <new_salary>, <new_contract_type>, <new_author>
     Then The mission must be modified <new_title>, <new_address>, <new_description>, <new_salary>, <new_contract_type>, <new_author> is return
 
     Examples:
-      | new_title         | new_address | new_description      | new_salary  | new_contract_type | new_author |
-      | "Developpeur web" | "paris"     | "dev web javascript" | "5000 EURO" | "CDI"             | "wemanity" |
+      | id | new_title         | new_address | new_description      | new_salary  | new_contract_type | new_author |
+      | 1  | "Developpeur web" | "paris"     | "dev web javascript" | "5000 EURO" | "CDI"             | "wemanity" |
 
 
   @UpdateJobPartially
   Scenario Outline: Employer wants to update two arguments
-    Given The employer wants to change a mission which exist
+    Given The employer wants to change the mission n°<id>
     When The employer update the mission <new_title>, <new_address>
     Then The mission must be modified <new_title>, <new_address> is return
 
     Examples:
-      | new_title    | new_address |
-      | "Commercial" | "Rouen"     |
+      | id | new_title    | new_address |
+      | 2  | "Commercial" | "Rouen"     |
 
   @DeleteJob
   Scenario Outline: Employer wants to remove a mission
-    Given The employer wants to delete a mission which exist with an id <id>
+    Given The employer wants to delete the mission n°<id>
     When The employer delete the mission
     Then The mission must not appear in the list
 
@@ -47,8 +47,8 @@ Feature: CRUD MISSION
 
   @ReadJob
   Scenario Outline: Employer want to read a mission
-    Given The employer want to read a mission wich exist
-    When The employer find the mission with an id <id>
+    Given The employer want to read the mission n°<id>
+    When The employer find the mission
     Then The mission must appear
 
     Examples:

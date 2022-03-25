@@ -7,6 +7,7 @@ import mockedMissions from '../../mock/mockedMissions';
 
 Before(function () {
   this.missionService = new MissionService(new AdapterMock());
+  mockedMissions.forEach((mission) => this.missionService.save(mission));
 });
 /**
  * Creating mission scenario
@@ -41,10 +42,9 @@ Then(
  * Updating mission entirely scenario
  */
 Given(
-  'The employer wants to change a mission which exist already',
-  async function () {
-    mockedMissions.forEach((mission) => this.missionService.save(mission));
-    this.mission = await this.missionService.getOne(3);
+  'The employer wants to change entierly the mission n°{int}',
+  async function (id) {
+    this.id = id;
   },
 );
 
@@ -60,9 +60,8 @@ When(
   ) {
     try {
       await this.missionService.update(
-        this.mission.getId,
+        this.id,
         new MissionDomain({
-          ...this.mission,
           title: new_title,
           address: new_address,
           description: new_description,
@@ -71,10 +70,10 @@ When(
           author: new_author,
         }),
       );
+      this.newMission = await this.missionService.getOne(this.id);
     } catch (error) {
       console.error(error);
     }
-    this.newMission = await this.missionService.getOne(3);
   },
 );
 
@@ -93,23 +92,22 @@ Then(
 /**
  * Updating mission partially scenario
  */
-Given('The employer wants to change a mission which exist', async function () {
-  mockedMissions.forEach((mission) => this.missionService.save(mission));
-  this.mission = await this.missionService.getOne(3);
+Given('The employer wants to change the mission n°{int}', async function (id) {
+  this.id = id;
 });
 When(
   'The employer update the mission {string}, {string}',
   async function (new_title, new_address) {
     try {
       await this.missionService.update(
-        this.mission.getId,
+        this.id,
         new MissionDomain({
           ...this.mission,
           title: new_title,
           address: new_address,
         }),
       );
-      this.missionUpdated = await this.missionService.getOne(3);
+      this.missionUpdated = await this.missionService.getOne(this.id);
     } catch (error) {
       console.error(error);
     }
@@ -126,33 +124,27 @@ Then(
 /**
  * Deleting mission scenario
  */
-Given(
-  'The employer wants to delete a mission which exist with an id {int}',
-  async function (id) {
-    this.id = id;
-    mockedMissions.forEach((mission) => this.missionService.save(mission));
-    this.mission = await this.missionService.getOne(id);
-  },
-);
+Given('The employer wants to delete the mission n°{int}', async function (id) {
+  this.id = id;
+});
 When('The employer delete the mission', async function () {
-  this.message = await this.missionService.remove(this.mission.getId);
+  this.message = await this.missionService.remove(this.id);
 });
 Then('The mission must not appear in the list', async function () {
-  expect(await this.missionService.getOne(this.id)).to.equals(undefined);
   expect(this.message).to.equals('DATA REMOVED');
 });
 
 /**
  * Reading missions
  */
-Given('The employer want to read a mission wich exist', async function () {
-  mockedMissions.forEach((mission) => this.missionService.save(mission));
-});
-When('The employer find the mission with an id {int}', async function (id) {
+Given('The employer want to read the mission n°{int}', async function (id) {
   this.id = id;
+});
+When('The employer find the mission', async function () {
   this.mission = await this.missionService.getOne(this.id);
-  this.response = await this.missionService.getOne(this.mission.getId);
 });
 Then('The mission must appear', async function () {
-  expect(await this.missionService.getOne(this.id)).to.equals(this.mission);
+  expect(await this.missionService.getOne(this.mission.getId)).to.equals(
+    this.mission,
+  );
 });

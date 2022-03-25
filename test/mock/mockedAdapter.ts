@@ -26,11 +26,13 @@ class AdapterMock {
     }
 
     const indexOfDataFound = this.datas.indexOf(dataFound);
+    data.id = this.datas[indexOfDataFound].id;
 
     const obj = {
       ...this.datas[indexOfDataFound],
       ...data,
     };
+
     return (this.datas[indexOfDataFound] = obj);
   }
   async getOne(id: any): Promise<any> {

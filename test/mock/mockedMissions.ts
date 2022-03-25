@@ -6,7 +6,7 @@ faker.seed(123456789);
 
 const mockedMissions: MissionDomain[] = [];
 
-for (let i = 0; i < 5; i++) {
+for (let i = 1; i < 5; i++) {
   mockedMissions.push(
     new MissionDomain({
       id: i,
