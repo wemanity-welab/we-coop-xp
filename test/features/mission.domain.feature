@@ -47,8 +47,8 @@ Feature: CRUD MISSION
 
   @ReadJob
   Scenario Outline: Employer want to read a mission
-    Given The employer want to read a mission wich exist with an id <id>
-    When The employer find the mission
+    Given The employer want to read a mission wich exist
+    When The employer find the mission with an id <id>
     Then The mission must appear
 
     Examples:
