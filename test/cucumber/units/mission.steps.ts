@@ -5,6 +5,8 @@ import { expect } from 'chai';
 import AdapterMock from '../../mock/mockedAdapter';
 import mockedMissions from '../../mock/mockedMissions';
 
+// Step definitions for domain centric testing, at unit level
+
 Before(function () {
   this.missionService = new MissionService(new AdapterMock());
   mockedMissions.forEach((mission) => this.missionService.save(mission));
@@ -135,9 +137,9 @@ Then('The mission must not appear in the list', async function () {
 });
 
 /**
- * Reading missions
+ * List missions
  */
-Given('The employer want to read the mission n°{int}', async function (id) {
+Given('The employer want to list the mission n°{int}', async function (id) {
   this.id = id;
 });
 When('The employer find the mission', async function () {
