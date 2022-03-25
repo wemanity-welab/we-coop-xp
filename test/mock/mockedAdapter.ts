@@ -1,4 +1,4 @@
-class Mock {
+class AdapterMock {
   datas: any[];
 
   constructor() {
@@ -38,4 +38,4 @@ class Mock {
   }
 }
 
-export default Mock;
+export default AdapterMock;
