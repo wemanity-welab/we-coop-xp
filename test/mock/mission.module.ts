@@ -4,7 +4,7 @@ import { MissionService } from '../../src/domain/mission/MissionService';
 import { MissionController } from '../../src/exposition/job/MissionController';
 import { MissionServiceAdapter } from '../../src/exposition/job/MissionServiceAdapter';
 import { MissionRepositoryAdapter } from '../../src/infrastructure/job/MissionRepositoryAdapter';
-import { MissionEntity } from './missionEntityMock';
+import { MissionEntity } from '../../src/infrastructure/job/MissionEntity';
 
 @Module({
   imports: [TypeOrmModule.forFeature([MissionEntity])],
