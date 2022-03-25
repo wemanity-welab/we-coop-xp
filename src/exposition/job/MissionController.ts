@@ -20,7 +20,7 @@ import { MissionDomain } from '../../domain/mission/MissionDomain';
 import { MissionEntity } from '../../infrastructure/job/MissionEntity';
 import { MissionServiceAdapter } from './MissionServiceAdapter';
 @ApiTags('Missions')
-@Controller('mission')
+@Controller('missions')
 export class MissionController {
   constructor(private readonly missionServiceAdapter: MissionServiceAdapter) {}
   @ApiCreatedResponse({ type: MissionEntity })
