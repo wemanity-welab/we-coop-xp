@@ -1,10 +1,12 @@
 .dockerignore
-node_modules
-npm-debug.log
 Dockerfile
+docker-compose
+.env*
+
 .git
 .gitignore
-.env.example
-docker-compose
-README
+
+*.log
+node_modules
 db
+README
