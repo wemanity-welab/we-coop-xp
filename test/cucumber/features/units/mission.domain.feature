@@ -1,6 +1,6 @@
 Feature: CRUD MISSION
 
-  @CreateJob
+  @CreateMission
   Scenario Outline: Employers wants to created a mission
     Given Writing a mission with <id>, <title>, <address>, <description>, <salary>, <contract_type>, <author>
     When The mission has been created
@@ -14,7 +14,7 @@ Feature: CRUD MISSION
       | 8  | "biz dev"               | "toulouse" | "commercial"         | "6666 EURO" | "CDI"         | "wemanity" | "Success" |
 
 
-  @UpdateJobEntirely
+  @UpdateMissionEntirely
   Scenario Outline: Employer wants to update his mission
     Given The employer wants to change entierly the mission n°<id>
     When The employer update the mission <new_title>, <new_address>, <new_description>, <new_salary>, <new_contract_type>, <new_author>
@@ -25,7 +25,7 @@ Feature: CRUD MISSION
       | 1  | "Developpeur web" | "paris"     | "dev web javascript" | "5000 EURO" | "CDI"             | "wemanity" |
 
 
-  @UpdateJobPartially
+  @UpdateMissionPartially
   Scenario Outline: Employer wants to update two arguments
     Given The employer wants to change the mission n°<id>
     When The employer update the mission <new_title>, <new_address>
@@ -35,7 +35,7 @@ Feature: CRUD MISSION
       | id | new_title    | new_address |
       | 2  | "Commercial" | "Rouen"     |
 
-  @DeleteJob
+  @DeleteMission
   Scenario Outline: Employer wants to remove a mission
     Given The employer wants to delete the mission n°<id>
     When The employer delete the mission
@@ -45,7 +45,7 @@ Feature: CRUD MISSION
       | id |
       | 4  |
 
-  @ReadJob
+  @ReadMission
   Scenario Outline: Employer want to read a mission
     Given The employer want to read the mission n°<id>
     When The employer find the mission
