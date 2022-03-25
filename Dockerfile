@@ -1,11 +1,10 @@
-FROM node:16.14.2
-
-
+FROM node:16.14.2-alpine
+RUN apk add dumb-init
+ENV NODE_ENV production
+USER node
 WORKDIR /usr/app
-COPY package*.json ./
-RUN npm install
-COPY . ./
 
-CMD ["npm", "run", "start:dev"]
+COPY . .
 
-
+RUN npm ci --production
+CMD [ "dumb-init", "npm", "run", "start:prod" ]
