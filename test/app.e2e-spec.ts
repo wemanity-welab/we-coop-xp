@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { HttpStatus, INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { MissionEntity } from './mock/missionEntityMock';
+import { MissionEntity } from '../src/infrastructure/job/MissionEntity';
 import { MissionModule } from './mock/mission.module';
 import { MissionDomain } from '../src/domain/mission/MissionDomain';
 import { getConnection } from 'typeorm';
@@ -89,17 +89,13 @@ describe('AppController (e2e)', () => {
       });
   });
   // it('/mission (PATCH)', async () => {
-  //   const mission = await app.getHttpServer().getOne(2);
-  //   const missionUpdated = {
-  //     title: 'CTO',
-  //     address: 'pouet',
-  //     salary: 'salary',
-  //     contract_type: 'contract_type',
-  //     author: 'author',
-  //     description: 'description',
-  //   };
+  //   const mission = await app.getHttpServer().get('/missions/2');
   //   await request(app.getHttpServer())
-  //     .patch(`/missions/${mission.getId}`, missionUpdated)
-  //     .expect(HttpStatus.OK);
+  //     .patch(`/missions/${mission.getId}`)
+  //     .send({ address: 'pouet' })
+  //     .expect(HttpStatus.OK)
+  //     .then((res) => {
+  //       console.log(res.body);
+  //     });
   // });
 });
