@@ -88,18 +88,18 @@ describe('AppController (e2e)', () => {
         console.log(res.body);
       });
   });
-  it('/mission (PATCH)', async () => {
-    const mission = await app.getHttpServer().getOne(2)
-    const missionUpdated = {title: 'CTO',
-    address: 'pouet',
-    salary: 'salary',
-    contract_type: 'contract_type',
-    author: 'author',
-    description: 'description'}
-    await request(app.getHttpServer())
-      .patch(`/missions/${mission.getId}`, missionUpdated)
-      .expect(HttpStatus.OK)
-      .then((res) => {
-        console.log(res.body);
-      });
+  // it('/mission (PATCH)', async () => {
+  //   const mission = await app.getHttpServer().getOne(2);
+  //   const missionUpdated = {
+  //     title: 'CTO',
+  //     address: 'pouet',
+  //     salary: 'salary',
+  //     contract_type: 'contract_type',
+  //     author: 'author',
+  //     description: 'description',
+  //   };
+  //   await request(app.getHttpServer())
+  //     .patch(`/missions/${mission.getId}`, missionUpdated)
+  //     .expect(HttpStatus.OK);
+  // });
 });
