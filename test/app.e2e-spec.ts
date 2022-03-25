@@ -10,7 +10,7 @@ import { getConnection } from 'typeorm';
 describe('AppController (e2e)', () => {
   let app: INestApplication;
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [
         TypeOrmModule.forRoot({
@@ -56,7 +56,7 @@ describe('AppController (e2e)', () => {
     });
   });
 
-  it('/mission (GET)', () => {
+  it('/mission (POST)', async () => {
     const job = new MissionDomain({
       title: 'title',
       address: 'address',
@@ -65,10 +65,41 @@ describe('AppController (e2e)', () => {
       author: 'author',
       description: 'description',
     });
-    request(app.getHttpServer())
-      .post('/jobs')
+    await request(app.getHttpServer())
+      .post('/missions')
       .send(job)
-      .expect(HttpStatus.FAILED_DEPENDENCY);
-    request(app.getHttpServer()).get('/jobs').expect(HttpStatus.OK);
+      .expect(HttpStatus.CREATED)
+      .then((res) => {
+        console.log(res.text);
+      });
   });
+
+  it('/mission (GET)', async () => {
+    await request(app.getHttpServer())
+      .get('/job')
+      .expect(HttpStatus.NOT_FOUND)
+      .then((res) => {
+        console.log(res.body);
+      });
+    await request(app.getHttpServer())
+      .get('/missions')
+      .expect(HttpStatus.OK)
+      .then((res) => {
+        console.log(res.body);
+      });
+  });
+  it('/mission (PATCH)', async () => {
+    const mission = await app.getHttpServer().getOne(2)
+    const missionUpdated = {title: 'CTO',
+    address: 'pouet',
+    salary: 'salary',
+    contract_type: 'contract_type',
+    author: 'author',
+    description: 'description'}
+    await request(app.getHttpServer())
+      .patch(`/missions/${mission.getId}`, missionUpdated)
+      .expect(HttpStatus.OK)
+      .then((res) => {
+        console.log(res.body);
+      });
 });
