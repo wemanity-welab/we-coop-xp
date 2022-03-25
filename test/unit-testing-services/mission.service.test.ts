@@ -1,6 +1,6 @@
 import { MissionDomain } from '../../src/domain/mission/MissionDomain';
 import { MissionService } from '../../src/domain/mission/MissionService';
-import Mock from '../mock/mockedAdapter';
+import AdapterMock from '../mock/mockedAdapter';
 
 const mission = new MissionDomain({
   id: 1,
@@ -17,7 +17,7 @@ describe('should test missionService class', () => {
   let adapter: any;
 
   beforeAll(async () => {
-    adapter = new Mock();
+    adapter = new AdapterMock();
     missionService = new MissionService(adapter);
   });
 
