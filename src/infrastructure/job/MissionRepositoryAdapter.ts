@@ -13,6 +13,9 @@ export class MissionRepositoryAdapter implements IMissionRepository {
     @InjectRepository(MissionEntity)
     private readonly missionEntityRepository: Repository<MissionEntity>,
   ) {}
+  search(keywords: object): Promise<MissionDomain> {
+    throw new Error('Method not implemented.');
+  }
 
   public async save(mission: MissionDomain): Promise<string> {
     await this.missionEntityRepository.save(fromDomainToEntity(mission));

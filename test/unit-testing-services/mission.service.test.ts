@@ -3,7 +3,7 @@ import { MissionService } from '../../src/domain/mission/MissionService';
 import AdapterMock from '../mock/mockedAdapter';
 
 const mission = new MissionDomain({
-  id: 1,
+  id: '1',
   profil: 'pouet',
   client: 'address',
   address: 'salary',
@@ -29,7 +29,7 @@ describe('should test missionService class', () => {
 
   it('should update an object ', async () => {
     const newMission = new MissionDomain({
-      id: 1,
+      id: '1',
       profil: 'test',
       client: 'address',
       address: 'salary',
@@ -39,7 +39,7 @@ describe('should test missionService class', () => {
       stack: 'stack',
       team_organisation: 'agile',
     });
-    const missionUpdated = await missionService.update(1, newMission);
+    const missionUpdated = await missionService.update('1', newMission);
     expect(missionUpdated).toEqual(newMission);
   });
 });
