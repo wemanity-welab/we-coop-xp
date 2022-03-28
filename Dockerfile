@@ -5,29 +5,26 @@ RUN apk add --update --no-cache tini
 WORKDIR /usr/app
 # Set tini as entrypoint
 ENTRYPOINT ["/sbin/tini", "--"]
+
+FROM base as builder
 # copy project file
 COPY package.json .
-
-FROM base as dependencies
-# install build dependencies
-# RUN apk add --update --no-cache python3 alpine-sdk && \
-#     ln -sf python3 /usr/bin/python
 # install node packages
 RUN npm set progress=false && npm config set depth 0
 RUN npm install --only=production
 # copy production node_modules aside
-RUN cp -R node_modules prod_node_modules
-# install ALL node_modules, including 'devDependencies'
+RUN cp -R node_modules ../prod_node_modules
+# install ALL node_modules
 RUN npm install
+# build app
+COPY . .
+RUN npm run build
 
 FROM base
-
-WORKDIR /usr/app
-
-COPY --from=dependencies --chown=node:node /usr/app/prod_node_modules ./node_modules
-
-COPY --chown=node:node . .
+# get app files from builder
+COPY --from=builder --chown=node:node /usr/prod_node_modules ./node_modules
+COPY --from=builder --chown=node:node /usr/app/dist dist
 
 USER node
 
-CMD [ "npm", "run", "start:prod" ]
+CMD [ "node", "dist/src/main"]

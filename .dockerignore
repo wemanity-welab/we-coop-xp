@@ -2,11 +2,12 @@
 Dockerfile
 docker-compose
 .env*
+db
 
 .git
 .gitignore
 
-*.log
 node_modules
-db
+dist
+*.log
 README
