@@ -78,4 +78,15 @@ export class MissionController {
 
     response.status(HttpStatus.OK).send(resp);
   }
+  @Patch(':id/status')
+  async setStatus(@Res() response: Response, @Param('id') missionId: string) {
+    let resp;
+
+    try {
+      resp = await this.missionServiceAdapter.setStatus(missionId);
+    } catch (error) {
+      throw error;
+    }
+    response.status(HttpStatus.OK).send(resp);
+  }
 }

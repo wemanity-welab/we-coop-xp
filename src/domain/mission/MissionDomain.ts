@@ -8,6 +8,7 @@ export class MissionDomain {
   private duration;
   private stack;
   private team_organisation;
+  private isActive;
 
   constructor({
     id,
@@ -19,6 +20,7 @@ export class MissionDomain {
     description,
     stack,
     team_organisation,
+    isActive,
   }: {
     id?: string;
     profil: string;
@@ -29,6 +31,7 @@ export class MissionDomain {
     description: string;
     stack: string;
     team_organisation: string;
+    isActive: boolean;
   }) {
     this.id = id;
     this.profil = profil;
@@ -39,6 +42,7 @@ export class MissionDomain {
     this.description = description;
     this.stack = stack;
     this.team_organisation = team_organisation;
+    this.isActive = isActive;
   }
 
   public get getId(): string {
@@ -102,5 +106,12 @@ export class MissionDomain {
   }
   public set setTeam_organisation(value: string) {
     this.team_organisation = value;
+  }
+
+  public get getStatus(): boolean {
+    return this.isActive;
+  }
+  public set setStatus(value: boolean) {
+    this.isActive = value;
   }
 }

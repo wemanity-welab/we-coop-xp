@@ -53,4 +53,20 @@ export class MissionRepositoryAdapter implements IMissionRepository {
       return fromEntityToDomain(fetchedMission);
     }
   }
+  public async setStatus(missionId: string): Promise<any> {
+    try {
+      const missionFound = await this.missionEntityRepository.findOne({
+        id: missionId,
+      });
+      if (!missionFound) throw new Error('Mission not found');
+      const mission = fromEntityToDomain(missionFound);
+      mission.setStatus = !mission.getStatus;
+      await this.missionEntityRepository.save({ ...mission });
+      return `Mission ${
+        mission.getStatus === false ? 'desactivated' : 'activated'
+      }`;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
 }
