@@ -58,12 +58,14 @@ describe('AppController (e2e)', () => {
 
   it('/mission (POST)', async () => {
     const job = new MissionDomain({
-      title: 'title',
-      address: 'address',
-      salary: 'salary',
-      contract_type: 'contract_type',
-      author: 'author',
+      profil: 'title',
+      client: 'address',
+      address: 'salary',
+      project: 'contract_type',
+      duration: 'author',
       description: 'description',
+      stack: 'nodejs reactjs',
+      team_organisation: 'agile',
     });
     await request(app.getHttpServer())
       .post('/missions')

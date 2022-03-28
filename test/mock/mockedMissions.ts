@@ -10,12 +10,14 @@ for (let i = 1; i < 5; i++) {
   mockedMissions.push(
     new MissionDomain({
       id: i,
-      title: faker.name.jobTitle(),
-      address: faker.name.jobArea(),
-      salary: faker.finance.amount(),
-      contract_type: faker.name.jobType(),
-      author: faker.name.firstName(),
+      profil: faker.name.jobTitle(),
+      client: faker.name.jobArea(),
+      address: faker.finance.amount(),
+      project: faker.name.jobType(),
+      duration: faker.name.firstName(),
       description: faker.name.jobDescriptor(),
+      stack: faker.name.jobDescriptor(),
+      team_organisation: faker.name.jobDescriptor(),
     }),
   );
 }

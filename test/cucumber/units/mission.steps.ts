@@ -16,15 +16,27 @@ Before(function () {
  */
 Given(
   'Writing a mission with {int}, {string}, {string}, {string}, {string}, {string}, {string}',
-  function (id, title, address, description, salary, contract_type, author) {
+  function (
+    id,
+    profil,
+    client,
+    description,
+    address,
+    project,
+    duration,
+    stack,
+    team_organisation,
+  ) {
     this.mission = new MissionDomain({
       id,
-      title,
-      address,
+      profil,
+      client,
       description,
-      salary,
-      contract_type,
-      author,
+      address,
+      project,
+      duration,
+      stack,
+      team_organisation,
     });
   },
 );
@@ -59,17 +71,21 @@ When(
     new_salary,
     new_contract_type,
     new_author,
+    new_stack,
+    new_team_organisation,
   ) {
     try {
       await this.missionService.update(
         this.id,
         new MissionDomain({
-          title: new_title,
-          address: new_address,
+          profil: new_title,
+          client: new_address,
           description: new_description,
-          salary: new_salary,
-          contract_type: new_contract_type,
-          author: new_author,
+          address: new_salary,
+          project: new_contract_type,
+          duration: new_author,
+          stack: new_stack,
+          team_organisation: new_team_organisation,
         }),
       );
       this.newMission = await this.missionService.getOne(this.id);
@@ -105,8 +121,8 @@ When(
         this.id,
         new MissionDomain({
           ...this.mission,
-          title: new_title,
-          address: new_address,
+          profil: new_title,
+          client: new_address,
         }),
       );
       this.missionUpdated = await this.missionService.getOne(this.id);

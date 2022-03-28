@@ -1,42 +1,44 @@
 export class MissionDomain {
-  private id: number;
-  private title: string;
-  private address: string;
-  private salary: string;
-  private contract_type: string;
-  private description: string;
-  private author: string;
-  // private created_at: string;
-  // private updated_at: string;
+  private id;
+  private profil;
+  private client;
+  private address;
+  private project;
+  private description;
+  private duration;
+  private stack;
+  private team_organisation;
 
   constructor({
     id,
-    title,
+    profil,
+    client,
     address,
-    salary,
-    contract_type,
-    author,
+    project,
+    duration,
     description,
+    stack,
+    team_organisation,
   }: {
     id?: number;
-    title: string;
+    profil: string;
+    client: string;
     address: string;
-    salary: string;
-    contract_type: string;
-    author: string;
+    project: string;
+    duration: string;
     description: string;
+    stack: string;
+    team_organisation: string;
   }) {
     this.id = id;
-    this.title = title;
+    this.profil = profil;
+    this.client = client;
     this.address = address;
-    this.salary = salary;
-    this.contract_type = contract_type;
-    this.author = author;
-    // this.created_at = created_at;
-    // this.updated_at = updated_at;
-    // this.created_at = `${new Date().getDate()} - ${new Date().getMonth()} - ${new Date().getFullYear()}`;
-    // this.updated_at = `${new Date().getDate()} - ${new Date().getMonth()} - ${new Date().getFullYear()}`;
+    this.project = project;
+    this.duration = duration;
     this.description = description;
+    this.stack = stack;
+    this.team_organisation = team_organisation;
   }
 
   public get getId(): number {
@@ -46,11 +48,18 @@ export class MissionDomain {
     this.id = value;
   }
 
-  public get getTitle(): string {
-    return this.title;
+  public get getProfil(): string {
+    return this.profil;
   }
-  public set setTitle(value: string) {
-    this.title = value;
+  public set setProfil(value: string) {
+    this.profil = value;
+  }
+
+  public get getClient(): string {
+    return this.client;
+  }
+  public set setClient(value: string) {
+    this.client = value;
   }
 
   public get getAddress(): string {
@@ -60,45 +69,38 @@ export class MissionDomain {
     this.address = value;
   }
 
-  public get getSalary(): string {
-    return this.salary;
-  }
-  public set setSalary(value: string) {
-    this.salary = value;
-  }
-
-  public get getContract_type(): string {
-    return this.contract_type;
+  public get getProject(): string {
+    return this.project;
   }
   public set setContract_type(value: string) {
-    this.contract_type = value;
+    this.project = value;
   }
 
-  public get getAuthor(): string {
-    return this.author;
+  public get getDuration(): string {
+    return this.duration;
   }
-  public set setAuthor(value: string) {
-    this.author = value;
+  public set setDuration(value: string) {
+    this.duration = value;
   }
-
-  // public get getCreated_at(): string {
-  //   return this.created_at;
-  // }
-  // public set setCreated_at(value: string) {
-  //   this.created_at = value;
-  // }
-
-  // public get setUpdated_at(): string {
-  //   return this.updated_at;
-  // }
-  // public set getUpdated_at(value: string) {
-  //   this.updated_at = value;
-  // }
 
   public get getDescription(): string {
     return this.description;
   }
   public set setDescription(value: string) {
     this.description = value;
+  }
+
+  public get getStack(): string {
+    return this.stack;
+  }
+  public set setStack(value: string) {
+    this.stack = value;
+  }
+
+  public get getTeam_organisation(): string {
+    return this.team_organisation;
+  }
+  public set setTeam_organisation(value: string) {
+    this.team_organisation = value;
   }
 }
