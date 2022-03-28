@@ -20,7 +20,7 @@ export class MissionDomain {
     stack,
     team_organisation,
   }: {
-    id?: number;
+    id?: string;
     profil: string;
     client: string;
     address: string;
@@ -41,10 +41,10 @@ export class MissionDomain {
     this.team_organisation = team_organisation;
   }
 
-  public get getId(): number {
+  public get getId(): string {
     return this.id;
   }
-  public set setId(value: number) {
+  public set setId(value: string) {
     this.id = value;
   }
 

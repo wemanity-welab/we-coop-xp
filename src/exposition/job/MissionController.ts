@@ -45,7 +45,7 @@ export class MissionController {
   @ApiCreatedResponse({ type: MissionEntity, description: 'the job' })
   @ApiNotFoundResponse()
   @Get(':id')
-  async getOne(@Res() response: Response, @Param('id') missionId: number) {
+  async getOne(@Res() response: Response, @Param('id') missionId: string) {
     const mission = await this.missionServiceAdapter.getOne(missionId);
     if (!mission) {
       throw new NotFoundException();
@@ -56,7 +56,7 @@ export class MissionController {
   @Delete(':id')
   async deleteMission(
     @Res() response: Response,
-    @Param('id') missionId: number,
+    @Param('id') missionId: string,
   ) {
     const message = await this.missionServiceAdapter.remove(missionId);
     response.status(HttpStatus.ACCEPTED).send(message);
@@ -64,7 +64,7 @@ export class MissionController {
   @Patch(':id')
   async updateMission(
     @Res() response: Response,
-    @Param('id') missionId: number,
+    @Param('id') missionId: string,
     @Body() mission: MissionDomain,
   ) {
     let resp;

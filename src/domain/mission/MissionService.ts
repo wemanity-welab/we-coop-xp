@@ -18,13 +18,13 @@ export class MissionService implements IMissionService {
   async getAll() {
     return await this.missionRepositoryAdapter.getAll();
   }
-  async getOne(missionId: number) {
+  async getOne(missionId: string) {
     return await this.missionRepositoryAdapter.getOne(missionId);
   }
-  async remove(missionId: number) {
+  async remove(missionId: string) {
     return await this.missionRepositoryAdapter.remove(missionId);
   }
-  async update(missionId: number, mission: MissionDomain) {
+  async update(missionId: string, mission: MissionDomain) {
     return await this.missionRepositoryAdapter.update(missionId, mission);
   }
 }

@@ -5,34 +5,34 @@ import { MissionDomain } from '../../domain/mission/MissionDomain';
 // The property "name" sets the table name. This is usually implied from the
 // class name, however this can be overridden if needed.
 
-@Entity({ name: 'missionTable' })
+@Entity({ name: 'mission' })
 export class MissionEntity {
-  @PrimaryGeneratedColumn({ name: 'id' })
-  id!: number;
+  @PrimaryGeneratedColumn('uuid')
+  id!: string;
   @ApiProperty()
-  @Column({ name: 'title' })
-  title!: string;
+  @Column({ name: 'profil' })
+  profil!: string;
+  @ApiProperty()
+  @Column({ name: 'client' })
+  client!: string;
   @ApiProperty()
   @Column({ name: 'address' })
   address!: string;
   @ApiProperty()
-  @Column({ name: 'salary' })
-  salary!: string;
+  @Column({ name: 'project' })
+  project!: string;
   @ApiProperty()
-  @Column({ name: 'contract_type' })
-  contract_type!: string;
-  @ApiProperty()
-  @Column({ name: 'author' })
-  author!: string;
+  @Column({ name: 'duration' })
+  duration!: string;
   @ApiProperty()
   @Column({ name: 'description' })
   description!: string;
   @ApiProperty()
-  @Column({ name: 'created_at', nullable: true })
-  created_at!: string;
+  @Column({ name: 'stack' })
+  stack!: string;
   @ApiProperty()
-  @Column({ name: 'updated_at', nullable: true })
-  updated_at!: string;
+  @Column({ name: 'team_organisation' })
+  team_organisation!: string;
 }
 
 export const fromDomainToEntity = (missionDomain: MissionDomain): any => {

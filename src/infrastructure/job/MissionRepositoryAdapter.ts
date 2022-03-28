@@ -22,14 +22,14 @@ export class MissionRepositoryAdapter implements IMissionRepository {
     const missions = await this.missionEntityRepository.find();
     return missions.map((mission) => fromEntityToDomain(mission));
   }
-  public async getOne(missionId: number): Promise<MissionDomain> {
+  public async getOne(missionId: string): Promise<MissionDomain> {
     const missionOne = await this.missionEntityRepository.find({
       id: missionId,
     });
     const mission = missionOne.map((mission) => fromEntityToDomain(mission));
     return mission[0];
   }
-  public async remove(missionId: number): Promise<string> {
+  public async remove(missionId: string): Promise<string> {
     try {
       const removeReturn = await this.missionEntityRepository.delete(missionId);
       return removeReturn.affected === 0
@@ -39,7 +39,7 @@ export class MissionRepositoryAdapter implements IMissionRepository {
       throw new Error(error);
     }
   }
-  public async update(missionId: number, mission: any): Promise<any> {
+  public async update(missionId: string, mission: any): Promise<any> {
     const missionFound = await this.missionEntityRepository.findOne({
       id: missionId,
     });

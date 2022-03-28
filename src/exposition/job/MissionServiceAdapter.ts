@@ -15,14 +15,14 @@ export class MissionServiceAdapter {
   public async getAll(): Promise<MissionDomain[]> {
     return this.missionService.getAll();
   }
-  public async getOne(missionId: number): Promise<MissionDomain> {
+  public async getOne(missionId: string): Promise<MissionDomain> {
     return this.missionService.getOne(missionId);
   }
-  public async remove(missionId: number): Promise<string> {
+  public async remove(missionId: string): Promise<string> {
     return this.missionService.remove(missionId);
   }
   public async update(
-    missionId: number,
+    missionId: string,
     mission: MissionDomain,
   ): Promise<MissionDomain> {
     return this.missionService.update(missionId, mission);
