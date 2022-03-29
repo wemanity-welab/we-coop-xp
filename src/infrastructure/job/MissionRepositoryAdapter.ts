@@ -6,6 +6,7 @@ import { MissionDomain } from '../../domain/mission/MissionDomain';
 import { IMissionRepository } from '../../domain/mission/IMissionRepository';
 import { MissionEntity } from './MissionEntity';
 import { fromDomainToEntity, fromEntityToDomain } from './MissionEntity';
+import Utils from '../../utils/Utils';
 
 @Injectable()
 export class MissionRepositoryAdapter implements IMissionRepository {
@@ -55,16 +56,24 @@ export class MissionRepositoryAdapter implements IMissionRepository {
   }
 
   async search(keywords: string[]): Promise<MissionDomain[]> {
-    const missions: any[] = [];
+    const request = await this.searchByElement(keywords);
+
+    const missions: MissionEntity[] = Utils.removeDuplicateObject(request);
+
+    return missions.map((mission) => new MissionDomain(mission));
+  }
+
+  async searchByElement(array: Array<any>) {
+    const elements: any[] = [];
     await Promise.all(
-      keywords.map(async (keyword) => {
-        const request: MissionEntity[] =
+      array.map(async (element) => {
+        const request: Array<string | number | object> =
           await this.missionEntityRepository.find({
-            profil: Like(`%${keyword}%`),
+            profil: Like(`%${element}%`),
           });
-        request.forEach((req) => missions.push(new MissionDomain(req)));
+        request.forEach((req) => elements.push(req));
       }),
     );
-    return missions;
+    return elements;
   }
 }
