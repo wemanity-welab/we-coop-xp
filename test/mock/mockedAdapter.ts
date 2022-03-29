@@ -7,7 +7,7 @@ class AdapterMock {
 
   async save(data: any): Promise<any> {
     this.datas.push(data);
-    return await 'Success';
+    return await data;
   }
   async getAll(): Promise<any[]> {
     return await this.datas;

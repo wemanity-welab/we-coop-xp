@@ -26,34 +26,6 @@ describe('AppController (e2e)', () => {
 
     app = moduleFixture.createNestApplication();
     await app.init();
-
-    const connection = await getConnection();
-    const entityManager = connection.createEntityManager();
-
-    entityManager.insert<MissionEntity>(MissionEntity, {
-      title: 'comptable',
-      address: 'address',
-      salary: 'salary',
-      contract_type: 'contract_type',
-      author: 'author',
-      description: 'description',
-    });
-    entityManager.insert<MissionEntity>(MissionEntity, {
-      title: 'dev',
-      address: 'address',
-      salary: 'salary',
-      contract_type: 'contract_type',
-      author: 'author',
-      description: 'description',
-    });
-    entityManager.insert<MissionEntity>(MissionEntity, {
-      title: 'CTO',
-      address: 'address',
-      salary: 'salary',
-      contract_type: 'contract_type',
-      author: 'author',
-      description: 'description',
-    });
   });
 
   it('/mission (POST)', async () => {
