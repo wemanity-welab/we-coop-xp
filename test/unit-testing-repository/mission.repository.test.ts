@@ -30,10 +30,17 @@ class MissionRepositoryAdapter implements IMissionRepository {
   }
 
   async search(keywords: string[]): Promise<MissionDomain[]> {
-    const missions: MissionEntity[] = await this.missionEntityRepository.find({
-      profil: Like(`%${keywords}%`),
-    });
-    return missions.map((mission) => new MissionDomain(mission));
+    const missions: any[] = [];
+    await Promise.all(
+      keywords.map(async (keyword) => {
+        const request: MissionEntity[] =
+          await this.missionEntityRepository.find({
+            profil: Like(`%${keyword}%`),
+          });
+        request.forEach((req) => missions.push(new MissionDomain(req)));
+      }),
+    );
+    return missions;
   }
 }
 
@@ -105,9 +112,15 @@ describe('Testing Search Method', () => {
     expect(missions.length).toBeGreaterThan(0);
   });
 
-  it('Should display a list of missions by keywords search', async () => {
+  it('Should display a  list of missions by keyword search', async () => {
     const missions = await repository.search(['Java']);
-    console.log(missions);
+    console.log('Get one mission: ', missions);
+    expect(missions.length).toBeGreaterThan(0);
+  });
+
+  it('Should display a list of missions by keywords search', async () => {
+    const missions = await repository.search(['Java', 'dev']);
+    console.log('Get list of missions: ', missions);
     expect(missions.length).toBeGreaterThan(0);
   });
 });
