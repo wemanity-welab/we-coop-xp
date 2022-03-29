@@ -27,4 +27,7 @@ export class MissionServiceAdapter {
   ): Promise<MissionDomain> {
     return this.missionService.update(missionId, mission);
   }
+  public async search(keywords: string[]): Promise<MissionDomain[]> {
+    return this.missionService.search(keywords);
+  }
 }

@@ -27,4 +27,7 @@ export class MissionService implements IMissionService {
   async update(missionId: string, mission: MissionDomain) {
     return await this.missionRepositoryAdapter.update(missionId, mission);
   }
+  async search(keywords: string[]) {
+    return await this.missionRepositoryAdapter.search(keywords);
+  }
 }
