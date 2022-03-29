@@ -27,13 +27,12 @@ Feature: CRUD MISSION
     @MissionListing
     Scenario: The employer wants to list all current missions
         Given An employer has several currents missions
-            | id  | profil | client | address | project   | duration | description     | stack | team_organisation |
-            | "1" | "java" | "bnp"  | "paris" | "we-coop" | "30"     | "developpement" | "js"  | "bus"             |
-            | "2" | "java" | "bnp"  | "paris" | "we-coop" | "30"     | "developpement" | "js"  | "bus"             |
-
+            | id | profil | client | address | project | duration | description   | stack | team_organisation |
+            | 1  | java   | bnp    | paris   | we-coop | 30       | developpement | js    | bus               |
+            | 2  | java   | bnp    | paris   | we-coop | 30       | developpement | js    | bus               |
         When The employer list all missions
         Then All missions appear in the list as followed:
-            | id  | profil | client | address | project   | duration | description     | stack | team_organisation |
-            | "1" | "java" | "bnp"  | "paris" | "we-coop" | "30"     | "developpement" | "js"  | "bus"             |
-            | "2" | "java" | "bnp"  | "paris" | "we-coop" | "30"     | "developpement" | "js"  | "bus"             |
+            | id | profil | client | address | project | duration | description   | stack | team_organisation |
+            | 1  | java   | bnp    | paris   | we-coop | 30       | developpement | js    | bus               |
+            | 2  | java   | bnp    | paris   | we-coop | 30       | developpement | js    | bus               |
 
