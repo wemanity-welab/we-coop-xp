@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Like, Repository } from 'typeorm';
 
 import { MissionDomain } from '../../domain/mission/MissionDomain';
 import { IMissionRepository } from '../../domain/mission/IMissionRepository';
@@ -13,9 +13,6 @@ export class MissionRepositoryAdapter implements IMissionRepository {
     @InjectRepository(MissionEntity)
     private readonly missionEntityRepository: Repository<MissionEntity>,
   ) {}
-  search(keywords: object): Promise<MissionDomain> {
-    throw new Error('Method not implemented.');
-  }
 
   public async save(mission: MissionDomain): Promise<string> {
     await this.missionEntityRepository.save(fromDomainToEntity(mission));
@@ -55,5 +52,19 @@ export class MissionRepositoryAdapter implements IMissionRepository {
       });
       return fromEntityToDomain(fetchedMission);
     }
+  }
+
+  async search(keywords: string[]): Promise<MissionDomain[]> {
+    const missions: any[] = [];
+    await Promise.all(
+      keywords.map(async (keyword) => {
+        const request: MissionEntity[] =
+          await this.missionEntityRepository.find({
+            profil: Like(`%${keyword}%`),
+          });
+        request.forEach((req) => missions.push(new MissionDomain(req)));
+      }),
+    );
+    return missions;
   }
 }
