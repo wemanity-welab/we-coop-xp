@@ -31,7 +31,7 @@ export class MissionDomain {
     description: string;
     stack: string;
     team_organisation: string;
-    isActive: boolean;
+    isActive?: boolean;
   }) {
     this.id = id;
     this.profil = profil;
