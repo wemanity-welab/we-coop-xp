@@ -9,6 +9,8 @@ import {
   Param,
   Patch,
   NotFoundException,
+  Query,
+  ParseArrayPipe,
 } from '@nestjs/common';
 import {
   ApiCreatedResponse,
@@ -16,6 +18,7 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { Response } from 'express';
+import { get } from 'http';
 import { MissionDomain } from '../../domain/mission/MissionDomain';
 import { MissionEntity } from '../../infrastructure/job/MissionEntity';
 import { MissionServiceAdapter } from './MissionServiceAdapter';
@@ -41,6 +44,14 @@ export class MissionController {
   async getAll(@Res() response: Response): Promise<void> {
     const missions = await this.missionServiceAdapter.getAll();
     response.status(HttpStatus.OK).send(missions);
+  }
+  @Get('search')
+  async search(@Query('criteria') search: string[]) {
+    if (search !== undefined && search.length > 0) {
+      return await this.missionServiceAdapter.search(search);
+    } else {
+      throw new Error('Incorrect search');
+    }
   }
   @ApiCreatedResponse({ type: MissionEntity, description: 'the job' })
   @ApiNotFoundResponse()

@@ -20,7 +20,6 @@ class AdapterMock {
 
   async update(id: any, data: any) {
     const dataFound = await this.datas.find((data) => data.id === id);
-
     if (!dataFound) {
       throw new Error('DATA NOT FOUND');
     }

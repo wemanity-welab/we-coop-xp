@@ -1,11 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Like, Repository } from 'typeorm';
 
 import { MissionDomain } from '../../domain/mission/MissionDomain';
 import { IMissionRepository } from '../../domain/mission/IMissionRepository';
 import { MissionEntity } from './MissionEntity';
 import { fromDomainToEntity, fromEntityToDomain } from './MissionEntity';
+import Utils from '../../utils/Utils';
 
 @Injectable()
 export class MissionRepositoryAdapter implements IMissionRepository {
@@ -52,5 +53,27 @@ export class MissionRepositoryAdapter implements IMissionRepository {
       });
       return fromEntityToDomain(fetchedMission);
     }
+  }
+
+  async search(keywords: string[]): Promise<MissionDomain[]> {
+    const request = await this.searchByElement(keywords);
+
+    const missions: MissionEntity[] = Utils.removeDuplicateObject(request);
+
+    return missions.map((mission) => new MissionDomain(mission));
+  }
+
+  async searchByElement(array: Array<any>) {
+    const elements: any[] = [];
+    await Promise.all(
+      array.map(async (element) => {
+        const request: Array<string | number | object> =
+          await this.missionEntityRepository.find({
+            profil: Like(`%${element}%`),
+          });
+        request.forEach((req) => elements.push(req));
+      }),
+    );
+    return elements;
   }
 }
