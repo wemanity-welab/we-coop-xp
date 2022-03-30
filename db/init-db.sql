@@ -8,5 +8,6 @@ CREATE TABLE IF NOT EXISTS mission (
     description TEXT NOT NULL,
     stack VARCHAR (128),
     team_organisation VARCHAR (128),
+    status BOOLEAN NOT NULL,
 );
 

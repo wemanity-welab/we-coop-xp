@@ -42,4 +42,11 @@ describe('should test missionService class', () => {
     const missionUpdated = await missionService.update('1', newMission);
     expect(missionUpdated).toEqual(newMission);
   });
+
+  describe('setStatus', () => {
+    it('should activate and desactivate the mission', async () => {
+      const isActive = await missionService.setStatus(mission.getId);
+      expect(isActive).toEqual(true);
+    });
+  });
 });

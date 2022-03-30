@@ -76,7 +76,7 @@ export class MissionController {
   async updateMission(
     @Res() response: Response,
     @Param('id') missionId: string,
-    @Body() mission: MissionDomain,
+    @Body() mission: Partial<MissionDomain>,
   ) {
     let resp;
     try {
@@ -86,7 +86,6 @@ export class MissionController {
         console.log(error);
       }
     }
-
     response.status(HttpStatus.OK).send(resp);
   }
 }

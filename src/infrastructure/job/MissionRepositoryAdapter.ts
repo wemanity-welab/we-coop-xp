@@ -40,7 +40,10 @@ export class MissionRepositoryAdapter implements IMissionRepository {
       throw new Error(error);
     }
   }
-  public async update(missionId: string, mission: any): Promise<any> {
+  public async update(
+    missionId: string,
+    mission: Partial<MissionDomain>,
+  ): Promise<MissionDomain> {
     const missionFound = await this.missionEntityRepository.findOne({
       id: missionId,
     });
