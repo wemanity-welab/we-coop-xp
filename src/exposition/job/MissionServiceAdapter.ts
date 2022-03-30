@@ -23,11 +23,8 @@ export class MissionServiceAdapter {
   }
   public async update(
     missionId: string,
-    mission: MissionDomain,
+    mission: Partial<MissionDomain>,
   ): Promise<MissionDomain> {
     return this.missionService.update(missionId, mission);
-  }
-  public async setStatus(missionId: string): Promise<any> {
-    return this.missionService.setStatus(missionId);
   }
 }

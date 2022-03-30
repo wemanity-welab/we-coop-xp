@@ -65,7 +65,7 @@ export class MissionController {
   async updateMission(
     @Res() response: Response,
     @Param('id') missionId: string,
-    @Body() mission: MissionDomain,
+    @Body() mission: Partial<MissionDomain>,
   ) {
     let resp;
     try {
@@ -74,18 +74,6 @@ export class MissionController {
       if (error == 'mission not found') {
         console.log(error);
       }
-    }
-
-    response.status(HttpStatus.OK).send(resp);
-  }
-  @Patch(':id/status')
-  async setStatus(@Res() response: Response, @Param('id') missionId: string) {
-    let resp;
-
-    try {
-      resp = await this.missionServiceAdapter.setStatus(missionId);
-    } catch (error) {
-      throw error;
     }
     response.status(HttpStatus.OK).send(resp);
   }

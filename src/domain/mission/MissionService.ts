@@ -24,10 +24,7 @@ export class MissionService implements IMissionService {
   async remove(missionId: string) {
     return await this.missionRepositoryAdapter.remove(missionId);
   }
-  async update(missionId: string, mission: MissionDomain) {
+  async update(missionId: string, mission: Partial<MissionDomain>) {
     return await this.missionRepositoryAdapter.update(missionId, mission);
-  }
-  async setStatus(missionId: string) {
-    return await this.missionRepositoryAdapter.setStatus(missionId);
   }
 }
