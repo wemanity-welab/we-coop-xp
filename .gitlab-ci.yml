@@ -4,6 +4,7 @@ stages:
   - setup
   - build
   - test
+  - lint
   - report
 
 setup:install:
@@ -22,18 +23,6 @@ build:app:
       artifacts: true
   script:
     - "npm run build"
-
-test:unit-test:
-  stage: test
-  needs:
-    - job: setup:install
-      artifacts: true
-  script:
-    - "npm run test:ci"
-  artifacts:
-    paths:
-      - coverage/
-    expire_in: 1 hour
 
 build:docker:
   stage: build
@@ -57,6 +46,26 @@ build:docker:
       --tag "$CI_REGISTRY_IMAGE:latest" .
     - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
     - docker push $CI_REGISTRY_IMAGE:latest
+
+test:unit-test:
+  stage: test
+  needs:
+    - job: setup:install
+      artifacts: true
+  script:
+    - "npm run test:ci"
+  artifacts:
+    paths:
+      - coverage/
+    expire_in: 1 hour
+
+lint:app:
+  stage: lint
+  needs:
+    - job: setup:install
+      artifacts: true
+  script:
+    - "npm run lint"
 
 pages:
   stage: report
