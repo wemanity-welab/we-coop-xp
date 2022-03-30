@@ -8,7 +8,8 @@ import mockedMissions from '../../mock/mockedMissions';
 // Step definitions for domain centric testing, at unit level
 
 Before(function () {
-  this.missionService = new MissionService(new AdapterMock());
+  const adapter: any = new AdapterMock();
+  this.missionService = new MissionService(adapter);
   mockedMissions.forEach((mission) => this.missionService.save(mission));
 });
 /**
