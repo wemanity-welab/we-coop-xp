@@ -47,7 +47,9 @@ export class MissionController {
   }
   @Get('search')
   async search(@Query('criteria') search: string[]) {
-    if (search !== undefined && search.length > 0) {
+    if (typeof search === 'string') {
+      return await this.missionServiceAdapter.search([search]);
+    } else if (search !== undefined && search.length > 0) {
       return await this.missionServiceAdapter.search(search);
     } else {
       throw new Error('Incorrect search');
