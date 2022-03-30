@@ -1,6 +1,5 @@
 stages:
-  - build
-  - test
+  - build-test
   - build-docker
 
 image: node:16.14.2
@@ -9,24 +8,18 @@ services:
   - docker:19.03.13-dind
 
 build-app:
-  stage: build
+  stage: build-test
   script:
     - "npm install"
     - "npm run build"
-
-unit-tests:
-  stage: test
-  script:
     - "npm run test:ci"
   artifacts:
+    paths:
+      - "coverage"
     reports:
       junit:
         - junit.xml
-
-e2e-tests:
-  stage: test
-  script:
-    - "npm run test:e2e"
+    expire_in: 30 days
 
 build-docker:
   stage: build-docker
