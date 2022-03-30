@@ -1,34 +1,54 @@
-stages:
-  - build-test
-  - build-docker
-
 image: node:16.14.2
 
-services:
-  - docker:19.03.13-dind
+stages:
+  - setup
+  - build
+  - test
 
-build-app:
-  stage: build-test
+setup:install:
+  stage: setup
   script:
     - "npm install"
+  artifacts:
+    paths:
+      - node_modules/
+    expire_in: 1 hour
+
+build:app:
+  stage: build
+  needs:
+    - job: setup:install
+      artifacts: true
+  script:
     - "npm run build"
+
+test:unit-test:
+  stage: test
+  needs:
+    - job: setup:install
+      artifacts: true
+  script:
     - "npm run test:ci"
   artifacts:
     paths:
-      - "coverage"
+      - coverage/
     reports:
       junit:
         - junit.xml
     expire_in: 30 days
 
-build-docker:
-  stage: build-docker
-  image: docker:19.03.12
+build:docker:
+  stage: build
+  image: docker:19.03.13
+  only:
+   - main
   variables:
     DOCKER_HOST: tcp://docker:2376
     DOCKER_TLS_CERTDIR: "/certs"
     DOCKER_TLS_VERIFY: 1
     DOCKER_CERT_PATH: "$DOCKER_TLS_CERTDIR/client"
+  services:
+  - docker:19.03.13-dind
   before_script:
     - docker login -u $CI_DEPLOY_USER -p $CI_DEPLOY_PASSWORD $CI_REGISTRY
   script:
