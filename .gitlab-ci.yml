@@ -4,6 +4,7 @@ stages:
   - setup
   - build
   - test
+  - report
 
 setup:install:
   stage: setup
@@ -32,10 +33,7 @@ test:unit-test:
   artifacts:
     paths:
       - coverage/
-    reports:
-      junit:
-        - junit.xml
-    expire_in: 30 days
+    expire_in: 1 hour
 
 build:docker:
   stage: build
@@ -59,3 +57,17 @@ build:docker:
       --tag "$CI_REGISTRY_IMAGE:latest" .
     - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
     - docker push $CI_REGISTRY_IMAGE:latest
+
+pages:
+  stage: report
+  only:
+    - main
+  needs:
+    - job: test:unit-test
+      artifacts: true
+  script:
+    - "mv coverage/lcov-report/ public/"
+  artifacts:
+    paths:
+      - public/
+    expire_in: 30 days
