@@ -3,7 +3,10 @@ stages:
   - test
   - build-docker
 
-image: node:16.14.2-d
+image: node:16.14.2
+
+services:
+  - docker:19.03.13-dind
 
 build-app:
   stage: build
@@ -24,6 +27,11 @@ e2e-tests:
 build-docker:
   stage: build-docker
   image: docker:19.03.12
+  variables:
+    DOCKER_HOST: tcp://docker:2376
+    DOCKER_TLS_CERTDIR: "/certs"
+    DOCKER_TLS_VERIFY: 1
+    DOCKER_CERT_PATH: "$DOCKER_TLS_CERTDIR/client"
   before_script:
     - echo "$DOCKER_REGISTRY_PASS" | docker login $DOCKER_REGISTRY --username $DOCKER_REGISTRY_USER --password-stdin
   script:
