@@ -17,7 +17,11 @@ build-app:
 unit-tests:
   stage: test
   script:
-    - "npm run test:cov"
+    - "npm run test:ci"
+  artifacts:
+    reports:
+      junit:
+        - junit.xml
 
 e2e-tests:
   stage: test
