@@ -62,10 +62,10 @@ When(
     this.elementsToModify = table.rowsHash();
     await this.missionService.update(this.id, this.elementsToModify);
     this.missionUpdated = await this.missionService.getOne(this.id);
+    this.missionUpdatedNewDomain = new MissionDomain(this.missionUpdated);
   },
 );
 Then(/^The mission is modified as followed$/, async function (table) {
-  this.expectedMission = table.rowsHash();
-
-  expect(this.missionUpdated).to.eql(this.expectedMission);
+  this.expectedMission = new MissionDomain(table.rowsHash());
+  expect(this.missionUpdatedNewDomain).to.eql(this.expectedMission);
 });
