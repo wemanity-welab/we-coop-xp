@@ -1,0 +1,36 @@
+stages:
+  - build
+  - test
+  - build-docker
+
+image: node:16.14.2-d
+
+build-app:
+  stage: build
+  script:
+    - "npm install"
+    - "npm run build"
+
+unit-tests:
+  stage: test
+  script:
+    - "npm run test:cov"
+
+e2e-tests:
+  stage: test
+  script:
+    - "npm run test:e2e"
+
+build-docker:
+  stage: build-docker
+  image: docker:19.03.12
+  before_script:
+    - echo "$DOCKER_REGISTRY_PASS" | docker login $DOCKER_REGISTRY --username $DOCKER_REGISTRY_USER --password-stdin
+  script:
+    - docker pull $CI_REGISTRY_IMAGE:latest || true
+    - >
+      docker build --cache-from $CI_REGISTRY_IMAGE:latest \
+      --tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA \
+      --tag $CI_REGISTRY_IMAGE:latest ./
+    - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+    - docker push $CI_REGISTRY_IMAGE:latest
