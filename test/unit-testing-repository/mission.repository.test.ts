@@ -44,11 +44,16 @@ class MissionRepositoryAdapter implements IMissionRepository {
       array.map(async (element) => {
         const request: Array<string | number | object> =
           await this.missionEntityRepository.find({
-            profil: Like(`%${element}%`),
+            where: [
+              { profil: Like(`%${element}%`) },
+              { stack: Like(`%${element}%`) },
+              { client: Like(`%${element}%`) },
+            ],
           });
         request.forEach((req) => elements.push(req));
       }),
     );
+
     return elements;
   }
 }
@@ -57,6 +62,48 @@ describe('Testing Search Method', () => {
   let app: INestApplication;
   let entityManager: EntityManager;
   let repository: MissionRepositoryAdapter;
+  const missions = [
+    {
+      profil: 'dev fullstack javascript',
+      client: 'BNP Paribas',
+      address: '10 rue de Paris 75000 Paris',
+      project: 'WEB APP',
+      description: 'full stack',
+      duration: '6 mois',
+      stack: 'React, Nodejs, Mongodb',
+      team_organisation: 'test',
+    },
+    {
+      profil: 'dev Java',
+      client: 'Metro',
+      address: '11 rue de Paris 75001 Paris',
+      project: 'ANDROID MOBILE APP',
+      description: 'back-end',
+      duration: '12 mois',
+      stack: 'Java, Postgresql, spring',
+      team_organisation: 'test',
+    },
+    {
+      profil: 'devOps',
+      client: 'Decathlon',
+      address: '12 rue de Paris 75002 Paris',
+      project: 'CI',
+      description: 'opérationnel',
+      duration: '24 mois',
+      stack: 'Jenkins, Dockers, SonarQube',
+      team_organisation: 'test',
+    },
+    {
+      profil: 'devOps',
+      client: 'BNP Paribas',
+      address: '10 rue de Paris 75000 Paris',
+      project: 'WEB APP',
+      description: 'full stack',
+      duration: '6 mois',
+      stack: 'React, Nodejs, Mongodb',
+      team_organisation: 'test',
+    },
+  ];
 
   beforeAll(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
@@ -82,54 +129,51 @@ describe('Testing Search Method', () => {
     const connection = getConnection();
     entityManager = connection.createEntityManager();
 
-    await entityManager.insert<MissionEntity>(MissionEntity, {
-      profil: 'dev fullstack javascript',
-      client: 'BNP Paribas',
-      address: '10 rue de Paris 75000 Paris',
-      project: 'WEB APP',
-      description: 'full stack',
-      duration: '6 mois',
-      stack: 'React, Nodejs, Mongodb',
-      team_organisation: 'test',
-    });
-
-    await entityManager.insert<MissionEntity>(MissionEntity, {
-      profil: 'dev Java',
-      client: 'Metro',
-      address: '11 rue de Paris 75001 Paris',
-      project: 'ANDROID MOBILE APP',
-      description: 'back-end',
-      duration: '12 mois',
-      stack: 'Java, Postgresql, spring',
-      team_organisation: 'test',
-    });
-
-    await entityManager.insert<MissionEntity>(MissionEntity, {
-      profil: 'devOps',
-      client: 'Decathlon',
-      address: '12 rue de Paris 75002 Paris',
-      project: 'cdd',
-      description: 'opérationnel',
-      duration: '24 mois',
-      stack: 'Jenkins, Dockers, SonarQube',
-      team_organisation: 'test',
-    });
+    missions.forEach(
+      async (mission) =>
+        await entityManager.insert<MissionEntity>(MissionEntity, mission),
+    );
   });
 
   it('Should display list of missions', async () => {
-    const missions = await repository.getAll();
+    const request = await repository.getAll();
+    expect(request.length).toBeGreaterThan(0);
+  });
+
+  it('Should display a  list of missions with profile keyword search', async () => {
+    const request = await repository.search(['Java']);
+    expect(request.length).toBeGreaterThan(0);
+  });
+
+  it('Should display a list of missions with multiple profile keywords search', async () => {
+    const request = await repository.search(['Java', 'dev']);
+    expect(request).toEqual(missions);
+  });
+
+  it('Should display a list of missions with stack keyword search', async () => {
+    const missions = await repository.search(['React', 'Jenkins']);
+    console.log(missions);
     expect(missions.length).toBeGreaterThan(0);
   });
 
-  it('Should display a  list of missions by keyword search', async () => {
-    const missions = await repository.search(['Java']);
-    console.log('Get one mission: ', missions);
+  it('Should display a list of missions with stack keyword search', async () => {
+    const missions = await repository.search(['React', 'Jenkins']);
     expect(missions.length).toBeGreaterThan(0);
   });
 
-  it('Should display a list of missions by keywords search', async () => {
-    const missions = await repository.search(['Java', 'dev']);
-    console.log('Get list of missions: ', missions);
+  it('Should display a list of missions with client keyword search', async () => {
+    const missions = await repository.search(['Decathlon', 'Metro']);
+    expect(missions.length).toBeGreaterThan(0);
+  });
+
+  it('Should display a list of missions with client,stack,profile keyword search', async () => {
+    const missions = await repository.search(['Decathlon', 'Java', 'Jenkins']);
+    expect(missions.length).toBeGreaterThan(0);
+  });
+
+  it('Should display a list of missions with client,stack,profile keyword search', async () => {
+    const missions = await repository.search(['devOps', 'BNP']);
+    console.log(missions);
     expect(missions.length).toBeGreaterThan(0);
   });
 });
