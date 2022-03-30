@@ -38,10 +38,6 @@ class AdapterMock {
   async getOne(id: any): Promise<any> {
     return await this.datas.find((data) => data.id === id);
   }
-  async setStatus(id: any): Promise<any> {
-    const dataFound = await this.datas.find((data) => data.id === id);
-    return (dataFound.status = !dataFound.status);
-  }
 }
 
 export default AdapterMock;
