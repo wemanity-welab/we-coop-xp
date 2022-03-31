@@ -1,24 +1,27 @@
-class AdapterMock {
-  datas: any[];
+import { IAdapter } from '../utils/interfaces/IAdapter';
+import { Mission } from '../utils/types/Mission';
+
+class AdapterMock implements IAdapter<Mission, string> {
+  datas: Mission[];
 
   constructor() {
     this.datas = [];
   }
 
-  async save(data: any): Promise<any> {
-    this.datas.push(data);
-    return await data;
+  async save(data: Mission): Promise<Mission> {
+    await this.datas.push(data);
+    return data;
   }
-  async getAll(): Promise<any[]> {
+  async getAll(): Promise<Mission[]> {
     return await this.datas;
   }
-  async remove(id: any): Promise<any> {
+  async remove(id: string): Promise<string> {
     const dataFound = await this.datas.find((data) => data.id === id);
     await this.datas.splice(this.datas.indexOf(dataFound), 1);
     return `DATA REMOVED ${id}`;
   }
 
-  async update(id: any, data: any) {
+  async update(id: string, data: Mission): Promise<Mission> {
     const dataFound = await this.datas.find((data) => data.id === id);
     if (!dataFound) {
       throw new Error('DATA NOT FOUND');
@@ -34,7 +37,7 @@ class AdapterMock {
 
     return (this.datas[indexOfDataFound] = obj);
   }
-  async getOne(id: any): Promise<any> {
+  async getOne(id: string): Promise<Mission> {
     return await this.datas.find((data) => data.id === id);
   }
 }

@@ -3,7 +3,7 @@ import { HttpStatus, INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { MissionEntity } from '../src/infrastructure/job/MissionEntity';
-import { MissionModule } from './mock/mission.module';
+import { MissionModule } from './config/mission.module';
 import { MissionDomain } from '../src/domain/mission/MissionDomain';
 import { getConnection } from 'typeorm';
 
@@ -26,6 +26,40 @@ describe('AppController (e2e)', () => {
 
     app = moduleFixture.createNestApplication();
     await app.init();
+
+    const connection = await getConnection();
+    const entityManager = connection.createEntityManager();
+
+    entityManager.insert<MissionEntity>(MissionEntity, {
+      profil: 'devOps',
+      client: 'BNP Paribas',
+      address: '10 rue de Paris 75000 Paris',
+      project: 'WEB APP',
+      description: 'full stack',
+      duration: '6 mois',
+      stack: 'React, Nodejs, Mongodb',
+      team_organisation: 'test',
+    });
+    entityManager.insert<MissionEntity>(MissionEntity, {
+      profil: 'dev fullstack javascript',
+      client: 'BNP Paribas',
+      address: '10 rue de Paris 75000 Paris',
+      project: 'WEB APP',
+      description: 'full stack',
+      duration: '6 mois',
+      stack: 'React, Nodejs, Mongodb',
+      team_organisation: 'test',
+    });
+    entityManager.insert<MissionEntity>(MissionEntity, {
+      profil: 'dev Java',
+      client: 'Metro',
+      address: '11 rue de Paris 75001 Paris',
+      project: 'ANDROID MOBILE APP',
+      description: 'back-end',
+      duration: '12 mois',
+      stack: 'Java, Postgresql, spring',
+      team_organisation: 'test',
+    });
   });
 
   it('/mission (POST)', async () => {

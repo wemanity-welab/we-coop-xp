@@ -40,7 +40,10 @@ export class MissionRepositoryAdapter implements IMissionRepository {
       throw new Error(error);
     }
   }
-  public async update(missionId: string, mission: any): Promise<any> {
+  public async update(
+    missionId: string,
+    mission: Partial<MissionDomain>,
+  ): Promise<MissionDomain> {
     const missionFound = await this.missionEntityRepository.findOne({
       id: missionId,
     });
@@ -69,11 +72,16 @@ export class MissionRepositoryAdapter implements IMissionRepository {
       array.map(async (element) => {
         const request: Array<string | number | object> =
           await this.missionEntityRepository.find({
-            profil: Like(`%${element}%`),
+            where: [
+              { profil: Like(`%${element}%`) },
+              { stack: Like(`%${element}%`) },
+              { client: Like(`%${element}%`) },
+            ],
           });
         request.forEach((req) => elements.push(req));
       }),
     );
+
     return elements;
   }
 }

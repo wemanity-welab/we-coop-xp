@@ -33,10 +33,25 @@ export class MissionEntity {
   @ApiProperty()
   @Column({ name: 'team_organisation' })
   team_organisation!: string;
+  @ApiProperty()
+  @Column({ type: 'boolean', name: 'isActive', default: false })
+  isActive!: boolean;
 }
 
-export const fromDomainToEntity = (missionDomain: MissionDomain): any => {
-  return { ...missionDomain };
+export const fromDomainToEntity = (
+  missionDomain: MissionDomain,
+): MissionEntity => {
+  const result = new MissionEntity();
+  result.profil = missionDomain.getProfil;
+  result.client = missionDomain.getClient;
+  result.address = missionDomain.getAddress;
+  result.project = missionDomain.getProject;
+  result.duration = missionDomain.getDuration;
+  result.description = missionDomain.getDescription;
+  result.stack = missionDomain.getStack;
+  result.team_organisation = missionDomain.getTeam_organisation;
+  result.isActive = missionDomain.getStatus;
+  return result;
 };
 
 export const fromEntityToDomain = (

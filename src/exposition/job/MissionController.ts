@@ -47,7 +47,9 @@ export class MissionController {
   }
   @Get('search')
   async search(@Query('criteria') search: string[]) {
-    if (search !== undefined && search.length > 0) {
+    if (typeof search === 'string') {
+      return await this.missionServiceAdapter.search([search]);
+    } else if (search !== undefined && search.length > 0) {
       return await this.missionServiceAdapter.search(search);
     } else {
       throw new Error('Incorrect search');
@@ -76,7 +78,7 @@ export class MissionController {
   async updateMission(
     @Res() response: Response,
     @Param('id') missionId: string,
-    @Body() mission: MissionDomain,
+    @Body() mission: Partial<MissionDomain>,
   ) {
     let resp;
     try {
@@ -86,7 +88,6 @@ export class MissionController {
         console.log(error);
       }
     }
-
     response.status(HttpStatus.OK).send(resp);
   }
 }

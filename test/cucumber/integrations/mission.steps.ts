@@ -1,18 +1,13 @@
 import { Given, Then, When, Before } from '@cucumber/cucumber';
-import HttpStream from '@cucumber/cucumber/lib/formatter/http_stream';
-import { expect } from 'chai';
-import mockedMissions from '../../mock/mockedMissions';
 import { Test, TestingModule } from '@nestjs/testing';
-import { HttpStatus, INestApplication } from '@nestjs/common';
-import { AppModule } from '../../../src/modules/app.module';
+import { INestApplication } from '@nestjs/common';
+
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { MissionModule } from '../../../src/modules/mission.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import configuration from '../../../src/config/configuration';
 
 Before(async () => {
-  let app: INestApplication;
-
   const moduleFixture: TestingModule = await Test.createTestingModule({
     imports: [
       ConfigModule.forRoot({
@@ -28,7 +23,7 @@ Before(async () => {
     ],
   }).compile();
 
-  app = moduleFixture.createNestApplication();
+  const app = moduleFixture.createNestApplication();
   await app.init();
 });
 
