@@ -19,6 +19,7 @@ import {
 } from '@nestjs/swagger';
 import { Response } from 'express';
 import { get } from 'http';
+import { Mission } from '../../../test/utils/types/Mission';
 import { MissionDomain } from '../../domain/mission/MissionDomain';
 import { MissionEntity } from '../../infrastructure/job/MissionEntity';
 import { MissionServiceAdapter } from './MissionServiceAdapter';
@@ -29,7 +30,7 @@ export class MissionController {
   @ApiCreatedResponse({ type: MissionEntity })
   @Post()
   async create(
-    @Body() mission: MissionDomain,
+    @Body() mission: Mission,
     @Res() response: Response,
   ): Promise<string | void> {
     const status = await this.missionServiceAdapter.save(mission);

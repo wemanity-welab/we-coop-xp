@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { MissionDomain } from '../../domain/mission/MissionDomain';
 import { MissionService } from '../../domain/mission/MissionService';
+import { Mission } from '../../types/Mission';
 
 @Injectable()
 export class MissionServiceAdapter {
@@ -9,8 +10,9 @@ export class MissionServiceAdapter {
     this.missionService = missionService;
   }
 
-  public async save(mission: MissionDomain): Promise<string> {
-    return this.missionService.save(mission);
+  public async save(mission: Mission): Promise<string> {
+    const missionDomain = new MissionDomain(mission);
+    return this.missionService.save(missionDomain);
   }
   public async getAll(): Promise<MissionDomain[]> {
     return this.missionService.getAll();
