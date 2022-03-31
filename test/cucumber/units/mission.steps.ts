@@ -3,167 +3,90 @@ import { MissionDomain } from '../../../src/domain/mission/MissionDomain';
 import { MissionService } from '../../../src/domain/mission/MissionService';
 import { expect } from 'chai';
 import AdapterMock from '../../mock/mockedAdapter';
-import mockedMissions from '../../mock/mockedMissions';
 
 // Step definitions for domain centric testing, at unit level
 
 Before(function () {
   const adapter: any = new AdapterMock();
-  this.missionService = new MissionService(adapter);
-  mockedMissions.forEach((mission) => this.missionService.save(mission));
+  return (this.missionService = new MissionService(adapter));
 });
-/**
- * Creating mission scenario
- */
-Given(
-  'Writing a mission with {int}, {string}, {string}, {string}, {string}, {string}, {string}',
-  function (
-    id,
-    profil,
-    client,
-    description,
-    address,
-    project,
-    duration,
-    stack,
-    team_organisation,
-  ) {
-    this.mission = new MissionDomain({
-      id,
-      profil,
-      client,
-      description,
-      address,
-      project,
-      duration,
-      stack,
-      team_organisation,
-    });
-  },
-);
+//     Scenario: A user wants to post a mission
 
-When('The mission has been created', async function () {
+Given(/^A user mission with details as shown in the table$/, function (table) {
+  this.mission = new MissionDomain(table.rowsHash());
+});
+
+When('The user posts the mission', async function () {
   this.result = await this.missionService.save(this.mission);
 });
+Then(/^The mission is created as shown in the table$/, function (table) {
+  this.expectedMission = new MissionDomain(table.rowsHash());
+  expect(this.result).to.eql(this.expectedMission);
+});
 
-Then(
-  'The mission is created and a message {string} is return',
-  async function (message) {
-    expect(this.result).to.equals(message);
-  },
-);
+//Scenario: The employer wants to list all current missions
 
-/**
- * Updating mission entirely scenario
- */
 Given(
-  'The employer wants to change entierly the mission n°{int}',
-  async function (id) {
-    this.id = id;
+  /^An employer are existing missions as followed$/,
+  async function (table) {
+    this.missions = table
+      .hashes()
+      .map((mission: any) => new MissionDomain(mission));
+
+    this.missions.forEach(
+      async (mission: any) => await this.missionService.save(mission),
+    );
   },
 );
 
-When(
-  'The employer update the mission {string}, {string}, {string}, {string}, {string}, {string}',
-  async function (
-    new_title,
-    new_address,
-    new_description,
-    new_salary,
-    new_contract_type,
-    new_author,
-    new_stack,
-    new_team_organisation,
-  ) {
-    try {
-      await this.missionService.update(
-        this.id,
-        new MissionDomain({
-          profil: new_title,
-          client: new_address,
-          description: new_description,
-          address: new_salary,
-          project: new_contract_type,
-          duration: new_author,
-          stack: new_stack,
-          team_organisation: new_team_organisation,
-        }),
-      );
-      this.newMission = await this.missionService.getOne(this.id);
-    } catch (error) {
-      console.error(error);
-    }
-  },
-);
+When('The employer list all missions', async function () {
+  this.result = await this.missionService.getAll();
+});
+Then(/^All missions appear in the list as followed:$/, function (table) {
+  this.missionsExpected = table
+    .hashes()
+    .map((mission: any) => new MissionDomain(mission));
+  expect(this.result).to.eql(this.missionsExpected);
+});
 
-Then(
-  'The mission must be modified {string}, {string}, {string}, {string}, {string}, {string} is return',
-  async function (title, address, description, salary, contract_type, author) {
-    expect(title).to.equals(this.newMission.title);
-    expect(address).to.equals(this.newMission.address);
-    expect(description).to.equals(this.newMission.description);
-    expect(salary).to.equals(this.newMission.salary);
-    expect(contract_type).to.equals(this.newMission.contract_type);
-    expect(author).to.equals(this.newMission.author);
-  },
-);
-
-/**
- * Updating mission partially scenario
- */
-Given('The employer wants to change the mission n°{int}', async function (id) {
-  this.id = id;
+// Scenario: A client wants to update a posted mission
+Given(/^An existing mission with details as followed$/, async function (table) {
+  this.mission = new MissionDomain(table.rowsHash());
+  this.missionSaved = await this.missionService.save(this.mission);
+  this.id = '6ba7b810-9dad-11d1-80b4-00c04fd430c8';
+  console.log(this.id);
 });
 When(
-  'The employer update the mission {string}, {string}',
-  async function (new_title, new_address) {
-    try {
-      await this.missionService.update(
-        this.id,
-        new MissionDomain({
-          ...this.mission,
-          profil: new_title,
-          client: new_address,
-        }),
-      );
-      this.missionUpdated = await this.missionService.getOne(this.id);
-    } catch (error) {
-      console.error(error);
-    }
+  /^The user updates a few attributes of the mission as shown$/,
+  async function (table) {
+    this.elementsToModify = table.rowsHash();
+    await this.missionService.update(this.id, this.elementsToModify);
+    this.missionUpdated = await this.missionService.getOne(this.id);
+    this.missionUpdatedNewDomain = new MissionDomain(this.missionUpdated);
   },
 );
-Then(
-  'The mission must be modified {string}, {string} is return',
-  async function (new_title, new_address) {
-    expect(this.missionUpdated.title).to.equals(new_title);
-    expect(this.missionUpdated.address).to.equals(new_address);
-  },
-);
-
-/**
- * Deleting mission scenario
- */
-Given('The employer wants to delete the mission n°{int}', async function (id) {
-  this.id = id;
-});
-When('The employer delete the mission', async function () {
-  this.message = await this.missionService.remove(this.id);
-});
-Then('The mission must not appear in the list', async function () {
-  expect(this.message).to.equals('DATA REMOVED');
+Then(/^The mission is modified as followed$/, async function (table) {
+  this.expectedMission = new MissionDomain(table.rowsHash());
+  expect(this.missionUpdatedNewDomain).to.eql(this.expectedMission);
 });
 
-/**
- * List missions
- */
-Given('The employer want to list the mission n°{int}', async function (id) {
-  this.id = id;
-});
-When('The employer find the mission', async function () {
-  this.mission = await this.missionService.getOne(this.id);
-});
-Then('The mission must appear', async function () {
-  expect(await this.missionService.getOne(this.mission.getId)).to.equals(
-    this.mission,
+//    Scenario: The user wants to delete a mission
+
+Given(/^an existing mission with details as followed$/, async function (table) {
+  this.missionSaved = await this.missionService.save(
+    new MissionDomain(table.rowsHash()),
   );
+});
+
+When(/^The user delete the mission with n°<id>$/, async function (table) {
+  this.missionDeleted = await this.missionService.remove(
+    this.missionSaved.getId,
+  );
+  console.log(' this.missionDeleted', this.missionDeleted);
+});
+
+Then(/^A message <message> is shown$/, async function (table) {
+  this.table = table.rowsHash();
+  console.log('message', this.table.message);
+  expect(await this.missionDeleted).to.equals(this.table.message);
 });
