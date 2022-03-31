@@ -3,7 +3,7 @@ import { HttpStatus, INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { MissionEntity } from '../src/infrastructure/job/MissionEntity';
-import { MissionModule } from './mock/mission.module';
+import { MissionModule } from './config/mission.module';
 import { MissionDomain } from '../src/domain/mission/MissionDomain';
 import { getConnection } from 'typeorm';
 
