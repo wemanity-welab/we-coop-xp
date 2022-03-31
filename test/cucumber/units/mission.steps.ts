@@ -69,3 +69,24 @@ Then(/^The mission is modified as followed$/, async function (table) {
   this.expectedMission = new MissionDomain(table.rowsHash());
   expect(this.missionUpdatedNewDomain).to.eql(this.expectedMission);
 });
+
+//    Scenario: The user wants to delete a mission
+
+Given(/^an existing mission with details as followed$/, async function (table) {
+  this.missionSaved = await this.missionService.save(
+    new MissionDomain(table.rowsHash()),
+  );
+});
+
+When(/^The user delete the mission with n°<id>$/, async function (table) {
+  this.missionDeleted = await this.missionService.remove(
+    this.missionSaved.getId,
+  );
+  console.log(' this.missionDeleted', this.missionDeleted);
+});
+
+Then(/^A message <message> is shown$/, async function (table) {
+  this.table = table.rowsHash();
+  console.log('message', this.table.message);
+  expect(await this.missionDeleted).to.equals(this.table.message);
+});

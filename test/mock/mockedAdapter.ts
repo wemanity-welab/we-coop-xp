@@ -14,8 +14,8 @@ class AdapterMock {
   }
   async remove(id: any): Promise<any> {
     const dataFound = await this.datas.find((data) => data.id === id);
-    this.datas.splice(this.datas.indexOf(dataFound), 1);
-    return await 'DATA REMOVED';
+    await this.datas.splice(this.datas.indexOf(dataFound), 1);
+    return `DATA REMOVED ${id}`;
   }
 
   async update(id: any, data: any) {

@@ -63,3 +63,25 @@ Feature: CRUD MISSION
             | description       | Java/Kotlin, Spring, Hibernate       |
             | stack             | NodeJS                               |
             | team_organisation | prod                                 |
+    # delete mission
+    @MissionDeleting
+    Scenario: The user wants to delete a mission
+        Given an existing mission with details as followed
+            | id                | 6ba7b810-9dad-11d1-80b4-00c04fd430c8 |
+            | profil            | fullstack developer Java             |
+            | client            | societé genérale                     |
+            | address           | paris                                |
+            | project           | we-coop                              |
+            | duration          | 20                                   |
+            | description       | Java, Spring, Hibernate              |
+            | stack             | React                                |
+            | team_organisation | prod                                 |
+        When The user delete the mission with n°<id>
+            | id | 6ba7b810-9dad-11d1-80b4-00c04fd430c8 |
+        Then A message <message> is shown
+            | message | DATA REMOVED 6ba7b810-9dad-11d1-80b4-00c04fd430c8 |
+
+
+
+
+
