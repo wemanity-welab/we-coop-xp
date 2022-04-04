@@ -2,8 +2,10 @@ back:
   stage: build
   trigger:
     include: api/.gitlab-ci.yml
+    strategy: depend
 
 front:
   stage: build
   trigger:
     include: client/.gitlab-ci.yml
+    strategy: depend
