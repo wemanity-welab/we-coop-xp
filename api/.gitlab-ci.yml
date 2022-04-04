@@ -1,5 +1,3 @@
-image: node:16.14.2
-
 stages:
   - setup
   - build
@@ -7,13 +5,18 @@ stages:
   - lint
   - report
 
+default:
+  image: node:16.14.2
+  before_script:
+    - cd api
+
 setup:install:
   stage: setup
   script:
     - "npm install"
   artifacts:
     paths:
-      - node_modules/
+      - api/node_modules/
     expire_in: 1 hour
 
 build:app:
@@ -56,7 +59,7 @@ test:unit-test:
     - "npm run test:ci"
   artifacts:
     paths:
-      - coverage/
+      - api/coverage/
     expire_in: 1 hour
 
 lint:app:
@@ -75,7 +78,7 @@ pages:
     - job: test:unit-test
       artifacts: true
   script:
-    - "mv coverage/lcov-report/ public/"
+    - "mv api/coverage/lcov-report/ public/api"
   artifacts:
     paths:
       - public/
