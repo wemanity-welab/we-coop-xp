@@ -1,5 +1,9 @@
-
 back:
   stage: build
   trigger:
     include: api/.gitlab-ci.yml
+
+front:
+  stage: build
+  trigger:
+    include: client/.gitlab-ci.yml

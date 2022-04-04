@@ -1,0 +1,62 @@
+stages:
+  - setup
+  - build
+  - test
+  - lint
+  - report
+
+default:
+  image: node:16.14.2
+  before_script:
+    - cd client
+
+setup:install:
+  stage: setup
+  script:
+    - "npm install"
+  artifacts:
+    paths:
+      - client/node_modules/
+    expire_in: 1 hour
+
+build:app:
+  stage: build
+  needs:
+    - job: setup:install
+      artifacts: true
+  script:
+    - "npm run build"
+
+test:unit-test:
+  stage: test
+  needs:
+    - job: setup:install
+      artifacts: true
+  script:
+    - "npm run test"
+  artifacts:
+    paths:
+      - client/coverage/
+    expire_in: 1 hour
+
+lint:app:
+  stage: lint
+  needs:
+    - job: setup:install
+      artifacts: true
+  script:
+    - "npm run lint"
+
+pages:
+  stage: report
+  only:
+    - main
+  needs:
+    - job: test:unit-test
+      artifacts: true
+  script:
+    - "mv client/coverage/lcov-report/ public/client"
+  artifacts:
+    paths:
+      - public/
+    expire_in: 30 days
