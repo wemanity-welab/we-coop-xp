@@ -34,10 +34,7 @@ test:unit-test:
       artifacts: true
   script:
     - "npm run test"
-  artifacts:
-    paths:
-      - client/coverage/
-    expire_in: 1 hour
+
 
 lint:app:
   stage: lint
@@ -46,17 +43,3 @@ lint:app:
       artifacts: true
   script:
     - "npm run lint"
-
-pages:
-  stage: report
-  only:
-    - main
-  needs:
-    - job: test:unit-test
-      artifacts: true
-  script:
-    - "mv client/coverage/lcov-report/ public/client"
-  artifacts:
-    paths:
-      - public/
-    expire_in: 30 days

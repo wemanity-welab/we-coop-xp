@@ -58,9 +58,11 @@ test:unit-test:
   script:
     - "npm run test:ci"
   artifacts:
-    paths:
-      - api/coverage/
-    expire_in: 1 hour
+    when: always
+    reports:
+      junit:
+        - api/junit.xml
+      cobertura: api/coverage/cobertura-coverage.xml
 
 lint:app:
   stage: lint
@@ -69,17 +71,3 @@ lint:app:
       artifacts: true
   script:
     - "npm run lint"
-
-pages:
-  stage: report
-  only:
-    - main
-  needs:
-    - job: test:unit-test
-      artifacts: true
-  script:
-    - "mv api/coverage/lcov-report/ public/api"
-  artifacts:
-    paths:
-      - public/
-    expire_in: 30 days
