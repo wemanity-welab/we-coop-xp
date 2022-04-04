@@ -1,7 +1,7 @@
-import { Mission } from "../types/mission";
+import { Mission } from "../types";
 import api from "./api";
 
-const reviewService = {
+const missionService = {
   getAllMissions: async (): Promise<Mission[]> => await api.post("/missions"),
   getOneMission: async (missionId: string): Promise<Mission> =>
     await api.get(`/missions/${missionId}`),
@@ -18,4 +18,4 @@ const reviewService = {
   },
 };
 
-export default reviewService;
+export default missionService;
