@@ -1,4 +1,4 @@
-export type Mission = {
+type Mission = {
   id: string;
   profil: string;
   client: string;
@@ -9,3 +9,5 @@ export type Mission = {
   stack: string;
   team_organisation: string;
 };
+
+export default Mission;
