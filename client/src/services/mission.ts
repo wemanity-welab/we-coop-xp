@@ -11,6 +11,11 @@ const reviewService = {
     await api.delete(`/missions/${missionId}`),
   updateMission: async (missionId: string, mission: Mission): Promise<string> =>
     await api.patch(`/missions/${missionId}`, mission),
+  search: async (keywords: string[]): Promise<Mission[]> => {
+    let url = "/missions/search?";
+    keywords.map((keyword) => (url = url + `criteria=${keyword}&`));
+    return await api.get(url);
+  },
 };
 
 export default reviewService;
