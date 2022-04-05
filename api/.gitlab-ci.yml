@@ -1,0 +1,73 @@
+stages:
+  - setup
+  - build
+  - test
+  - lint
+  - report
+
+default:
+  image: node:16.14.2
+  before_script:
+    - cd api
+
+setup:install:
+  stage: setup
+  script:
+    - "npm install"
+  artifacts:
+    paths:
+      - api/node_modules/
+    expire_in: 1 hour
+
+build:app:
+  stage: build
+  needs:
+    - job: setup:install
+      artifacts: true
+  script:
+    - "npm run build"
+
+build:docker:
+  stage: build
+  image: docker:19.03.13
+  only:
+   - main
+  variables:
+    DOCKER_HOST: tcp://docker:2376
+    DOCKER_TLS_CERTDIR: "/certs"
+    DOCKER_TLS_VERIFY: 1
+    DOCKER_CERT_PATH: "$DOCKER_TLS_CERTDIR/client"
+  services:
+  - docker:19.03.13-dind
+  before_script:
+    - docker login -u $CI_DEPLOY_USER -p $CI_DEPLOY_PASSWORD $CI_REGISTRY
+  script:
+    - docker pull $CI_REGISTRY_IMAGE:latest || true
+    - >
+      docker build --cache-from "$CI_REGISTRY_IMAGE:latest"
+      --tag "$CI_REGISTRY_IMAGE:$CI_COMMIT_SHA"
+      --tag "$CI_REGISTRY_IMAGE:latest" .
+    - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+    - docker push $CI_REGISTRY_IMAGE:latest
+
+test:unit-test:
+  stage: test
+  needs:
+    - job: setup:install
+      artifacts: true
+  script:
+    - "npm run test:ci"
+  artifacts:
+    when: always
+    reports:
+      junit:
+        - api/junit.xml
+      cobertura: api/coverage/cobertura-coverage.xml
+
+lint:app:
+  stage: lint
+  needs:
+    - job: setup:install
+      artifacts: true
+  script:
+    - "npm run lint"
