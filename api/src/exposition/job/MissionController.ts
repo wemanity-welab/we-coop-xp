@@ -50,13 +50,12 @@ export class MissionController {
   })
   @Get()
   async getAll(@Res() response: Response): Promise<void> {
-    const missions = await this.missionServiceAdapter.getAll();
-    if (missions.length === 0)
-      throw new HttpException(
-        'Aucune mission dans la base de données',
-        HttpStatus.NOT_FOUND,
-      );
-    response.status(HttpStatus.OK).send(missions);
+    try {
+      const missions = await this.missionServiceAdapter.getAll();
+      response.status(HttpStatus.OK).send(missions);
+    } catch (error) {
+      throw new HttpException(error.message, HttpStatus.NOT_FOUND);
+    }
   }
   @Get('search')
   async search(@Query('criteria') search: string[]) {
@@ -76,11 +75,17 @@ export class MissionController {
   @ApiNotFoundResponse()
   @Get(':id')
   async getOne(@Res() response: Response, @Param('id') missionId: string) {
-    const mission = await this.missionServiceAdapter.getOne(missionId);
-    if (!mission) {
-      throw new HttpException('Aucune mission trouvée', HttpStatus.NOT_FOUND);
+    try {
+      const mission = await this.missionServiceAdapter.getOne(missionId);
+      return response.status(HttpStatus.OK).send(mission);
+    } catch (error) {
+      if (
+        error.message === `invalid input syntax for type uuid: \"${missionId}\"`
+      ) {
+        error.message = "Le format de l'id de mission est incorrect.";
+      }
+      throw new HttpException(error.message, HttpStatus.NOT_FOUND);
     }
-    return response.status(HttpStatus.OK).send(mission);
   }
 
   @Delete(':id')
