@@ -1,11 +1,17 @@
-back:
+backend:
   stage: build
   trigger:
     include: api/.gitlab-ci.yml
     strategy: depend
+  rules:
+    - changes:
+        - "api/*"
 
-front:
+ui:
   stage: build
   trigger:
     include: client/.gitlab-ci.yml
     strategy: depend
+  rules:
+    - changes:
+        - "client/*"
