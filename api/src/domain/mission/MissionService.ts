@@ -16,10 +16,18 @@ export class MissionService implements IMissionService {
     return await this.missionRepositoryAdapter.save(mission);
   }
   async getAll() {
-    return await this.missionRepositoryAdapter.getAll();
+    const missions = await this.missionRepositoryAdapter.getAll();
+    if (missions.length === 0) {
+      throw new Error('Aucune mission dans la base de données.');
+    }
+    return missions;
   }
   async getOne(missionId: string) {
-    return await this.missionRepositoryAdapter.getOne(missionId);
+    const mission = await this.missionRepositoryAdapter.getOne(missionId);
+    if (!mission) {
+      throw new Error('Mission introuvable');
+    }
+    return mission;
   }
   async remove(missionId: string) {
     return await this.missionRepositoryAdapter.remove(missionId);
