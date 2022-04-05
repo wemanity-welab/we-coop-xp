@@ -8,9 +8,8 @@ import {
   Delete,
   Param,
   Patch,
-  NotFoundException,
   Query,
-  ParseArrayPipe,
+  HttpException,
 } from '@nestjs/common';
 import {
   ApiCreatedResponse,
@@ -18,7 +17,6 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { Response } from 'express';
-import { get } from 'http';
 import { Mission } from '../../../test/utils/types/Mission';
 import { MissionDomain } from '../../domain/mission/MissionDomain';
 import { MissionEntity } from '../../infrastructure/job/MissionEntity';
@@ -33,8 +31,17 @@ export class MissionController {
     @Body() mission: Mission,
     @Res() response: Response,
   ): Promise<string | void> {
-    const status = await this.missionServiceAdapter.save(mission);
-    response.status(HttpStatus.CREATED).send(status);
+    const values = Object.values(mission);
+    values.map((el) => {
+      if (el === '') {
+        throw new HttpException(
+          'Tous les champs doivent être renseignés',
+          HttpStatus.BAD_REQUEST,
+        );
+      }
+    });
+    const res = await this.missionServiceAdapter.save(mission);
+    response.status(HttpStatus.CREATED).send(res);
   }
   @ApiCreatedResponse({
     type: MissionEntity,
@@ -44,25 +51,34 @@ export class MissionController {
   @Get()
   async getAll(@Res() response: Response): Promise<void> {
     const missions = await this.missionServiceAdapter.getAll();
+    if (!missions)
+      throw new HttpException(
+        'Aucune mission dans la base de données',
+        HttpStatus.NOT_FOUND,
+      );
     response.status(HttpStatus.OK).send(missions);
   }
   @Get('search')
   async search(@Query('criteria') search: string[]) {
     if (typeof search === 'string') {
-      return await this.missionServiceAdapter.search([search]);
-    } else if (search !== undefined && search.length > 0) {
-      return await this.missionServiceAdapter.search(search);
+      const searchedMission = await this.missionServiceAdapter.search([search]);
+      if (searchedMission.length === 0) {
+        throw new HttpException('Aucune correspondance', HttpStatus.NOT_FOUND);
+      } else return searchedMission;
     } else {
-      throw new Error('Incorrect search');
+      const searchedMission = await this.missionServiceAdapter.search(search);
+      if (searchedMission.length === 0) {
+        throw new HttpException('Aucune correspondance', HttpStatus.NOT_FOUND);
+      } else return searchedMission;
     }
   }
-  @ApiCreatedResponse({ type: MissionEntity, description: 'the job' })
+  @ApiCreatedResponse({ type: MissionEntity, description: 'the mission' })
   @ApiNotFoundResponse()
   @Get(':id')
   async getOne(@Res() response: Response, @Param('id') missionId: string) {
     const mission = await this.missionServiceAdapter.getOne(missionId);
     if (!mission) {
-      throw new NotFoundException();
+      throw new HttpException('Aucune mission trouvée', HttpStatus.NOT_FOUND);
     }
     return response.status(HttpStatus.OK).send(mission);
   }
@@ -72,8 +88,8 @@ export class MissionController {
     @Res() response: Response,
     @Param('id') missionId: string,
   ) {
-    const message = await this.missionServiceAdapter.remove(missionId);
-    response.status(HttpStatus.ACCEPTED).send(message);
+    const res = await this.missionServiceAdapter.remove(missionId);
+    response.status(HttpStatus.ACCEPTED).send(res);
   }
   @Patch(':id')
   async updateMission(
