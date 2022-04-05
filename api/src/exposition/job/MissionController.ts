@@ -51,7 +51,7 @@ export class MissionController {
   @Get()
   async getAll(@Res() response: Response): Promise<void> {
     const missions = await this.missionServiceAdapter.getAll();
-    if (!missions)
+    if (missions.length === 0)
       throw new HttpException(
         'Aucune mission dans la base de données',
         HttpStatus.NOT_FOUND,
