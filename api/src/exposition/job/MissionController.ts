@@ -98,7 +98,7 @@ export class MissionController {
       if (
         error.message === `invalid input syntax for type uuid: \"${missionId}\"`
       ) {
-        error.message = "Le format de l'id de mission est incorrect.";
+        error.message = 'Le format du numéro de mission est incorrect.';
       }
       throw new HttpException(error.message, HttpStatus.NOT_FOUND);
     }
