@@ -6,6 +6,7 @@ import { IMissionRepository } from '../../src/domain/mission/IMissionRepository'
 import { MissionDomain } from '../../src/domain/mission/MissionDomain';
 import { MissionEntity } from '../../src/infrastructure/job/MissionEntity';
 import Utils from '../../src/utils/Utils';
+import { Mission } from '../utils/types/Mission';
 
 @Injectable()
 class MissionRepositoryAdapter implements IMissionRepository {
@@ -14,7 +15,7 @@ class MissionRepositoryAdapter implements IMissionRepository {
     private readonly missionEntityRepository: Repository<MissionEntity>,
   ) {}
 
-  save(mission: MissionDomain): Promise<string> {
+  save(mission: MissionDomain): Promise<Mission> {
     throw new Error('Method not implemented.');
   }
   async getAll(): Promise<any> {
