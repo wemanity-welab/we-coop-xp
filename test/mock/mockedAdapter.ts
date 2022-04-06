@@ -1,8 +1,9 @@
+import Utils from '../../src/utils/Utils';
 import { IAdapter } from '../utils/interfaces/IAdapter';
 import { Mission } from '../utils/types/Mission';
 
 class AdapterMock implements IAdapter<Mission, string> {
-  datas: Mission[];
+  datas: any[];
 
   constructor() {
     this.datas = [];
@@ -18,7 +19,7 @@ class AdapterMock implements IAdapter<Mission, string> {
   async remove(id: string): Promise<string> {
     const dataFound = await this.datas.find((data) => data.id === id);
     await this.datas.splice(this.datas.indexOf(dataFound), 1);
-    return `DATA REMOVED ${id}`;
+    return `Mission deleted`;
   }
 
   async update(id: string, data: Mission): Promise<Mission> {
@@ -39,6 +40,23 @@ class AdapterMock implements IAdapter<Mission, string> {
   }
   async getOne(id: string): Promise<Mission> {
     return await this.datas.find((data) => data.id === id);
+  }
+
+  search(keywords: any) {
+    const filtered: any = [];
+    this.datas.forEach((mission: any, idx: any) => {
+      for (const property in mission) {
+        const words = mission[property].split(/[\s,]+/);
+        words.forEach((word: any) => {
+          keywords.forEach((keyword: any) => {
+            if (word === keyword) {
+              filtered.push(this.datas[idx]);
+            }
+          });
+        });
+      }
+    });
+    return Utils.removeDuplicateObject(filtered);
   }
 }
 

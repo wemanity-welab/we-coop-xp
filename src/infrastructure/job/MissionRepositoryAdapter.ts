@@ -15,9 +15,11 @@ export class MissionRepositoryAdapter implements IMissionRepository {
     private readonly missionEntityRepository: Repository<MissionEntity>,
   ) {}
 
-  public async save(mission: MissionDomain): Promise<string> {
-    await this.missionEntityRepository.save(fromDomainToEntity(mission));
-    return 'Success';
+  public async save(mission: MissionDomain): Promise<MissionDomain> {
+    const requestedMission = await this.missionEntityRepository.save(
+      fromDomainToEntity(mission),
+    );
+    return fromEntityToDomain(requestedMission);
   }
   public async getAll(): Promise<MissionDomain[]> {
     const missions = await this.missionEntityRepository.find();

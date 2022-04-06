@@ -10,7 +10,6 @@ import {
   Patch,
   NotFoundException,
   Query,
-  ParseArrayPipe,
 } from '@nestjs/common';
 import {
   ApiCreatedResponse,
@@ -18,8 +17,7 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { Response } from 'express';
-import { get } from 'http';
-import { Mission } from '../../../test/utils/types/Mission';
+import { Mission } from '../../types/Mission';
 import { MissionDomain } from '../../domain/mission/MissionDomain';
 import { MissionEntity } from '../../infrastructure/job/MissionEntity';
 import { MissionServiceAdapter } from './MissionServiceAdapter';
@@ -27,15 +25,17 @@ import { MissionServiceAdapter } from './MissionServiceAdapter';
 @Controller('missions')
 export class MissionController {
   constructor(private readonly missionServiceAdapter: MissionServiceAdapter) {}
+
   @ApiCreatedResponse({ type: MissionEntity })
   @Post()
   async create(
     @Body() mission: Mission,
     @Res() response: Response,
-  ): Promise<string | void> {
+  ): Promise<MissionDomain | void> {
     const status = await this.missionServiceAdapter.save(mission);
     response.status(HttpStatus.CREATED).send(status);
   }
+
   @ApiCreatedResponse({
     type: MissionEntity,
     isArray: true,

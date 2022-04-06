@@ -112,7 +112,7 @@ describe('Testing Search Method', () => {
           type: 'better-sqlite3',
           database: ':memory:',
           entities: [MissionEntity],
-          logging: true,
+          logging: false,
           synchronize: true,
         }),
         TypeOrmModule.forFeature([MissionEntity]),
@@ -152,7 +152,6 @@ describe('Testing Search Method', () => {
 
   it('Should display a list of missions with stack keyword search', async () => {
     const missions = await repository.search(['React', 'Jenkins']);
-    console.log(missions);
     expect(missions.length).toBeGreaterThan(0);
   });
 
@@ -173,7 +172,6 @@ describe('Testing Search Method', () => {
 
   it('Should display a list of missions with client,stack,profile keyword search', async () => {
     const missions = await repository.search(['devOps', 'BNP']);
-    console.log(missions);
     expect(missions.length).toBeGreaterThan(0);
   });
 });

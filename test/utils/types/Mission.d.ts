@@ -8,4 +8,5 @@ export type Mission = {
   description: string;
   stack: string;
   team_organisation: string;
+  isActive?: boolean;
 };

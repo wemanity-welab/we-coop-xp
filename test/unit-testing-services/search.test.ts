@@ -3,20 +3,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken, TypeOrmModule } from '@nestjs/typeorm';
 import { EntityManager, getConnection, Like, Repository } from 'typeorm';
 import { MissionEntity } from '../../src/infrastructure/job/MissionEntity';
-
-export type MockType<T> = {
-  [P in keyof T]?: jest.Mock<any>;
-};
-
-export const repositoryMockFactory: () => MockType<Repository<any>> = jest.fn(
-  () => ({
-    find: jest.fn((entity) => entity),
-    findOne: jest.fn((entity) => entity),
-    save: jest.fn((entity) => entity),
-    update: jest.fn((entity) => entity),
-    delete: jest.fn((entity) => entity),
-  }),
-);
+import { MockType, repositoryMockFactory } from '../mock/typeormMockMethods';
 
 describe('Testing Search Method', () => {
   let app: INestApplication;
@@ -72,7 +59,7 @@ describe('Testing Search Method', () => {
           type: 'better-sqlite3',
           database: ':memory:',
           entities: [MissionEntity],
-          logging: true,
+          logging: false,
           synchronize: true,
         }),
         TypeOrmModule.forFeature([MissionEntity]),
@@ -99,15 +86,9 @@ describe('Testing Search Method', () => {
   });
 
   it('Should display list of missions', async () => {
-    const request = await repositoryMock.find();
-    console.log(`FIND: `, request);
-    // expect(request.length).toBeGreaterThan(0);
-  });
-
-  it('Should display list of missions', async () => {
     const test = {
       id: '1',
-      profil: 'SCRUM MASTER',
+      profil: 'devOps',
       client: 'BNP Paribas',
       address: '10 rue de Paris 75000 Paris',
       project: 'WEB APP',
@@ -118,6 +99,12 @@ describe('Testing Search Method', () => {
     };
     const request = await repositoryMock.save(test);
     console.log(request);
+    // expect(request.length).toBeGreaterThan(0);
+  });
+
+  it('Should display list of missions', async () => {
+    const request = await repositoryMock.findOne('1');
+    console.log(`FIND: `, request);
     // expect(request.length).toBeGreaterThan(0);
   });
 
@@ -160,7 +147,7 @@ describe('Testing Search Method', () => {
     };
 
     const response = await searchByElement(['Java']);
-    console.log(`MISSION UPDATED: `, response);
+    console.log(`SEARCH: `, response);
     // expect(request.length).toBeGreaterThan(0);
   });
 });

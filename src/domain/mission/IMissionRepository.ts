@@ -2,7 +2,7 @@ import { MissionEntity } from '../../infrastructure/job/MissionEntity';
 import { MissionDomain } from './MissionDomain';
 
 export interface IMissionRepository {
-  save(mission: MissionDomain): Promise<string>;
+  save(mission: MissionDomain): Promise<MissionDomain>;
   getAll(): Promise<MissionDomain[]>;
   remove(missionId: string): Promise<string>;
   update(

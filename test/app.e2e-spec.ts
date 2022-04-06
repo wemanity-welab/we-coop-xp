@@ -96,19 +96,4 @@ describe('AppController (e2e)', () => {
         console.log(res.body);
       });
   });
-  // it('/mission (PATCH)', async () => {
-  //   await app
-  //     .getHttpServer()
-  //     .get('/missions/2')
-  //     .then((res) => {
-  //       const mission = res.body;
-  //     });
-  //   await request(app.getHttpServer())
-  //     .patch(`/missions/${mission.getId}`)
-  //     .send({ address: 'pouet' })
-  //     .expect(HttpStatus.OK)
-  //     .then((res) => {
-  //       console.log(res.body);
-  //     });
-  // });
 });
