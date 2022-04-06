@@ -10,7 +10,7 @@ export class MissionServiceAdapter {
     this.missionService = missionService;
   }
 
-  public async save(mission: Mission): Promise<string> {
+  public async save(mission: Mission): Promise<Mission> {
     const missionDomain = new MissionDomain(mission);
     return this.missionService.save(missionDomain);
   }
