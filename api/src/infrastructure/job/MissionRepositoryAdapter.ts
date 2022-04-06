@@ -7,6 +7,7 @@ import { IMissionRepository } from '../../domain/mission/IMissionRepository';
 import { MissionEntity } from './MissionEntity';
 import { fromDomainToEntity, fromEntityToDomain } from './MissionEntity';
 import Utils from '../../utils/Utils';
+import { Mission } from '../../types/Mission';
 
 @Injectable()
 export class MissionRepositoryAdapter implements IMissionRepository {
@@ -15,9 +16,8 @@ export class MissionRepositoryAdapter implements IMissionRepository {
     private readonly missionEntityRepository: Repository<MissionEntity>,
   ) {}
 
-  public async save(mission: MissionDomain): Promise<string> {
-    await this.missionEntityRepository.save(fromDomainToEntity(mission));
-    return 'Success';
+  public async save(mission: MissionDomain): Promise<Mission> {
+    return await this.missionEntityRepository.save(fromDomainToEntity(mission));
   }
   public async getAll(): Promise<MissionDomain[]> {
     const missions = await this.missionEntityRepository.find();
@@ -31,14 +31,8 @@ export class MissionRepositoryAdapter implements IMissionRepository {
     return mission[0];
   }
   public async remove(missionId: string): Promise<string> {
-    try {
-      const removeReturn = await this.missionEntityRepository.delete(missionId);
-      return removeReturn.affected === 0
-        ? 'Mission not found'
-        : 'Mission deleted';
-    } catch (error) {
-      throw new Error(error);
-    }
+    await this.missionEntityRepository.delete(missionId);
+    return `Mission n°${missionId} supprimée.`;
   }
   public async update(
     missionId: string,
@@ -47,15 +41,12 @@ export class MissionRepositoryAdapter implements IMissionRepository {
     const missionFound = await this.missionEntityRepository.findOne({
       id: missionId,
     });
-    if (!missionFound) {
-      throw new Error('mission not updated');
-    } else {
-      const fetchedMission = await this.missionEntityRepository.save({
-        ...missionFound, // existing fields
-        ...mission, // updated fields
-      });
-      return fromEntityToDomain(fetchedMission);
-    }
+
+    const missionUpdated = await this.missionEntityRepository.save({
+      ...missionFound, // existing fields
+      ...mission, // updated fields
+    });
+    return fromEntityToDomain(missionUpdated);
   }
 
   async search(keywords: string[]): Promise<MissionDomain[]> {

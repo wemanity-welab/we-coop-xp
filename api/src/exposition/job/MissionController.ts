@@ -30,18 +30,18 @@ export class MissionController {
   async create(
     @Body() mission: Mission,
     @Res() response: Response,
-  ): Promise<string | void> {
-    const values = Object.values(mission);
-    values.map((el) => {
-      if (el === '') {
+  ): Promise<Mission | void> {
+    const missionProperties = Object.values(mission);
+    missionProperties.map((propertie) => {
+      if (propertie === '') {
         throw new HttpException(
           'Tous les champs doivent être renseignés',
           HttpStatus.BAD_REQUEST,
         );
       }
     });
-    const res = await this.missionServiceAdapter.save(mission);
-    response.status(HttpStatus.CREATED).send(res);
+    const newMission = await this.missionServiceAdapter.save(mission);
+    response.status(HttpStatus.CREATED).send(newMission);
   }
   @ApiCreatedResponse({
     type: MissionEntity,
@@ -59,16 +59,14 @@ export class MissionController {
   }
   @Get('search')
   async search(@Query('criteria') search: string[]) {
-    if (typeof search === 'string') {
-      const searchedMission = await this.missionServiceAdapter.search([search]);
-      if (searchedMission.length === 0) {
-        throw new HttpException('Aucune correspondance', HttpStatus.NOT_FOUND);
-      } else return searchedMission;
-    } else {
-      const searchedMission = await this.missionServiceAdapter.search(search);
-      if (searchedMission.length === 0) {
-        throw new HttpException('Aucune correspondance', HttpStatus.NOT_FOUND);
-      } else return searchedMission;
+    try {
+      if (typeof search === 'string') {
+        return await this.missionServiceAdapter.search([search]);
+      } else {
+        return await this.missionServiceAdapter.search(search);
+      }
+    } catch (error) {
+      throw new HttpException(error.message, HttpStatus.NOT_FOUND);
     }
   }
   @ApiCreatedResponse({ type: MissionEntity, description: 'the mission' })
@@ -82,7 +80,7 @@ export class MissionController {
       if (
         error.message === `invalid input syntax for type uuid: \"${missionId}\"`
       ) {
-        error.message = "Le format de l'id de mission est incorrect.";
+        error.message = 'Le format du numéro de mission est incorrect.';
       }
       throw new HttpException(error.message, HttpStatus.NOT_FOUND);
     }
@@ -93,8 +91,17 @@ export class MissionController {
     @Res() response: Response,
     @Param('id') missionId: string,
   ) {
-    const res = await this.missionServiceAdapter.remove(missionId);
-    response.status(HttpStatus.ACCEPTED).send(res);
+    try {
+      const res = await this.missionServiceAdapter.remove(missionId);
+      response.status(HttpStatus.ACCEPTED).send(res);
+    } catch (error) {
+      if (
+        error.message === `invalid input syntax for type uuid: \"${missionId}\"`
+      ) {
+        error.message = "Le format de l'id de mission est incorrect.";
+      }
+      throw new HttpException(error.message, HttpStatus.NOT_FOUND);
+    }
   }
   @Patch(':id')
   async updateMission(
@@ -102,14 +109,14 @@ export class MissionController {
     @Param('id') missionId: string,
     @Body() mission: Partial<MissionDomain>,
   ) {
-    let resp;
     try {
-      resp = await this.missionServiceAdapter.update(missionId, mission);
+      const missionUpdated = await this.missionServiceAdapter.update(
+        missionId,
+        mission,
+      );
+      response.status(HttpStatus.OK).send(missionUpdated);
     } catch (error) {
-      if (error == 'mission not found') {
-        console.log(error);
-      }
+      throw new HttpException(error.message, HttpStatus.NOT_FOUND);
     }
-    response.status(HttpStatus.OK).send(resp);
   }
 }
