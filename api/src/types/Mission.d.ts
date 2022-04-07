@@ -1,5 +1,4 @@
 export type Mission = {
-  id: string;
   profil: string;
   client: string;
   address: string;

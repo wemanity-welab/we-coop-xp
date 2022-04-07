@@ -27,4 +27,4 @@ COPY --from=builder --chown=node:node /usr/app/dist dist
 
 USER node
 
-CMD [ "node", "dist/src/main"]
+CMD ["node", "dist/src/main"]

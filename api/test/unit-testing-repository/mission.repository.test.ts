@@ -15,7 +15,7 @@ class MissionRepositoryAdapter implements IMissionRepository {
     private readonly missionEntityRepository: Repository<MissionEntity>,
   ) {}
 
-  save(mission: MissionDomain): Promise<Mission> {
+  save(mission: MissionDomain): Promise<MissionDomain> {
     throw new Error('Method not implemented.');
   }
   async getAll(): Promise<any> {
@@ -113,7 +113,7 @@ describe('Testing Search Method', () => {
           type: 'better-sqlite3',
           database: ':memory:',
           entities: [MissionEntity],
-          logging: true,
+          logging: false,
           synchronize: true,
         }),
         TypeOrmModule.forFeature([MissionEntity]),
@@ -153,7 +153,6 @@ describe('Testing Search Method', () => {
 
   it('Should display a list of missions with stack keyword search', async () => {
     const missions = await repository.search(['React', 'Jenkins']);
-    console.log(missions);
     expect(missions.length).toBeGreaterThan(0);
   });
 
@@ -174,7 +173,6 @@ describe('Testing Search Method', () => {
 
   it('Should display a list of missions with client,stack,profile keyword search', async () => {
     const missions = await repository.search(['devOps', 'BNP']);
-    console.log(missions);
     expect(missions.length).toBeGreaterThan(0);
   });
 });

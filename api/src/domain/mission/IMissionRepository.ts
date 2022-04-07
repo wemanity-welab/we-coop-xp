@@ -3,7 +3,7 @@ import { Mission } from '../../types/Mission';
 import { MissionDomain } from './MissionDomain';
 
 export interface IMissionRepository {
-  save(mission: MissionDomain): Promise<Mission>;
+  save(mission: MissionDomain): Promise<MissionDomain>;
   getAll(): Promise<MissionDomain[]>;
   remove(missionId: string): Promise<string>;
   update(

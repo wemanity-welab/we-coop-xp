@@ -90,3 +90,33 @@ Then(/^A message <message> is shown$/, async function (table) {
   console.log('message', this.table.message);
   expect(await this.missionDeleted).to.equals(this.table.message);
 });
+
+//@MissionPosting
+//Scenario: The employer wants to search missions according to some keywords
+Given(
+  /^An Employer who wants to search a mission and there are existing missions as followed$/,
+  async function (table) {
+    this.missions = table.hashes();
+
+    this.missions.forEach(
+      async (mission: any) => await this.missionService.save(mission),
+    );
+  },
+);
+When(/^The employer search missions with keywords$/, async function (table) {
+  this.table = table.hashes();
+
+  this.keyword = this.table[0].keywords.split(/[\s,]+/);
+  await Promise.all(this.keyword)
+    .then(async () => {
+      this.missionFiltered = await this.missionService.search(this.keyword);
+    })
+    .catch((e) => {
+      console.log(e);
+    });
+});
+
+Then(/^Missions list appear as followed:$/, function (table) {
+  this.missionsExpected = table.hashes();
+  expect(this.missionFiltered).to.eql(this.missionsExpected);
+});

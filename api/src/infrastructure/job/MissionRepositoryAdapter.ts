@@ -7,7 +7,6 @@ import { IMissionRepository } from '../../domain/mission/IMissionRepository';
 import { MissionEntity } from './MissionEntity';
 import { fromDomainToEntity, fromEntityToDomain } from './MissionEntity';
 import Utils from '../../utils/Utils';
-import { Mission } from '../../types/Mission';
 
 @Injectable()
 export class MissionRepositoryAdapter implements IMissionRepository {
@@ -16,8 +15,11 @@ export class MissionRepositoryAdapter implements IMissionRepository {
     private readonly missionEntityRepository: Repository<MissionEntity>,
   ) {}
 
-  public async save(mission: MissionDomain): Promise<Mission> {
-    return await this.missionEntityRepository.save(fromDomainToEntity(mission));
+  public async save(mission: MissionDomain): Promise<MissionDomain> {
+    const requestedMission = await this.missionEntityRepository.save(
+      fromDomainToEntity(mission),
+    );
+    return fromEntityToDomain(requestedMission);
   }
   public async getAll(): Promise<MissionDomain[]> {
     const missions = await this.missionEntityRepository.find();

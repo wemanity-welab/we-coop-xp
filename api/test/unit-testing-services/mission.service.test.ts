@@ -40,7 +40,6 @@ describe('should test missionService class', () => {
       team_organisation: 'agile',
     });
     const missionUpdated = await missionService.update('1', newMission);
-    console.log(missionUpdated);
     expect(missionUpdated).toEqual(newMission);
   });
 });
