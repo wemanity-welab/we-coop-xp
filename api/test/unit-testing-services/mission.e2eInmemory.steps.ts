@@ -167,6 +167,7 @@ When(/^The user delete the mission with n°<id>$/, async function (table) {
 
 Then(/^A message <message> is shown$/, async function (table) {
   this.table = table.rowsHash();
+  this.table.message = `Mission n°${this.result.id} supprimée.`;
   expect(this.deletedMissionMessage).to.equals(this.table.message);
 });
 
@@ -193,10 +194,6 @@ Given(
 When(/^The employer search missions with keywords$/, async function (table) {
   this.table = table.hashes();
   this.keywords = this.table[0].keywords.split(/[\s,]+/);
-
-  console.log(this.keywords);
-
-  console.log(`keywords: `, this.keywords);
   await request(app.getHttpServer())
     .get(
       `/missions/search?criteria=${this.keywords[2]}&criteria=${this.keywords[0]}&criteria=${this.keywords[1]}`,

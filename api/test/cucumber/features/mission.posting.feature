@@ -85,7 +85,7 @@ Feature: CRUD MISSION
         When The user delete the mission with n°<id>
             | id | 6ba7b810-9dad-11d1-80b4-00c04fd430c8 |
         Then A message <message> is shown
-            | message | Mission n°9c120246-2ddf-4471-af69-c7bec2ec3de7 supprimée. |
+            | message | Mission n°6ba7b810-9dad-11d1-80b4-00c04fd430c8 supprimée. |
 
 
     @MissionSearching

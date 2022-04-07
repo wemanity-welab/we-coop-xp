@@ -19,7 +19,7 @@ class AdapterMock implements IAdapter<Mission, string> {
   async remove(id: string): Promise<string> {
     const dataFound = await this.datas.find((data) => data.id === id);
     await this.datas.splice(this.datas.indexOf(dataFound), 1);
-    return `Mission deleted`;
+    return `Mission n°${dataFound.id} supprimée.`;
   }
 
   async update(id: string, data: Mission): Promise<Mission> {
