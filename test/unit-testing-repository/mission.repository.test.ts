@@ -14,7 +14,7 @@ class MissionRepositoryAdapter implements IMissionRepository {
     private readonly missionEntityRepository: Repository<MissionEntity>,
   ) {}
 
-  save(mission: MissionDomain): Promise<string> {
+  save(mission: MissionDomain): Promise<MissionDomain> {
     throw new Error('Method not implemented.');
   }
   async getAll(): Promise<any> {
