@@ -4,8 +4,9 @@ import { HttpStatus, INestApplication } from '@nestjs/common';
 import { expect } from 'chai';
 import * as request from 'supertest';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { MissionModule } from '../../config/mission.module';
-import { MissionEntity } from '../../../src/infrastructure/job/MissionEntity';
+import { ConfigModule } from '@nestjs/config';
+import { MissionModule } from '../../../src/modules/mission.module';
+import configuration from '../../../src/config/configuration';
 import { Mission } from '../../utils/types/Mission';
 import { getConnection } from 'typeorm';
 let app: INestApplication;
@@ -13,12 +14,21 @@ let app: INestApplication;
 Before(async () => {
   const moduleFixture: TestingModule = await Test.createTestingModule({
     imports: [
+      ConfigModule.forRoot({
+        isGlobal: true,
+        load: [configuration],
+      }),
       TypeOrmModule.forRoot({
-        type: 'better-sqlite3',
-        database: ':memory:',
-        entities: [MissionEntity],
+        type: 'postgres',
+        host: process.env.DB_HOST,
+        port: parseInt(process.env.DB_PORT, 10),
+        username: process.env.DB_USER,
+        password: process.env.DB_PASSWORD,
+        database: process.env.DB_NAME,
+        entities: ['src/**/*Entity{.ts,.js}'],
         synchronize: true,
         keepConnectionAlive: true,
+        logging: false,
       }),
       MissionModule,
     ],
@@ -194,7 +204,6 @@ When(/^The employer search missions with keywords$/, async function (table) {
   this.table = table.hashes();
   this.keywords = this.table[0].keywords.split(/[\s,]+/);
 
-  console.log(`keywords: `, this.keywords);
   await request(app.getHttpServer())
     .get(
       `/missions/search?criteria=${this.keywords[0]}&criteria=${this.keywords[1]}&criteria=${this.keywords[2]}`,
@@ -207,11 +216,10 @@ When(/^The employer search missions with keywords$/, async function (table) {
 
 Then(/^Missions list appear as followed:$/, async function (table) {
   this.table = table.hashes();
-  console.log('TABLE: ', this.table.sort());
+
   for (let i = 0; i < this.table.length; i++) {
     this.result[i].id = this.table[i].id;
     delete this.result[i].isActive;
   }
-  console.log('RESULT: ', this.result.sort());
   expect(this.result).to.eql(this.table);
 });

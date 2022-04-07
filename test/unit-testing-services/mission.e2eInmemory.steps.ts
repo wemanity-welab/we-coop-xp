@@ -4,9 +4,8 @@ import { HttpStatus, INestApplication } from '@nestjs/common';
 import { expect } from 'chai';
 import * as request from 'supertest';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ConfigModule } from '@nestjs/config';
-import { MissionModule } from '../../src/modules/mission.module';
-import configuration from '../../src/config/configuration';
+import { MissionModule } from '../config/mission.module';
+import { MissionEntity } from '../../src/infrastructure/job/MissionEntity';
 import { Mission } from '../utils/types/Mission';
 import { getConnection } from 'typeorm';
 let app: INestApplication;
@@ -14,21 +13,12 @@ let app: INestApplication;
 Before(async () => {
   const moduleFixture: TestingModule = await Test.createTestingModule({
     imports: [
-      ConfigModule.forRoot({
-        isGlobal: true,
-        load: [configuration],
-      }),
       TypeOrmModule.forRoot({
-        type: 'postgres',
-        host: process.env.DB_HOST,
-        port: parseInt(process.env.DB_PORT, 10),
-        username: process.env.DB_USER,
-        password: process.env.DB_PASSWORD,
-        database: process.env.DB_NAME,
-        entities: ['src/**/*Entity{.ts,.js}'],
+        type: 'better-sqlite3',
+        database: ':memory:',
+        entities: [MissionEntity],
         synchronize: true,
         keepConnectionAlive: true,
-        logging: false,
       }),
       MissionModule,
     ],
@@ -204,20 +194,21 @@ When(/^The employer search missions with keywords$/, async function (table) {
   this.table = table.hashes();
   this.keywords = this.table[0].keywords.split(/[\s,]+/);
 
+  console.log(this.keywords);
+
+  console.log(`keywords: `, this.keywords);
   await request(app.getHttpServer())
     .get(
-      `/missions/search?criteria=${this.keywords[0]}&criteria=${this.keywords[1]}&criteria=${this.keywords[2]}`,
+      `/missions/search?criteria=${this.keywords[2]}&criteria=${this.keywords[0]}&criteria=${this.keywords[1]}`,
     )
     .expect(HttpStatus.OK)
     .then((res) => {
       this.result = res.body;
     });
-  console.log(this.result);
 });
 
 Then(/^Missions list appear as followed:$/, async function (table) {
   this.table = table.hashes();
-
   for (let i = 0; i < this.table.length; i++) {
     this.result[i].id = this.table[i].id;
     delete this.result[i].isActive;
