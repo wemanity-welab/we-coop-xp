@@ -46,7 +46,7 @@ class MissionRepositoryAdapter implements IMissionRepository {
         const request: Array<string | number | object> =
           await this.missionEntityRepository.find({
             where: [
-              { profil: Like(`%${element}%`) },
+              { profile: Like(`%${element}%`) },
               { stack: Like(`%${element}%`) },
               { client: Like(`%${element}%`) },
             ],
@@ -65,44 +65,44 @@ describe('Testing Search Method', () => {
   let repository: MissionRepositoryAdapter;
   const missions = [
     {
-      profil: 'dev fullstack javascript',
+      profile: 'dev fullstack javascript',
       client: 'BNP Paribas',
       address: '10 rue de Paris 75000 Paris',
       project: 'WEB APP',
       description: 'full stack',
       duration: '6 mois',
       stack: 'React, Nodejs, Mongodb',
-      team_organisation: 'test',
+      teamOrganisation: 'test',
     },
     {
-      profil: 'dev Java',
+      profile: 'dev Java',
       client: 'Metro',
       address: '11 rue de Paris 75001 Paris',
       project: 'ANDROID MOBILE APP',
       description: 'back-end',
       duration: '12 mois',
       stack: 'Java, Postgresql, spring',
-      team_organisation: 'test',
+      teamOrganisation: 'test',
     },
     {
-      profil: 'devOps',
+      profile: 'devOps',
       client: 'Decathlon',
       address: '12 rue de Paris 75002 Paris',
       project: 'CI',
       description: 'opérationnel',
       duration: '24 mois',
       stack: 'Jenkins, Dockers, SonarQube',
-      team_organisation: 'test',
+      teamOrganisation: 'test',
     },
     {
-      profil: 'devOps',
+      profile: 'devOps',
       client: 'BNP Paribas',
       address: '10 rue de Paris 75000 Paris',
       project: 'WEB APP',
       description: 'full stack',
       duration: '6 mois',
       stack: 'React, Nodejs, Mongodb',
-      team_organisation: 'test',
+      teamOrganisation: 'test',
     },
   ];
 

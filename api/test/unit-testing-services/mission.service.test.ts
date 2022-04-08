@@ -4,14 +4,14 @@ import AdapterMock from '../mock/mockedAdapter';
 
 const mission = new MissionDomain({
   id: '1',
-  profil: 'pouet',
+  profile: 'pouet',
   client: 'address',
   address: 'salary',
   project: 'contract_type',
   duration: 'author',
   description: 'description',
   stack: 'stack',
-  team_organisation: 'agile',
+  teamOrganisation: 'agile',
 });
 
 describe('should test missionService class', () => {
@@ -30,14 +30,14 @@ describe('should test missionService class', () => {
   it('should update an object ', async () => {
     const newMission = new MissionDomain({
       id: '1',
-      profil: 'test',
+      profile: 'test',
       client: 'address',
       address: 'salary',
       project: 'contract_type',
       duration: 'author',
       description: 'description',
       stack: 'stack',
-      team_organisation: 'agile',
+      teamOrganisation: 'agile',
     });
     const missionUpdated = await missionService.update('1', newMission);
     expect(missionUpdated).toEqual(newMission);
