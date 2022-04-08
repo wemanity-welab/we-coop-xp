@@ -1,10 +1,12 @@
 export type Mission = {
-  profil: string;
+  id?: string;
+  profile: string;
   client: string;
   address: string;
   project: string;
   duration: string;
   description: string;
   stack: string;
-  team_organisation: string;
+  teamOrganisation: string;
+  isActive?: boolean;
 };

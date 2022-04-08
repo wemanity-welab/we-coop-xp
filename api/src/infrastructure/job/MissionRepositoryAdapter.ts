@@ -66,7 +66,7 @@ export class MissionRepositoryAdapter implements IMissionRepository {
         const request: Array<string | number | object> =
           await this.missionEntityRepository.find({
             where: [
-              { profil: Like(`%${element}%`) },
+              { profile: Like(`%${element}%`) },
               { stack: Like(`%${element}%`) },
               { client: Like(`%${element}%`) },
             ],

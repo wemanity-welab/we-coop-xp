@@ -10,8 +10,8 @@ export class MissionEntity {
   @PrimaryGeneratedColumn('uuid')
   id!: string;
   @ApiProperty()
-  @Column({ name: 'profil' })
-  profil!: string;
+  @Column({ name: 'profile' })
+  profile!: string;
   @ApiProperty()
   @Column({ name: 'client' })
   client!: string;
@@ -32,7 +32,7 @@ export class MissionEntity {
   stack!: string;
   @ApiProperty()
   @Column({ name: 'team_organisation' })
-  team_organisation!: string;
+  teamOrganisation!: string;
   @ApiProperty()
   @Column({ type: 'boolean', name: 'isActive', default: false })
   isActive!: boolean;
@@ -42,14 +42,14 @@ export const fromDomainToEntity = (
   missionDomain: MissionDomain,
 ): MissionEntity => {
   const result = new MissionEntity();
-  result.profil = missionDomain.getProfil;
+  result.profile = missionDomain.getProfile;
   result.client = missionDomain.getClient;
   result.address = missionDomain.getAddress;
   result.project = missionDomain.getProject;
   result.duration = missionDomain.getDuration;
   result.description = missionDomain.getDescription;
   result.stack = missionDomain.getStack;
-  result.team_organisation = missionDomain.getTeam_organisation;
+  result.teamOrganisation = missionDomain.getTeamOrganisation;
   result.isActive = missionDomain.getStatus;
   return result;
 };

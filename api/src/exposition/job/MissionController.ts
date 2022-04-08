@@ -17,7 +17,7 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { Response } from 'express';
-import { Mission } from '../../../test/utils/types/Mission';
+import { Mission } from '../../types/Mission';
 import { MissionDomain } from '../../domain/mission/MissionDomain';
 import { MissionEntity } from '../../infrastructure/job/MissionEntity';
 import { MissionServiceAdapter } from './MissionServiceAdapter';

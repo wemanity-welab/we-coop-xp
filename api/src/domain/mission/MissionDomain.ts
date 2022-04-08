@@ -1,47 +1,47 @@
 export class MissionDomain {
   private id;
-  private profil;
+  private profile;
   private client;
   private address;
   private project;
   private description;
   private duration;
   private stack;
-  private team_organisation;
+  private teamOrganisation;
   private isActive;
 
   constructor({
     id,
-    profil,
+    profile,
     client,
     address,
     project,
     duration,
     description,
     stack,
-    team_organisation,
+    teamOrganisation,
     isActive,
   }: {
     id?: string;
-    profil: string;
+    profile: string;
     client: string;
     address: string;
     project: string;
     duration: string;
     description: string;
     stack: string;
-    team_organisation: string;
+    teamOrganisation: string;
     isActive?: boolean;
   }) {
     this.id = id;
-    this.profil = profil;
+    this.profile = profile;
     this.client = client;
     this.address = address;
     this.project = project;
     this.duration = duration;
     this.description = description;
     this.stack = stack;
-    this.team_organisation = team_organisation;
+    this.teamOrganisation = teamOrganisation;
     this.isActive = isActive;
   }
 
@@ -52,11 +52,11 @@ export class MissionDomain {
     this.id = value;
   }
 
-  public get getProfil(): string {
-    return this.profil;
+  public get getProfile(): string {
+    return this.profile;
   }
-  public set setProfil(value: string) {
-    this.profil = value;
+  public set setProfile(value: string) {
+    this.profile = value;
   }
 
   public get getClient(): string {
@@ -101,11 +101,11 @@ export class MissionDomain {
     this.stack = value;
   }
 
-  public get getTeam_organisation(): string {
-    return this.team_organisation;
+  public get getTeamOrganisation(): string {
+    return this.teamOrganisation;
   }
-  public set setTeam_organisation(value: string) {
-    this.team_organisation = value;
+  public set setTeamOrganisation(value: string) {
+    this.teamOrganisation = value;
   }
 
   public get getStatus(): boolean {
