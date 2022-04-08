@@ -31,47 +31,47 @@ describe('AppController (e2e)', () => {
     const entityManager = connection.createEntityManager();
 
     entityManager.insert<MissionEntity>(MissionEntity, {
-      profil: 'devOps',
+      profile: 'devOps',
       client: 'BNP Paribas',
       address: '10 rue de Paris 75000 Paris',
       project: 'WEB APP',
       description: 'full stack',
       duration: '6 mois',
       stack: 'React, Nodejs, Mongodb',
-      team_organisation: 'test',
+      teamOrganisation: 'test',
     });
     entityManager.insert<MissionEntity>(MissionEntity, {
-      profil: 'dev fullstack javascript',
+      profile: 'dev fullstack javascript',
       client: 'BNP Paribas',
       address: '10 rue de Paris 75000 Paris',
       project: 'WEB APP',
       description: 'full stack',
       duration: '6 mois',
       stack: 'React, Nodejs, Mongodb',
-      team_organisation: 'test',
+      teamOrganisation: 'test',
     });
     entityManager.insert<MissionEntity>(MissionEntity, {
-      profil: 'dev Java',
+      profile: 'dev Java',
       client: 'Metro',
       address: '11 rue de Paris 75001 Paris',
       project: 'ANDROID MOBILE APP',
       description: 'back-end',
       duration: '12 mois',
       stack: 'Java, Postgresql, spring',
-      team_organisation: 'test',
+      teamOrganisation: 'test',
     });
   });
 
   it('/mission (POST)', async () => {
     const job = new MissionDomain({
-      profil: 'title',
+      profile: 'title',
       client: 'address',
       address: 'salary',
       project: 'contract_type',
       duration: 'author',
       description: 'description',
       stack: 'nodejs reactjs',
-      team_organisation: 'agile',
+      teamOrganisation: 'agile',
     });
     await request(app.getHttpServer())
       .post('/missions')
