@@ -3,7 +3,7 @@ import { render, fireEvent } from '@testing-library/react';
 
 import { ThemeSwitch } from '..';
 import { Provider } from 'react-redux';
-import { configureAppStore } from 'store/configureStore';
+import { configureAppStore } from 'infrastructure/view/contexts/store/configureStore';
 import { Store } from '@reduxjs/toolkit';
 import { ThemeProvider } from 'styles/theme/ThemeProvider';
 

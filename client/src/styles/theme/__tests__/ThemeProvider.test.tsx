@@ -3,7 +3,7 @@ import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { Store } from '@reduxjs/toolkit';
 import { ThemeProvider } from '../ThemeProvider';
-import { configureAppStore } from 'store/configureStore';
+import { configureAppStore } from 'infrastructure/view/contexts/store/configureStore';
 import { useTheme } from 'styled-components';
 import { selectTheme } from '../slice/selectors';
 

@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import { ThemeProvider } from 'styles/theme/ThemeProvider';
 import { HelmetProvider } from 'react-helmet-async';
 import { GithubRepoForm, repoErrorText } from '..';
-import { configureAppStore } from 'store/configureStore';
+import { configureAppStore } from 'infrastructure/view/contexts/store/configureStore';
 import { githubRepoFormActions as actions, initialState } from '../slice';
 import { RepoErrorType } from '../slice/types';
 
