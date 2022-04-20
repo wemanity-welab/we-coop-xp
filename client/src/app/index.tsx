@@ -8,7 +8,7 @@
 
 import * as React from 'react';
 import { Helmet } from 'react-helmet-async';
-import { Route, BrowserRouter, Routes } from 'react-router-dom';
+import { Route, BrowserRouter, Switch } from 'react-router-dom';
 
 import { GlobalStyle } from 'styles/global-styles';
 
