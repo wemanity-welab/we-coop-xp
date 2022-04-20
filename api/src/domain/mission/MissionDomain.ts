@@ -1,36 +1,35 @@
 export class MissionDomain {
   private id;
-  private profile;
-  private client;
-
   private title;
+  private client;
+  private profile;
   private description;
-
   private isActive;
 
   constructor({
     id,
+    title,
     profile,
     client,
 
     description,
-    title,
 
     isActive,
   }: {
     id?: string;
-    profile: string;
-    client: string;
     title: string;
+    client: string;
+    profile: string;
 
     description: string;
 
     isActive?: boolean;
   }) {
     this.id = id;
-    this.profile = profile;
-    this.client = client;
     this.title = title;
+    this.client = client;
+
+    this.profile = profile;
 
     this.description = description;
 
