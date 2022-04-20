@@ -1,40 +1,12 @@
 {
-  "name": "cra-template-rb",
-  "description": "The official React Boilerplate template for Create React App",
-  "version": "1.2.4",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/react-boilerplate/react-boilerplate-cra-template.git"
-  },
-  "license": "MIT",
-  "engines": {
-    "node": ">=14.x"
-  },
-  "bugs": {
-    "url": "https://github.com/react-boilerplate/react-boilerplate-cra-template/issues"
-  },
-  "main": "template.json",
-  "files": [
-    "template",
-    "template.json"
-  ],
-  "keywords": [
-    "react",
-    "create-react-app",
-    "template",
-    "typescript",
-    "redux",
-    "reduxjs",
-    "react-redux",
-    "react-boilerplate",
-    "styled-components"
-  ],
+  "name": "client",
+  "version": "0.1.0",
+  "private": true,
   "scripts": {
-    "// ---DEFAULT CRA---": "",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "// ---TEMPLATE---": "Scripts will be also in the template",
+    "eject": "react-scripts eject",
     "start:prod": "yarn run build && serve -s build",
     "test:generators": "ts-node ./internals/testing/generators/test-generators.ts",
     "checkTs": "tsc --noEmit",
@@ -43,23 +15,24 @@
     "lint:fix": "yarn run eslint --fix src",
     "lint:css": "stylelint src/**/*.css",
     "generate": "plop --plopfile internals/generators/plopfile.ts",
-    "cleanAndSetup": "ts-node ./internals/scripts/clean.ts",
     "prettify": "prettier --write",
     "extract-messages": "i18next-scanner --config=internals/extractMessages/i18next-scanner.config.js",
-    "// ---TESTING TEMPLATE---": "",
-    "test:internals": "yarn run test:extract-messages && yarn run test:generators",
-    "test:extract-messages": "jest --config=internals/extractMessages/jest.config.js",
-    "verify-startingTemplate-changes": "ts-node ./internals/scripts/verify-startingTemplate-changes.ts",
-    "test:coverage": "yarn run test --watchAll=false --coverage",
-    "test:cra": "yarn run create:cra-app && cd generated-cra-app && yarn run test:generators && yarn run lint && yarn run checkTs && yarn run cleanAndSetup && yarn run lint && yarn run checkTs",
-    "// ---BUILDING TEMPLATE---": "",
-    "create:npm-package": "ts-node ./internals/scripts/create-npm-package.script.ts",
-    "create:cra-app": "ts-node ./internals/scripts/create-cra-app.script.ts",
-    "// ---PUBLISHING---": "",
-    "publish:github": "cross-env PUBLIC_URL='/react-boilerplate-cra-template' yarn build && gh-pages -d build",
-    "changelog": "ts-node ./internals/scripts/create-changelog.script.ts",
-    "release": "standard-version",
-    "publish:npm": "yarn run create:npm-package && yarn publish .cra-template-rb --non-interactive"
+    "prepare": "husky install"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "engines": {
+    "node": ">=14.x"
   },
   "lint-staged": {
     "*.{ts,tsx,js,jsx}": [
@@ -75,7 +48,6 @@
       "!src/**/*/*.d.ts",
       "!src/**/*/Loadable.{js,jsx,ts,tsx}",
       "!src/**/*/messages.ts",
-      "!src/reportWebVitals.ts",
       "!src/**/*/types.ts",
       "!src/index.tsx"
     ],
@@ -157,17 +129,5 @@
     "ts-jest": "27.1.3",
     "ts-node": "10.4.0",
     "typescript": "4.5.4"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
   }
 }
