@@ -2,46 +2,38 @@ export class MissionDomain {
   private id;
   private profile;
   private client;
-  private address;
-  private project;
+
+  private title;
   private description;
-  private duration;
-  private stack;
-  private teamOrganisation;
+
   private isActive;
 
   constructor({
     id,
     profile,
     client,
-    address,
-    project,
-    duration,
+
     description,
-    stack,
-    teamOrganisation,
+    title,
+
     isActive,
   }: {
     id?: string;
     profile: string;
     client: string;
-    address: string;
-    project: string;
-    duration: string;
+    title: string;
+
     description: string;
-    stack: string;
-    teamOrganisation: string;
+
     isActive?: boolean;
   }) {
     this.id = id;
     this.profile = profile;
     this.client = client;
-    this.address = address;
-    this.project = project;
-    this.duration = duration;
+    this.title = title;
+
     this.description = description;
-    this.stack = stack;
-    this.teamOrganisation = teamOrganisation;
+
     this.isActive = isActive;
   }
 
@@ -66,25 +58,11 @@ export class MissionDomain {
     this.client = value;
   }
 
-  public get getAddress(): string {
-    return this.address;
+  public get getTitle(): string {
+    return this.title;
   }
-  public set setAddress(value: string) {
-    this.address = value;
-  }
-
-  public get getProject(): string {
-    return this.project;
-  }
-  public set setContract_type(value: string) {
-    this.project = value;
-  }
-
-  public get getDuration(): string {
-    return this.duration;
-  }
-  public set setDuration(value: string) {
-    this.duration = value;
+  public set setTitle(value: string) {
+    this.title = value;
   }
 
   public get getDescription(): string {
@@ -92,20 +70,6 @@ export class MissionDomain {
   }
   public set setDescription(value: string) {
     this.description = value;
-  }
-
-  public get getStack(): string {
-    return this.stack;
-  }
-  public set setStack(value: string) {
-    this.stack = value;
-  }
-
-  public get getTeamOrganisation(): string {
-    return this.teamOrganisation;
-  }
-  public set setTeamOrganisation(value: string) {
-    this.teamOrganisation = value;
   }
 
   public get getStatus(): boolean {
