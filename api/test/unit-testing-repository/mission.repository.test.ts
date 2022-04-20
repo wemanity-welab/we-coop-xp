@@ -47,7 +47,7 @@ class MissionRepositoryAdapter implements IMissionRepository {
           await this.missionEntityRepository.find({
             where: [
               { profile: Like(`%${element}%`) },
-              { stack: Like(`%${element}%`) },
+              { description: Like(`%${element}%`) },
               { client: Like(`%${element}%`) },
             ],
           });
@@ -65,44 +65,28 @@ describe('Testing Search Method', () => {
   let repository: MissionRepositoryAdapter;
   const missions = [
     {
+      title: 'mission1',
       profile: 'dev fullstack javascript',
       client: 'BNP Paribas',
-      address: '10 rue de Paris 75000 Paris',
-      project: 'WEB APP',
       description: 'full stack',
-      duration: '6 mois',
-      stack: 'React, Nodejs, Mongodb',
-      teamOrganisation: 'test',
     },
     {
+      title: 'mission2',
       profile: 'dev Java',
       client: 'Metro',
-      address: '11 rue de Paris 75001 Paris',
-      project: 'ANDROID MOBILE APP',
       description: 'back-end',
-      duration: '12 mois',
-      stack: 'Java, Postgresql, spring',
-      teamOrganisation: 'test',
     },
     {
+      title: 'mission3',
       profile: 'devOps',
       client: 'Decathlon',
-      address: '12 rue de Paris 75002 Paris',
-      project: 'CI',
       description: 'opérationnel',
-      duration: '24 mois',
-      stack: 'Jenkins, Dockers, SonarQube',
-      teamOrganisation: 'test',
     },
     {
+      title: 'mission4',
       profile: 'devOps',
       client: 'BNP Paribas',
-      address: '10 rue de Paris 75000 Paris',
-      project: 'WEB APP',
       description: 'full stack',
-      duration: '6 mois',
-      stack: 'React, Nodejs, Mongodb',
-      teamOrganisation: 'test',
     },
   ];
 
@@ -152,12 +136,7 @@ describe('Testing Search Method', () => {
   });
 
   it('Should display a list of missions with stack keyword search', async () => {
-    const missions = await repository.search(['React', 'Jenkins']);
-    expect(missions.length).toBeGreaterThan(0);
-  });
-
-  it('Should display a list of missions with stack keyword search', async () => {
-    const missions = await repository.search(['React', 'Jenkins']);
+    const missions = await repository.search(['Java', 'Javascript']);
     expect(missions.length).toBeGreaterThan(0);
   });
 

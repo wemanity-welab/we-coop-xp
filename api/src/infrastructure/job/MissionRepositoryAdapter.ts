@@ -67,7 +67,7 @@ export class MissionRepositoryAdapter implements IMissionRepository {
           await this.missionEntityRepository.find({
             where: [
               { profile: Like(`%${element}%`) },
-              { stack: Like(`%${element}%`) },
+              { description: Like(`%${element}%`) },
               { client: Like(`%${element}%`) },
             ],
           });

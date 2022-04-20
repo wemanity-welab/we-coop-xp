@@ -4,14 +4,11 @@ import AdapterMock from '../mock/mockedAdapter';
 
 const mission = new MissionDomain({
   id: '1',
+  title: 'title',
   profile: 'pouet',
   client: 'address',
-  address: 'salary',
-  project: 'contract_type',
-  duration: 'author',
   description: 'description',
-  stack: 'stack',
-  teamOrganisation: 'agile',
+  isActive: false,
 });
 
 describe('should test missionService class', () => {
@@ -32,12 +29,9 @@ describe('should test missionService class', () => {
       id: '1',
       profile: 'test',
       client: 'address',
-      address: 'salary',
-      project: 'contract_type',
-      duration: 'author',
+      title: 'title',
       description: 'description',
-      stack: 'stack',
-      teamOrganisation: 'agile',
+      isActive: false,
     });
     const missionUpdated = await missionService.update('1', newMission);
     expect(missionUpdated).toEqual(newMission);
