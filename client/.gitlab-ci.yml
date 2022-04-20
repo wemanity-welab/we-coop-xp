@@ -37,9 +37,3 @@ test:unit-test:
 
 
 lint:app:
-  stage: lint
-  needs:
-    - job: setup:install
-      artifacts: true
-  script:
-    - "yarn run lint"

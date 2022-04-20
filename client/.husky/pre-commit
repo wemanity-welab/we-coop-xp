@@ -3,4 +3,4 @@
 
 yarn checkTs
 yarn lint-staged
-yarn verify-startingTemplate-changes
+
