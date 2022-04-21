@@ -5,6 +5,8 @@ const headers = {
   'Content-Type': 'application/json',
 };
 
+axios.defaults.baseURL = `http://localhost:8080`;
+
 export const httpAxios: Http = {
   get: async <T>(path: string, params?: Record<string, any>, config?: any) => {
     const response = await axios.get(path, {

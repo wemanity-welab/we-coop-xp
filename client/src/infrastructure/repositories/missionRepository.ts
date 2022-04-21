@@ -5,7 +5,7 @@ import { MissionDTO } from 'infrastructure/http/MissionDTO';
 
 export const missionRepository = (client: Http): IMissionRepository => ({
   getMissions: async () => {
-    const missions = await client.get<MissionDTO>('');
+    const missions = await client.get<MissionDTO[]>('/missions');
     return missions.map(
       (missionDto): Mission => ({
         id: missionDto.id,
