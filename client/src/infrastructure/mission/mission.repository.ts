@@ -17,4 +17,9 @@ export const missionRepository = (client: Http): IMissionRepository => ({
       }),
     );
   },
+
+  addMission: async (mission: Mission) => {
+    const postMission = await client.post<MissionDTO>('/missions', mission);
+    return postMission;
+  },
 });
