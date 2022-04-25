@@ -1,6 +1,3 @@
-import { missionService } from 'domain/services/MissionService';
-import { httpAxios } from 'infrastructure/instances/httpAxios';
-import { missionRepository } from 'infrastructure/repositories/missionRepository';
 import React, { useCallback, useEffect } from 'react';
 import { useMission } from '../store/contexts/MissionContext';
 
@@ -9,9 +6,7 @@ export const MissionList = () => {
 
   const getMissions = useCallback(async () => {
     try {
-      const repository = await missionRepository(httpAxios);
-      const responseMissions = await missionService(repository).getMissions();
-      dispatch({ type: 'display-list-missions', payload: responseMissions });
+      dispatch({ type: 'display-list-missions' });
     } catch (exception) {
       console.error(exception);
     }
@@ -20,6 +15,7 @@ export const MissionList = () => {
   useEffect(() => {
     getMissions();
   }, []);
+  console.log(state);
 
   // const handleSelectMission = (mission: Mission) => {
   //   onSelectMission(mission);
@@ -28,7 +24,9 @@ export const MissionList = () => {
   return (
     <div>
       <h2>List of missions</h2>
-      <ul></ul>
+      <ul>
+        {state.catalog.length > 0 ? state.catalog[0].client : 'loading...'}
+      </ul>
     </div>
   );
 };
