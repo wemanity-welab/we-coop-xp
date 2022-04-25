@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect } from 'react';
-import { useMission } from '../store/contexts/MissionContext';
+import { useMission } from '../hooks/UseMissions';
 
 export const MissionList = () => {
   const { state, dispatch } = useMission();
