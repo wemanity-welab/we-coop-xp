@@ -19,7 +19,6 @@ export const MissionList = () => {
 
   useEffect(() => {
     getMissions();
-    console.log('STATE', state);
   }, []);
 
   // const handleSelectMission = (mission: Mission) => {
@@ -29,7 +28,7 @@ export const MissionList = () => {
   return (
     <div>
       <h2>List of missions</h2>
-      <ul>{state[0]?.client}</ul>
+      <ul></ul>
     </div>
   );
 };

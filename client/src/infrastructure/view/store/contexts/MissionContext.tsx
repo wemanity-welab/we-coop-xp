@@ -26,7 +26,7 @@ const MissionStateContext = React.createContext<
 function missionReducer(state: State, action: Action) {
   switch (action.type) {
     case 'display-list-missions': {
-      return { catalog: state.catalog, ...action.payload };
+      return { catalog: [{ ...state, ...action.payload }] };
     }
     default: {
       throw new Error(`Unhandled action type`);
