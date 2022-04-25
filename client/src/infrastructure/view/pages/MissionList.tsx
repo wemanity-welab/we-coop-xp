@@ -9,7 +9,9 @@ export const MissionList = () => {
 
   const getMissions = useCallback(async () => {
     try {
-      dispatch({ type: 'display-list-missions' });
+      const repository = await missionRepository(httpAxios);
+      const responseMissions = await missionService(repository).getMissions();
+      dispatch({ type: 'display-list-missions', payload: responseMissions });
     } catch (exception) {
       console.error(exception);
     }
@@ -17,6 +19,7 @@ export const MissionList = () => {
 
   useEffect(() => {
     getMissions();
+    console.log('STATE', state);
   }, []);
 
   // const handleSelectMission = (mission: Mission) => {
@@ -26,20 +29,7 @@ export const MissionList = () => {
   return (
     <div>
       <h2>List of missions</h2>
-      <ul>
-        {/* {state.catalog.map(mission => (
-          <li key={mission.id}>
-            <button
-            // onClick={() => {
-            //   handleSelectMission(mission);
-            // }}
-            >
-              {mission.title}
-            </button>
-            {mission.client}
-          </li>
-        ))} */}
-      </ul>
+      <ul>{state[0]?.client}</ul>
     </div>
   );
 };

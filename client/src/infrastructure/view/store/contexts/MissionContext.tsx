@@ -5,13 +5,13 @@ import { missionRepository } from 'infrastructure/repositories/missionRepository
 import * as React from 'react';
 
 type Action =
-  | { type: 'display-list-missions' }
+  | { type: 'display-list-missions'; payload: any }
   | { type: 'display-mission' }
   | { type: 'update-mission' }
   | { type: 'add-mission' }
   | { type: 'delete-mission' };
 
-type Dispatch = (action: Action) => void;
+// type Dispatch = (action: Action) => void;
 
 type State = {
   catalog: Mission[];
@@ -20,16 +20,13 @@ type State = {
 type MissionProviderProps = { children: React.ReactNode };
 
 const MissionStateContext = React.createContext<
-  { state: State; dispatch: Dispatch } | undefined
+  { state: State; dispatch } | undefined
 >(undefined);
 
 function missionReducer(state: State, action: Action) {
   switch (action.type) {
     case 'display-list-missions': {
-      const repository = missionRepository(httpAxios);
-      const responseMissions = missionService(repository).getMissions();
-      console.log('MISSION', repository);
-      return { catalog: state.catalog };
+      return { catalog: state.catalog, ...action.payload };
     }
     default: {
       throw new Error(`Unhandled action type`);
