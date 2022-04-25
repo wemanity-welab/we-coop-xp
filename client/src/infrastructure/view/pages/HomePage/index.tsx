@@ -1,6 +1,6 @@
-import { MissionList } from 'infrastructure/view/store/contexts/MissionContext';
 import * as React from 'react';
 import { Helmet } from 'react-helmet-async';
+import { MissionList } from '../MissionList';
 
 export function HomePage() {
   return (
