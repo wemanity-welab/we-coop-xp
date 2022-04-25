@@ -4,7 +4,7 @@ import { missionService } from 'domain/services/MissionService';
 import { httpAxios } from 'infrastructure/instances/httpAxios';
 import { missionRepository } from 'infrastructure/repositories/missionRepository';
 
-export const ProductList = ({ onSelectProduct: onSelectMission }) => {
+export const MissionList = () => {
   const [missions, setMissions] = useState<Mission[]>([]);
 
   const getMissions = useCallback(async () => {
@@ -21,9 +21,9 @@ export const ProductList = ({ onSelectProduct: onSelectMission }) => {
     getMissions();
   }, []);
 
-  const handleSelectMission = (mission: Mission) => {
-    onSelectMission(mission);
-  };
+  // const handleSelectMission = (mission: Mission) => {
+  //   onSelectMission(mission);
+  // };
 
   return (
     <div>
@@ -32,12 +32,13 @@ export const ProductList = ({ onSelectProduct: onSelectMission }) => {
         {missions.map(mission => (
           <li key={mission.id}>
             <button
-              onClick={() => {
-                handleSelectMission(mission);
-              }}
+            // onClick={() => {
+            //   handleSelectMission(mission);
+            // }}
             >
               {mission.title}
             </button>
+            {mission.client}
           </li>
         ))}
       </ul>
