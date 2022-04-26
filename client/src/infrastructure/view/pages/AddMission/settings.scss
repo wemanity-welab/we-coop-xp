@@ -1,0 +1,60 @@
+$color-1:#FB9AD2;
+$color-3: #5BB7F3;
+$color-2: #7D7987;
+$color1: rgb(211, 27, 57);
+$black1: rgb(36, 36, 36);
+$black2: rgb(49, 49, 49);
+$black3: rgb(70, 70, 70);
+$white: rgb(207, 207, 207);
+$grey: rgb(95, 95, 95);
+$shadow: 0 3px 20px rgba(0, 0, 0, 0.356);
+@mixin verticalCenter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style-type: none;
+    outline: none;
+    border: none;
+    text-decoration: none;
+    &::selection {
+        background: $color-1;
+    }
+}
+a,
+a:visited {
+    color: $color-2;
+}
+body {
+    line-height: 1.4rem;
+    color: $color-2;
+    padding: 2rem;
+    min-height: 100vh;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+button,
+input[type=“submit”] {
+  background: none;
+  border: none;
+  cursor: pointer;
+  background: $color-1;
+  transition: 0.2s;
+  &:hover {
+    filter: brightness(80%);
+    transform: translateX(2px);
+  }
+}
+input,
+textarea {
+  border-radius: 7px;
+  border: none;
+  resize: none;
+  margin: 5px;
+  padding: 8px;
+  background: $white;
+}
