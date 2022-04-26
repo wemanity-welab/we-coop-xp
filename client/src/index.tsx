@@ -35,7 +35,6 @@ ReactDOM.render(
         <App />
       </React.StrictMode>
     </HelmetProvider>
-    ,
   </MissionProvider>,
   MOUNT_NODE,
 );
