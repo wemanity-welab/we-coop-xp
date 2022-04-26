@@ -2,7 +2,7 @@ import { Mission } from 'domain/models/Mission';
 import { missionService } from 'domain/services/MissionService';
 import { httpAxios } from 'infrastructure/instances/httpAxios';
 import { missionRepository } from 'infrastructure/repositories/missionRepository';
-import { Action } from '../actions/MissionAction';
+import { Action } from '../types/storeTypes';
 import { State } from '../types/storeTypes';
 
 export async function missionReducer(state: State<Mission>, action: Action) {

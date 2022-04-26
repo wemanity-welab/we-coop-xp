@@ -1,5 +1,4 @@
-import { Action } from '../actions/MissionAction';
-
+export type Action = { type: string };
 export type Dispatch = (action: Action) => void;
 
 export type State<T> = {
