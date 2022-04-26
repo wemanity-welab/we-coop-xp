@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
-import { AddMission } from '../AddMission';
+import { AddMission } from '../AddMission/AddMission';
+import { MissionList } from '../MissionList';
 
 export function HomePage() {
   return (
