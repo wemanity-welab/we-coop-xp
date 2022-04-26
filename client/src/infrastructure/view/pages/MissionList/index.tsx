@@ -1,5 +1,8 @@
 import React, { useCallback, useEffect } from 'react';
-import { useMission } from '../hooks/UseMissions';
+import { MissionCard } from '../../components/molecules';
+import { useMission } from '../../hooks/UseMissions';
+
+import './missionList.scss';
 
 export const MissionList = () => {
   const { state, dispatch } = useMission();
@@ -15,17 +18,14 @@ export const MissionList = () => {
   useEffect(() => {
     getMissions();
   }, []);
-  console.log(state);
-
-  // const handleSelectMission = (mission: Mission) => {
-  //   onSelectMission(mission);
-  // };
 
   return (
-    <div>
-      <h2>List of missions</h2>
-      <ul>
-        {state.catalog.length > 0 ? state.catalog[0].client : 'loading...'}
+    <div className="container">
+      <h2>Les missions</h2>
+      <ul className="container__missions">
+        {state.catalog.map(mission => (
+          <MissionCard key={mission.id} props={mission} />
+        ))}
       </ul>
     </div>
   );

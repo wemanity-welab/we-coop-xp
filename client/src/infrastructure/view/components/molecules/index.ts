@@ -1,4 +1,4 @@
 // import and export all molecules here
-import Card from './Card';
+import MissionCard from './cards/MissionCard';
 
-export { Card };
+export { MissionCard };

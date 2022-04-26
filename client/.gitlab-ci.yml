@@ -35,5 +35,10 @@ test:unit-test:
   script:
     - "yarn run test"
 
-
 lint:app:
+  stage: lint
+  needs:
+    - job: setup:install
+      artifacts: true
+  script:
+    - "npm run lint"
