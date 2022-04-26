@@ -16,11 +16,19 @@ const Navbar = styled.section`
   justify-content: start;
 `;
 
+const StyledLogo = styled.section`
+  background-color: #ffffff;
+`;
+
 export const MenuComponent = () => {
   return (
     <>
       <div className="MenuWrapper">
+<<<<<<< HEAD
         <Logo />
+=======
+        <StyledLogo />
+>>>>>>> 955d42f (feature: side menu, add logo and background color)
         <div className="Navbar">
           <Link to="/missions">Missions</Link>
           <Link to="/cooperateurs">Cooperateurs</Link>
