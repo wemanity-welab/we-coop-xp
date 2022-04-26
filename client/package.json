@@ -77,6 +77,7 @@
     "redux-injectors": "1.3.0",
     "redux-saga": "1.1.3",
     "sanitize.css": "13.0.0",
+    "sass": "1.51.0",
     "styled-components": "5.3.3",
     "web-vitals": "2.1.2"
   },
