@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { useMission } from '../../hooks/UseMissions';
 import { useForm } from 'react-hook-form';
 import { Mission } from 'domain/models/Mission';
-import './form.scss';
+import './index.scss';
 
 export const AddMission = () => {
   const { dispatch } = useMission();
@@ -45,7 +45,7 @@ export const AddMission = () => {
         {...register('client', { required: true })}
       />
 
-      <p> {errors.client?.type === 'required' && 'clientis required'}</p>
+      <p> {errors.client?.type === 'required' && 'client is required'}</p>
       <input
         type="text"
         placeholder="description"
@@ -56,12 +56,7 @@ export const AddMission = () => {
         {' '}
         {errors.description?.type === 'required' && 'description is required'}
       </p>
-      <input
-        type="text"
-        placeholder="isActive"
-        {...register('isActive', { required: true })}
-      />
-      <p> {errors.isActive?.type === 'required' && 'isActive  is required'}</p>
+
       <button type="submit">Envoyer</button>
     </form>
   );
