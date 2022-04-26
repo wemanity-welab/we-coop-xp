@@ -14,6 +14,7 @@ import { HomePage } from './pages/HomePage/Loadable';
 import { NotFoundPage } from './pages/NotFoundPage/Loadable';
 import { useTranslation } from 'react-i18next';
 import { MissionList } from './pages/MissionList/Loadable';
+import { AddMission } from './pages/AddMission';
 
 export function App() {
   const { i18n } = useTranslation();
@@ -30,6 +31,8 @@ export function App() {
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route exact path="/missions" component={MissionList} />
+        <Route exact path="/addMission" component={AddMission} />
+
         <Route component={NotFoundPage} />
       </Switch>
     </BrowserRouter>

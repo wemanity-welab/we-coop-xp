@@ -20,6 +20,17 @@ export const missionRepository = (client: Http): IMissionRepository => ({
 
   addMission: async (mission: Mission) => {
     const postMission = await client.post<MissionDTO>('/missions', mission);
-    return postMission;
+    console.log('postMission');
+
+    return postMission.push(
+      (missionDto): Mission => ({
+        id: missionDto.id,
+        title: missionDto.title,
+        profile: missionDto.profile,
+        client: missionDto.client,
+        description: missionDto.description,
+        isActive: missionDto.isActive,
+      }),
+    );
   },
 });
