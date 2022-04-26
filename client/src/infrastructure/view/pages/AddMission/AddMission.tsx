@@ -56,12 +56,7 @@ export const AddMission = () => {
         {' '}
         {errors.description?.type === 'required' && 'description is required'}
       </p>
-      <input
-        type="text"
-        placeholder="isActive"
-        {...register('isActive', { required: true })}
-      />
-      <p> {errors.isActive?.type === 'required' && 'isActive  is required'}</p>
+
       <button type="submit">Envoyer</button>
     </form>
   );
