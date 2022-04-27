@@ -2,6 +2,9 @@
     background-color: rgba(74, 122, 169, 0.3);
     width: 250px;
     height: 100vh;
+    .Logo {
+        border: 5px solid red;
+    }
     .Navbar {
         display: flex;
         flex-direction: column;
