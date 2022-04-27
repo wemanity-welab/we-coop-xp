@@ -3,21 +3,21 @@ import { useMission } from '../../hooks/UseMissions';
 import { useForm } from 'react-hook-form';
 import { Mission } from 'domain/models/Mission';
 import './form.scss';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+toast.configure();
 
 export const AddMission = () => {
   const { dispatch } = useMission();
-  const {
-    getValues,
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<Mission>();
+  const { getValues, register, handleSubmit } = useForm<Mission>();
+
   const addMission = useCallback(async () => {
     try {
       dispatch({
         type: 'add-mission',
         payload: getValues(),
       });
+      toast.success('La mission est enregistrée 👋 ');
     } catch (exception) {
       console.error(exception);
     }
@@ -25,39 +25,40 @@ export const AddMission = () => {
 
   return (
     <form onSubmit={handleSubmit(addMission)}>
+      <h1>Formulaire de mission</h1>
+      <br />
+      {/* <label htmlFor="titre">Titre</label> */}
+      <br />
       <input
         type="text"
         placeholder="titre"
         {...register('title', { required: true })}
       />
-
-      <p> {errors.title?.type === 'required' && 'Title is required'}</p>
+      <br />
 
       <input
         type="text"
         placeholder="profil"
         {...register('profile', { required: true })}
       />
-      <p> {errors.profile?.type === 'required' && 'profile is required'}</p>
+      <br />
+
       <input
         type="text"
         placeholder="client"
         {...register('client', { required: true })}
       />
-
-      <p> {errors.client?.type === 'required' && 'clientis required'}</p>
-      <input
-        type="text"
+      <br />
+      <textarea
+        style={{ height: '10rem' }}
         placeholder="description"
         {...register('description', { required: true })}
       />
+      <br />
 
-      <p>
-        {' '}
-        {errors.description?.type === 'required' && 'description is required'}
-      </p>
-
-      <button type="submit">Envoyer</button>
+      <button className="active-btn width-btn" type="submit">
+        Envoyer
+      </button>
     </form>
   );
 };

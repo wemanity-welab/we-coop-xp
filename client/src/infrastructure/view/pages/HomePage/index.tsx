@@ -1,8 +1,6 @@
 import * as React from 'react';
 import { Helmet } from 'react-helmet-async';
-import { Link } from 'react-router-dom';
 import { AddMission } from '../AddMission/AddMission';
-import { MissionList } from '../MissionList';
 
 export function HomePage() {
   return (
@@ -12,8 +10,8 @@ export function HomePage() {
         <meta name="description" content="A Boilerplate application homepage" />
       </Helmet>
 
-      <Link
-        to="/addMission 
+      <a
+        href="/addMission 
       "
       >
         {' '}
@@ -27,7 +25,7 @@ export function HomePage() {
           {' '}
           Ajouter une mission
         </button>
-      </Link>
+      </a>
 
       <br />
       <span>My HomePage</span>
