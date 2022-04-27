@@ -68,7 +68,7 @@ form {
     padding: 5vw;
     font-family: inherit;
 
-    input {
+    input,textarea {
 
         &:focus {
             box-shadow: 10px 5px 5px $black3;         
