@@ -2,8 +2,6 @@ import React, { useCallback, useEffect } from 'react';
 import { MissionCard } from '../../components/molecules';
 import { useMission } from '../../hooks/UseMissions';
 
-import './missionList.scss';
-
 export const MissionList = () => {
   const { state, dispatch } = useMission();
 

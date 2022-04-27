@@ -14,7 +14,7 @@ import { Provider } from 'react-redux';
 
 // Use consistent styling
 import 'sanitize.css/sanitize.css';
-
+import './styles/style.scss';
 // Import root app
 import { App } from './infrastructure/view';
 

@@ -1,5 +1,4 @@
 import React from 'react';
-import './missionCard.scss';
 import active from './check.png';
 import inactive from './close.png';
 
