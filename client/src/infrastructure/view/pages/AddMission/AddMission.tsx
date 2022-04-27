@@ -36,8 +36,8 @@ export const AddMission = () => {
       />
       <br />
 
-      <input
-        type="text"
+      <textarea
+        style={{ height: '6rem' }}
         placeholder="profil"
         {...register('profile', { required: true })}
       />
