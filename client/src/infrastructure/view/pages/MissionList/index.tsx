@@ -1,20 +1,19 @@
-import React, { useCallback, useEffect } from 'react';
+import { missionServices } from 'infrastructure/view/store/services';
+import React, { useEffect } from 'react';
 import { MissionCard } from '../../components/molecules';
 import { useMission } from '../../hooks/UseMissions';
+import { missionList } from '../../store/actions/mission.actions';
 
 export const MissionList = () => {
   const { state, dispatch } = useMission();
+  const missions = missionServices.getMissions();
 
-  const getMissions = useCallback(async () => {
+  useEffect(() => {
     try {
-      dispatch({ type: 'display-list-missions' });
+      missions.then(data => dispatch(missionList(data)));
     } catch (exception) {
       console.error(exception);
     }
-  }, []);
-
-  useEffect(() => {
-    getMissions();
   }, []);
 
   return (
