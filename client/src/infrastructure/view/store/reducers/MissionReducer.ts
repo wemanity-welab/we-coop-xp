@@ -21,7 +21,6 @@ export async function missionReducer(state: State<Mission>, action: Action) {
       const CreatedMission = await missionService(repository).addMission(
         typePayload,
       );
-
       return CreatedMission;
     }
     default: {
