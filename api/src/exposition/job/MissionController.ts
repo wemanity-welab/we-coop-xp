@@ -31,17 +31,24 @@ export class MissionController {
     @Body() mission: Mission,
     @Res() response: Response,
   ): Promise<Mission | void> {
-    const missionProperties = Object.values(mission);
-    missionProperties.map((propertie) => {
-      if (propertie === '') {
-        throw new HttpException(
-          'Tous les champs doivent être renseignés',
-          HttpStatus.BAD_REQUEST,
-        );
-      }
-    });
-    const newMission = await this.missionServiceAdapter.save(mission);
-    response.status(HttpStatus.CREATED).send(newMission);
+    try {
+      const missionProperties = Object.values(mission);
+
+      missionProperties.map((propertie) => {
+        if (propertie === '') {
+          throw new HttpException(
+            'Tous les champs doivent être renseignés',
+            HttpStatus.BAD_REQUEST,
+          );
+        }
+      });
+
+      const newMission = await this.missionServiceAdapter.save(mission);
+
+      response.status(HttpStatus.CREATED).send(newMission);
+    } catch (error) {
+      throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
+    }
   }
   @ApiCreatedResponse({
     type: MissionEntity,
