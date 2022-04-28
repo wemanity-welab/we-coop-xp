@@ -1,4 +1,4 @@
-import { Mission } from 'domain/models/Mission';
+import { Mission } from 'domain/mission/mission';
 import { Action, State } from '../types/storeTypes';
 
 export async function missionReducer(state: State<Mission>, action: Action) {

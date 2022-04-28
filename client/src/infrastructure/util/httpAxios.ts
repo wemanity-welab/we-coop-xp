@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Http } from '../../domain/repositories/Http';
+import { Http } from './Http';
 
 const headers = {
   'Content-Type': 'application/json',
@@ -7,7 +7,7 @@ const headers = {
 
 axios.defaults.baseURL = `http://localhost:8080`;
 
-export const httpAxios: Http = {
+export const HttpAxios: Http = {
   get: async <T>(path: string, params?: Record<string, any>, config?: any) => {
     const response = await axios.get(path, {
       ...config,

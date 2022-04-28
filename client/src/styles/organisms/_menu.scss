@@ -1,0 +1,32 @@
+.Menu {
+    background-color: rgba(74, 122, 169, 0.3);
+    width: 10rem;
+    height: 100vh;
+    display: flex;
+    justify-content: start;
+    flex-direction: column;
+    align-items: center;
+
+    .LinkWrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 2rem;
+    }
+
+    .Link img {
+        width: 1.2rem;
+        height: 1.2rem;
+    }
+
+    .MenuFooter .Link {
+        display: flex;
+    }
+
+    .MenuFooter {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        width: auto;
+    }
+}

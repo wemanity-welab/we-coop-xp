@@ -1,4 +1,4 @@
-import { missionServices } from 'infrastructure/view/store/services';
+import { missionServices } from 'application';
 import React, { useEffect } from 'react';
 import { MissionCard } from '../../components/molecules';
 import { useMission } from '../../hooks/UseMissions';

@@ -10,7 +10,6 @@ import 'react-app-polyfill/stable';
 
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
 
 // Use consistent styling
 import 'sanitize.css/sanitize.css';
@@ -24,7 +23,7 @@ import reportWebVitals from 'reportWebVitals';
 
 // Initialize languages
 import './locales/i18n';
-import { MissionProvider } from 'infrastructure/view/store/contexts/MissionContext';
+import { MissionProvider } from 'infrastructure/view/store/Mission/MissionContext';
 
 const MOUNT_NODE = document.getElementById('root') as HTMLElement;
 

@@ -1,7 +1,7 @@
-import { Mission } from 'domain/models/Mission';
-import { Http } from 'domain/repositories/Http';
-import { MissionRepository as IMissionRepository } from 'domain/repositories/MissionRepository.interface';
-import { MissionDTO } from 'infrastructure/http/MissionDTO';
+import { Mission } from 'domain/mission/mission';
+import { IMissionRepository } from 'domain/mission/mission.irepository';
+import { MissionDTO } from './mission.dto';
+import { Http } from 'infrastructure/util/Http';
 
 export const missionRepository = (client: Http): IMissionRepository => ({
   getMissions: async () => {

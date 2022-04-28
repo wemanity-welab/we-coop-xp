@@ -1,4 +1,4 @@
-import { Mission } from 'domain/models/Mission';
+import { Mission } from 'domain/mission/mission';
 
 export const missionList = (data: Mission[]) => {
   return {

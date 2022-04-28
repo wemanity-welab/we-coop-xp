@@ -1,7 +1,7 @@
-import { Mission } from 'domain/models/Mission';
+import { Mission } from 'domain/mission/mission';
 import { useAsyncReducer } from 'infrastructure/view/hooks';
 import * as React from 'react';
-import { missionReducer } from '../reducers/MissionReducer';
+import { missionReducer } from './MissionReducer';
 import { Dispatch, ProviderProps, State } from '../types/storeTypes';
 
 export const MissionStateContext = React.createContext<
