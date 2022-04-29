@@ -16,7 +16,7 @@
                 width: 70%;
                 height: 50px;
                 list-style-type: none;
-                margin: 0%;
+                margin: 2%;
                 display: flex;
                 justify-content: center;
                 align-items: center;
@@ -27,6 +27,14 @@
                 }
             }
     }
+    .MenuList #linkActive {
+        background-color: rgba(74, 122, 169, 0.3);
+        border: 1px solid rgb(128, 155, 181);
+        border-radius: 5px;
+        padding: 5%;
+        color: white;
+    }
+    
     .MenuFooter {
         position: relative;
         top: 52%;
