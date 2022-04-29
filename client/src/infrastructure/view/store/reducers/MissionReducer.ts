@@ -21,11 +21,7 @@ export async function missionReducer(state: State<Mission>, action: Action) {
     //add mission
     case 'add-mission': {
       const typePayload = action.payload as Mission;
-      const repository = missionRepository(httpAxios);
-      const CreatedMission = await missionService(repository).addMission(
-        typePayload,
-      );
-      return CreatedMission;
+      return { typePayload };
     }
     default: {
       throw new Error(`Unknown action type: ${action.type}`);

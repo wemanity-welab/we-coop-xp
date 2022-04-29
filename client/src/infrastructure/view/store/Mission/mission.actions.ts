@@ -6,3 +6,9 @@ export const missionList = (data: Mission[]) => {
     payload: data,
   };
 };
+export const missionPosted = (data: Mission) => {
+  return {
+    type: 'add-mission',
+    payload: data,
+  };
+};

@@ -9,7 +9,7 @@ export const missionService = (
   getMissions: () => {
     return repository.getMissions();
   },
-  addMission: (mission: Mission) => {
-    return repository.addMission(mission);
+  addMission: async (mission: Mission) => {
+    return await repository.addMission(mission);
   },
 });
