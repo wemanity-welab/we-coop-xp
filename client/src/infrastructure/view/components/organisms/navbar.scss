@@ -1,0 +1,10 @@
+.Menu {
+    background-color: rgba(74, 122, 169, 0.3);
+    width: 250px;
+    height: 100vh;
+    .Link {
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+    }
+}

@@ -1,3 +1,4 @@
+import MenuComponent from 'infrastructure/view/components/organisms/navbar';
 import * as React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { MissionList } from '../MissionList';
