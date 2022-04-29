@@ -2,7 +2,7 @@ import { missionServices } from 'application';
 import React, { useEffect } from 'react';
 import { MissionCard } from '../../components/molecules';
 import { useMission } from '../../hooks/UseMissions';
-import { missionList } from '../../store/actions/mission.actions';
+import { missionList } from '../../store/Mission/mission.actions';
 
 export const MissionList = () => {
   const { state, dispatch } = useMission();
