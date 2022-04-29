@@ -9,17 +9,22 @@ export const Menu = () => {
         <Link to="/">
           <Logo />
         </Link>
+
         <div className="MenuList">
           <Link className="MenuItem" to="/missions">
-            Missions
+            <img src="/icon-missions.png" alt="" />
+            &nbsp;Missions
           </Link>
           <Link className="MenuItem" to="/cooperateurs">
-            Cooperateurs
+            <img src="/icon-cooperators.png" alt="" />
+            &nbsp;Cooperateurs
           </Link>
-          {/* <Link className="MenuItem" to="/paramètres">
-          <img src="/icon-parameter.png" alt="" />
-          &nbsp;Paramètres
-        </Link> */}
+        </div>
+        <div className="MenuFooter">
+          <Link className="MenuItem" to="/paramètres">
+            <img src="/icon-parameters.png" alt="" />
+            &nbsp;Paramètres
+          </Link>
         </div>
       </div>
     </>
