@@ -1,32 +1,29 @@
 .Menu {
-    background-color: rgba(74, 122, 169, 0.3);
-    width: 10rem;
     height: 100vh;
+    width: 250px;
+    background-color: rgba(74, 122, 169, 0.3);
     display: flex;
-    justify-content: start;
     flex-direction: column;
     align-items: center;
-
-    .LinkWrapper {
+    .MenuList {
+        margin-top: 1.8rem;
+        height: 100%;
+        width:100%;
         display: flex;
         flex-direction: column;
         align-items: center;
-        margin-top: 2rem;
     }
 
-    .Link img {
-        width: 1.2rem;
-        height: 1.2rem;
-    }
+}
 
-    .MenuFooter .Link {
-        display: flex;
-    }
-
-    .MenuFooter {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        width: auto;
-    }
+.MenuList .MenuItem {
+    width: 100%;
+    height: 50px;
+    list-style-type: none;
+    margin: 0%;
+    display: flex;
+    justify-content: center;
+    color: white;
+    align-items: center;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }

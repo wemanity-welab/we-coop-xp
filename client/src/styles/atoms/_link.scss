@@ -1,13 +1,14 @@
-.Link {
+.MenuItem {
     text-decoration: none;
     color:#4A7AA9;
     margin-top: 1.8rem;
-    transition: 0.2s;
+    transition: 0.3s;
+    padding: 5%;
 }
 
-.Link:hover {
+.MenuItem:hover {
     background-color: rgba(74, 122, 169, 0.3);
-    border: 0.1px solid #5b84ac7a;
-    border-radius: 5px;
-    padding: 10%;
+    padding: 5%;
+    display: block;
+    cursor: pointer;
 }
