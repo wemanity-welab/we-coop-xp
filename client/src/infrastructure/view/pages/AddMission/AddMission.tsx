@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import { useMission } from '../../hooks/UseMissions';
 import { useForm } from 'react-hook-form';
-import { Mission } from 'domain/models/Mission';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { missionPosted } from '../../store/actions/mission.actions';
-import { missionServices } from 'infrastructure/view/store/services';
+import { missionPosted } from 'infrastructure/view/store/Mission/mission.actions';
+import { Mission } from 'domain/mission/mission';
+import { missionServices } from 'application';
 toast.configure();
 
 export const AddMission = () => {

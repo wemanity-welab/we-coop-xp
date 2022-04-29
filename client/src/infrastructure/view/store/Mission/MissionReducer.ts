@@ -6,6 +6,12 @@ export async function missionReducer(state: State<Mission>, action: Action) {
     case 'display-list-missions': {
       return { catalog: action.payload };
     }
+    //add mission
+    case 'add-mission': {
+      const typePayload = action.payload;
+      return typePayload;
+    }
+
     default: {
       throw new Error(`Unhandled action type`);
     }

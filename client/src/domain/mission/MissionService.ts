@@ -7,4 +7,7 @@ export const MissionService = (
   getMissions: (): Promise<Mission[]> => {
     return repository.getMissions();
   },
+  addMission: (mission: Mission) => {
+    return repository.addMission(mission);
+  },
 });
