@@ -1,24 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
 import { Logo } from '../atoms/logo-wemanity';
-import './navbar.scss';
-
-const MenuWrapper = styled.section`
-  background-color: rgba(74, 122, 169, 0.3);
-  width: 250px;
-  height: 100vh;
-`;
-
-const Navbar = styled.section`
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-`;
 
 export const MenuComponent = () => {
   return (
     <>
+<<<<<<< HEAD
       <div className="MenuWrapper">
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -33,6 +20,25 @@ export const MenuComponent = () => {
           <Link to="/missions">Missions</Link>
           <Link to="/cooperateurs">Cooperateurs</Link>
           <Link to="/paramètres"></Link>
+=======
+      <div className="Menu">
+        <Link to="/">
+          <Logo />
+        </Link>
+        <div className="LinkWrapper">
+          <Link className="Link" to="/missions">
+            Missions
+          </Link>
+          <Link className="Link" to="/cooperateurs">
+            Cooperateurs
+          </Link>
+        </div>
+        <div className="MenuFooter">
+          <Link className="Link" to="/paramètres">
+            <img src="/icon-parameter.png" alt="" />
+            &nbsp;Paramètres
+          </Link>
+>>>>>>> 282a3e9 (feat: side menu)
         </div>
       </div>
     </>
