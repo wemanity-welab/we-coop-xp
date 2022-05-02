@@ -1,0 +1,18 @@
+button {
+    height: 8vh;
+    border-radius: 7px;
+    border: none;
+    resize: none;
+    margin: 10px;
+    padding: 10px;
+    min-width: 20%;
+    background:$color-night-bleu;
+    ; 
+    color: aliceblue;
+    &:hover {
+
+        background: $color-2;
+    }
+
+}
+

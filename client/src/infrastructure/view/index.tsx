@@ -14,7 +14,7 @@ import { HomePage } from './pages/HomePage/Loadable';
 import { NotFoundPage } from './pages/NotFoundPage/Loadable';
 import { useTranslation } from 'react-i18next';
 import { MissionList } from './pages/MissionList/Loadable';
-import { AddMission } from './pages/AddMission/AddMission';
+import { AddMission } from './components/templates/AddMission/AddMission';
 
 export function App() {
   const { i18n } = useTranslation();

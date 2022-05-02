@@ -1,0 +1,15 @@
+.addMission {
+  .goBack {
+    position: absolute;
+    width: 52px;
+    height: 53px;
+    left: 790px;
+    top: 30px;
+    @media screen and(max-width: 950px) {
+    
+    left:20px;
+  }
+}
+
+  
+}
