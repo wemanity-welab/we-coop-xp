@@ -17,4 +17,11 @@ export const missionRepository = (client: Http): IMissionRepository => ({
       }),
     );
   },
+  updateMission: async (id, data) => {
+    const missionUpdated = await client.patch<MissionDTO>(
+      `/missions/${id}`,
+      data,
+    );
+    return missionUpdated;
+  },
 });
