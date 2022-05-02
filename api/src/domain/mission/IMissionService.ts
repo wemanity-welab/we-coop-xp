@@ -1,4 +1,3 @@
-import { Mission } from '../../types/Mission';
 import { MissionDomain } from './MissionDomain';
 
 export interface IMissionService {
