@@ -33,38 +33,40 @@ export class CooperatorService implements ICooperatorService {
   }
 }
 
-const mission = new CooperatorDomain({
-  id: '1',
-  title: 'title',
-  profile: 'pouet',
-  client: 'address',
-  description: 'description',
-  isActive: false,
+const cooperator = new CooperatorDomain({
+  firstName: 'Mickaël',
+  lastName: 'Zonton',
+  phoneNumber: '157-232-6965',
+  email: 'mzonton@pen.io',
+  practice: 'Tech',
+  m3: 'Estève',
+  mentor: 'Lóng',
 });
 
 describe('should test missionService class', () => {
-  let missionService: MissionService;
+  let service: CooperatorService;
   let adapter: any;
 
   beforeAll(async () => {
     adapter = new AdapterMock();
-    missionService = new MissionService(adapter);
+    service = new CooperatorService(adapter);
   });
 
   it('should return success', async () => {
-    expect(await missionService.save(mission)).toEqual(mission);
+    expect(await service.save(cooperator)).toEqual(cooperator);
   });
 
   it('should update an object ', async () => {
-    const newMission = new MissionDomain({
-      id: '1',
-      profile: 'test',
-      client: 'address',
-      title: 'title',
-      description: 'description',
-      isActive: false,
+    const newCooperator = new CooperatorDomain({
+      firstName: 'Mickaël',
+      lastName: 'Zonton',
+      phoneNumber: '0000000000',
+      email: 'mickaelzonton@gogole.io',
+      practice: 'Tech',
+      m3: 'Estève',
+      mentor: 'Lóng',
     });
-    const missionUpdated = await missionService.update('1', newMission);
-    expect(missionUpdated).toEqual(newMission);
+    const cooperatorUpdated = await service.update('1', newCooperator);
+    expect(cooperatorUpdated).toEqual(newCooperator);
   });
 });
