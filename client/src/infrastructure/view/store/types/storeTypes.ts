@@ -1,4 +1,4 @@
-export type Action = { type: string; payload?: object[] };
+export type Action = { type: string; payload?: any };
 export type Dispatch = (action: Action) => void;
 
 export type State<T> = {

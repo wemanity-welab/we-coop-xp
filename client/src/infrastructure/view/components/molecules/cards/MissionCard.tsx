@@ -1,21 +1,25 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { CardMenu } from '../../atoms';
 import active from './check.png';
 import inactive from './close.png';
 
 const MissionCard = ({ props }) => {
+  const [status, setStatus] = useState();
   const { title, client, isActive } = props;
+  useEffect(() => {
+    setStatus(isActive);
+  }, [isActive]);
 
   return (
     <li>
       <div className="container">
         <div className="card">
           <div className="card__content">
-            <CardMenu status={isActive} />
+            <CardMenu props={props} />
             <h3 className="card__header">{title}</h3>
             <p className="card__info">{client}</p>
             <div className={`card__status`}>
-              {isActive ? (
+              {status ? (
                 <>
                   <img
                     className="card__status__logo"

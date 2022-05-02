@@ -1,28 +1,34 @@
 import { missionServices } from 'application';
-import React, { useEffect } from 'react';
+import { Mission } from 'domain/mission/mission';
+import React, { useEffect, useRef, useState } from 'react';
+import { sortingByTitle } from 'utils/sortingArrays';
 import { MissionCard } from '../../components/molecules';
 import { useMission } from '../../hooks/UseMissions';
 import { missionList } from '../../store/Mission/mission.actions';
 
 export const MissionList = () => {
   const { state, dispatch } = useMission();
+  const [catalog, setCatalog] = useState<Mission[]>([]);
   const missions = missionServices.getMissions();
 
   useEffect(() => {
-    try {
-      missions.then(data => dispatch(missionList(data)));
-    } catch (exception) {
-      console.error(exception);
-    }
+    missions.then(data => dispatch(missionList(data)));
   }, []);
 
+  useEffect(() => {
+    setCatalog(state.catalog);
+  }, [state.catalog, catalog]);
+
+  console.log(catalog.values().return?.name);
   return (
     <div className="container">
-      <h2>Les missions</h2>
+      <h2 onClick={() => console.log('pouet')}>Les missions</h2>
       <ul className="container__missions">
-        {state.catalog.map(mission => (
-          <MissionCard key={mission.id} props={mission} />
-        ))}
+        {catalog.length > 0
+          ? catalog
+              .sort(sortingByTitle)
+              .map(mission => <MissionCard key={mission.id} props={mission} />)
+          : 'Chargement'}
       </ul>
     </div>
   );

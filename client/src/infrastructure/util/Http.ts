@@ -9,7 +9,7 @@ export interface Http {
     params?: Record<string, any>,
     config?: any,
   ) => Promise<T | any>;
-  put: <T>(
+  patch: <T>(
     path: string,
     params?: Record<string, any>,
     config?: any,
