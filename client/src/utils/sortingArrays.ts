@@ -25,7 +25,7 @@ function sortingByProfile(a, b) {
   }
   return 0;
 }
-function sortingByRecent(a, b) {
+function sortingByMostRecent(a, b) {
   if (a < b) {
     return -1;
   }
@@ -34,4 +34,9 @@ function sortingByRecent(a, b) {
   }
   return 0;
 }
-export { sortingByClient, sortingByTitle, sortingByProfile, sortingByRecent };
+export {
+  sortingByClient,
+  sortingByTitle,
+  sortingByProfile,
+  sortingByMostRecent,
+};
