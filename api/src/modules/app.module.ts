@@ -4,6 +4,7 @@ import { MissionModule } from './mission.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import configuration from '../config/configuration';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { CooperatorModule } from './cooperator.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       useFactory: configuration,
     }),
     MissionModule,
+    CooperatorModule,
   ],
 })
 export class AppModule {}

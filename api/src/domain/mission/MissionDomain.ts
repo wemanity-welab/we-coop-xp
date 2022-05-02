@@ -11,28 +11,21 @@ export class MissionDomain {
     title,
     profile,
     client,
-
     description,
-
     isActive,
   }: {
     id?: string;
     title: string;
     client: string;
     profile: string;
-
     description: string;
-
     isActive?: boolean;
   }) {
     this.id = id;
     this.title = title;
     this.client = client;
-
     this.profile = profile;
-
     this.description = description;
-
     this.isActive = isActive;
   }
 

@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { MissionService } from '../../src/domain/mission/MissionService';
-import { MissionController } from '../../src/exposition/job/MissionController';
-import { MissionServiceAdapter } from '../../src/exposition/job/MissionServiceAdapter';
-import { MissionRepositoryAdapter } from '../../src/infrastructure/job/MissionRepositoryAdapter';
-import { MissionEntity } from '../../src/infrastructure/job/MissionEntity';
+import { MissionService } from '../../src/domain/Mission/MissionService';
+import { MissionController } from '../../src/exposition/Mission/MissionController';
+import { MissionServiceAdapter } from '../../src/exposition/Mission/MissionServiceAdapter';
+import { MissionRepositoryAdapter } from '../../src/infrastructure/Mission/MissionRepositoryAdapter';
+import { MissionEntity } from '../../src/infrastructure/Mission/MissionEntity';
 
 @Module({
   imports: [TypeOrmModule.forFeature([MissionEntity])],
