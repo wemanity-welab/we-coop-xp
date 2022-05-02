@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { linksData } from '../atoms/link';
+import { linksData } from '../../constants/routes';
 import { Logo } from '../atoms/logo-wemanity';
 import { usePathName } from 'infrastructure/view/hooks/UsePathName';
 
@@ -14,7 +14,7 @@ export const Menu = () => {
         </Link>
 
         <div className="MenuList">
-          {linksData.map((val, key) => {
+          {linksData.map(val => {
             return (
               <Link
                 className="MenuItem"
