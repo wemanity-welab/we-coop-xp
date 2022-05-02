@@ -1,5 +1,6 @@
 import { missionServices } from 'application';
 import { Mission } from 'domain/mission/mission';
+import MainLayout from 'infrastructure/view/components/templates/MainLayout';
 import React, { useEffect, useState } from 'react';
 import { sortingByTitle } from 'utils/sortingArrays';
 import { MissionCard } from '../../components/molecules';
@@ -19,15 +20,19 @@ export const MissionList = () => {
   }, [state.catalog]);
 
   return (
-    <div className="container">
-      <h2 onClick={() => console.log('pouet')}>Les missions</h2>
-      <ul className="container__missions">
-        {catalog.length > 0
-          ? catalog
-              .sort(sortingByTitle)
-              .map(mission => <MissionCard key={mission.id} props={mission} />)
-          : 'Chargement'}
-      </ul>
-    </div>
+    <MainLayout>
+      <div className="container">
+        <h2>Les missions</h2>
+        <ul className="container__missions">
+          {catalog.length > 0
+            ? catalog
+                .sort(sortingByTitle)
+                .map(mission => (
+                  <MissionCard key={mission.id} props={mission} />
+                ))
+            : 'Chargement'}
+        </ul>
+      </div>
+    </MainLayout>
   );
 };
