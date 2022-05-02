@@ -1,7 +1,7 @@
 export class CooperatorDomain {
   private id?: string;
-  private lastName: string;
   private firstName: string;
+  private lastName: string;
   private phoneNumber: string;
   private email: string;
   private practice: string;
@@ -10,26 +10,26 @@ export class CooperatorDomain {
 
   constructor({
     id,
-    lastName,
     firstName,
+    lastName,
     phoneNumber,
     email,
     practice,
     m3,
     mentor,
   }: {
-    id: string;
+    id?: string;
     lastName: string;
     firstName: string;
     phoneNumber: string;
     email: string;
     practice: string;
-    m3: string;
-    mentor: string;
+    m3?: string;
+    mentor?: string;
   }) {
     this.id = id;
-    this.lastName = lastName;
     this.firstName = firstName;
+    this.lastName = lastName;
     this.phoneNumber = phoneNumber;
     this.email = email;
     this.practice = practice;
@@ -44,18 +44,18 @@ export class CooperatorDomain {
     this.id = value;
   }
 
-  get getLastName(): string {
-    return this.lastName;
-  }
-  set setLastName(value: string) {
-    this.lastName = value;
-  }
-
   get getFirstName(): string {
     return this.firstName;
   }
   set setFirstName(value: string) {
     this.firstName = value;
+  }
+
+  get getLastName(): string {
+    return this.lastName;
+  }
+  set setLastName(value: string) {
+    this.lastName = value;
   }
 
   get getPhoneNumber(): string {
