@@ -1,46 +1,47 @@
-import { MissionDomain } from '../../../src/domain/Mission/MissionDomain';
-import { faker } from '@faker-js/faker';
-
-// faker.locale = 'fr';
-faker.seed(123456789);
-
-const missions = [
+export const cooperators = [
   {
-    title: 'dev fullstack javascript',
-    profile: 'dev fullstack javascript',
-    client: 'BNP Paribas',
-    description: 'full stack',
-    duration: '6 mois',
-    isActive: false,
+    firstName: 'Katuscha',
+    lastName: 'Ceresa',
+    phoneNumber: '575-240-0477',
+    email: 'kceresa0@jimdo.com',
+    practice: 'Littel LLC',
+    m3: 'Séréna',
+    mentor: 'Gaïa',
   },
   {
-    title: 'dev Java',
-    profile: 'dev Java',
-    client: 'Metro',
-    description: 'back-end',
-    duration: '12 mois',
-    isActive: false,
+    firstName: 'Stearn',
+    lastName: 'Prayer',
+    phoneNumber: '362-471-0429',
+    email: 'sprayer1@google.cn',
+    practice: 'Murazik-Spinka',
+    m3: 'Eléa',
+    mentor: 'Noémie',
   },
   {
-    title: 'devOps',
-    profile: 'devOps',
-    client: 'Decathlon',
-    description: 'opérationnel',
-    duration: '24 mois',
-    isActive: false,
+    firstName: 'Walden',
+    lastName: 'Bentjens',
+    phoneNumber: '109-279-9048',
+    email: 'wbentjens2@yandex.ru',
+    practice: 'Jacobi Inc',
+    m3: 'Angélique',
+    mentor: 'Mégane',
   },
   {
-    title: 'devOps',
-    profile: 'devOps',
-    client: 'BNP Paribas',
-    description: 'full stack',
-    duration: '6 mois',
-    isActive: false,
+    firstName: 'Ignaz',
+    lastName: 'St. Quentin',
+    phoneNumber: '581-392-3023',
+    email: 'istquentin3@surveymonkey.com',
+    practice: 'Morar, Shanahan and DuBuque',
+    m3: 'Sélène',
+    mentor: 'Anaël',
+  },
+  {
+    firstName: 'Justinn',
+    lastName: 'Hayton',
+    phoneNumber: '157-232-6965',
+    email: 'jhayton4@pen.io',
+    practice: 'Nader LLC',
+    m3: 'Estève',
+    mentor: 'Lóng',
   },
 ];
-
-const mockedMissions: MissionDomain[] = missions.map(
-  (mission) => new MissionDomain(mission),
-);
-
-export default mockedMissions;

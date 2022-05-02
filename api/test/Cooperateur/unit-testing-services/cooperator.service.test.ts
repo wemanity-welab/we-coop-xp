@@ -1,8 +1,39 @@
-import { MissionDomain } from '../../../src/domain/Mission/MissionDomain';
-import { MissionService } from '../../../src/domain/Mission/MissionService';
+import { Inject, Injectable } from '@nestjs/common';
+import { CooperatorDomain } from '../../../src/domain/Cooperator/CooperatorDomain';
+import { ICooperatorRepository } from '../../../src/domain/Cooperator/ICooperatorRepository';
+import { ICooperatorService } from '../../../src/domain/Cooperator/ICooperatorService';
+
 import AdapterMock from '../mock/mockedAdapter';
 
-const mission = new MissionDomain({
+@Injectable()
+export class CooperatorService implements ICooperatorService {
+  private cooperatorRepositoryAdapter: ICooperatorRepository;
+  constructor(
+    @Inject('ICooperatorRepository') cooperatorAdapter: ICooperatorRepository,
+  ) {
+    this.cooperatorRepositoryAdapter = cooperatorAdapter;
+  }
+  save(cooperator: CooperatorDomain): Promise<CooperatorDomain> {
+    throw new Error('Method not implemented.');
+  }
+  getAll(): Promise<CooperatorDomain[]> {
+    throw new Error('Method not implemented.');
+  }
+  remove(id: string): Promise<string> {
+    throw new Error('Method not implemented.');
+  }
+  update(id: string, cooperator: CooperatorDomain): Promise<CooperatorDomain> {
+    throw new Error('Method not implemented.');
+  }
+  getOne(id: string): Promise<CooperatorDomain> {
+    throw new Error('Method not implemented.');
+  }
+  search(keywords: string[]): Promise<CooperatorDomain[]> {
+    throw new Error('Method not implemented.');
+  }
+}
+
+const mission = new CooperatorDomain({
   id: '1',
   title: 'title',
   profile: 'pouet',

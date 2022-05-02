@@ -1,28 +1,28 @@
 import Utils from '../../../src/utils/Utils';
 import { IAdapter } from '../../utils/interfaces/IAdapter';
-import { Mission } from '../../utils/types/Mission';
+import { Cooperator } from '../../utils/types/Cooperator';
 
-class AdapterMock implements IAdapter<Mission, string> {
+class AdapterMock implements IAdapter<Cooperator, string> {
   datas: any[];
 
   constructor() {
     this.datas = [];
   }
 
-  async save(data: Mission): Promise<Mission> {
+  async save(data: Cooperator): Promise<Cooperator> {
     await this.datas.push(data);
     return data;
   }
-  async getAll(): Promise<Mission[]> {
+  async getAll(): Promise<Cooperator[]> {
     return await this.datas;
   }
   async remove(id: string): Promise<string> {
     const dataFound = await this.datas.find((data) => data.id === id);
     await this.datas.splice(this.datas.indexOf(dataFound), 1);
-    return `Mission n°${dataFound.id} supprimée.`;
+    return `Cooperator n°${dataFound.id} supprimée.`;
   }
 
-  async update(id: string, data: Mission): Promise<Mission> {
+  async update(id: string, data: Cooperator): Promise<Cooperator> {
     const dataFound = await this.datas.find((data) => data.id === id);
     if (!dataFound) {
       throw new Error('DATA NOT FOUND');
@@ -38,7 +38,7 @@ class AdapterMock implements IAdapter<Mission, string> {
 
     return (this.datas[indexOfDataFound] = obj);
   }
-  async getOne(id: string): Promise<Mission> {
+  async getOne(id: string): Promise<Cooperator> {
     return await this.datas.find((data) => data.id === id);
   }
 
