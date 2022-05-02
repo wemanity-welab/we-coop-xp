@@ -10,11 +10,11 @@ export class CooperatorEntity {
   @PrimaryGeneratedColumn('uuid')
   id!: string;
   @ApiProperty()
-  @Column({ name: 'last_name' })
-  lastName!: string;
-  @ApiProperty()
   @Column({ name: 'first_name' })
   firstName!: string;
+  @ApiProperty()
+  @Column({ name: 'last_name' })
+  lastName!: string;
   @ApiProperty()
   @Column({ name: 'phone_number' })
   phoneNumber!: string;
@@ -36,9 +36,10 @@ export const fromDomainToEntity = (
   cooperatorDomain: CooperatorDomain,
 ): CooperatorEntity => {
   const result = new CooperatorEntity();
-  result.lastName = cooperatorDomain.getLastName;
   result.firstName = cooperatorDomain.getFirstName;
+  result.lastName = cooperatorDomain.getLastName;
   result.phoneNumber = cooperatorDomain.getPhoneNumber;
+  result.email = cooperatorDomain.getEmail;
   result.practice = cooperatorDomain.getPractice;
   result.m3 = cooperatorDomain.getM3;
   result.mentor = cooperatorDomain.getMentor;
