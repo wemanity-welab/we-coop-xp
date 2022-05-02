@@ -1,4 +1,4 @@
 // import and export all atoms here
-import CardMenu from './CardMenu/CardMenu';
+import CardMenu from './CardMenu';
 
 export { CardMenu };

@@ -1,9 +1,8 @@
 import { missionServices } from 'application';
-import React, { useEffect, useState } from 'react';
-import menu from './menu.png';
+import React, { useState } from 'react';
 
-function CardMenu({ props }) {
-  const [status, setStatus] = useState(props.isActive);
+function CardMenu(props) {
+  const [status, setStatus] = useState(props.props.isActive);
   const [openMenu, setOpenMenu] = useState(false);
   const [position, setPosition] = useState({ xPos: 0, yPos: 0 });
   const toggleMenu = (e: React.MouseEvent) => {
@@ -12,23 +11,26 @@ function CardMenu({ props }) {
     setOpenMenu(!openMenu);
   };
 
-  useEffect(() => {
-    setStatus(props.isActive);
-  }, [props.isActive]);
-
   const handleClick = async () => {
     const newStatus = { isActive: !status };
-    const updatedMission = await missionServices.updateMission(
-      props.id,
+    const updatedMission = missionServices.updateMission(
+      props.props.id,
       newStatus,
     );
-    setStatus(updatedMission.isActive);
-    console.log(updatedMission);
+    const newMission = await updatedMission;
+    setStatus(newMission.isActive);
+    setOpenMenu(!openMenu);
+    props.function(newMission.isActive);
   };
 
   return (
     <>
-      <img className="card__menu" src={menu} alt="menu" onClick={toggleMenu} />
+      <img
+        className="card__menu"
+        src={'/menu.png'}
+        alt="menu"
+        onClick={toggleMenu}
+      />
       {openMenu && (
         <div
           className="custom-context-menu"

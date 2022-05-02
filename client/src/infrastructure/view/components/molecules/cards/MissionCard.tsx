@@ -1,21 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { CardMenu } from '../../atoms';
-import active from './check.png';
-import inactive from './close.png';
 
 const MissionCard = ({ props }) => {
-  const [status, setStatus] = useState();
   const { title, client, isActive } = props;
-  useEffect(() => {
-    setStatus(isActive);
-  }, [isActive]);
+  const [status, setStatus] = useState<boolean>(isActive);
+
+  const getStatus = (status: boolean) => {
+    setStatus(status);
+  };
 
   return (
     <li>
       <div className="container">
         <div className="card">
           <div className="card__content">
-            <CardMenu props={props} />
+            <CardMenu props={props} function={getStatus} />
             <h3 className="card__header">{title}</h3>
             <p className="card__info">{client}</p>
             <div className={`card__status`}>
@@ -23,7 +22,7 @@ const MissionCard = ({ props }) => {
                 <>
                   <img
                     className="card__status__logo"
-                    src={active}
+                    src={'/check.png'}
                     alt="check"
                   />
                   <span>Active</span>
@@ -32,7 +31,7 @@ const MissionCard = ({ props }) => {
                 <>
                   <img
                     className="card__status__logo"
-                    src={inactive}
+                    src={'/close.png'}
                     alt="check"
                   />
                   <span>Inactive</span>

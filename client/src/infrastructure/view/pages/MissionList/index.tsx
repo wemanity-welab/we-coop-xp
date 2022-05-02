@@ -1,6 +1,6 @@
 import { missionServices } from 'application';
 import { Mission } from 'domain/mission/mission';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { sortingByTitle } from 'utils/sortingArrays';
 import { MissionCard } from '../../components/molecules';
 import { useMission } from '../../hooks/UseMissions';
@@ -9,17 +9,15 @@ import { missionList } from '../../store/Mission/mission.actions';
 export const MissionList = () => {
   const { state, dispatch } = useMission();
   const [catalog, setCatalog] = useState<Mission[]>([]);
-  const missions = missionServices.getMissions();
 
   useEffect(() => {
-    missions.then(data => dispatch(missionList(data)));
+    missionServices.getMissions().then(data => dispatch(missionList(data)));
   }, []);
 
   useEffect(() => {
     setCatalog(state.catalog);
-  }, [state.catalog, catalog]);
+  }, [state.catalog]);
 
-  console.log(catalog.values().return?.name);
   return (
     <div className="container">
       <h2 onClick={() => console.log('pouet')}>Les missions</h2>
