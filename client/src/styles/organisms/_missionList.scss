@@ -1,4 +1,7 @@
 .container {
+    h2 {
+        padding-left: 5vw;
+    }
     &__missions {
         display: flex;
         flex: 0 0 33.33333%;
