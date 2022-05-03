@@ -1,7 +1,10 @@
 import { missionServices } from 'application';
+import { useMission } from 'infrastructure/view/hooks/UseMissions';
+import { missionList } from 'infrastructure/view/store/Mission/mission.actions';
 import React, { useState } from 'react';
 
 function CardMenu(props) {
+  const { dispatch } = useMission();
   const [status, setStatus] = useState(props.props.isActive);
   const [openMenu, setOpenMenu] = useState(false);
   const [position, setPosition] = useState({ xPos: 0, yPos: 0 });
@@ -11,7 +14,7 @@ function CardMenu(props) {
     setOpenMenu(!openMenu);
   };
 
-  const handleClick = async () => {
+  const handleClickStatus = async () => {
     const newStatus = { isActive: !status };
     const updatedMission = missionServices.updateMission(
       props.props.id,
@@ -21,6 +24,15 @@ function CardMenu(props) {
     setStatus(newMission.isActive);
     setOpenMenu(!openMenu);
     props.function(newMission.isActive);
+  };
+
+  const handleClickDelete = async () => {
+    const id = props.props.id;
+    const deletedMsg = await missionServices.deleteMission(id);
+    console.log(deletedMsg);
+    missionServices
+      .getMissions()
+      .then(missions => dispatch(missionList(missions)));
   };
 
   return (
@@ -36,13 +48,13 @@ function CardMenu(props) {
           className="custom-context-menu"
           style={{ top: position.yPos, left: position.xPos }}
         >
-          <div className="option" onClick={() => handleClick()}>
+          <div className="option" onClick={() => handleClickStatus()}>
             {status ? 'Désactiver' : 'Activer'}
           </div>{' '}
           <div className="option" onClick={() => console.log('Option 2')}>
             Modifier
           </div>
-          <div className="option" onClick={() => console.log('Option 3')}>
+          <div className="option" onClick={() => handleClickDelete()}>
             Supprimer
           </div>
         </div>
