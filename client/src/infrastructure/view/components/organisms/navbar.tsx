@@ -14,9 +14,10 @@ export const Menu = () => {
         </Link>
 
         <div className="MenuList">
-          {linksData.map(val => {
+          {linksData.map((val, i) => {
             return (
               <Link
+                key={i}
                 className="MenuItem"
                 to={val.link}
                 id={path === val.link ? 'linkActive' : ''}

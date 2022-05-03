@@ -24,4 +24,8 @@ export const missionRepository = (client: Http): IMissionRepository => ({
     );
     return missionUpdated;
   },
+  deleteMission: async id => {
+    const missionDeleted = await client.delete<String>(`/missions/${id}`);
+    return missionDeleted;
+  },
 });
