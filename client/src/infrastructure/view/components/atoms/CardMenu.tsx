@@ -26,13 +26,19 @@ function CardMenu(props) {
     props.function(newMission.isActive);
   };
 
-  const handleClickDelete = async () => {
+  const deleteMission = async () => {
     const id = props.props.id;
     const deletedMsg = await missionServices.deleteMission(id);
     console.log(deletedMsg);
     missionServices
       .getMissions()
       .then(missions => dispatch(missionList(missions)));
+  };
+
+  const handleClickDelete = async () => {
+    if (window.confirm('Êtes-vous sur de vouloir supprimer cette mission ?'))
+      deleteMission();
+    setOpenMenu(!openMenu);
   };
 
   return (
