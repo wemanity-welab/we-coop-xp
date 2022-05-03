@@ -1,11 +1,12 @@
 .container {
+    h2 {
+        padding-left: 5vw;
+    }
     &__missions {
         display: flex;
         flex: 0 0 33.33333%;
         flex-wrap: wrap;
         justify-content: center;
-        width:100%;
-        height:100%;
         align-items: center;
         justify-items: center;
     }
