@@ -17,4 +17,15 @@ export const missionRepository = (client: Http): IMissionRepository => ({
       }),
     );
   },
+  updateMission: async (id, data) => {
+    const missionUpdated = await client.patch<MissionDTO>(
+      `/missions/${id}`,
+      data,
+    );
+    return missionUpdated;
+  },
+  deleteMission: async id => {
+    const missionDeleted = await client.delete<String>(`/missions/${id}`);
+    return missionDeleted;
+  },
 });

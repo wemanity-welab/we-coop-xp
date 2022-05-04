@@ -20,8 +20,8 @@ export function App() {
   return (
     <BrowserRouter>
       <Helmet
-        titleTemplate="%s - React Boilerplate"
-        defaultTitle="React Boilerplate"
+        titleTemplate="%s - WeLab"
+        defaultTitle="WeLab"
         htmlAttributes={{ lang: i18n.language }}
       >
         <meta name="description" content="A React Boilerplate application" />

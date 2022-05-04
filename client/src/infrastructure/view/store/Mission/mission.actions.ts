@@ -6,3 +6,10 @@ export const missionList = (data: Mission[]) => {
     payload: data,
   };
 };
+
+export const updateMission = (data: Mission) => {
+  return {
+    type: 'update-status-mission',
+    payload: data,
+  };
+};

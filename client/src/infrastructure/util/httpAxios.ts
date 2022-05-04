@@ -24,8 +24,12 @@ export const HttpAxios: Http = {
     );
     return response.data as T;
   },
-  put: async <T>(path: string, params?: Record<string, any>, config?: any) => {
-    const response = await axios.put(
+  patch: async <T>(
+    path: string,
+    params?: Record<string, any>,
+    config?: any,
+  ) => {
+    const response = await axios.patch(
       path,
       { ...params },
       { ...config, headers },
