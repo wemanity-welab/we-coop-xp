@@ -1,4 +1,4 @@
-import { MissionDomain } from '../../../src/domain/Mission/MissionDomain';
+import { MissionDomain } from '../../../src/domain/Mission/mission.domain';
 import { faker } from '@faker-js/faker';
 
 // faker.locale = 'fr';

@@ -2,9 +2,9 @@ import { INestApplication, Injectable } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { InjectRepository, TypeOrmModule } from '@nestjs/typeorm';
 import { EntityManager, getConnection, Like, Repository } from 'typeorm';
-import { IMissionRepository } from '../../../src/domain/Mission/IMissionRepository';
-import { MissionDomain } from '../../../src/domain/Mission/MissionDomain';
-import { MissionEntity } from '../../../src/infrastructure/Mission/MissionEntity';
+import { IMissionRepository } from '../../../src/domain/Mission/mission.irepository';
+import { MissionDomain } from '../../../src/domain/Mission/mission.domain';
+import { MissionEntity } from '../../../src/infrastructure/Mission/mission.entity';
 import Utils from '../../../src/utils/Utils';
 import { Mission } from '../../utils/types/Mission';
 
@@ -44,13 +44,25 @@ class MissionRepositoryAdapter implements IMissionRepository {
     await Promise.all(
       array.map(async (element) => {
         const request: Array<string | number | object> =
-          await this.missionEntityRepository.find({
-            where: [
-              { profile: Like(`%${element}%`) },
-              { description: Like(`%${element}%`) },
-              { client: Like(`%${element}%`) },
-            ],
-          });
+          await this.missionEntityRepository
+            .createQueryBuilder('mission')
+            .where('LOWER(client) LIKE :client', {
+              client: `%${element.toLowerCase()}%`,
+            })
+            .orWhere('LOWER(profile) LIKE :profile', {
+              profile: `%${element.toLowerCase()}%`,
+            })
+            .orWhere('LOWER(description) LIKE :description', {
+              description: `%${element.toLowerCase()}%`,
+            })
+            .getMany();
+        // await this.missionEntityRepository.find({
+        //   where: [
+        //     { profile: Like(`%${element}%`) },
+        //     { description: Like(`%${element}%`) },
+        //     { client: Like(`%${element}%`) },
+        //   ],
+        // });
         request.forEach((req) => elements.push(req));
       }),
     );
@@ -66,15 +78,16 @@ describe('Testing Search Method', () => {
   const missions = [
     {
       title: 'mission1',
-      profile: 'dev fullstack javascript',
+      profile: 'Dev fullstack javascript',
       client: 'BNP Paribas',
       description: 'full stack',
     },
     {
       title: 'mission2',
-      profile: 'dev Java',
+      profile: 'Dev Java',
       client: 'Metro',
-      description: 'back-end',
+      description:
+        "interface sur borne placee a l'entrée pour activer et gérer compte client",
     },
     {
       title: 'mission3',
@@ -127,11 +140,13 @@ describe('Testing Search Method', () => {
 
   it('Should display a  list of missions with profile keyword search', async () => {
     const request = await repository.search(['Java']);
+    console.log(request);
     expect(request.length).toBeGreaterThan(0);
   });
 
   it('Should display a list of missions with multiple profile keywords search', async () => {
-    const request = await repository.search(['Java', 'dev']);
+    const request = await repository.search(['Dev']);
+    console.log(request);
     expect(request).toEqual(missions);
   });
 

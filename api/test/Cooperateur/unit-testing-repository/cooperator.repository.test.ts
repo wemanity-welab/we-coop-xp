@@ -2,9 +2,9 @@ import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { EntityManager, getConnection } from 'typeorm';
-import { CooperatorDomain } from '../../../src/domain/Cooperator/CooperatorDomain';
-import { CooperatorEntity } from '../../../src/infrastructure/Cooperator/CooperatorEntity';
-import { CooperatorRepositoryAdapter } from '../../../src/infrastructure/Cooperator/CooperatorRepositoryAdapter';
+import { CooperatorDomain } from '../../../src/domain/Cooperator/cooperator.domain';
+import { CooperatorEntity } from '../../../src/infrastructure/Cooperator/cooperator.entity';
+import { CooperatorRepositoryAdapter } from '../../../src/infrastructure/Cooperator/cooperator.repository.adapter';
 import { cooperators } from '../mock/mockedCooperators';
 
 describe('Testing Cooperator respository', () => {

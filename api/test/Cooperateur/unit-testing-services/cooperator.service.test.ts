@@ -1,41 +1,6 @@
-import { Inject, Injectable } from '@nestjs/common';
-import { CooperatorDomain } from '../../../src/domain/Cooperator/CooperatorDomain';
-import { ICooperatorRepository } from '../../../src/domain/Cooperator/ICooperatorRepository';
-import { ICooperatorService } from '../../../src/domain/Cooperator/ICooperatorService';
-
+import { CooperatorDomain } from '../../../src/domain/Cooperator/cooperator.domain';
+import { CooperatorService } from '../../../src/domain/Cooperator/cooperator.service';
 import AdapterMock from '../mock/mockedAdapter';
-
-@Injectable()
-export class CooperatorService implements ICooperatorService {
-  private cooperatorRepositoryAdapter: ICooperatorRepository;
-  constructor(
-    @Inject('ICooperatorRepository') cooperatorAdapter: ICooperatorRepository,
-  ) {
-    this.cooperatorRepositoryAdapter = cooperatorAdapter;
-  }
-  async save(cooperator: CooperatorDomain): Promise<CooperatorDomain> {
-    return await this.cooperatorRepositoryAdapter.save(cooperator);
-  }
-  async getAll(): Promise<CooperatorDomain[]> {
-    const cooperators = await this.cooperatorRepositoryAdapter.getAll();
-    if (cooperators.length === 0) {
-      throw new Error('Aucun cooperateur dans la base de données.');
-    }
-    return cooperators;
-  }
-  remove(id: string): Promise<string> {
-    throw new Error('Method not implemented.');
-  }
-  update(id: string, cooperator: CooperatorDomain): Promise<CooperatorDomain> {
-    throw new Error('Method not implemented.');
-  }
-  getOne(id: string): Promise<CooperatorDomain> {
-    throw new Error('Method not implemented.');
-  }
-  search(keywords: string[]): Promise<CooperatorDomain[]> {
-    throw new Error('Method not implemented.');
-  }
-}
 
 const cooperator = new CooperatorDomain({
   id: '1',
@@ -66,14 +31,9 @@ describe('Cooperator service testing', () => {
     expect(cooperatorsList).toEqual(cooperator);
   });
 
-  xit('should delete a cooperators', async () => {
-    const id = (await service.getAll())[0].getId;
-    console.log(id);
-    // expect(await service.remove(id)).toEqual(cooperator);
-  });
-
-  xit('should update a cooperator ', async () => {
+  it('should update a cooperator ', async () => {
     const newCooperator = new CooperatorDomain({
+      id: '1',
       firstName: 'Mickaël',
       lastName: 'Zonton',
       phoneNumber: '0000000000',
@@ -84,5 +44,41 @@ describe('Cooperator service testing', () => {
     });
     const cooperatorUpdated = await service.update('1', newCooperator);
     expect(cooperatorUpdated).toEqual(newCooperator);
+  });
+
+  it('should delete a cooperators', async () => {
+    const newCooperator = new CooperatorDomain({
+      id: '1',
+      firstName: 'Mickaël',
+      lastName: 'Zonton',
+      phoneNumber: '0000000000',
+      email: 'mickaelzonton@gogole.io',
+      practice: 'Tech',
+      m3: 'Estève',
+      mentor: 'Lóng',
+    });
+    expect(await service.getOne('1')).toEqual(newCooperator);
+  });
+
+  it('Should display a list of missions with multiple profile keywords search', async () => {
+    const request = await service.search(['Tech']);
+    const expectedCooperators = [
+      {
+        id: '1',
+        firstName: 'Mickaël',
+        lastName: 'Zonton',
+        phoneNumber: '0000000000',
+        email: 'mickaelzonton@gogole.io',
+        practice: 'Tech',
+        m3: 'Estève',
+        mentor: 'Lóng',
+      },
+    ];
+
+    expect(request[0]).toMatchObject(expectedCooperators[0]);
+  });
+
+  it('should delete a cooperators', async () => {
+    expect(await service.remove('1')).toEqual('Cooperator n°1 supprimée.');
   });
 });

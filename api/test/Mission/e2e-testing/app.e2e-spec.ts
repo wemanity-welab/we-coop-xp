@@ -2,9 +2,9 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { HttpStatus, INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { MissionEntity } from '../../../src/infrastructure/Mission/MissionEntity';
+import { MissionEntity } from '../../../src/infrastructure/Mission/mission.entity';
 import { MissionModule } from '../../config/mission.module';
-import { MissionDomain } from '../../../src/domain/Mission/MissionDomain';
+import { MissionDomain } from '../../../src/domain/Mission/mission.domain';
 import { getConnection } from 'typeorm';
 
 describe('AppController (e2e)', () => {

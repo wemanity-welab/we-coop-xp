@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { CooperatorService } from '../domain/Cooperator/CooperatorService';
-import { CooperatorController } from '../exposition/Cooperator/CooperatorController';
-import { CooperatorServiceAdapter } from '../exposition/Cooperator/CooperatorServiceAdapter';
-import { CooperatorEntity } from '../infrastructure/Cooperator/CooperatorEntity';
-import { CooperatorRepositoryAdapter } from '../infrastructure/Cooperator/CooperatorRepositoryAdapter';
+import { CooperatorService } from '../domain/Cooperator/cooperator.service';
+import { CooperatorController } from '../exposition/Cooperator/cooperator.controller';
+import { CooperatorServiceAdapter } from '../exposition/Cooperator/cooperator.service.adapter';
+import { CooperatorEntity } from '../infrastructure/Cooperator/cooperator.entity';
+import { CooperatorRepositoryAdapter } from '../infrastructure/Cooperator/cooperator.repository.adapter';
 
 @Module({
   imports: [TypeOrmModule.forFeature([CooperatorEntity])],

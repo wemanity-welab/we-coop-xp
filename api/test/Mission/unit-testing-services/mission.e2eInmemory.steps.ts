@@ -5,7 +5,7 @@ import { expect } from 'chai';
 import * as request from 'supertest';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { MissionModule } from '../../config/mission.module';
-import { MissionEntity } from '../../../src/infrastructure/Mission/MissionEntity';
+import { MissionEntity } from '../../../src/infrastructure/Mission/mission.entity';
 import { Mission } from '../../utils/types/Mission';
 import { getConnection } from 'typeorm';
 let app: INestApplication;

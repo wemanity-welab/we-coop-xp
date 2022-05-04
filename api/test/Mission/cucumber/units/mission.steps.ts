@@ -1,6 +1,6 @@
 import { Given, Then, When, Before } from '@cucumber/cucumber';
-import { MissionDomain } from '../../../../src/domain/Mission/MissionDomain';
-import { MissionService } from '../../../../src/domain/Mission/MissionService';
+import { MissionDomain } from '../../../../src/domain/Mission/mission.domain';
+import { MissionService } from '../../../../src/domain/Mission/mission.service';
 import { expect } from 'chai';
 import AdapterMock from '../../mock/mockedAdapter';
 

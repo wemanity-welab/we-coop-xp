@@ -1,5 +1,5 @@
-import { MissionDomain } from '../../../src/domain/Mission/MissionDomain';
-import { MissionService } from '../../../src/domain/Mission/MissionService';
+import { MissionDomain } from '../../../src/domain/Mission/mission.domain';
+import { MissionService } from '../../../src/domain/Mission/mission.service';
 import AdapterMock from '../mock/mockedAdapter';
 
 const mission = new MissionDomain({
