@@ -20,8 +20,10 @@
     "test:ci": "jest --ci --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "test:bdd:domain": "CUCUMBER_PUBLISH_TOKEN=6ae765ae-4e50-4ba3-a28e-b43e72efd23e cucumber-js -p profile",
-    "test:bdd:e2e": "cucumber-js -p e2e"
+    "test:domain:mission": "cucumber-js -p mission",
+    "test:e2e:mission": "cucumber-js -p missionE2E",
+    "test:domain:cooperator": "cucumber-js -p cooperator",
+    "test:e2e:cooperator": "cucumber-js -p cooperatorE2E"
   },
   "dependencies": {
     "@cucumber/pretty-formatter": "^1.0.0-alpha.1",

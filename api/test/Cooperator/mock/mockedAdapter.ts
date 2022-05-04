@@ -19,7 +19,7 @@ class AdapterMock implements IAdapter<Cooperator, string> {
   async remove(id: string): Promise<string> {
     const dataFound = await this.datas.find((data) => data.id === id);
     await this.datas.splice(this.datas.indexOf(dataFound), 1);
-    return `Cooperator n°${dataFound.id} supprimée.`;
+    return `Cooperateur n°${dataFound.id} supprimé.`;
   }
 
   async update(id: string, data: Cooperator): Promise<Cooperator> {
