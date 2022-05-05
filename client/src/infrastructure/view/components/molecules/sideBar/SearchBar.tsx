@@ -2,20 +2,22 @@ import { missionServices } from 'application';
 import { useMission } from 'infrastructure/view/hooks/UseMissions';
 import { missionFiltred } from 'infrastructure/view/store/Mission/mission.actions';
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 
 export const SearchBar = props => {
   const { title, client, description, profile, isActive } = props;
 
   const { dispatch } = useMission();
   const [tags, setTags] = useState<string[]>([]);
-
+  const history = useHistory();
+  //   history.replace(`/missions/search/?criteria=${tags}`);
   const missions = missionServices.missionFiltred(tags);
 
   const addTag = e => {
     if (e.key === 'Enter') {
       if (e.target.value.length > 0) {
         setTags([...tags, e.target.value]);
+        console.log('tags', tags);
 
         e.target.value = '';
       }

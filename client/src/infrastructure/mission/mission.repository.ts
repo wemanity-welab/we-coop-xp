@@ -2,6 +2,8 @@ import { Mission } from 'domain/mission/mission';
 import { IMissionRepository } from 'domain/mission/mission.irepository';
 import { MissionDTO } from './mission.dto';
 import { Http } from 'infrastructure/util/Http';
+import { useHistory } from 'react-router-dom';
+// eslint-disable-next-line react-hooks/rules-of-hooks
 
 export const missionRepository = (client: Http): IMissionRepository => ({
   getMissions: async () => {

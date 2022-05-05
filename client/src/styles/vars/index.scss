@@ -18,3 +18,7 @@ $black3: rgb(65, 15, 15);
 $white: rgb(207, 207, 207);
 $grey: rgb(95, 95, 95);
 $shadow: 0 3px 20px rgba(0, 0, 0, 0.356);
+
+@mixin random-bgr(){
+    background: rgb(random(255), random(255), random(255));
+  }
