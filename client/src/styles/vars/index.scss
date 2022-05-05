@@ -1,0 +1,24 @@
+
+
+$color-evennig-azur:#015A82;
+$color-glacier-lake:#599eB4;
+$color-night-bleu: #17243E;
+$color-glacier-lake40:#C9D6E5;
+$color-bleugreen: #227794;
+$color-greenish:#008A8D;
+$color-neon:#ED8B0C;
+$color-yellow-sunny:#FFD405;
+$color-polar-wind:#E1F1F9;
+$color-opacite3: rgba(255, 255, 255, .3);
+$color-2: #7D7987;
+
+$black1: rgb(36, 36, 36);
+$black2: rgb(49, 49, 49);
+$black3: rgb(65, 15, 15);
+$white: rgb(207, 207, 207);
+$grey: rgb(95, 95, 95);
+$shadow: 0 3px 20px rgba(0, 0, 0, 0.356);
+
+@mixin random-bgr(){
+    background: rgb(random(255), random(255), random(255));
+  }

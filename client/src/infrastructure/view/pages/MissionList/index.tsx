@@ -3,6 +3,7 @@ import { Mission } from 'domain/mission/mission';
 import MainLayout from 'infrastructure/view/components/templates/MainLayout';
 import React, { useEffect, useState } from 'react';
 import { sortingByTitle } from 'utils/sortingArrays';
+import { SearchBar } from 'infrastructure/view/components/molecules/sideBar/SearchBar';
 import { MissionCard } from '../../components/molecules';
 import { useMission } from '../../hooks/UseMissions';
 import { missionList } from '../../store/Mission/mission.actions';
@@ -21,6 +22,7 @@ export const MissionList = () => {
 
   return (
     <MainLayout>
+      <SearchBar />
       <div className="container">
         <h2>Les missions</h2>
         <ul className="container__missions">

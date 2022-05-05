@@ -13,4 +13,11 @@ export const MissionService = (
   deleteMission: (id): Promise<string> => {
     return repository.deleteMission(id);
   },
+  addMission: (mission: Mission): Promise<Mission> => {
+    return repository.addMission(mission);
+  },
+
+  missionFiltred: (keywords: string[]): Promise<Mission[]> => {
+    return repository.missionFiltred(keywords);
+  },
 });
