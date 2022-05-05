@@ -73,13 +73,13 @@ Feature: CRUD MISSION
             | id                                   | profile                    | client | title    | description                          |
             | 6ba7b810-9dad-11d1-80b4-00c04fd430c1 | Developpeur Java           | Paris  | Wemanity | dev web Java                         |
             | 6ba7b810-9dad-11d1-80b4-00c04fd430c2 | Developpeur Nodejs         | Paris  | Wemanity | dev web Javascript docker kubernetes |
-            | 6ba7b810-9dad-11d1-80b4-00c04fd430c3 | Developpeur Nodejs Reactjs | Paris  | Wemanity | dev web Javascript typescript docker |
+            | 6ba7b810-9dad-11d1-80b4-00c04fd430c3 | Developpeur Reactjs        | Paris  | Wemanity | dev web Javascript typescript docker |
             | 6ba7b810-9dad-11d1-80b4-00c04fd430c4 | Developpeur Python Angular | Paris  | Wemanity | dev web python                       |
         When The employer search missions with keywords
             | keywords           |
-            | node, docker, Java |
+            | Java, node, docker |
         Then Missions list appear as followed:
-            | id                                   | profile                    | client | title    | description                          |
-            | 6ba7b810-9dad-11d1-80b4-00c04fd430c1 | Developpeur Java           | Paris  | Wemanity | dev web Java                         |
-            | 6ba7b810-9dad-11d1-80b4-00c04fd430c2 | Developpeur Nodejs         | Paris  | Wemanity | dev web Javascript docker kubernetes |
-            | 6ba7b810-9dad-11d1-80b4-00c04fd430c3 | Developpeur Nodejs Reactjs | Paris  | Wemanity | dev web Javascript typescript docker |
+            | id                                   | profile             | client | title    | description                          |
+            | 6ba7b810-9dad-11d1-80b4-00c04fd430c2 | Developpeur Nodejs  | Paris  | Wemanity | dev web Javascript docker kubernetes |
+            | 6ba7b810-9dad-11d1-80b4-00c04fd430c3 | Developpeur Reactjs | Paris  | Wemanity | dev web Javascript typescript docker |
+            | 6ba7b810-9dad-11d1-80b4-00c04fd430c1 | Developpeur Java    | Paris  | Wemanity | dev web Java                         |
