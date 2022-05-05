@@ -1,4 +1,11 @@
-textarea,
+
+.addMission {
+
+
+
+
+
+    textarea,
 input {
   min-width: 60%;
   height: 8vh;
@@ -15,11 +22,11 @@ input {
 
   cursor: pointer;
 }
-.addMission {
   background: linear-gradient(45deg, #4A7AA9,$color-polar-wind);
   border-radius: 100px;
 
   form {
+      margin-top: 12rem;
     font-size: 1.2rem;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
@@ -34,6 +41,9 @@ input {
     input,
     textarea {
       border-bottom: solid 2px $color-opacite3;
+   
+        color: black1;
+  
 
       &:focus {
         box-shadow: 10px 5px 5px $black3;
@@ -76,7 +86,6 @@ input {
     input,
     textarea {
       font-size: 1.2rem;
-      color: white;
       font-weight: 500;
     }
   }
@@ -97,3 +106,4 @@ div.Toastify__toast--error {
       align-items: center;
       }
 }
+

@@ -25,4 +25,36 @@ export const missionRepository = (client: Http): IMissionRepository => ({
 
     return postMission;
   },
+
+  missionfiltred: async (keywords: string[]) => {
+    console.log('keywords', keywords);
+
+    // let url = '/missions/search/?';
+    // let words = '';
+    // keywords.map(async key => {
+    //   words = await (words + `criteria=${key}&`);
+    // });
+    // url = url + words;
+    // console.log('url', url);
+
+    const parameterizeArray = (key, arr) => {
+      arr = arr.map(encodeURIComponent);
+      return '?' + 'criteria=' + arr.join('&' + key + '=');
+    };
+
+    const missionfiltred = await client.get<MissionDTO[]>(
+      '/missions/search/' + parameterizeArray('criteria', keywords),
+    );
+
+    return missionfiltred.map(
+      (missionDto): Mission => ({
+        id: missionDto.id,
+        title: missionDto.title,
+        profile: missionDto.profile,
+        client: missionDto.client,
+        description: missionDto.description,
+        isActive: missionDto.isActive,
+      }),
+    );
+  },
 });

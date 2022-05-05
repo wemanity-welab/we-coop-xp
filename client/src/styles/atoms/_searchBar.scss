@@ -1,0 +1,73 @@
+.wrapper {
+  position: relative;
+  left: 60%;
+  transform: translate(-40%, -50%);
+  background: #c9d6e5;
+  width: 40%;
+  height: auto;
+  border-radius: 20px;
+
+  padding: 1px;
+  display: flex;
+  justify-content: space-between;
+  height: 54px;
+
+  input .input {
+    background: #c9d6e5;
+    border-radius: 5px;
+    margin: auto;
+    font-size: 3.5em;
+  }
+
+  .searchbtn {
+    background: white;
+    width: 15%;
+    border-radius: 50%;
+    position: relative;
+    cursor: pointer;
+    float: left;
+  }
+
+  .searchbtn .fas {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 18px;
+  }
+}
+.tags {
+  width: 30%;
+  gap: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  margin: auto;
+  margin-left: 45%;
+}
+.tag {
+  border-radius: 10px;
+  height: 25px;
+  align-items: center;
+  color: black;
+  background-color: #ffd405;
+
+  padding: 1%;
+  &:hover {
+    background: #e1f1f9;
+  }
+}
+
+.tag span {
+  left: 56%;
+  margin: auto;
+
+  color: #5884b0;
+  cursor: pointer;
+}
+
+#root > div > div.modale > div.sideBar > div.wrapper > input {
+  background: #c9d6e5;
+  border: none;
+  border-radius: 20px;
+}
+

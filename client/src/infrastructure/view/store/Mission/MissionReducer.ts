@@ -11,7 +11,9 @@ export async function missionReducer(state: State<Mission>, action: Action) {
       const typePayload = action.payload;
       return typePayload;
     }
-
+    case 'filtre-mission': {
+      return { catalog: action.payload };
+    }
     default: {
       throw new Error(`Unhandled action type`);
     }

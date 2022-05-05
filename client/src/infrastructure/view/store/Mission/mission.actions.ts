@@ -12,3 +12,9 @@ export const missionPosted = (data: Mission) => {
     payload: data,
   };
 };
+export const missionfiltred = (data: Mission[]) => {
+  return {
+    type: 'filtre-mission',
+    payload: data,
+  };
+};
