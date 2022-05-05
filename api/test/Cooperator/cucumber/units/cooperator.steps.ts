@@ -3,7 +3,6 @@ import { expect } from 'chai';
 import { CooperatorDomain } from '../../../../src/domain/cooperator/cooperator.domain';
 import { CooperatorService } from '../../../../src/domain/Cooperator/cooperator.service';
 import AdapterMock from '../../mock/mockedAdapter';
-import { cooperators } from '../../mock/mockedCooperators';
 
 // Step definitions for domain centric testing, at unit level
 
@@ -109,32 +108,34 @@ Then(/^A message is shown$/, async function (table) {
   expect(await this.deletedCooperator).to.eql(this.message);
 });
 
-// //@MissionPosting
-// //Scenario: The employer wants to search missions according to some keywords
-// Given(
-//   /^An Employer who wants to search a mission and there are existing missions as followed$/,
-//   async function (table) {
-//     this.missions = table.hashes();
+/**
+ * Scenario: The employer wants to search cooperators according to some keywords
+ */
+Given(
+  /^An Employer who wants to search a cooperator and there are existing cooperators as followed$/,
+  async function (table) {
+    this.cooperators = table.hashes();
 
-//     this.missions.forEach(
-//       async (mission: any) => await this.missionService.save(mission),
-//     );
-//   },
-// );
-// When(/^The employer search missions with keywords$/, async function (table) {
-//   this.table = table.hashes();
+    this.cooperators.forEach(
+      async (cooperator: any) => await this.service.save(cooperator),
+    );
+  },
+);
 
-//   this.keyword = this.table[0].keywords.split(/[\s,]+/);
-//   await Promise.all(this.keyword)
-//     .then(async () => {
-//       this.missionFiltered = await this.missionService.search(this.keyword);
-//     })
-//     .catch((e) => {
-//       console.log(e);
-//     });
-// });
+When(/^The employer search cooperators with keywords$/, async function (table) {
+  this.table = table.hashes();
 
-// Then(/^Missions list appear as followed:$/, function (table) {
-//   this.missionsExpected = table.hashes();
-//   expect(this.missionFiltered).to.eql(this.missionsExpected);
-// });
+  this.keywords = this.table[0].keywords.split(/[\s,]+/);
+  await Promise.all(this.keywords)
+    .then(async () => {
+      this.cooperatorsFiltered = await this.service.search(this.keywords);
+    })
+    .catch((e) => {
+      console.log(e);
+    });
+});
+
+Then(/^Cooperators list appear as followed:$/, function (table) {
+  this.cooperatorsExpected = table.hashes();
+  expect(this.cooperatorsFiltered).to.eql(this.cooperatorsExpected);
+});

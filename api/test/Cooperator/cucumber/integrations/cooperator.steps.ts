@@ -1,36 +1,27 @@
-import { Given, Then, When, Before, After } from '@cucumber/cucumber';
-import { Test, TestingModule } from '@nestjs/testing';
-import { HttpStatus, INestApplication } from '@nestjs/common';
+import { After, Before, Given, Then, When } from '@cucumber/cucumber';
 import { expect } from 'chai';
-import * as request from 'supertest';
+import { HttpStatus, INestApplication } from '@nestjs/common';
+import { Test, TestingModule } from '@nestjs/testing';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ConfigModule } from '@nestjs/config';
-import { MissionModule } from '../../../../src/modules/mission.module';
-import configuration from '../../../../src/config/configuration';
-import { Mission } from '../../../utils/types/Mission';
+import * as request from 'supertest';
 import { getConnection } from 'typeorm';
+import { CooperatorEntity } from '../../../../src/infrastructure/Cooperator/cooperator.entity';
+import { CooperatorModule } from '../../../config/cooperator.module';
+import { Cooperator } from '../../../utils/types/Cooperator';
+
 let app: INestApplication;
 
 Before(async () => {
   const moduleFixture: TestingModule = await Test.createTestingModule({
     imports: [
-      ConfigModule.forRoot({
-        isGlobal: true,
-        load: [configuration],
-      }),
       TypeOrmModule.forRoot({
-        type: 'postgres',
-        host: process.env.DB_HOST,
-        port: parseInt(process.env.DB_PORT, 10),
-        username: process.env.DB_USER,
-        password: process.env.DB_PASSWORD,
-        database: process.env.DB_NAME,
-        entities: ['src/**/*Entity{.ts,.js}'],
+        type: 'better-sqlite3',
+        database: ':memory:',
+        entities: [CooperatorEntity],
         synchronize: true,
         keepConnectionAlive: true,
-        logging: false,
       }),
-      MissionModule,
+      CooperatorModule,
     ],
   }).compile();
 
@@ -40,7 +31,6 @@ Before(async () => {
 
 After(async () => {
   const entities = getConnection().entityMetadatas;
-
   for (const entity of entities) {
     const repository = getConnection().getRepository(entity.name); // Get repository
     await repository.clear(); // Clear each entity table's content
@@ -48,166 +38,168 @@ After(async () => {
 });
 
 /**
- * Scenario: A user wants to post a mission
+ * Scenario: An employer wants to create a cooperator
  */
 Given(
-  /^A user mission with details as shown in the table$/,
+  /^An employer that want to save cooperator details as shown in the table$/,
   async function (table) {
-    this.mission = table.rowsHash();
+    this.cooperator = table.rowsHash();
   },
 );
 
-When(/^The user posts the mission$/, async function () {
-  await request(app.getHttpServer())
-    .post('/missions')
-    .send(this.mission)
-    .expect(HttpStatus.CREATED)
-    .then((res) => {
-      this.result = res.body;
-    });
-  this.result.id = this.mission.id;
-  delete this.result.isActive;
-});
+When(
+  /^The employer write cooperator details and submit it$/,
+  async function () {
+    await request(app.getHttpServer())
+      .post('/cooperators')
+      .send(this.cooperator)
+      .expect(HttpStatus.CREATED)
+      .then((res) => {
+        this.result = res.body;
+      });
+    this.result.id = this.cooperator.id;
+  },
+);
 
-Then(/^The mission is created as shown in the table$/, function (table) {
-  this.expectedMission = table.rowsHash();
-  expect(this.result).to.eql(this.expectedMission);
+Then(/^The cooperator is created as shown in the table$/, function (table) {
+  this.expectedCooperator = table.rowsHash();
+  expect(this.result).to.eql(this.expectedCooperator);
 });
 
 /**
- * Scenario: The employer wants to list all current missions
+ * Scenario: An employer wants to display a cooperators list
  */
-
 Given(
-  /^An employer are existing missions as followed$/,
+  /^An employer that wants to display an existing cooperators list as followed$/,
   async function (table) {
-    this.missions = table.hashes();
+    this.cooperators = table.hashes();
 
     await Promise.all(
-      this.missions.map(async (mission: Mission) => {
+      this.cooperators.map(async (cooperator: Cooperator) => {
         await request(app.getHttpServer())
-          .post('/missions')
-          .send(mission)
+          .post('/cooperators')
+          .send(cooperator)
           .expect(HttpStatus.CREATED);
       }),
     );
   },
 );
 
-When(/^The employer list all missions$/, async function () {
+When(/^The employer display the cooperators list$/, async function () {
   await request(app.getHttpServer())
-    .get('/missions')
+    .get('/cooperators')
     .expect(HttpStatus.OK)
     .then((res) => {
       this.result = res.body;
     });
 
   for (let i = 0; i < 2; i++) {
-    this.result[i].id = this.missions[i].id;
-    delete this.result[i].isActive;
+    this.result[i].id = this.cooperators[i].id;
   }
 });
 
-Then(/^All missions appear in the list as followed:$/, function (table) {
-  this.missionsExpected = table.hashes();
-  expect(this.result).to.eql(this.missionsExpected);
+Then(/^All cooperators appear in the list as followed:$/, function (table) {
+  this.cooperatorsExpected = table.hashes();
+  expect(this.result).to.eql(this.cooperatorsExpected);
 });
 
 /**
- * Scenario: A client wants to update a posted mission
+ * Scenario: An employer wants to update cooperator data
  */
-
-Given(/^An existing mission with details as followed$/, async function (table) {
-  this.mission = table.rowsHash();
-  await request(app.getHttpServer())
-    .post('/missions')
-    .send(this.mission)
-    .expect(HttpStatus.CREATED)
-    .then((res) => {
-      this.result = res.body;
-    });
-});
+Given(
+  /^An employer that want to update cooperator data, they are display as shown in the table$/,
+  async function (table) {
+    this.cooperator = table.rowsHash();
+    await request(app.getHttpServer())
+      .post('/cooperators')
+      .send(this.cooperator)
+      .expect(HttpStatus.CREATED)
+      .then((res) => {
+        this.result = res.body;
+      });
+  },
+);
 
 When(
-  /^The user updates a few attributes of the mission as shown$/,
+  /^The employer write few attributes of the cooperator as shown and submit it$/,
   async function (table) {
     this.elementsToModify = table.rowsHash();
 
     await request(app.getHttpServer())
-      .patch(`/missions/${this.result.id}`)
+      .patch(`/cooperators/${this.result.id}`)
       .send(this.elementsToModify)
       .expect(HttpStatus.OK)
       .then((res) => {
-        this.modifiedMission = res.body;
+        this.modifiedCooperator = res.body;
       });
-
-    delete this.modifiedMission.isActive;
   },
 );
-Then(/^The mission is modified as followed$/, async function (table) {
-  this.expectedMission = table.rowsHash();
-  this.modifiedMission.id = this.expectedMission.id;
-  expect(this.modifiedMission).to.eql(this.expectedMission);
+Then(/^The cooperator is modified as followed$/, async function (table) {
+  this.expectedCooperator = table.rowsHash();
+  this.modifiedCooperator.id = this.expectedCooperator.id;
+  expect(this.modifiedCooperator).to.eql(this.expectedCooperator);
 });
 
 /**
- * Scenario: A client wants to delete a posted mission
- */
-
-Given(/^an existing mission with details as followed$/, async function (table) {
-  this.mission = table.rowsHash();
-
-  await request(app.getHttpServer())
-    .post('/missions')
-    .send(this.mission)
-    .expect(HttpStatus.CREATED)
-    .then((res) => {
-      this.result = res.body;
-    });
-});
-
-When(/^The user delete the mission with n°<id>$/, async function (table) {
-  await request(app.getHttpServer())
-    .delete(`/missions/${this.result.id}`)
-    .expect(HttpStatus.ACCEPTED)
-    .then((res) => {
-      this.deletedMissionMessage = res.text;
-    });
-});
-
-Then(/^A message <message> is shown$/, async function (table) {
-  this.table = table.rowsHash();
-  this.table.message = `Mission n°${this.result.id} supprimée.`;
-  expect(this.deletedMissionMessage).to.equals(this.table.message);
-});
-
-/**
- * Scenario: A client wants to search a posted mission by keywords
+ * Scenario: The employer wants to delete a cooperator
  */
 
 Given(
-  /^An Employer who wants to search a mission and there are existing missions as followed$/,
+  /^An employer that wants to delete an existing cooperator as followed$/,
   async function (table) {
-    this.missions = table.hashes();
+    this.cooperator = table.rowsHash();
+
+    await request(app.getHttpServer())
+      .post('/cooperators')
+      .send(this.cooperator)
+      .expect(HttpStatus.CREATED)
+      .then((res) => {
+        this.result = res.body;
+      });
+  },
+);
+
+When(/^The employer delete the cooperator n°<id>$/, async function (table) {
+  await request(app.getHttpServer())
+    .delete(`/cooperators/${this.result.id}`)
+    .expect(HttpStatus.ACCEPTED)
+    .then((res) => {
+      this.deletedCooperatorMessage = res.text;
+    });
+});
+
+Then(/^A message is shown$/, async function (table) {
+  this.table = table.rowsHash();
+  this.table.message = `Cooperateur n°${this.result.id} supprimé.`;
+  expect(this.deletedCooperatorMessage).to.equals(this.table.message);
+});
+
+/**
+ * Scenario: The employer wants to search cooperators according to some keywords
+ */
+
+Given(
+  /^An Employer who wants to search a cooperator and there are existing cooperators as followed$/,
+  async function (table) {
+    this.cooperators = table.hashes();
 
     await Promise.all(
-      this.missions.map(async (mission: Mission) => {
+      this.cooperators.map(async (cooperator: Cooperator) => {
         await request(app.getHttpServer())
-          .post('/missions')
-          .send(mission)
+          .post('/cooperators')
+          .send(cooperator)
           .expect(HttpStatus.CREATED);
       }),
     );
   },
 );
 
-When(/^The employer search missions with keywords$/, async function (table) {
+When(/^The employer search cooperators with keywords$/, async function (table) {
   this.table = table.hashes();
   this.keywords = this.table[0].keywords.split(/[\s,]+/);
-
   await request(app.getHttpServer())
     .get(
-      `/missions/search?criteria=${this.keywords[0]}&criteria=${this.keywords[1]}&criteria=${this.keywords[2]}`,
+      `/cooperators/search?criteria=${this.keywords[1]}&criteria=${this.keywords[2]}&criteria=${this.keywords[0]}`,
     )
     .expect(HttpStatus.OK)
     .then((res) => {
@@ -215,12 +207,10 @@ When(/^The employer search missions with keywords$/, async function (table) {
     });
 });
 
-Then(/^Missions list appear as followed:$/, async function (table) {
-  this.table = table.hashes();
-
-  for (let i = 0; i < this.table.length; i++) {
-    this.result[i].id = this.table[i].id;
-    delete this.result[i].isActive;
+Then(/^Cooperators list appear as followed:$/, async function (table) {
+  this.expectedCooperators = table.hashes();
+  for (let i = 0; i < this.expectedCooperators.length; i++) {
+    this.result[i].id = this.expectedCooperators[i].id;
   }
-  expect(this.result).to.eql(this.table);
+  expect(this.result).to.eql(this.expectedCooperators);
 });
