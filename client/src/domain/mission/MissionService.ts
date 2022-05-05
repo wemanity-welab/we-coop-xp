@@ -11,7 +11,7 @@ export const MissionService = (
     return repository.addMission(mission);
   },
 
-  missionfiltred: (keywords: string[]): Promise<Mission[]> => {
-    return repository.missionfiltred(keywords);
+  missionFiltred: (keywords: string[]): Promise<Mission[]> => {
+    return repository.missionFiltred(keywords);
   },
 });

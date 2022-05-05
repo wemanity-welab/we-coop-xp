@@ -17,6 +17,7 @@ import { MissionList } from './pages/MissionList/Loadable';
 import { AddMission } from './components/templates/AddMission/AddMission';
 import Home from './pages/HomePage/Home';
 import { SearchBar } from './components/molecules/sideBar/SearchBar';
+import MissionCard from './components/molecules/cards/MissionCard';
 
 export function App() {
   const { i18n } = useTranslation();

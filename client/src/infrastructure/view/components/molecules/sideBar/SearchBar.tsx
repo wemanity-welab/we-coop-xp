@@ -1,18 +1,16 @@
 import { missionServices } from 'application';
 import { useMission } from 'infrastructure/view/hooks/UseMissions';
-import { missionfiltred } from 'infrastructure/view/store/Mission/mission.actions';
+import { missionFiltred } from 'infrastructure/view/store/Mission/mission.actions';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 export const SearchBar = props => {
-  const { title, client, description, profil, isActive } = props;
-  console.log('props', props.location);
+  const { title, client, description, profile, isActive } = props;
 
   const { dispatch } = useMission();
-  const keywords = useParams();
   const [tags, setTags] = useState<string[]>([]);
 
-  const missions = missionServices.missionfiltred(tags);
+  const missions = missionServices.missionFiltred(tags);
 
   const addTag = e => {
     if (e.key === 'Enter') {
@@ -31,7 +29,7 @@ export const SearchBar = props => {
 
   useEffect(() => {
     try {
-      missions.then(data => dispatch(missionfiltred(data)));
+      missions.then(data => dispatch(missionFiltred(data)));
     } catch (exception) {
       console.error(exception);
     }
