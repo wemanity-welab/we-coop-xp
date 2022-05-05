@@ -1,6 +1,6 @@
 import { missionServices } from 'application';
 import { SearchBar } from 'infrastructure/view/components/molecules/sideBar/SearchBar';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { MissionCard } from '../../components/molecules';
 import { useMission } from '../../hooks/UseMissions';
 import { missionList } from '../../store/Mission/mission.actions';
@@ -20,7 +20,6 @@ export const MissionList = () => {
   return (
     <>
       <SearchBar />
-      <br />
       <div className="container">
         <ul className="container__missions">
           {state.catalog &&

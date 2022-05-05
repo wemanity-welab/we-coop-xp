@@ -9,7 +9,7 @@ export const SearchBar = props => {
 
   const { dispatch } = useMission();
   const [tags, setTags] = useState<string[]>([]);
-  const history = useHistory();
+  //   const history = useHistory();
   //   history.replace(`/missions/search/?criteria=${tags}`);
   const missions = missionServices.missionFiltred(tags);
 
@@ -40,7 +40,11 @@ export const SearchBar = props => {
   return (
     <div className="sideBar">
       <div className="wrapper">
-        <input className="input" onKeyDown={addTag} />
+        <input
+          className="input"
+          onKeyDown={addTag}
+          placeholder="Rechercher...."
+        />
         <div className="searchbtn">
           <i className="fas fa-search"></i>
         </div>

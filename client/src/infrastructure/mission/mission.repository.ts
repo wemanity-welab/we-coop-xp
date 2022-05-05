@@ -2,8 +2,6 @@ import { Mission } from 'domain/mission/mission';
 import { IMissionRepository } from 'domain/mission/mission.irepository';
 import { MissionDTO } from './mission.dto';
 import { Http } from 'infrastructure/util/Http';
-import { useHistory } from 'react-router-dom';
-// eslint-disable-next-line react-hooks/rules-of-hooks
 
 export const missionRepository = (client: Http): IMissionRepository => ({
   getMissions: async () => {
@@ -28,14 +26,11 @@ export const missionRepository = (client: Http): IMissionRepository => ({
   },
 
   missionFiltred: async (keywords: string[]) => {
-    console.log('keywords', keywords);
-
     const parameterizeArray = (key, arr) => {
       arr = arr.map(encodeURIComponent);
       return '?' + 'criteria=' + arr.join('&' + key + '=');
     };
     const url = '/missions/search/' + parameterizeArray('criteria', keywords);
-    console.log('url :', url);
 
     const missionFiltred = await client.get<MissionDTO[]>(url);
 
