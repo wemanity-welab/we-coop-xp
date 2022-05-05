@@ -25,7 +25,7 @@ Before(async () => {
         username: process.env.DB_USER,
         password: process.env.DB_PASSWORD,
         database: process.env.DB_NAME,
-        entities: ['src/**/*Entity{.ts,.js}'],
+        entities: ['src/**/*.entity{.ts,.js}'],
         synchronize: true,
         keepConnectionAlive: true,
         logging: false,
@@ -218,9 +218,12 @@ When(/^The employer search missions with keywords$/, async function (table) {
 Then(/^Missions list appear as followed:$/, async function (table) {
   this.table = table.hashes();
 
+  console.log({ result: this.result, expect: this.table });
+
   for (let i = 0; i < this.table.length; i++) {
     this.result[i].id = this.table[i].id;
     delete this.result[i].isActive;
   }
+  console.log(this.result);
   expect(this.result).to.eql(this.table);
 });
