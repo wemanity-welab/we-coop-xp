@@ -54,7 +54,6 @@ Given(/^An existing mission with details as followed$/, async function (table) {
   this.mission = new MissionDomain(table.rowsHash());
   this.missionSaved = await this.missionService.save(this.mission);
   this.id = '6ba7b810-9dad-11d1-80b4-00c04fd430c8';
-  console.log(this.id);
 });
 When(
   /^The user updates a few attributes of the mission as shown$/,
@@ -82,12 +81,10 @@ When(/^The user delete the mission with n°<id>$/, async function (table) {
   this.missionDeleted = await this.missionService.remove(
     this.missionSaved.getId,
   );
-  console.log(' this.missionDeleted', this.missionDeleted);
 });
 
 Then(/^A message <message> is shown$/, async function (table) {
   this.table = table.rowsHash();
-  console.log('message', this.table.message);
   expect(await this.missionDeleted).to.equals(this.table.message);
 });
 
@@ -112,7 +109,7 @@ When(/^The employer search missions with keywords$/, async function (table) {
       this.missionFiltered = await this.missionService.search(this.keyword);
     })
     .catch((e) => {
-      console.log(e);
+      console.error(e);
     });
 });
 

@@ -218,12 +218,9 @@ When(/^The employer search missions with keywords$/, async function (table) {
 Then(/^Missions list appear as followed:$/, async function (table) {
   this.table = table.hashes();
 
-  console.log({ result: this.result, expect: this.table });
-
   for (let i = 0; i < this.table.length; i++) {
     this.result[i].id = this.table[i].id;
     delete this.result[i].isActive;
   }
-  console.log(this.result);
   expect(this.result).to.eql(this.table);
 });

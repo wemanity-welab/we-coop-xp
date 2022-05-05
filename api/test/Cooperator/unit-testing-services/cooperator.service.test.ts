@@ -1,7 +1,4 @@
-import { Inject, Injectable } from '@nestjs/common';
 import { CooperatorDomain } from '../../../src/domain/Cooperator/cooperator.domain';
-import { ICooperatorRepository } from '../../../src/domain/cooperator/cooperator.irepository';
-import { ICooperatorService } from '../../../src/domain/cooperator/cooperator.iservice';
 import { CooperatorService } from '../../../src/domain/Cooperator/cooperator.service';
 import AdapterMock from '../mock/mockedAdapter';
 
