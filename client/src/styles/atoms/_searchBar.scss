@@ -1,4 +1,5 @@
 .wrapper {
+    margin-top: 2rem;
   position: relative;
   left: 60%;
   transform: translate(-40%, -50%);
@@ -11,21 +12,21 @@
   display: flex;
   justify-content: space-between;
   height: 54px;
-
-  input .input {
+  @media screen and(max-width: (600px)) {
+    left: 50%} 
+ .input {
+    border: none;
+    margin-left: 1em;
     background: #c9d6e5;
     border-radius: 5px;
-    margin: auto;
-    font-size: 3.5em;
+    font-size: 1em;
+    
   }
 
   .searchbtn {
-    background: white;
-    width: 15%;
-    border-radius: 50%;
+    width: 19%;
     position: relative;
     cursor: pointer;
-    float: left;
   }
 
   .searchbtn .fas {
@@ -34,7 +35,13 @@
     left: 50%;
     transform: translate(-50%, -50%);
     font-size: 18px;
+
+
+
+    @media screen and(max-width: (600px)) {
+        left: 10%;      }
   }
+
 }
 .tags {
   width: 30%;
@@ -64,9 +71,5 @@
   cursor: pointer;
 }
 
-#root > div > div.modale > div.sideBar > div.wrapper > input {
-  background: #c9d6e5;
-  border: none;
-  border-radius: 20px;
-}
+
 

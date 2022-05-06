@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { CardMenu } from '../../atoms';
+import CardMenu from '../../atoms/CardMenu';
 
 const MissionCard = ({ props }) => {
   const { title, client, isActive } = props;

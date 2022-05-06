@@ -4,7 +4,7 @@
 
 import { lazyLoad } from 'utils/loadable';
 
-export const MissionList = lazyLoad(
+export const MainMissionList = lazyLoad(
   () => import('./index'),
-  module => module.MissionList,
+  module => module.MainMissionList,
 );

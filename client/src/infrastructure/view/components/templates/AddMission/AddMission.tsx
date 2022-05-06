@@ -6,7 +6,7 @@ import { missionPosted } from 'infrastructure/view/store/Mission/mission.actions
 import { Mission } from 'domain/mission/mission';
 import { missionServices } from 'application';
 import { useMission } from 'infrastructure/view/hooks/UseMissions';
-import { MissionList } from 'infrastructure/view/pages/MissionList';
+import { MissionList } from 'infrastructure/view/pages/MissionList/MissionList';
 
 toast.configure();
 const notify = () => {
@@ -40,7 +40,12 @@ export const AddMission = () => {
         toast.error(error.response.data.message);
       });
   };
-
+  useEffect(() => {
+    console.log('monting');
+    return () => {
+      console.log('unmonting');
+    };
+  }, []);
   return (
     <>
       {formSubmit ? (

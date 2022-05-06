@@ -1,7 +1,9 @@
-
-    .Logo {
-        width: 80px;
-        height: 78px;
-        margin-top: 2rem;
-       
-    }
+.Logo {
+  width: 80px;
+  height: 78px;
+  margin-top: 2rem;
+  @media screen and(max-width: 920px) {
+    width: 50px;
+    height: 48px;
+  }
+}

@@ -1,8 +1,8 @@
 import React from 'react';
 import { AddMission } from 'infrastructure/view/components/templates/AddMission/AddMission';
-import { MissionList } from '../MissionList';
-import { useState } from 'react';
-const Home = props => {
+import { useState, useEffect } from 'react';
+import { MissionList } from './MissionList';
+const ModaleMission = props => {
   const [displayForm, setDisplayForm] = useState(false);
   const [displayMission, setDisplayMission] = useState(true);
   const handelModals = (e: any) => {
@@ -14,12 +14,11 @@ const Home = props => {
       setDisplayForm(false);
     }
   };
+
   return (
     <>
       <div className="Home">
-        <div> </div>
-
-        <div>
+        <div className="buttonSwitch">
           <button
             className="btn-addMission"
             onClick={handelModals}
@@ -49,4 +48,4 @@ const Home = props => {
   );
 };
 
-export default Home;
+export default ModaleMission;

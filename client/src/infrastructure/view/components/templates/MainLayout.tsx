@@ -1,3 +1,4 @@
+import Home from 'infrastructure/view/pages/MissionList/ModaleHome';
 import React from 'react';
 import Menu from '../organisms/navbar';
 

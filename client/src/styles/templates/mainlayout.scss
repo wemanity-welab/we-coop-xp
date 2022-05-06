@@ -1,11 +1,14 @@
 #content-wrap {
-    display: flex;
-    width: 100vw;
-    #content {
-        width: 85vw;
-    }
-    .Menu {
-        width: 15vw;
-    }
+  display: flex;
+  width: 100vw;
+  #content {
+    width: 85vw;
+  }
+  .Menu {
+    width: 15vw;
+    @media screen and(max-width: 920px) {
+        width: 14vw;
+      }
+   
+  }
 }
-

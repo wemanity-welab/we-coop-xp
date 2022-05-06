@@ -1,14 +1,17 @@
 button {
-    height: 8vh;
-    border-radius: 7px;
+    height: 5vh;
+        border-radius: 7px;
+        font-size: clamp(0.1rem, 10vw, 0.5rem); 
+
     border: none;
     resize: none;
     margin: 40px;
     margin-top:100px;
+    max-width: 30%;
     padding: 10px;
     background:$color-night-bleu;
     ; 
-    color: aliceblue;
+    color: $white;
     &:hover {
 
         background: $color-2;
