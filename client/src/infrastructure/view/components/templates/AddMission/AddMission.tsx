@@ -7,6 +7,7 @@ import { Mission } from 'domain/mission/mission';
 import { missionServices } from 'application';
 import { useMission } from 'infrastructure/view/hooks/UseMissions';
 import { MissionList } from 'infrastructure/view/pages/MissionList/MissionList';
+import { ConvertedToObjectType } from '../../../../../locales/types';
 
 toast.configure();
 const notify = () => {
@@ -19,12 +20,10 @@ export const AddMission = () => {
     register,
 
     handleSubmit,
-
+    setValue,
+    getValues,
     formState,
-    formState: { isDirty, isSubmitSuccessful },
   } = useForm<Mission>();
-
-  console.log('formState', formState);
 
   const addMission = async payload => {
     await missionServices
@@ -40,8 +39,13 @@ export const AddMission = () => {
         toast.error(error.response.data.message);
       });
   };
+
+  console.log('get values', getValues());
+
   useEffect(() => {
     console.log('monting');
+    console.log('get values', getValues());
+
     return () => {
       console.log('unmonting');
     };

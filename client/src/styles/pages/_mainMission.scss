@@ -9,6 +9,9 @@
       font-size: clamp(0.1rem, 10vw, 0.6rem); 
 
     }
+    @media screen and(max-width: 350px) {
+        left: 4rem;
+      }
   }
 
   .displayNone {
@@ -29,6 +32,9 @@
       }
       @media screen and(max-width: 730px) {
         left: 10rem;
+      }
+      @media screen and(max-width: 350px) {
+        left: 5rem;
       }
     }
   

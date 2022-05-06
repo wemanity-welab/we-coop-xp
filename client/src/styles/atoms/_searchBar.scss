@@ -1,5 +1,5 @@
 .wrapper {
-    margin-top: 2rem;
+  margin-top: 2rem;
   position: relative;
   left: 60%;
   transform: translate(-40%, -50%);
@@ -13,14 +13,21 @@
   justify-content: space-between;
   height: 54px;
   @media screen and(max-width: (600px)) {
-    left: 50%} 
- .input {
+    left: 50%;
+  }
+  @media screen and(max-width: 450px) {
+    left: 5rem;
+  }
+  .input {
     border: none;
     margin-left: 1em;
     background: #c9d6e5;
     border-radius: 5px;
-    font-size: 1em;
     
+        @media screen and(max-width: (    300px)) {
+          border-radius: 20px;
+      
+        }
   }
 
   .searchbtn {
@@ -36,12 +43,10 @@
     transform: translate(-50%, -50%);
     font-size: 18px;
 
-
-
     @media screen and(max-width: (600px)) {
-        left: 10%;      }
+      left: 10%;
+    }
   }
-
 }
 .tags {
   width: 30%;
@@ -72,4 +77,8 @@
 }
 
 
-
+.searchbtn .fas {
+    @media screen and(max-width: (    300px)) {
+  display: none;
+    }
+  }
