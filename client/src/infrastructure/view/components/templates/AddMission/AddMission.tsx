@@ -16,21 +16,12 @@ const notify = () => {
 export const AddMission = () => {
   const [formSubmit, setFormSubmit] = useState(false);
   const { dispatch } = useMission();
-  const {
-    register,
-
-    handleSubmit,
-    setValue,
-    getValues,
-    formState,
-  } = useForm<Mission>();
+  const { register, handleSubmit, getValues, setValue } = useForm<Mission>();
 
   const addMission = async payload => {
     await missionServices
       .addMission(payload)
       .then(res => {
-        console.log('res', res);
-
         dispatch(missionPosted(payload));
         setFormSubmit(true);
         notify();
@@ -40,16 +31,9 @@ export const AddMission = () => {
       });
   };
 
-  console.log('get values', getValues());
-
   useEffect(() => {
-    console.log('monting');
-    console.log('get values', getValues());
-
-    return () => {
-      console.log('unmonting');
-    };
-  }, []);
+    console.log('getValues()', getValues());
+  }, [getValues]);
   return (
     <>
       {formSubmit ? (
@@ -61,7 +45,13 @@ export const AddMission = () => {
 
             <br />
             <div className="input">
-              <input type="text" placeholder="Title" {...register('title')} />
+              <input
+                type="text"
+                placeholder="Title"
+                //@ts-ignore
+                value={setValue('title', getValues().title)}
+                {...register('title')}
+              />
               <br />
               <input type="text" placeholder="Client" {...register('client')} />
             </div>

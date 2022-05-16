@@ -41,6 +41,7 @@ export const missionRepository = (client: Http): IMissionRepository => ({
       return '?' + 'criteria=' + arr.join('&' + key + '=');
     };
     const url = '/missions/search/' + parameterizeArray('criteria', keywords);
+    console.log('url', url);
 
     const missionFiltred = await client.get<MissionDTO[]>(url);
 

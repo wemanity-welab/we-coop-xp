@@ -29,7 +29,7 @@ export function App() {
 
       <Switch>
         <Route exact path="/" component={HomePage} />
-        <Route exact path="/missions" component={MainMissionList} />
+        <Route exact path="/missions/" component={MainMissionList} />
         <Route component={NotFoundPage} />
       </Switch>
     </BrowserRouter>

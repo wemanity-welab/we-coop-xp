@@ -1,26 +1,23 @@
 import { missionServices } from 'application';
 import { useMission } from 'infrastructure/view/hooks/UseMissions';
 import { missionFiltred } from 'infrastructure/view/store/Mission/mission.actions';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
+import dataColor from '../../../../../utils/tagsColor.json';
 
 export const SearchBar = props => {
   const { title, client, description, profile, isActive } = props;
+  const divRef = React.useRef<HTMLDivElement>(null);
 
   const { dispatch } = useMission();
   const [tags, setTags] = useState<string[]>([]);
-  //   const history = useHistory();
-  //   history.replace(`/missions/search/?criteria=${tags}`);
+
   const missions = missionServices.missionFiltred(tags);
 
   const addTag = e => {
-    if (e.key === 'Enter') {
-      if (e.target.value.length > 0) {
-        setTags([...tags, e.target.value]);
-        console.log('tags', tags);
-
-        e.target.value = '';
-      }
+    if (e.key === 'Enter' && e.target.value.length > 0) {
+      setTags([...tags, e.target.value]);
+      e.target.value = '';
     }
   };
 
@@ -34,6 +31,14 @@ export const SearchBar = props => {
       missions.then(data => dispatch(missionFiltred(data)));
     } catch (exception) {
       console.error(exception);
+    }
+  }, []);
+
+  useEffect(() => {
+    for (const [key, value] of Object.entries(dataColor)) {
+      if (tags.includes(key) && divRef.current?.textContent === key + 'x') {
+        divRef.current.style.backgroundColor = value;
+      }
     }
   }, [tags]);
 
@@ -52,7 +57,7 @@ export const SearchBar = props => {
       <div className="tags" id="tags">
         {tags.map((tag, index) => {
           return (
-            <div key={index} className="tag">
+            <div key={index} ref={divRef} className="tag">
               {tag}
 
               <span onClick={() => removeTag(tag)}>x</span>

@@ -2,7 +2,8 @@ import React from 'react';
 import { AddMission } from 'infrastructure/view/components/templates/AddMission/AddMission';
 import { useState, useEffect } from 'react';
 import { MissionList } from './MissionList';
-const ModaleMission = props => {
+import { title } from 'process';
+const ModaleMission = () => {
   const [displayForm, setDisplayForm] = useState(false);
   const [displayMission, setDisplayMission] = useState(true);
   const handelModals = (e: any) => {
@@ -14,7 +15,7 @@ const ModaleMission = props => {
       setDisplayForm(false);
     }
   };
-
+  useEffect(() => {}, []);
   return (
     <>
       <div className="Home">

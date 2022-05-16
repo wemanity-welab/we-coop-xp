@@ -17,7 +17,12 @@ export const MissionList = () => {
   useEffect(() => {
     setCatalog(state.catalog);
   }, [state.catalog]);
-
+  //   useEffect(() => {
+  //     console.log('monting mission ');
+  //     return () => {
+  //       console.log('unmonting mission');
+  //     };
+  //   });
   return (
     <div className="container">
       <h2>Les missions</h2>
