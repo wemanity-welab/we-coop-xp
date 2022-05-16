@@ -6,7 +6,7 @@ import { missionPosted } from 'infrastructure/view/store/Mission/mission.actions
 import { Mission } from 'domain/mission/mission';
 import { missionServices } from 'application';
 import { useMission } from 'infrastructure/view/hooks/UseMissions';
-import { MissionList } from 'infrastructure/view/pages/MissionList/MissionList';
+import { Missions } from 'infrastructure/view/pages/Missions';
 
 toast.configure();
 const notify = () => {
@@ -37,7 +37,7 @@ export const AddMission = () => {
   return (
     <>
       {formSubmit ? (
-        <MissionList />
+        <Missions />
       ) : (
         <div className="addMission">
           <form onSubmit={handleSubmit(addMission)}>

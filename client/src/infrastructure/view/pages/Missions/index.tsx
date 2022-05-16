@@ -3,11 +3,7 @@ import { missionServices } from 'application';
 import { Mission } from 'domain/mission/mission';
 import { useMission } from '../../hooks/UseMissions';
 import { missionList } from '../../store/Mission/mission.actions';
-import {
-  ListingCards,
-  SearchBar,
-  MainLayout,
-} from 'infrastructure/view/components';
+import { ListingCards } from 'infrastructure/view/components';
 
 export const Missions = () => {
   const { state, dispatch } = useMission();
