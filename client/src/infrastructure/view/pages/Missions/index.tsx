@@ -61,15 +61,12 @@ export const Missions = () => {
   };
 
   return (
-    <MainLayout>
-      <SearchBar />
-      <ListingCards
-        title="Les Missions"
-        props={catalog}
-        functions={functions}
-        position={position}
-        open={openMenu}
-      />
-    </MainLayout>
+    <ListingCards
+      title="Les Missions"
+      props={catalog}
+      functions={functions}
+      position={position}
+      open={openMenu}
+    />
   );
 };

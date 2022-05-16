@@ -1,5 +1,5 @@
-import { ListingCards } from './organisms';
 import { SearchBar } from './molecules/sideBar/SearchBar';
-import { MainLayout } from './templates';
+import ListingCards from './organisms/listingCards';
+import MainLayout from './templates/MainLayout';
 
 export { SearchBar, ListingCards, MainLayout };

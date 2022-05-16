@@ -1,6 +1,6 @@
 import Home from 'infrastructure/view/pages/MissionList/ModaleMission';
 import React from 'react';
-import { Menu } from '../organisms';
+import Menu from '../organisms/navbar';
 
 export default function MainLayout({ children }) {
   return (
