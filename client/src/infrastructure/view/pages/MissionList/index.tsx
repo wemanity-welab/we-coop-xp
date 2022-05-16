@@ -7,6 +7,7 @@ import { SearchBar } from 'infrastructure/view/components/molecules/sideBar/Sear
 import { MissionCard } from '../../components/molecules';
 import { useMission } from '../../hooks/UseMissions';
 import { missionList } from '../../store/Mission/mission.actions';
+import { ListingCards } from 'infrastructure/view/components/organisms';
 
 export const MissionList = () => {
   const { state, dispatch } = useMission();
@@ -23,18 +24,7 @@ export const MissionList = () => {
   return (
     <MainLayout>
       <SearchBar />
-      <div className="container">
-        <h2>Les missions</h2>
-        <ul className="container__missions">
-          {catalog.length > 0
-            ? catalog
-                .sort(sortingByTitle)
-                .map(mission => (
-                  <MissionCard key={mission.id} props={mission} />
-                ))
-            : 'Chargement'}
-        </ul>
-      </div>
+      {/* <ListingCards title="Les missions" props={catalog} /> */}
     </MainLayout>
   );
 };
