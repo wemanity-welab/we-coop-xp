@@ -1,5 +1,5 @@
 import React from 'react';
-import Menu from '../organisms/navbar';
+import { Menu } from '../organisms';
 
 export default function MainLayout({ children }) {
   return (
