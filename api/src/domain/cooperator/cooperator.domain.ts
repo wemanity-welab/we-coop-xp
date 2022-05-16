@@ -85,7 +85,6 @@ export class CooperatorDomain {
   set setM3(value: string) {
     this.m3 = value;
   }
-
   get getMentor(): string {
     return this.mentor;
   }

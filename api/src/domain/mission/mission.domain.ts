@@ -42,7 +42,6 @@ export class MissionDomain {
   public set setProfile(value: string) {
     this.profile = value;
   }
-
   public get getClient(): string {
     return this.client;
   }
