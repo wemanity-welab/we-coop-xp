@@ -48,7 +48,7 @@ export const SearchBar = props => {
           placeholder="Rechercher...."
         />
         <div className="searchbtn">
-          <i className="fas fa-search"></i>
+          <img src="../Vector-search.png" alt="icon search" />
         </div>
       </div>
       <div className="tags" id="tags">

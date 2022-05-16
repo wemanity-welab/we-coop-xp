@@ -7,7 +7,6 @@ import { Mission } from 'domain/mission/mission';
 import { missionServices } from 'application';
 import { useMission } from 'infrastructure/view/hooks/UseMissions';
 import { MissionList } from 'infrastructure/view/pages/MissionList/MissionList';
-import { ConvertedToObjectType } from '../../../../../locales/types';
 
 toast.configure();
 const notify = () => {
@@ -16,7 +15,7 @@ const notify = () => {
 export const AddMission = () => {
   const [formSubmit, setFormSubmit] = useState(false);
   const { dispatch } = useMission();
-  const { register, handleSubmit, getValues, setValue } = useForm<Mission>();
+  const { register, handleSubmit } = useForm<Mission>();
 
   const addMission = async payload => {
     await missionServices
@@ -32,8 +31,9 @@ export const AddMission = () => {
   };
 
   useEffect(() => {
-    console.log('getValues()', getValues());
-  }, [getValues]);
+    console.log('yes');
+  }, []);
+
   return (
     <>
       {formSubmit ? (
@@ -45,13 +45,7 @@ export const AddMission = () => {
 
             <br />
             <div className="input">
-              <input
-                type="text"
-                placeholder="Title"
-                //@ts-ignore
-                value={setValue('title', getValues().title)}
-                {...register('title')}
-              />
+              <input type="text" placeholder="Title" {...register('title')} />
               <br />
               <input type="text" placeholder="Client" {...register('client')} />
             </div>
