@@ -1,24 +1,23 @@
-import React, { useState } from 'react';
-import CardMenu from '../../atoms/CardMenu';
+import React from 'react';
+import { CardMenu } from '../atoms';
 
-const MissionCard = ({ props }) => {
-  const { title, client, isActive } = props;
-  const [status, setStatus] = useState<boolean>(isActive);
-
-  const getStatus = (status: boolean) => {
-    setStatus(status);
-  };
-
+function Card({ prop, functions, position, open }) {
   return (
     <li>
       <div className="container">
         <div className="card">
           <div className="card__content">
-            {/* <CardMenu props={props} function={getStatus} /> */}
-            <h3 className="card__header">{title}</h3>
-            <p className="card__info">{client}</p>
+            <CardMenu
+              key={prop.id}
+              prop={prop}
+              functions={functions}
+              position={position}
+              open={open}
+            />
+            <h3 className="card__header">{prop.title && prop.title}</h3>
+            <p className="card__info">{prop.client && prop.client}</p>
             <div className={`card__status`}>
-              {status ? (
+              {prop.isActive ? (
                 <>
                   <img
                     className="card__status__logo"
@@ -43,6 +42,6 @@ const MissionCard = ({ props }) => {
       </div>
     </li>
   );
-};
+}
 
-export default MissionCard;
+export default Card;

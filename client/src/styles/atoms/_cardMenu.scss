@@ -1,0 +1,18 @@
+.custom-context-menu {
+    position: absolute;
+    font-size: 14px;
+    background-color: #fff;
+    border-radius: 2px;
+    width: 150px;
+    height: auto;
+    margin: 0;
+    box-shadow: 0 0 20px 0 #ccc;
+    transition: opacity 0.5s linear;
+    cursor: pointer;
+    z-index: 5;
+    background-color:white;
+    .option:hover {
+      color: white;
+      background-color: #4A7AA9;
+    }
+  }

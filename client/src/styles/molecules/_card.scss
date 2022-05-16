@@ -4,6 +4,9 @@
   text-align: center;
   border-radius: 10px;
   &__content {
+    &:hover{
+      box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+    }
     color: #4A7AA9;
     width: 100%;
     height: 16rem;
@@ -13,9 +16,6 @@
     padding: 20px;
     cursor: pointer;
     transition: 0.15s all ease-in-out;
-    &:hover{
-      box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
-    }
   }
   &__header {
     font-size: 20px;
