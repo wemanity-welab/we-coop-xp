@@ -14,7 +14,7 @@ export const SearchBar = props => {
 
   const missions = missionServices.missionFiltred(tags);
 
-  const addTag = e => {
+  const addTag = async e => {
     if (e.key === 'Enter' && e.target.value.length > 0) {
       setTags([...tags, e.target.value]);
       e.target.value = '';
@@ -29,16 +29,13 @@ export const SearchBar = props => {
   useEffect(() => {
     try {
       missions.then(data => dispatch(missionFiltred(data)));
+      for (const [key, value] of Object.entries(dataColor)) {
+        if (tags.includes(key) && divRef.current?.textContent === key + 'x') {
+          divRef.current.style.backgroundColor = value;
+        }
+      }
     } catch (exception) {
       console.error(exception);
-    }
-  }, []);
-
-  useEffect(() => {
-    for (const [key, value] of Object.entries(dataColor)) {
-      if (tags.includes(key) && divRef.current?.textContent === key + 'x') {
-        divRef.current.style.backgroundColor = value;
-      }
     }
   }, [tags]);
 
