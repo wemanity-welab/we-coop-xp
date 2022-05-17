@@ -12,6 +12,9 @@ export const Missions = () => {
   const [status, setStatus] = useState<boolean>();
   const [position, setPosition] = useState({ xPos: 0, yPos: 0 });
   const [openMenu, setOpenMenu] = useState(false);
+  const [idList, setIdList] = useState<any>([]);
+  const [idMenuList, setIdMenuList] = useState<any>([]);
+  // const [details, setDetails] = useState(false);
 
   useEffect(() => {
     const missions: any = missionServices
@@ -20,35 +23,48 @@ export const Missions = () => {
     setCatalog(missions);
   }, [status]);
 
-  const functions = {
+  const details = {
+    ids: idList,
+    addId: (el: any) => {
+      const newList = idList.push(el);
+      setIdList([newList, ...idList]);
+    },
+    removeId: (el: any) => {
+      const newList = idList.splice(el, 1);
+      setIdList([newList]);
+    },
+  };
+
+  const contextMenu = {
+    ids: idMenuList,
+    addId: el => {
+      const newList = idMenuList.push(el);
+      setIdMenuList([newList, ...idMenuList]);
+    },
+    removeId: el => {
+      const newList = idList.splice(el, 1);
+      setIdMenuList([newList]);
+    },
     toggleMenu: (e: React.MouseEvent) => {
       e.preventDefault();
       setPosition({ xPos: e.pageX, yPos: e.pageY - 80 });
-      setOpenMenu(!openMenu);
     },
-    setStatus: async () => {
+    setStatus: async id => {
       const newStatus = { isActive: !status };
       await missionServices.updateMission(id, newStatus);
       setStatus(newStatus.isActive);
     },
-    getStatus: () => status,
-    setId: id => {
-      setId(id);
-    },
-    setPropStatus: propStatus => {
-      setStatus(propStatus);
-    },
-    displayOption: () => (status ? 'Désactiver' : 'Activer'),
-    handleClickDelete: async () => {
+    handleClickDelete: async id => {
       if (window.confirm('Êtes-vous sur de vouloir supprimer cette mission ?'))
-        deleteMission();
+        deleteMission(id);
     },
   };
+
   useEffect(() => {
     setCatalog(state.catalog);
   }, [state.catalog]);
 
-  const deleteMission = async () => {
+  const deleteMission = async id => {
     const deletedMsg = await missionServices.deleteMission(id);
     console.log(deletedMsg);
     missionServices
@@ -60,9 +76,9 @@ export const Missions = () => {
     <ListingCards
       title="Les Missions"
       props={catalog}
-      functions={functions}
       position={position}
-      open={openMenu}
+      contextMenu={contextMenu}
+      details={details}
     />
   );
 };

@@ -2,7 +2,11 @@ import React from 'react';
 import { sortingByTitle } from 'utils/sortingArrays';
 import { Card } from '../molecules';
 
-function ListingCards({ props, title, functions, position, open }) {
+function ListingCards({ props, title, position, details, contextMenu }) {
+  for (let index = 0; index < props.length; index++) {
+    // console.log(props[index].id);
+  }
+
   return (
     <div className="container">
       <h2>{title}</h2>
@@ -14,9 +18,9 @@ function ListingCards({ props, title, functions, position, open }) {
                 <Card
                   key={prop.id}
                   prop={prop}
-                  functions={functions}
                   position={position}
-                  open={open}
+                  contextMenu={contextMenu}
+                  details={details}
                 />
               ))
           : 'Aucune mission dans la base de données ou serveur down. (erreur à gérer dynamiquement)'}
