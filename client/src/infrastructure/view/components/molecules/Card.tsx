@@ -6,7 +6,12 @@ function Card({ prop, position, details, contextMenu }) {
   return (
     <>
       {details.ids.includes(prop.id) && (
-        <CardDetails key={prop.id} cardType="mission" data={prop} />
+        <CardDetails
+          key={prop.id}
+          cardType="mission"
+          data={prop}
+          details={details}
+        />
       )}
       <li>
         <div className="container">

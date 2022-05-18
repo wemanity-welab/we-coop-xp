@@ -1,13 +1,11 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import { useOutsideClick } from 'infrastructure/view/hooks';
 
 export default function CardDetails(props) {
+  const wrapperRef = useRef(null);
+  useOutsideClick(wrapperRef, props.details.removeId);
   return (
-    <div
-      onClick={() => {
-        console.log(props.data.title);
-      }}
-      className="details"
-    >
+    <div ref={wrapperRef} className="details">
       <div className="details__container">
         {props.cardType === 'mission' && (
           <>

@@ -1,17 +1,21 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import { useOutsideClick } from 'infrastructure/view/hooks';
 
 function CardMenu({ prop, position, contextMenu }) {
+  const wrapperRef = useRef(null);
+  useOutsideClick(wrapperRef, contextMenu.removeId);
   return (
     <>
       <img
         onClick={e => {
-          e.stopPropagation();
           if (contextMenu.ids.includes(prop.id)) {
+            e.stopPropagation();
             contextMenu.removeId(prop.id);
             return;
           }
-          contextMenu.addId(prop.id);
           contextMenu.position(e);
+          contextMenu.addId(prop.id);
+          e.stopPropagation();
           return;
         }}
         className="card__menu"
@@ -20,6 +24,7 @@ function CardMenu({ prop, position, contextMenu }) {
       />
       {contextMenu.ids.includes(prop.id) && (
         <div
+          ref={wrapperRef}
           className="custom-context-menu"
           style={{ top: position.yPos, left: position.xPos }}
         >
@@ -28,13 +33,19 @@ function CardMenu({ prop, position, contextMenu }) {
               className="option"
               onClick={e => {
                 e.stopPropagation();
-                contextMenu.setStatus(prop.id);
+                contextMenu.changeStatus();
               }}
             >
               {prop.isActive ? 'Désactiver' : 'Activer'}
             </div>
           )}
-          <div className="option" onClick={() => console.log('Option 2')}>
+          <div
+            className="option"
+            onClick={e => {
+              e.stopPropagation();
+              console.log(contextMenu.ids);
+            }}
+          >
             Modifier
           </div>
           <div
