@@ -7,11 +7,9 @@ import { ListingCards } from 'infrastructure/view/components';
 
 export const Missions = () => {
   const { state, dispatch } = useMission();
-  const [id, setId] = useState('');
   const [catalog, setCatalog] = useState<Mission[]>([]);
   const [status, setStatus] = useState<boolean>();
   const [position, setPosition] = useState({ xPos: 0, yPos: 0 });
-  const [openMenu, setOpenMenu] = useState(false);
   const [idList, setIdList] = useState<any>([]);
   const [idMenuList, setIdMenuList] = useState<any>([]);
   // const [details, setDetails] = useState(false);
@@ -42,10 +40,10 @@ export const Missions = () => {
       setIdMenuList([newList, ...idMenuList]);
     },
     removeId: el => {
-      const newList = idList.splice(el, 1);
+      const newList = idMenuList.splice(el, 1);
       setIdMenuList([newList]);
     },
-    toggleMenu: (e: React.MouseEvent) => {
+    position: (e: React.MouseEvent) => {
       e.preventDefault();
       setPosition({ xPos: e.pageX, yPos: e.pageY - 80 });
     },
@@ -57,6 +55,7 @@ export const Missions = () => {
     handleClickDelete: async id => {
       if (window.confirm('Êtes-vous sur de vouloir supprimer cette mission ?'))
         deleteMission(id);
+      setIdMenuList([]);
     },
   };
 
@@ -70,6 +69,7 @@ export const Missions = () => {
     missionServices
       .getMissions()
       .then(missions => dispatch(missionList(missions)));
+    setStatus(status);
   };
 
   return (

@@ -5,13 +5,15 @@ function CardMenu({ prop, position, contextMenu }) {
     <>
       <img
         onClick={e => {
+          e.stopPropagation();
           if (contextMenu.ids.includes(prop.id)) {
             contextMenu.removeId(prop.id);
+            return;
           }
           contextMenu.addId(prop.id);
-          contextMenu.toggleMenu(e);
+          contextMenu.position(e);
+          return;
         }}
-        key={prop.id}
         className="card__menu"
         src={'/menu.png'}
         alt="menu"
@@ -24,7 +26,8 @@ function CardMenu({ prop, position, contextMenu }) {
           {prop.isActive !== undefined && (
             <div
               className="option"
-              onClick={() => {
+              onClick={e => {
+                e.stopPropagation();
                 contextMenu.setStatus(prop.id);
               }}
             >
@@ -36,7 +39,10 @@ function CardMenu({ prop, position, contextMenu }) {
           </div>
           <div
             className="option"
-            onClick={() => contextMenu.handleClickDelete(prop.id)}
+            onClick={e => {
+              e.stopPropagation();
+              contextMenu.handleClickDelete(prop.id);
+            }}
           >
             Supprimer
           </div>
