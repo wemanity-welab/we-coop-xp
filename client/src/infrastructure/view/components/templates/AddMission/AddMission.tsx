@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -12,10 +12,18 @@ toast.configure();
 const notify = () => {
   toast.success('La mission est enregistrée');
 };
-export const AddMission = () => {
+
+type Props = {
+  setDisplay: (val: boolean) => void;
+};
+
+export const AddMission: React.FC<Props> = ({ setDisplay }) => {
   const [formSubmit, setFormSubmit] = useState(false);
+
   const { dispatch } = useMission();
-  const { register, handleSubmit } = useForm<Mission>();
+  const { register, handleSubmit, setValue } = useForm<Mission>();
+  const refInput = React.useRef<HTMLInputElement | null>(null);
+  const { ref, ...rest } = register('title');
 
   const addMission = async payload => {
     await missionServices
@@ -23,6 +31,7 @@ export const AddMission = () => {
       .then(res => {
         dispatch(missionPosted(payload));
         setFormSubmit(true);
+        setDisplay(true);
         notify();
       })
       .catch((error: any) => {
@@ -30,9 +39,7 @@ export const AddMission = () => {
       });
   };
 
-  useEffect(() => {
-    console.log('yes');
-  }, []);
+  useEffect(() => {}, []);
 
   return (
     <>
@@ -41,28 +48,36 @@ export const AddMission = () => {
       ) : (
         <div className="addMission">
           <form onSubmit={handleSubmit(addMission)}>
-            <h1>Formulaire de mission</h1>
+            <h2>Ajouter une mission</h2>
 
             <br />
-            <div className="input">
-              <input type="text" placeholder="Title" {...register('title')} />
-              <br />
-              <input type="text" placeholder="Client" {...register('client')} />
-            </div>
 
-            <textarea
-              style={{ height: '6rem' }}
-              placeholder="Profil"
-              {...register('profile')}
+            <label htmlFor="titre">Titre:</label>
+            <input
+              {...rest}
+              name="title"
+              ref={e => {
+                ref(e);
+                refInput.current = e; // you can still assign to ref
+                console.log(e);
+              }}
+              onChange={e => e.target.value}
             />
-            <br />
-            <textarea
-              style={{ height: '10rem' }}
-              placeholder="Description"
-              {...register('description')}
-            />
-            <br />
 
+            {/* <input type="text" placeholder="Title" {...register('title')} /> */}
+            <br />
+            <label htmlFor="client">Client: </label>
+            <input type="text" {...register('client')} />
+            <br />
+            <label htmlFor="profile">Profil:</label>
+            <textarea {...register('profile')} />
+            <br />
+            <label className="label-description" htmlFor="description">
+              Description:
+            </label>
+            <textarea className="description" {...register('description')} />
+            <br />
+            <label htmlFor=""></label>
             <button
               className="active-btn width-btn"
               id="sendedForm"
@@ -71,8 +86,6 @@ export const AddMission = () => {
               Envoyer
             </button>
           </form>
-
-          <span></span>
         </div>
       )}
     </>

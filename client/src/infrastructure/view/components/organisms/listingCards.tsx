@@ -7,7 +7,7 @@ function ListingCards({ props, title, functions, position, open }) {
     <div className="container">
       <h2>{title}</h2>
       <ul className="container__missions">
-        {props.length > 0
+        {props && props.length > 0
           ? props
               .sort(sortingByTitle)
               .map(prop => (
