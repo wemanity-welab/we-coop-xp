@@ -87,7 +87,7 @@ border-radius: 10px;
       font-size: clamp(0.1rem, 10vw, 1rem);
 
       background: $color-night-bleu;
-      min-width: 30%;
+      min-width: 20%;
       
       @media screen and(max-width: 617px) {
         margin-top: 0.2rem;
@@ -95,8 +95,7 @@ border-radius: 10px;
       }
 
       &:hover {
-        background: $color-opacite3;
-      }
+        background: $color-2;      }
     }
 
     p {

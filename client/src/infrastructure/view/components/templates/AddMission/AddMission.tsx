@@ -77,7 +77,6 @@ export const AddMission: React.FC<Props> = ({ setDisplay }) => {
             </label>
             <textarea className="description" {...register('description')} />
             <br />
-            <label htmlFor=""></label>
             <button
               className="active-btn width-btn"
               id="sendedForm"

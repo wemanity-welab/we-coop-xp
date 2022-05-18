@@ -6,11 +6,12 @@
   width: 40%;
   height: auto;
   border-radius: 10px;
-border: solid 2px  $color-night-bleu;
+
   padding: 1px;
   display: flex;
   justify-content: space-between;
   height: 54px;
+  background-color: $background-color-search-card;
 
   @media screen and(max-width: 600px) {
     left: 7rem;
@@ -20,6 +21,8 @@ border: solid 2px  $color-night-bleu;
     margin-left: 1em;
     border-radius: 5px;
     color:$color-night-bleu ;
+    background-color: $background-color-search-card;
+
     
         @media screen and(max-width: (    300px)) {
           border-radius: 20px;
