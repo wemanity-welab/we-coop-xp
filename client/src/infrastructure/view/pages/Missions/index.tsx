@@ -36,20 +36,24 @@ export const Missions = () => {
   const contextMenu = {
     ids: idMenuList,
     addId: el => {
-      const newList = idMenuList.push(el);
-      setIdMenuList([newList, ...idMenuList]);
+      idMenuList.push(el);
+      setIdMenuList([...idMenuList]);
     },
     removeId: el => {
-      const newList = idMenuList.splice(el, 1);
-      setIdMenuList([newList]);
+      const index = idMenuList.indexOf(el);
+      idMenuList.splice(index, 1);
+      setIdMenuList([...idMenuList]);
     },
     position: (e: React.MouseEvent) => {
       e.preventDefault();
       setPosition({ xPos: e.pageX, yPos: e.pageY - 80 });
     },
-    setStatus: async id => {
+    changeStatus: async () => {
       const newStatus = { isActive: !status };
-      await missionServices.updateMission(id, newStatus);
+      await missionServices.updateMission(
+        idMenuList[idMenuList.length - 1],
+        newStatus,
+      );
       setStatus(newStatus.isActive);
     },
     handleClickDelete: async id => {
