@@ -12,7 +12,6 @@ export const Missions = () => {
   const [position, setPosition] = useState({ xPos: 0, yPos: 0 });
   const [idList, setIdList] = useState<any>([]);
   const [idMenuList, setIdMenuList] = useState<any>([]);
-  // const [details, setDetails] = useState(false);
 
   useEffect(() => {
     const missions: any = missionServices
@@ -20,6 +19,10 @@ export const Missions = () => {
       .then(data => dispatch(missionList(data)));
     setCatalog(missions);
   }, [status]);
+
+  useEffect(() => {
+    setCatalog(state.catalog);
+  }, [state.catalog]);
 
   const details = {
     ids: idList,
@@ -48,12 +51,9 @@ export const Missions = () => {
       e.preventDefault();
       setPosition({ xPos: e.pageX, yPos: e.pageY - 80 });
     },
-    changeStatus: async () => {
+    changeStatus: async id => {
       const newStatus = { isActive: !status };
-      await missionServices.updateMission(
-        idMenuList[idMenuList.length - 1],
-        newStatus,
-      );
+      await missionServices.updateMission(id, newStatus);
       setStatus(newStatus.isActive);
     },
     handleClickDelete: async id => {
@@ -63,17 +63,12 @@ export const Missions = () => {
     },
   };
 
-  useEffect(() => {
-    setCatalog(state.catalog);
-  }, [state.catalog]);
-
   const deleteMission = async id => {
     const deletedMsg = await missionServices.deleteMission(id);
     console.log(deletedMsg);
     missionServices
       .getMissions()
       .then(missions => dispatch(missionList(missions)));
-    setStatus(status);
   };
 
   return (
