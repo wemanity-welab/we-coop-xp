@@ -3,7 +3,7 @@
 	position: sticky;
 	top: 0;
     height: 100vh;
-    background-color: rgba(74, 122, 169, 0.3);
+    background-color: $nightblue;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -22,26 +22,25 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
+                color: white;
                 font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-                img {
-                    width:2rem;
-                    height: 2rem;
+                .menuIcon {
+                    width: 1rem;
+                    height: 1rem;
+                    margin-right: 5%;
                 }
             }
-    }
-    .MenuList #linkActive {
-        background-color: rgba(74, 122, 169, 0.3);
-        border: 1px solid rgb(128, 155, 181);
+        }
+    #menuLinkActive {
+        background-color: white;
         border-radius: 5px;
         padding: 5%;
-        color: white;
+        color: $nightblue;
     }
-    
     .MenuFooter {
         position: absolute;
         bottom: 5vh;
     }
-
 }
 
 

@@ -1,38 +1,60 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import { useOutsideClick } from 'infrastructure/view/hooks';
 
-function CardMenu({ prop, functions, position, open }) {
+function CardMenu({ prop, position, contextMenu }) {
+  const wrapperRef = useRef(null);
+  useOutsideClick(wrapperRef, contextMenu.removeId);
   return (
     <>
       <img
         onClick={e => {
-          prop.isActive !== undefined && functions.setPropStatus(prop.isActive);
-          functions.setId(prop.id);
-          functions.toggleMenu(e);
+          if (contextMenu.ids.includes(prop.id)) {
+            e.stopPropagation();
+            contextMenu.removeId(prop.id);
+            return;
+          }
+          contextMenu.position(e);
+          contextMenu.addId(prop.id);
+          e.stopPropagation();
+          return;
         }}
-        key={prop.id}
         className="card__menu"
         src={'/menu.png'}
         alt="menu"
       />
-      {open && (
+      {contextMenu.ids.includes(prop.id) && (
         <div
+          ref={wrapperRef}
           className="custom-context-menu"
           style={{ top: position.yPos, left: position.xPos }}
         >
-          {functions.getStatus !== undefined && (
+          {prop.isActive !== undefined && (
             <div
               className="option"
-              onClick={() => {
-                functions.setStatus();
+              onClick={e => {
+                e.stopPropagation();
+                contextMenu.changeStatus(prop.id);
               }}
             >
-              {functions.displayOption()}
+              {prop.isActive ? 'Désactiver' : 'Activer'}
             </div>
           )}
-          <div className="option" onClick={() => console.log('Option 2')}>
+          <div
+            className="option"
+            onClick={e => {
+              e.stopPropagation();
+              console.log(contextMenu.ids);
+            }}
+          >
             Modifier
           </div>
-          <div className="option" onClick={() => functions.handleClickDelete()}>
+          <div
+            className="option"
+            onClick={e => {
+              e.stopPropagation();
+              contextMenu.handleClickDelete(prop.id);
+            }}
+          >
             Supprimer
           </div>
         </div>
