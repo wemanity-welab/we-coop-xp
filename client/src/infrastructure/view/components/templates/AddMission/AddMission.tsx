@@ -1,9 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { missionPosted } from 'infrastructure/view/store/Mission/mission.actions';
-import { Mission } from 'domain/mission/mission';
 import { missionServices } from 'application';
 import { useMission } from 'infrastructure/view/hooks/UseMissions';
 import { Missions } from 'infrastructure/view/pages/Missions';
@@ -12,20 +10,19 @@ toast.configure();
 const notify = () => {
   toast.success('La mission est enregistrée');
 };
-
 type Props = {
   setDisplay: (val: boolean) => void;
 };
-
 export const AddMission: React.FC<Props> = ({ setDisplay }) => {
   const [formSubmit, setFormSubmit] = useState(false);
-
   const { dispatch } = useMission();
-  const { register, handleSubmit, setValue } = useForm<Mission>();
-  const refInput = React.useRef<HTMLInputElement | null>(null);
-  const { ref, ...rest } = register('title');
+  const [title, setTitle] = useState('');
+  const [profile, setProfile] = useState('');
+  const [client, setClient] = useState('');
+  const [description, setDescription] = useState('');
 
-  const addMission = async payload => {
+  const addMission = async (payload, e) => {
+    e.preventDefault();
     await missionServices
       .addMission(payload)
       .then(res => {
@@ -34,50 +31,89 @@ export const AddMission: React.FC<Props> = ({ setDisplay }) => {
         setDisplay(true);
         notify();
       })
+
       .catch((error: any) => {
         toast.error(error.response.data.message);
       });
+    console.log('payload', payload);
   };
-
-  useEffect(() => {}, []);
-
+  const handleClick = e => {
+    const payload = {
+      title,
+      client,
+      profile,
+      description,
+    };
+    addMission(payload, e);
+    setTitle('');
+    setProfile('');
+    setClient('');
+    setDescription('');
+  };
+  useEffect(() => {
+    const dataStorage: any = localStorage.getItem('data');
+    const savedData = JSON.parse(dataStorage);
+    setTitle(savedData?.title);
+    setProfile(savedData?.profile);
+    setClient(savedData?.client);
+    setDescription(savedData?.description);
+  }, []);
+  useEffect(() => {
+    const valuesStoked = {
+      title,
+      client,
+      profile,
+      description,
+    };
+    localStorage.setItem('data', JSON.stringify(valuesStoked));
+  });
   return (
     <>
       {formSubmit ? (
         <Missions />
       ) : (
         <div className="addMission">
-          <form onSubmit={handleSubmit(addMission)}>
+          <form>
             <h2>Ajouter une mission</h2>
 
             <br />
 
             <label htmlFor="titre">Titre:</label>
+
             <input
-              {...rest}
-              name="title"
-              ref={e => {
-                ref(e);
-                refInput.current = e; // you can still assign to ref
-                console.log(e);
-              }}
-              onChange={e => e.target.value}
+              type="text"
+              value={title}
+              onChange={e => setTitle(e.target.value)}
             />
 
-            {/* <input type="text" placeholder="Title" {...register('title')} /> */}
             <br />
             <label htmlFor="client">Client: </label>
-            <input type="text" {...register('client')} />
+
+            <input
+              type="text"
+              value={client}
+              onChange={e => setClient(e.target.value)}
+            />
             <br />
             <label htmlFor="profile">Profil:</label>
-            <textarea {...register('profile')} />
+            <textarea
+              value={profile}
+              onChange={e => setProfile(e.target.value)}
+            />
+
             <br />
             <label className="label-description" htmlFor="description">
               Description:
             </label>
-            <textarea className="description" {...register('description')} />
+            <textarea
+              className="description"
+              value={description}
+              onChange={e => setDescription(e.target.value)}
+            />
+
             <br />
             <button
+              onClick={e => handleClick(e)}
               className="active-btn width-btn"
               id="sendedForm"
               type="submit"
