@@ -51,7 +51,7 @@ export const AddMission: React.FC<Props> = ({ setDisplay }) => {
     setDescription('');
   };
   useEffect(() => {
-    const dataStorage: any = localStorage.getItem('data');
+    const dataStorage: any = localStorage.getItem('dataInput');
     const savedData = JSON.parse(dataStorage);
     setTitle(savedData?.title);
     setProfile(savedData?.profile);
@@ -65,7 +65,7 @@ export const AddMission: React.FC<Props> = ({ setDisplay }) => {
       profile,
       description,
     };
-    localStorage.setItem('data', JSON.stringify(valuesStoked));
+    localStorage.setItem('dataInput', JSON.stringify(valuesStoked));
   });
   return (
     <>
@@ -75,17 +75,13 @@ export const AddMission: React.FC<Props> = ({ setDisplay }) => {
         <div className="addMission">
           <form>
             <h2>Ajouter une mission</h2>
-
             <br />
-
             <label htmlFor="titre">Titre:</label>
-
             <input
               type="text"
               value={title}
               onChange={e => setTitle(e.target.value)}
             />
-
             <br />
             <label htmlFor="client">Client: </label>
 
@@ -100,7 +96,6 @@ export const AddMission: React.FC<Props> = ({ setDisplay }) => {
               value={profile}
               onChange={e => setProfile(e.target.value)}
             />
-
             <br />
             <label className="label-description" htmlFor="description">
               Description:
@@ -110,7 +105,6 @@ export const AddMission: React.FC<Props> = ({ setDisplay }) => {
               value={description}
               onChange={e => setDescription(e.target.value)}
             />
-
             <br />
             <button
               onClick={e => handleClick(e)}
