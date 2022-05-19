@@ -1,12 +1,15 @@
-export const linksData = [
+import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
+import { faUserTie } from '@fortawesome/free-solid-svg-icons';
+
+export const linksData: any = [
   {
     title: 'Missions',
-    icon: '/icon-missions.png',
+    icon: faPaperPlane,
     link: '/missions',
   },
   {
     title: 'Coopérateurs',
-    icon: '/icon-cooperators.png',
+    icon: faUserTie,
     link: '/cooperateurs',
   },
 ];
