@@ -1,14 +1,18 @@
 import React, { useRef } from 'react';
 import { useOutsideClick } from 'infrastructure/view/hooks';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
 export default function CardDetails(props) {
   const wrapperRef = useRef(null);
   useOutsideClick(wrapperRef, props.details.removeId);
   return (
     <div ref={wrapperRef} className="details">
-      <span onClick={props.details.removeId} className="details__closeButton">
-        CLOSE ICON
-      </span>
+      <FontAwesomeIcon
+        onClick={props.details.removeId}
+        className="details__closeButton"
+        icon={faXmark}
+      />
       {props.cardType === 'mission' && (
         <div className="details__mission">
           <h3>Mission</h3>
