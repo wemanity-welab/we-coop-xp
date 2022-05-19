@@ -6,7 +6,9 @@ export default function CardDetails(props) {
   useOutsideClick(wrapperRef, props.details.removeId);
   return (
     <div ref={wrapperRef} className="details">
-      <span className="details__closeButton">close</span>
+      <span onClick={props.details.removeId} className="details__closeButton">
+        CLOSE ICON
+      </span>
       {props.cardType === 'mission' && (
         <div className="details__mission">
           <h3>Mission</h3>

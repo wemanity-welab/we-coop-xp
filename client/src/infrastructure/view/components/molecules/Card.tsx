@@ -2,7 +2,7 @@ import React from 'react';
 import { CardMenu } from '../atoms';
 import CardDetails from './CardDetails';
 
-function Card({ prop, position, details, contextMenu }) {
+function Card({ prop, position, details, contextMenu, cardType }) {
   return (
     <>
       {details.ids.includes(prop.id) && (
@@ -26,37 +26,39 @@ function Card({ prop, position, details, contextMenu }) {
             }}
             className="card"
           >
-            <div className="card__content">
-              <CardMenu
-                key={prop.id}
-                prop={prop}
-                position={position}
-                contextMenu={contextMenu}
-              />
-              <h3 className="card__header">{prop.title && prop.title}</h3>
-              <p className="card__info">{prop.client && prop.client}</p>
-              <div className={`card__status`}>
-                {prop.isActive ? (
-                  <>
-                    <img
-                      className="card__status__logo"
-                      src={'/check.png'}
-                      alt="check"
-                    />
-                    <span>Active</span>
-                  </>
-                ) : (
-                  <>
-                    <img
-                      className="card__status__logo"
-                      src={'/close.png'}
-                      alt="check"
-                    />
-                    <span>Inactive</span>
-                  </>
-                )}
+            {cardType === 'mission' && (
+              <div className="card__content">
+                <CardMenu
+                  key={prop.id}
+                  prop={prop}
+                  position={position}
+                  contextMenu={contextMenu}
+                />
+                <h3 className="card__header">{prop.title && prop.title}</h3>
+                <p className="card__info">{prop.client && prop.client}</p>
+                <div className={`card__status`}>
+                  {prop.isActive ? (
+                    <>
+                      <img
+                        className="card__status__logo"
+                        src={'/check.png'}
+                        alt="check"
+                      />
+                      <span>Active</span>
+                    </>
+                  ) : (
+                    <>
+                      <img
+                        className="card__status__logo"
+                        src={'/close.png'}
+                        alt="check"
+                      />
+                      <span>Inactive</span>
+                    </>
+                  )}
+                </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
       </li>

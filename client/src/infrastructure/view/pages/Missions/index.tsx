@@ -74,6 +74,7 @@ export const Missions = () => {
   return (
     <ListingCards
       title="Les Missions"
+      cardType="mission"
       props={catalog}
       position={position}
       contextMenu={contextMenu}
