@@ -1,0 +1,107 @@
+// import { missionServices } from 'application';
+// import { useMission } from 'infrastructure/view/hooks/UseMissions';
+// import Chip from '@material-ui/core/chip';
+// import {
+//   missionfiltrred,
+//   missionList,
+// } from 'infrastructure/view/store/Mission/mission.actions';
+// import React, { useEffect, useState } from 'react';
+
+// import AppBar from '@material-ui/core/AppBar';
+// import Toolbar from '@material-ui/core/Toolbar';
+// import InputBase from '@material-ui/core/InputBase';
+// import { useStyles } from './useStyles';
+// import SearchIcon from '@material-ui/icons/Search';
+// import { Mission } from '../../../../../../../api/test/utils/types/Mission';
+
+// const SearchBar = () => {
+//   const classes = useStyles();
+//   const { state, dispatch } = useMission();
+//   const [selectedFilterMission, setSelectedFilterMission] = useState([]);
+//   const [genres, setGenres] = useState([]);
+
+//   const handleAdd = (genre: any) => {
+//     //@ts-ignore
+
+//     setSelectedFilterMission([...selectedFilterMission, genre]);
+//     //@ts-ignore
+//     setGenres(genres.filter(g => g.id !== genre.id));
+//     console.log('datas', genres);
+//   };
+
+//   const handleRemove = genre => {
+//     setSelectedFilterMission(
+//       //@ts-ignore
+
+//       selectedFilterMission.filter(selected => selected.id !== genre.id),
+//     );
+//     //@ts-ignore
+//     setGenres([...genres, genre]);
+//   };
+//   const missions = missionServices.missionfiltrred([]);
+//   useEffect(() => {
+//     try {
+//       missions.then(data => dispatch(missionfiltrred(data)));
+//       //@ts-ignore
+
+//       setGenres(state.catalog.slice(0, 10));
+
+//       console.log('genres', setGenres);
+//       return () => {
+//         setGenres([]); // unmounting
+//       };
+//     } catch (exception) {
+//       console.error(exception);
+//     }
+//   }, [dispatch]);
+
+//   return (
+//     <>
+//       <AppBar position="static">
+//         <Toolbar>
+//           <div className={classes.search}>
+//             <SearchIcon />
+//             <InputBase
+//               placeholder="Search…"
+//               classes={{
+//                 root: classes.inputRoot,
+//                 input: classes.inputInput,
+//               }}
+//               inputProps={{ 'aria-label': 'search' }}
+//             />
+//           </div>
+//         </Toolbar>
+//       </AppBar>
+
+//       <div style={{ padding: '6px 0' }}>
+//         {selectedFilterMission &&
+//           selectedFilterMission.map(mission => (
+//             <Chip
+//               //@ts-ignore
+
+//               label={mission.title}
+//               style={{ margin: 2 }}
+//               color="primary"
+//               clickable
+//               size="small"
+//               onDelete={() => handleRemove(mission)}
+//             />
+//           ))}
+//         {genres &&
+//           genres.map(mission => (
+//             <Chip
+//               //@ts-ignore
+
+//               label={mission.title}
+//               style={{ margin: 2 }}
+//               clickable
+//               size="small"
+//               onClick={() => handleAdd(mission)}
+//             />
+//           ))}
+//       </div>
+//     </>
+//   );
+// };
+
+// export default SearchBar;

@@ -26,12 +26,10 @@
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     -moz-backdrop-filter: blur(10px);
-    box-shadow: 20px 20px 40px -6px;
     display: block;
     text-align: center;
     min-width: 100%;
  
-    padding: 5vw;
 
 
     h2{
@@ -95,7 +93,7 @@ border-radius: 10px;
       }
 
       &:hover {
-        background: $color-2;      }
+ background: $color-2;      }
     }
 
     p {

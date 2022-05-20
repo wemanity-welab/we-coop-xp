@@ -1,11 +1,12 @@
+import { faMagnifyingGlass, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { missionServices } from 'application';
 import { useMission } from 'infrastructure/view/hooks/UseMissions';
 import { missionFiltred } from 'infrastructure/view/store/Mission/mission.actions';
 import React, { useEffect, useRef, useState } from 'react';
 import dataColor from '../../../../../utils/tagsColor.json';
 
-export const SearchBar = props => {
-  const { title, client, description, profile, isActive } = props;
+export const SearchBar = () => {
   const divRef = React.useRef<HTMLDivElement>(null);
 
   const { dispatch } = useMission();
@@ -30,7 +31,7 @@ export const SearchBar = props => {
       missions.then(data => dispatch(missionFiltred(data)));
 
       for (const [key, value] of Object.entries(dataColor)) {
-        if (tags.includes(key) && divRef.current?.textContent === key + 'x') {
+        if (tags.includes(key) && divRef.current?.textContent === key) {
           divRef.current.style.backgroundColor = value;
         }
       }
@@ -48,7 +49,7 @@ export const SearchBar = props => {
           placeholder="Rechercher...."
         />
         <div className="searchbtn">
-          <img src="../Vector-search.png" alt="icon search" />
+          <FontAwesomeIcon icon={faMagnifyingGlass} />
         </div>
       </div>
       <div className="tags" id="tags">
@@ -56,7 +57,9 @@ export const SearchBar = props => {
           return (
             <div key={index} ref={divRef} className="tag">
               {tag}
-              <span onClick={() => removeTag(tag)}>x</span>
+              <span onClick={() => removeTag(tag)}>
+                <FontAwesomeIcon icon={faXmark} />
+              </span>
             </div>
           );
         })}
