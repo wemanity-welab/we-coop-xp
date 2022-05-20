@@ -14,7 +14,7 @@ function ListingCards({
     <div className="container">
       <h2>{title}</h2>
       <ul className="container__cards">
-        {props.length > 0
+        {props && props.length > 0
           ? props
               .sort(sortingByTitle)
               .map(prop => (

@@ -20,23 +20,16 @@
   .display {
     display: block;
     position: absolute;
-    width: 42px;
-    height: 43px;
-    left: 62rem;
+    width: 38px;
+    height: 39px;
+    left: 15rem;
     top: 8rem;
-        @media screen and(max-width: 1180px) {
-        left: 50rem;
-      }
-       @media screen and(max-width:1090px) {
-        left: 20rem;
-      }
+       
+    
       @media screen and(max-width: 730px) {
-        left: 10rem;
+        left: 7rem;
       }
-      @media screen and(max-width: 350px) {
-        left: 5rem;
-      }
-    }
+     }
   
   }
 

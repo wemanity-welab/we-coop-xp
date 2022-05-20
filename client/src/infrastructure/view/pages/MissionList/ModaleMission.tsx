@@ -2,16 +2,14 @@ import React from 'react';
 import { AddMission } from 'infrastructure/view/components/templates/AddMission/AddMission';
 import { useState, useEffect } from 'react';
 import { Missions } from '../Missions/Loadable';
+
 const ModaleMission = () => {
-  const [displayForm, setDisplayForm] = useState(false);
-  const [displayMission, setDisplayMission] = useState(true);
+  const [display, setDisplay] = useState(true);
   const handelModals = (e: any) => {
     if (e.target.id === 'AddMission') {
-      setDisplayMission(false);
-      setDisplayForm(true);
+      setDisplay(false);
     } else if (e.target.id === 'goBack') {
-      setDisplayMission(true);
-      setDisplayForm(false);
+      setDisplay(true);
     }
   };
   useEffect(() => {}, []);
@@ -20,9 +18,10 @@ const ModaleMission = () => {
       <div className="Home">
         <div className="buttonSwitch">
           <button
-            className="btn-addMission"
+            className="btn-addMission "
             onClick={handelModals}
             id="AddMission"
+            style={{ display: display ? 'block' : 'none' }}
           >
             Ajouter une mission
           </button>
@@ -32,16 +31,14 @@ const ModaleMission = () => {
             onClick={handelModals}
             src="../goBack.png"
             alt="go back"
-            className={displayMission ? 'displayNone' : 'display'}
+            className={display ? 'displayNone' : 'display'}
           />
         </div>
         <br />
         <div className="modale">
           <span></span>
 
-          {displayForm && <AddMission />}
-
-          {displayMission && <Missions />}
+          {display ? <Missions /> : <AddMission setDisplay={setDisplay} />}
         </div>
       </div>
     </>

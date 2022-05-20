@@ -2,7 +2,6 @@ import { missionServices } from 'application';
 import { useMission } from 'infrastructure/view/hooks/UseMissions';
 import { missionFiltred } from 'infrastructure/view/store/Mission/mission.actions';
 import React, { useEffect, useRef, useState } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
 import dataColor from '../../../../../utils/tagsColor.json';
 
 export const SearchBar = props => {
@@ -29,6 +28,7 @@ export const SearchBar = props => {
   useEffect(() => {
     try {
       missions.then(data => dispatch(missionFiltred(data)));
+
       for (const [key, value] of Object.entries(dataColor)) {
         if (tags.includes(key) && divRef.current?.textContent === key + 'x') {
           divRef.current.style.backgroundColor = value;
@@ -56,7 +56,6 @@ export const SearchBar = props => {
           return (
             <div key={index} ref={divRef} className="tag">
               {tag}
-
               <span onClick={() => removeTag(tag)}>x</span>
             </div>
           );
