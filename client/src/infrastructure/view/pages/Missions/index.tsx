@@ -49,7 +49,7 @@ export const Missions = () => {
     },
     position: (e: React.MouseEvent) => {
       e.preventDefault();
-      setPosition({ xPos: e.pageX, yPos: e.pageY - 80 });
+      setPosition({ xPos: e.pageX - 130, yPos: e.pageY + 10 });
     },
     changeStatus: async id => {
       const newStatus = { isActive: !status };
