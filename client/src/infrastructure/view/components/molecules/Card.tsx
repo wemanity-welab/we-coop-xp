@@ -28,14 +28,23 @@ function Card({ prop, position, details, contextMenu, cardType }) {
           >
             {cardType === 'mission' && (
               <div className="card__content">
-                <CardMenu
-                  key={prop.id}
-                  prop={prop}
-                  position={position}
-                  contextMenu={contextMenu}
+                <div className="card__header">
+                  <CardMenu
+                    key={prop.id}
+                    prop={prop}
+                    position={position}
+                    contextMenu={contextMenu}
+                  />
+                  <h3 className="card__header__title">
+                    {prop.title && prop.title}
+                  </h3>
+                </div>
+                <p className="card__client">{prop.client && prop.client}</p>
+                <img
+                  className="card__illustration"
+                  src={'/mission_illustration.png'}
+                  alt="illustration"
                 />
-                <h3 className="card__header">{prop.title && prop.title}</h3>
-                <p className="card__info">{prop.client && prop.client}</p>
                 <div className={`card__status`}>
                   {prop.isActive ? (
                     <>

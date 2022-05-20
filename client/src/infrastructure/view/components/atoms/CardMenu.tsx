@@ -18,7 +18,7 @@ function CardMenu({ prop, position, contextMenu }) {
           e.stopPropagation();
           return;
         }}
-        className="card__menu"
+        className="card__header__menu"
         src={'/menu.png'}
         alt="menu"
       />
