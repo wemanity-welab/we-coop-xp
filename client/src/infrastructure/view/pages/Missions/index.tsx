@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useLayoutEffect } from 'react';
 import { missionServices } from 'application';
 import { Mission } from 'domain/mission/mission';
 import { useMission } from '../../hooks/UseMissions';
@@ -12,6 +12,11 @@ export const Missions = () => {
   const [position, setPosition] = useState({ xPos: 0, yPos: 0 });
   const [idList, setIdList] = useState<any>([]);
   const [idMenuList, setIdMenuList] = useState<any>([]);
+  const [scroll, setScroll] = useState<any>({ scrollx: 0, scrolly: 0 });
+
+  useLayoutEffect(() => {
+    window.scrollTo(scroll.scrollx, scroll.scrolly);
+  });
 
   useEffect(() => {
     const missions: any = missionServices
@@ -50,6 +55,7 @@ export const Missions = () => {
     position: (e: React.MouseEvent) => {
       e.preventDefault();
       setPosition({ xPos: e.pageX - 130, yPos: e.pageY + 10 });
+      setScroll({ scrollx: window.scrollX, scrolly: window.scrollY });
     },
     changeStatus: async id => {
       const newStatus = { isActive: !status };
