@@ -62,6 +62,7 @@ export const Missions = () => {
       setPosition({ xPos: e.pageX - 130, yPos: e.pageY + 10 });
     },
     changeStatus: async (id, propStatus) => {
+      setScroll({ scrollx: window.scrollX, scrolly: window.scrollY });
       setStatus(propStatus);
       const newStatus = { isActive: !propStatus };
       await missionServices.updateMission(id, newStatus);
