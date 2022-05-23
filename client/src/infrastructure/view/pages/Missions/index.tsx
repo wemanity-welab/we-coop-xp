@@ -32,12 +32,15 @@ export const Missions = () => {
   const details = {
     ids: idList,
     addId: (el: any) => {
-      const newList = idList.push(el);
-      setIdList([newList, ...idList]);
+      idList.push(el);
+      setIdList([...idList]);
+      setScroll({ scrollx: window.scrollX, scrolly: window.scrollY });
     },
     removeId: (el: any) => {
-      const newList = idList.splice(el, 1);
-      setIdList([newList]);
+      setScroll({ scrollx: window.scrollX, scrolly: window.scrollY });
+      const index = idList.indexOf(el);
+      idList.splice(index, 1);
+      setIdList([...idList]);
     },
   };
 
@@ -46,8 +49,10 @@ export const Missions = () => {
     addId: el => {
       idMenuList.push(el);
       setIdMenuList([...idMenuList]);
+      setScroll({ scrollx: window.scrollX, scrolly: window.scrollY });
     },
     removeId: el => {
+      setScroll({ scrollx: window.scrollX, scrolly: window.scrollY });
       const index = idMenuList.indexOf(el);
       idMenuList.splice(index, 1);
       setIdMenuList([...idMenuList]);
@@ -55,7 +60,6 @@ export const Missions = () => {
     position: (e: React.MouseEvent) => {
       e.preventDefault();
       setPosition({ xPos: e.pageX - 130, yPos: e.pageY + 10 });
-      setScroll({ scrollx: window.scrollX, scrolly: window.scrollY });
     },
     changeStatus: async id => {
       const newStatus = { isActive: !status };
