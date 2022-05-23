@@ -33,7 +33,7 @@ function CardMenu({ prop, position, contextMenu }) {
               className="option"
               onClick={e => {
                 e.stopPropagation();
-                contextMenu.changeStatus(prop.id);
+                contextMenu.changeStatus(prop.id, prop.isActive);
               }}
             >
               {prop.isActive ? 'Désactiver' : 'Activer'}

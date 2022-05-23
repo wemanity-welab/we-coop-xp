@@ -61,8 +61,8 @@ export const Missions = () => {
       e.preventDefault();
       setPosition({ xPos: e.pageX - 130, yPos: e.pageY + 10 });
     },
-    changeStatus: async id => {
-      const newStatus = { isActive: !status };
+    changeStatus: async (id, propStatus) => {
+      const newStatus = { isActive: !propStatus };
       await missionServices.updateMission(id, newStatus);
       setStatus(newStatus.isActive);
     },
