@@ -13,8 +13,6 @@ import { HomePage } from './pages/HomePage/Loadable';
 import { NotFoundPage } from './pages/NotFoundPage/Loadable';
 import { useTranslation } from 'react-i18next';
 import { MainMissionList } from './pages/MissionList';
-import { AddMission } from './components/templates/AddMission/AddMission';
-import { Missions } from './pages/Missions/Loadable';
 
 export function App() {
   const { i18n } = useTranslation();
