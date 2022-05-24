@@ -5,7 +5,7 @@ import { useMission } from '../../hooks/UseMissions';
 import { missionList } from '../../store/Mission/mission.actions';
 import { ListingCards } from 'infrastructure/view/components';
 
-export const Missions = () => {
+export const Missions = ({ setDisplay, setMission }) => {
   const { state, dispatch } = useMission();
   const [catalog, setCatalog] = useState<Mission[]>([]);
   const [status, setStatus] = useState<boolean>();
@@ -77,7 +77,6 @@ export const Missions = () => {
 
   const deleteMission = async id => {
     const deletedMsg = await missionServices.deleteMission(id);
-    console.log(deletedMsg);
     missionServices
       .getMissions()
       .then(missions => dispatch(missionList(missions)));
@@ -85,12 +84,14 @@ export const Missions = () => {
 
   return (
     <ListingCards
+      setMission={setMission}
       title="Les Missions"
       cardType="mission"
       props={catalog}
       position={position}
       contextMenu={contextMenu}
       details={details}
+      setDisplay={setDisplay}
     />
   );
 };

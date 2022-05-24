@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { useOutsideClick } from 'infrastructure/view/hooks';
 
-function CardMenu({ prop, position, contextMenu }) {
+function CardMenu({ prop, position, contextMenu, setDisplay, setMission }) {
   const wrapperRef = useRef(null);
   useOutsideClick(wrapperRef, contextMenu.removeId);
   return (
@@ -43,7 +43,8 @@ function CardMenu({ prop, position, contextMenu }) {
             className="option"
             onClick={e => {
               e.stopPropagation();
-              console.log(contextMenu.ids);
+              setMission(prop);
+              setDisplay('update-form');
             }}
           >
             Modifier

@@ -9,6 +9,8 @@ function ListingCards({
   details,
   contextMenu,
   cardType,
+  setDisplay,
+  setMission,
 }) {
   return (
     <div className="container">
@@ -25,6 +27,8 @@ function ListingCards({
                   contextMenu={contextMenu}
                   details={details}
                   cardType={cardType}
+                  setDisplay={setDisplay}
+                  setMission={setMission}
                 />
               ))
           : 'Chargement'}
