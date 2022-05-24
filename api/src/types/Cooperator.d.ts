@@ -7,4 +7,5 @@ export type Cooperator = {
   practice: string;
   m3?: string;
   mentor?: string;
+  disponible?: boolean;
 };

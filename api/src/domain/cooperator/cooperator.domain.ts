@@ -7,6 +7,7 @@ export class CooperatorDomain {
   private practice: string;
   private m3?: string;
   private mentor?: string;
+  private disponible?: boolean;
 
   constructor({
     id,
@@ -17,6 +18,7 @@ export class CooperatorDomain {
     practice,
     m3,
     mentor,
+    disponible,
   }: {
     id?: string;
     lastName: string;
@@ -26,6 +28,7 @@ export class CooperatorDomain {
     practice: string;
     m3?: string;
     mentor?: string;
+    disponible?: boolean;
   }) {
     this.id = id;
     this.firstName = firstName;
@@ -35,6 +38,7 @@ export class CooperatorDomain {
     this.practice = practice;
     this.m3 = m3;
     this.mentor = mentor;
+    this.disponible = disponible;
   }
 
   get getId(): string {
@@ -90,5 +94,11 @@ export class CooperatorDomain {
   }
   set setMentor(value: string) {
     this.mentor = value;
+  }
+  get getStatus(): boolean {
+    return this.disponible;
+  }
+  set setStatus(value: boolean) {
+    this.disponible = value;
   }
 }
