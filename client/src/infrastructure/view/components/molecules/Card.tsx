@@ -2,7 +2,15 @@ import React from 'react';
 import { CardMenu } from '../atoms';
 import CardDetails from './CardDetails';
 
-function Card({ prop, position, details, contextMenu, cardType }) {
+function Card({
+  prop,
+  position,
+  details,
+  contextMenu,
+  cardType,
+  setDisplay,
+  setMission,
+}) {
   return (
     <>
       {details.ids.includes(prop.id) && (
@@ -33,6 +41,8 @@ function Card({ prop, position, details, contextMenu, cardType }) {
                   prop={prop}
                   position={position}
                   contextMenu={contextMenu}
+                  setDisplay={setDisplay}
+                  setMission={setMission}
                 />
                 <h3 className="card__header">{prop.title && prop.title}</h3>
                 <p className="card__info">{prop.client && prop.client}</p>
