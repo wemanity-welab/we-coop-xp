@@ -1,23 +1,24 @@
 import React, { useEffect, useState } from 'react';
-import { missionServices } from 'application';
-import { Mission } from 'domain/mission/mission';
-import { useMission } from '../../hooks/UseMissions';
-import { missionList } from '../../store/Mission/mission.actions';
-import { ListingCards } from 'infrastructure/view/components';
 
-export const Missions = () => {
-  const { state, dispatch } = useMission();
-  const [catalog, setCatalog] = useState<Mission[]>([]);
+import { ListingCards } from 'infrastructure/view/components';
+import { useCooperator } from 'infrastructure/view/hooks/UseCooperators';
+import { Cooperator } from '../../../../../domain/cooperator/cooperator';
+import cooperatorServices from 'application/cooperator/cooperator.factory';
+import { cooperatorList } from 'infrastructure/view/store/Cooperator/cooperator.actions';
+
+export const Cooperators = () => {
+  const { state, dispatch } = useCooperator();
+  const [catalog, setCatalog] = useState<Cooperator[]>([]);
   const [status, setStatus] = useState<boolean>();
   const [position, setPosition] = useState({ xPos: 0, yPos: 0 });
   const [idList, setIdList] = useState<any>([]);
   const [idMenuList, setIdMenuList] = useState<any>([]);
 
   useEffect(() => {
-    const missions: any = missionServices
-      .getMissions()
-      .then(data => dispatch(missionList(data)));
-    setCatalog(missions);
+    const cooperators: any = cooperatorServices
+      .getCooperators()
+      .then(data => dispatch(cooperatorList(data)));
+    setCatalog(cooperators);
   }, [status]);
 
   useEffect(() => {
@@ -51,30 +52,32 @@ export const Missions = () => {
       e.preventDefault();
       setPosition({ xPos: e.pageX, yPos: e.pageY - 80 });
     },
+
     changeStatus: async id => {
-      const newStatus = { isActive: !status };
-      await missionServices.updateMission(id, newStatus);
-      setStatus(newStatus.isActive);
+      const newStatus = { disponible: !status };
+      await cooperatorServices.updateCooperator(id, newStatus);
+      setStatus(newStatus.disponible);
     },
+
     handleClickDelete: async id => {
       if (window.confirm('Êtes-vous sur de vouloir supprimer cette mission ?'))
-        deleteMission(id);
+        deleteCooperator(id);
       setIdMenuList([]);
     },
   };
 
-  const deleteMission = async id => {
-    const deletedMsg = await missionServices.deleteMission(id);
+  const deleteCooperator = async id => {
+    const deletedMsg = await cooperatorServices.deleteCooperator(id);
     console.log(deletedMsg);
-    missionServices
-      .getMissions()
-      .then(missions => dispatch(missionList(missions)));
+    cooperatorServices
+      .getCooperators()
+      .then(cooperators => dispatch(cooperatorList(cooperators)));
   };
 
   return (
     <ListingCards
-      title="Les Missions"
-      cardType="mission"
+      title="Cooperateurs"
+      cardType="cooperator"
       props={catalog}
       position={position}
       contextMenu={contextMenu}

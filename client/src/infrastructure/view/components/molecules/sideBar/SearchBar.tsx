@@ -1,18 +1,22 @@
 import { faMagnifyingGlass, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { missionServices } from 'application';
+import cooperatorServices from 'application/cooperator/cooperator.factory';
+import missionServices from 'application/mission/mission.factory';
+import { useCooperator } from 'infrastructure/view/hooks/UseCooperators';
 import { useMission } from 'infrastructure/view/hooks/UseMissions';
+import { cooperatorFiltred } from 'infrastructure/view/store/Cooperator/cooperator.actions';
 import { missionFiltred } from 'infrastructure/view/store/Mission/mission.actions';
-import React, { useEffect, useRef, useState } from 'react';
+
+import React, { useEffect, useState } from 'react';
 import dataColor from '../../../../../utils/tagsColor.json';
 
 export const SearchBar = () => {
   const divRef = React.useRef<HTMLDivElement>(null);
+  const [tags, setTags] = useState<string[]>([]);
+  let path = window.location.pathname;
 
   const { dispatch } = useMission();
-  const [tags, setTags] = useState<string[]>([]);
-
-  const missions = missionServices.missionFiltred(tags);
+  const cooperatordispatch = useCooperator();
 
   const addTag = async e => {
     if (e.key === 'Enter' && e.target.value.length > 0) {
@@ -28,7 +32,13 @@ export const SearchBar = () => {
 
   useEffect(() => {
     try {
-      missions.then(data => dispatch(missionFiltred(data)));
+      path === '/missions'
+        ? missionServices
+            .missionFiltred(tags)
+            .then(data => dispatch(missionFiltred(data)))
+        : cooperatorServices
+            .cooperatorFiltred(tags)
+            .then(data => cooperatordispatch.dispatch(cooperatorFiltred(data)));
 
       for (const [key, value] of Object.entries(dataColor)) {
         if (tags.includes(key) && divRef.current?.textContent === key) {

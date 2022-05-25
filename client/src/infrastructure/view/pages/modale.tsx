@@ -1,12 +1,19 @@
 import React from 'react';
-import { AddMission } from 'infrastructure/view/components/templates/AddMission/AddMission';
-import { useState, useEffect } from 'react';
-import { Missions } from '../Missions/Loadable';
-
-const ModaleMission = () => {
-  const [display, setDisplay] = useState(true);
-  const handelModals = (e: any) => {
-    if (e.target.id === 'AddMission') {
+import { useEffect } from 'react';
+type ModaleProps = {
+  setDisplay: (val: boolean) => void;
+  display: boolean;
+  children: React.ReactNode;
+  buttonSwich: string;
+};
+const Modale: React.FC<ModaleProps> = ({
+  setDisplay,
+  display,
+  children,
+  buttonSwich,
+}) => {
+  const handelModals = e => {
+    if (e.target.id === 'switch') {
       setDisplay(false);
     } else if (e.target.id === 'goBack') {
       setDisplay(true);
@@ -20,10 +27,10 @@ const ModaleMission = () => {
           <button
             className="btn-addMission "
             onClick={handelModals}
-            id="AddMission"
+            id="switch"
             style={{ display: display ? 'block' : 'none' }}
           >
-            Ajouter une mission
+            {buttonSwich}
           </button>
 
           <img
@@ -35,14 +42,10 @@ const ModaleMission = () => {
           />
         </div>
         <br />
-        <div className="modale">
-          <span></span>
-
-          {display ? <Missions /> : <AddMission setDisplay={setDisplay} />}
-        </div>
+        <div className="modale">{children}</div>
       </div>
     </>
   );
 };
 
-export default ModaleMission;
+export default Modale;

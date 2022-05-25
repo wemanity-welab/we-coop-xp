@@ -28,7 +28,7 @@ function CardMenu({ prop, position, contextMenu }) {
           className="custom-context-menu"
           style={{ top: position.yPos, left: position.xPos }}
         >
-          {prop.isActive !== undefined && (
+          {prop.isActive !== undefined ? (
             <div
               className="option"
               onClick={e => {
@@ -38,7 +38,18 @@ function CardMenu({ prop, position, contextMenu }) {
             >
               {prop.isActive ? 'Désactiver' : 'Activer'}
             </div>
+          ) : (
+            <div
+              className="option"
+              onClick={e => {
+                e.stopPropagation();
+                contextMenu.changeStatus(prop.id);
+              }}
+            >
+              {prop.disponible ? 'disponible' : 'Indisponible'}
+            </div>
           )}
+
           <div
             className="option"
             onClick={e => {

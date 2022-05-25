@@ -4,7 +4,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { missionPosted } from 'infrastructure/view/store/Mission/mission.actions';
 import { missionServices } from 'application';
 import { useMission } from 'infrastructure/view/hooks/UseMissions';
-import { Missions } from 'infrastructure/view/pages/Missions';
+import { Missions } from 'infrastructure/view/pages/MissionPage/Missions/Loadable';
 
 toast.configure();
 const notify = () => {
@@ -45,6 +45,7 @@ export const AddMission: React.FC<Props> = ({ setDisplay }) => {
       description,
     };
     addMission(payload, e);
+
     setTitle('');
     setProfile('');
     setClient('');

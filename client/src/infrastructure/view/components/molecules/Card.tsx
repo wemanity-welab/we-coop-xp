@@ -5,16 +5,25 @@ import CardDetails from './CardDetails';
 function Card({ prop, position, details, contextMenu, cardType }) {
   return (
     <>
-      {details.ids.includes(prop.id) && (
-        <CardDetails
-          key={prop.id}
-          cardType="mission"
-          data={prop}
-          details={details}
-        />
-      )}
       <li>
         <div className="container">
+          {details.ids.includes(prop.id) &&
+            (cardType === 'mission' ? (
+              <CardDetails
+                key={prop.id}
+                cardType="mission"
+                data={prop}
+                details={details}
+              />
+            ) : (
+              <CardDetails
+                key={prop.id}
+                cardType="cooperator"
+                data={prop}
+                details={details}
+              />
+            ))}
+
           <div
             onClick={() => {
               if (details.ids.includes(prop.id)) {
@@ -26,7 +35,7 @@ function Card({ prop, position, details, contextMenu, cardType }) {
             }}
             className="card"
           >
-            {cardType === 'mission' && (
+            {cardType === 'mission' ? (
               <div className="card__content">
                 <CardMenu
                   key={prop.id}
@@ -36,6 +45,7 @@ function Card({ prop, position, details, contextMenu, cardType }) {
                 />
                 <h3 className="card__header">{prop.title && prop.title}</h3>
                 <p className="card__info">{prop.client && prop.client}</p>
+
                 <div className={`card__status`}>
                   {prop.isActive ? (
                     <>
@@ -54,6 +64,47 @@ function Card({ prop, position, details, contextMenu, cardType }) {
                         alt="check"
                       />
                       <span>Inactive</span>
+                    </>
+                  )}
+                </div>
+              </div>
+            ) : (
+              <div className="card__content">
+                <CardMenu
+                  key={prop.id}
+                  prop={prop}
+                  position={position}
+                  contextMenu={contextMenu}
+                />
+                <h3 className="card__header">
+                  {prop.lastName && prop.lastName}
+                </h3>
+
+                <p className="card__info">{prop.practice && prop.practice}</p>
+                {/* <img
+                  className="card__illustration"
+                  src={'/img-cooperator.png'}
+                  alt="img cooperator"
+                /> */}
+
+                <div className={`card__status`}>
+                  {prop.disponible ? (
+                    <>
+                      <img
+                        className="card__status__logo"
+                        src={'/check.png'}
+                        alt="check"
+                      />
+                      <span>disponible</span>
+                    </>
+                  ) : (
+                    <>
+                      <img
+                        className="card__status__logo"
+                        src={'/close.png'}
+                        alt="check"
+                      />
+                      <span>Indisponible</span>
                     </>
                   )}
                 </div>

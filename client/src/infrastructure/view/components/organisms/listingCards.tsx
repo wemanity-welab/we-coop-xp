@@ -1,5 +1,5 @@
 import React from 'react';
-import { sortingByTitle } from 'utils/sortingArrays';
+import sorting from 'utils/sortingArrays';
 import { Card } from '../molecules';
 
 function ListingCards({
@@ -16,7 +16,7 @@ function ListingCards({
       <ul className="container__cards">
         {props && props.length > 0
           ? props
-              .sort(sortingByTitle)
+              .sort(sorting)
               .map(prop => (
                 <Card
                   key={prop.id}

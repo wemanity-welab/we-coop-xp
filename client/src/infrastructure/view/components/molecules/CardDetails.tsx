@@ -13,7 +13,8 @@ export default function CardDetails(props) {
         className="details__closeButton"
         icon={faXmark}
       />
-      {props.cardType === 'mission' && (
+
+      {props.cardType === 'mission' ? (
         <div className="details__mission">
           <h3>Mission</h3>
           <div className="details__mission__title">
@@ -28,6 +29,32 @@ export default function CardDetails(props) {
           <div className="details__mission__description">
             Description : {props.data.description}
           </div>
+        </div>
+      ) : (
+        <div className="details__mission">
+          <h3>Coopérateur</h3>
+          <div className="details__mission__title">
+            Prénom : {props.data.firstName}
+          </div>
+          <div className="details__mission__profil">
+            Nom: {props.data.lastName}
+          </div>
+          <div className="details__mission__client">
+            Numéro de telephone : {props.data.phoneNumber}
+          </div>
+          <div className="details__mission__client">
+            Email : {props.data.email}
+          </div>
+          <div className="details__mission__client">
+            Practice : {props.data.practice}
+          </div>
+          <div className="details__mission__client">M3 : {props.data.m3}</div>
+          <div className="details__mission__client">
+            Mentor : {props.data.mentor}
+          </div>
+          {/* <div className="details__mission__description">
+            Description : {props.data.description}
+          </div> */}
         </div>
       )}
     </div>
