@@ -41,7 +41,7 @@ const Modale: React.FC<ModaleProps> = ({
             className={display ? 'displayNone' : 'display'}
           />
         </div>
-        <br />
+
         <div className="modale">{children}</div>
       </div>
     </>

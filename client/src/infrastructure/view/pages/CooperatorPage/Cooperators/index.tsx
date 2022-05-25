@@ -82,6 +82,8 @@ export const Cooperators = () => {
       position={position}
       contextMenu={contextMenu}
       details={details}
+      setDisplay={undefined}
+      setMission={undefined}
     />
   );
 };

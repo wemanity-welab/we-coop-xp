@@ -64,8 +64,6 @@ function Card({
                   src={'/mission_illustration.png'}
                   alt="illustration"
                 />
-                <h3 className="card__header">{prop.title && prop.title}</h3>
-                <p className="card__info">{prop.client && prop.client}</p>
 
                 <div className={`card__status`}>
                   {prop.isActive ? (
@@ -96,19 +94,19 @@ function Card({
                   prop={prop}
                   position={position}
                   contextMenu={contextMenu}
-                  setDisplay={setDisplay}
-                  setMission={setMission}
+                  setDisplay={undefined}
+                  setMission={undefined}
                 />
                 <h3 className="card__header">
                   {prop.lastName && prop.lastName}
                 </h3>
 
                 <p className="card__info">{prop.practice && prop.practice}</p>
-                {/* <img
+                <img
                   className="card__illustration"
                   src={'/img-cooperator.png'}
                   alt="img cooperator"
-                /> */}
+                />
 
                 <div className={`card__status`}>
                   {prop.disponible ? (
