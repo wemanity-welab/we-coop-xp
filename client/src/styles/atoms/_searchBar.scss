@@ -4,13 +4,13 @@
   left: 60%;
   transform: translate(-40%, -50%);
   width: 40%;
-  height: auto;
-  border-radius: 10px;
+
+  border-radius: 30px;
 
   padding: 1px;
   display: flex;
   justify-content: space-between;
-  height: 54px;
+  height: 40px;
   background-color: $background-color-search-card;
 
   @media screen and(max-width: 600px) {
@@ -20,27 +20,31 @@
     border: none;
     margin-left: 1em;
     border-radius: 5px;
-    color:$color-night-bleu ;
+    color: $color-night-bleu;
     background-color: $background-color-search-card;
 
-    
-        @media screen and(max-width: (    300px)) {
-          border-radius: 20px;
-      
-        }
+    @media screen and(max-width: (    300px)) {
+      border-radius: 20px;
+    }
   }
 
   .searchbtn {
     width: 19%;
     position: relative;
     cursor: pointer;
-    img{
-        position: absolute;
-        
-        right: 0.01%;
-        top: 26%;
-        bottom: -0.01%;
-        
+
+    .svg-inline--fa {
+      position: absolute;
+      left: 2rem;
+      color: $nightblue;
+      top: 26%;
+      bottom: -0.01%;
+      @media screen and(max-width: (800px)) {
+        left: 1rem;
+      }
+      @media screen and(max-width: (580px)) {
+        left: -1rem;
+      }
     }
   }
 
@@ -68,19 +72,30 @@
   border-radius: 10px;
   align-items: center;
   color: black;
-  background-color: $green-default-tags;
-  padding: 3%;
+  text-align: center;
+  width: 8rem;
+  background-color: rgb(104, 186, 178,0.2);
+  padding: 1% 1% 1% 1.5%;
     &:hover {
     background: #e1f1f9;
   }
-}
+  .svg-inline--fa {
+    height: 1em;
+    overflow: none;
+    padding-left: 3rem;
+    padding-top: 0.3rem;
+    color: $color-night-bleu;
 
-.tag span {
-  left: 56%;
-  margin: auto;
 
-  color: #5884b0;
+  opacity: 0.5;
+
   cursor: pointer;
-}
+  }
+  span{
+    color: $color-night-bleu;
 
+
+    opacity: 0.5;
+  }
+}
 

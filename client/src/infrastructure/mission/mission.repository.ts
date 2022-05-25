@@ -43,7 +43,6 @@ export const missionRepository = (client: Http): IMissionRepository => ({
     const url = '/missions/search/' + parameterizeArray('criteria', keywords);
 
     const missionFiltred = await client.get<MissionDTO[]>(url);
-
     return missionFiltred.map(
       (missionDto): Mission => ({
         id: missionDto.id,

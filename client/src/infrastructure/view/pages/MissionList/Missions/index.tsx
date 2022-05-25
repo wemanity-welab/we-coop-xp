@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useLayoutEffect } from 'react';
 import { missionServices } from 'application';
+import { useMission } from 'infrastructure/view/hooks/UseMissions';
 import { Mission } from 'domain/mission/mission';
-import { useMission } from '../../hooks/UseMissions';
-import { missionList } from '../../store/Mission/mission.actions';
-import { ListingCards } from 'infrastructure/view/components';
+import { missionList } from 'infrastructure/view/store/Mission/mission.actions';
+import ListingCards from 'infrastructure/view/components/organisms/listingCards';
 
 export const Missions = ({ setDisplay, setMission }) => {
   const { state, dispatch } = useMission();

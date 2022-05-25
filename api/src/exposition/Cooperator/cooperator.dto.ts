@@ -9,6 +9,7 @@ export interface CooperatorDTO {
   practice: string;
   m3?: string;
   mentor?: string;
+  disponible?: boolean;
 }
 
 //EXEMPLE TYPE

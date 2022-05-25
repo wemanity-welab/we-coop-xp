@@ -2,13 +2,14 @@ import MainLayout from 'infrastructure/view/components/templates/MainLayout';
 
 import { SearchBar } from 'infrastructure/view/components/molecules/sideBar/SearchBar';
 
-import React from 'react';
-import ModaleMission from './ModaleMission';
+import React, { useState } from 'react';
+import ModaleMission from './Missions/modaleMission';
 
 export const MainMissionList = () => {
   return (
     <MainLayout>
       <SearchBar />
+
       <ModaleMission />
     </MainLayout>
   );

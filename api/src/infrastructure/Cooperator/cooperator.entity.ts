@@ -30,6 +30,9 @@ export class CooperatorEntity {
   @ApiProperty()
   @Column({ name: 'mentor', nullable: true })
   mentor!: string;
+  @ApiProperty()
+  @Column({ type: 'boolean', name: 'disponible', default: false })
+  disponible!: boolean;
 }
 
 export const fromDomainToEntity = (
@@ -43,6 +46,8 @@ export const fromDomainToEntity = (
   result.practice = cooperatorDomain.getPractice;
   result.m3 = cooperatorDomain.getM3;
   result.mentor = cooperatorDomain.getMentor;
+  result.disponible = cooperatorDomain.getStatus;
+
   return result;
 };
 
