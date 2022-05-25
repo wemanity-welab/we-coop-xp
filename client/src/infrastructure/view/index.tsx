@@ -13,7 +13,7 @@ import { HomePage } from './pages/HomePage/Loadable';
 import { NotFoundPage } from './pages/NotFoundPage/Loadable';
 import { useTranslation } from 'react-i18next';
 import { CooperatorsList } from './pages/CooperatorPage';
-import { MainMissionList } from './pages/MissionPage/Loadable';
+import { MainMissionList } from './pages/MissionList/Loadable';
 
 export function App() {
   const { i18n } = useTranslation();
