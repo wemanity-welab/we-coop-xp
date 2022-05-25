@@ -26,7 +26,9 @@
     "test:e2e:cooperator": "cucumber-js -p cooperatorE2E",
     "test:domain": "cucumber-js -p mission -p cooperator",
     "db:populate:missions": "./src/utils/scripts/missions.sh",
-    "db:clear:missions" : "./src/utils/scripts/clearMissionTable.sh"
+    "db:clear:missions" : "./src/utils/scripts/clearMissionTable.sh",
+    "db:populate:cooperators": "./src/utils/scripts/cooperators.sh",
+    "db:clear:cooperators" : "./src/utils/scripts/clearCooperatorTable.sh"
   },
   "dependencies": {
     "@cucumber/pretty-formatter": "^1.0.0-alpha.1",
