@@ -193,10 +193,10 @@ const ModaleMission: React.FC = () => {
           />
         );
       case 'mission-list':
-        return <Missions setMission={setMission} setDisplay={setDisplay} />;
+        return <Missions setProp={setMission} setDisplay={setDisplay} />;
 
       default:
-        return <Missions setMission={setMission} setDisplay={setDisplay} />;
+        return <Missions setProp={setMission} setDisplay={setDisplay} />;
     }
   };
 

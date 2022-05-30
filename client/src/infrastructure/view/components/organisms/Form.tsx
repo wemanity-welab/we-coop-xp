@@ -8,7 +8,7 @@ export const Form: React.FC<FormProps> = ({ formStructure, children }) => {
   return (
     <>
       <div className={formStructure.className}>
-        <form>
+        <form noValidate>
           <Title
             format={formStructure.titleFormat}
             label={formStructure.title}
