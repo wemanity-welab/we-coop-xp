@@ -1,25 +1,24 @@
-
 .MenuItem {
-    text-decoration: none;
-    color:#4A7AA9;
-    margin-top: 1.8rem;
-    transition: 0.2s all ease-in-out;
-    padding: 5%;
-    
-       
-        @media screen and(max-width: 920px) {
-            font-size: 0rem;
-       
-      }
+  text-decoration: none;
+  color: #4a7aa9;
+  margin-top: 1.8rem;
+  transition: 0.2s all ease-in-out;
+  padding: 5%;
+  @media screen and(max-width: 1200px) {
+    font-size: 0.8rem;
+  }
 
+  @media screen and(max-width: 920px) {
+    font-size: 0rem;
+  }
 }
 
 .MenuItem:hover {
-    background-color: rgba(74, 122, 169, 0.3);
-    border: 1px solid rgb(128, 155, 181);
-    border-radius: 5px;
-    padding: 5%;
-    display: block;
-    color: $white;
-    cursor: pointer;
+  background-color: rgba(74, 122, 169, 0.3);
+  border: 1px solid rgb(128, 155, 181);
+  border-radius: 5px;
+  padding: 5%;
+  display: block;
+  color: $white;
+  cursor: pointer;
 }

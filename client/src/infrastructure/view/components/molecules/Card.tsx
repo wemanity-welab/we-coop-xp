@@ -54,9 +54,9 @@ function Card({
                     setDisplay={setDisplay}
                     setMission={setMission}
                   />
-                  <h3 className="card__header__title">
+                  <h4 className="card__header__title">
                     {prop.title && prop.title}
-                  </h3>
+                  </h4>
                 </div>
                 <p className="card__client">{prop.client && prop.client}</p>
                 <img
@@ -65,7 +65,7 @@ function Card({
                   alt="illustration"
                 />
 
-                <div className={`card__status`}>
+                <div className={`card__status `}>
                   {prop.isActive ? (
                     <>
                       <img
@@ -89,19 +89,24 @@ function Card({
               </div>
             ) : (
               <div className="card__content">
-                <CardMenu
-                  key={prop.id}
-                  prop={prop}
-                  position={position}
-                  contextMenu={contextMenu}
-                  setDisplay={undefined}
-                  setMission={undefined}
-                />
-                <h3 className="card__header">
-                  {prop.lastName && prop.lastName}
-                </h3>
-
-                <p className="card__info">{prop.practice && prop.practice}</p>
+                <div className="card__header">
+                  <CardMenu
+                    key={prop.id}
+                    prop={prop}
+                    position={position}
+                    contextMenu={contextMenu}
+                    setDisplay={undefined}
+                    setMission={undefined}
+                  />
+                  <h4 className="card__header__title card-header-name">
+                    {prop.firstName && prop.firstName}
+                    &nbsp;
+                    {prop.lastName && prop.lastName}
+                  </h4>
+                </div>
+                <p className="card__practice">
+                  {prop.practice && prop.practice}
+                </p>
                 <img
                   className="card__illustration"
                   src={'/img-cooperator.png'}

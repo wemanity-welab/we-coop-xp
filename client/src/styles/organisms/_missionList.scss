@@ -10,7 +10,7 @@
     }
     h2 {
         padding-left: 5vw;
-        padding-top: 4rem;
+        // padding-top: 4rem;
     }
     &__cards {
         display: flex;
@@ -24,5 +24,6 @@
         list-style: none;
         padding-bottom: 5%;
         flex: 0 0 30%;
+        margin-top: 3rem;
     }
 }

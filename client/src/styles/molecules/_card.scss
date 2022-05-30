@@ -36,6 +36,10 @@
     padding-left: 20px;
     font-weight: bold;
   }
+  &__practice {
+    padding-left: 20px;
+    font-weight: bold;
+  }
   &__illustration {
     width: inherit;
   }
@@ -49,5 +53,9 @@
     &__logo{
       width: 1.5rem;
     }
+    
+  }
+  &__statusDisponible {
+      padding-left: 2rem;
   }
 }

@@ -17,7 +17,7 @@ const ModaleCooperator = () => {
   const CooperatorFormStructure: FormStructure = {
     title: 'Ajouter un coopérateur',
     titleFormat: 'h2',
-    className: 'addMission',
+    className: 'addMission ',
     handleClick: e => {
       console.log('form');
     },
