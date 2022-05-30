@@ -10,7 +10,7 @@ function ListingCards({
   contextMenu,
   cardType,
   setDisplay,
-  setMission,
+  setProp,
 }) {
   return (
     <div className="container">
@@ -28,7 +28,7 @@ function ListingCards({
                   details={details}
                   cardType={cardType}
                   setDisplay={setDisplay}
-                  setMission={setMission}
+                  setProp={setProp}
                 />
               ))
           : 'Chargement'}

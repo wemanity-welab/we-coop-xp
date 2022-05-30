@@ -9,7 +9,7 @@ function Card({
   contextMenu,
   cardType,
   setDisplay,
-  setMission,
+  setProp,
 }) {
   return (
     <>
@@ -52,7 +52,7 @@ function Card({
                     position={position}
                     contextMenu={contextMenu}
                     setDisplay={setDisplay}
-                    setMission={setMission}
+                    setProp={setProp}
                   />
                   <h3 className="card__header__title">
                     {prop.title && prop.title}
@@ -94,8 +94,8 @@ function Card({
                   prop={prop}
                   position={position}
                   contextMenu={contextMenu}
-                  setDisplay={undefined}
-                  setMission={undefined}
+                  setDisplay={setDisplay}
+                  setProp={setProp}
                 />
                 <h3 className="card__header">
                   {prop.lastName && prop.lastName}

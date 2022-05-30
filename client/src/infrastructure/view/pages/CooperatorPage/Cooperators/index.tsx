@@ -6,7 +6,7 @@ import { Cooperator } from '../../../../../domain/cooperator/cooperator';
 import cooperatorServices from 'application/cooperator/cooperator.factory';
 import { cooperatorList } from 'infrastructure/view/store/Cooperator/cooperator.actions';
 
-export const Cooperators = () => {
+export const Cooperators = ({ setDisplay, setProp }) => {
   const { state, dispatch } = useCooperator();
   const [catalog, setCatalog] = useState<Cooperator[]>([]);
   const [status, setStatus] = useState<boolean>();
@@ -76,14 +76,14 @@ export const Cooperators = () => {
 
   return (
     <ListingCards
-      title="Cooperateurs"
+      title="Les Coopérateurs"
       cardType="cooperator"
       props={catalog}
       position={position}
       contextMenu={contextMenu}
       details={details}
-      setDisplay={undefined}
-      setMission={undefined}
+      setDisplay={setDisplay}
+      setProp={setProp}
     />
   );
 };

@@ -5,7 +5,7 @@ import { Mission } from 'domain/mission/mission';
 import { missionList } from 'infrastructure/view/store/Mission/mission.actions';
 import ListingCards from 'infrastructure/view/components/organisms/listingCards';
 
-export const Missions = ({ setDisplay, setMission }) => {
+export const Missions = ({ setDisplay, setProp }) => {
   const { state, dispatch } = useMission();
   const [catalog, setCatalog] = useState<Mission[]>([]);
   const [status, setStatus] = useState<boolean>();
@@ -84,7 +84,7 @@ export const Missions = ({ setDisplay, setMission }) => {
 
   return (
     <ListingCards
-      setMission={setMission}
+      setProp={setProp}
       title="Les Missions"
       cardType="mission"
       props={catalog}
