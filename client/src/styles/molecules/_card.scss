@@ -54,12 +54,15 @@
     align-items: center;
     justify-content: space-evenly;
     font-size: 1rem;
-
     width: 50%;
     &__logo{
       width: 1.5rem;
     }
-    
+    &__disponible{
+        padding-left: 2rem;
+        display: flex;
+        gap: 1rem
+    }
   }
   &__statusDisponible {
       padding-left: 2rem;

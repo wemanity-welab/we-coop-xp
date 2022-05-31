@@ -1,5 +1,6 @@
 import { faMagnifyingGlass, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Keyboard } from '@material-ui/icons';
 import cooperatorServices from 'application/cooperator/cooperator.factory';
 import missionServices from 'application/mission/mission.factory';
 import { useCooperator } from 'infrastructure/view/hooks/UseCooperators';
@@ -14,7 +15,6 @@ export const SearchBar = () => {
   const divRef = React.useRef<HTMLDivElement>(null);
   const [tags, setTags] = useState<string[]>([]);
   let path = window.location.pathname;
-
   const { dispatch } = useMission();
   const cooperatordispatch = useCooperator();
 

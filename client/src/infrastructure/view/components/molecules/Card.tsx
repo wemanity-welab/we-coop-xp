@@ -127,23 +127,23 @@ function Card({
 
                 <div className={`card__status`}>
                   {prop.disponible ? (
-                    <>
+                    <div className={`card__status__disponible`}>
                       <img
                         className="card__status__logo"
                         src={'/check.png'}
                         alt="check"
                       />
                       <span>Disponible</span>
-                    </>
+                    </div>
                   ) : (
-                    <>
+                    <div className={`card__status__disponible`}>
                       <img
                         className="card__status__logo"
                         src={'/close.png'}
                         alt="check"
                       />
                       <span>Indisponible</span>
-                    </>
+                    </div>
                   )}
                 </div>
               </div>
