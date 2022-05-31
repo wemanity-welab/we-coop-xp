@@ -31,15 +31,18 @@
     &__title {
       padding-left: 20px;
       order: 1;
+      font-size: 1rem;
     }
   }
   &__client {
     padding-left: 20px;
     font-weight: bold;
+    font-size: 1rem;
   }
   &__practice {
     padding-left: 20px;
     font-weight: bold;
+    font-size: 1rem;
   }
   &__illustration {
     width: inherit;
@@ -50,6 +53,8 @@
     display: flex;
     align-items: center;
     justify-content: space-evenly;
+    font-size: 1rem;
+
     width: 50%;
     &__logo{
       width: 1.5rem;
@@ -58,5 +63,7 @@
   }
   &__statusDisponible {
       padding-left: 2rem;
+      font-size: 1rem;
+
   }
 }

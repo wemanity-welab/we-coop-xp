@@ -1,6 +1,7 @@
 .Home {
   .btn-addMission {
     position: absolute;
+    cursor: pointer;
     left: 75%;
     top: 2rem;
     font-size: clamp(0.5rem, 10vw, 1rem); 
@@ -24,7 +25,7 @@
     height: 39px;
     left: 15rem;
     top: 8rem;
-       
+    cursor: pointer;
     
       @media screen and(max-width: 730px) {
         left: 7rem;

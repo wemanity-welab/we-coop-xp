@@ -19,13 +19,7 @@
     padding-bottom: 1rem;
       color: black1;
 
-      &:focus {
-        box-shadow: 10px 5px 5px $color-bleu;
 
-        border: dashed 2px $color-bleu;
-      }
-
-      cursor: pointer;
       @media screen and(max-width: 660px) {
       width: 100%;
       }
@@ -64,6 +58,7 @@
   }
   button {
     border-radius: 7px;
+    cursor: pointer;
 
     margin-left: 45rem;
     margin-top: 2rem;

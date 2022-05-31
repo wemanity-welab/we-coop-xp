@@ -135,7 +135,7 @@ const ModaleCooperator = () => {
     title:
       display === 'update-form'
         ? 'Modifier un coopérateur'
-        : 'Ajouter un coopérateur',
+        : 'Ajouter un(e) coopérateur(trice)',
     titleFormat: 'h2',
     className: 'addCoperators ',
     handleClick: e => {

@@ -6,10 +6,9 @@
     resize: none;
     padding: 10px;
     margin-bottom: 3rem;
-   
+
     display: flex;
     margin: auto;
-
   }
 
   form {
@@ -45,7 +44,7 @@
       }
       @media screen and(max-width: 500px) {
         margin-left: 2rem;
-         }
+      }
     }
 
     input,
@@ -57,10 +56,6 @@
 
       color: black1;
 
-      &:focus {
-
-      }
-
       @media screen and(max-width: 550px) {
         width: 80%;
         margin: 0 auto;
@@ -69,6 +64,7 @@
     }
 
     button {
+        cursor: pointer;
       border-radius: 7px;
       border: none;
       resize: none;
@@ -109,12 +105,11 @@
   label[for='Description'] {
     margin-left: 15rem;
     @media screen and(max-width: 617px) {
-        margin-left: 10rem;
-
-      }
-      @media screen and(max-width: 500px) {
-        margin-left: 2rem;
-         }
+      margin-left: 10rem;
+    }
+    @media screen and(max-width: 500px) {
+      margin-left: 2rem;
+    }
   }
   .description {
     height: 10rem;
