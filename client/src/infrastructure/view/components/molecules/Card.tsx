@@ -55,7 +55,9 @@ function Card({
                     setProp={setProp}
                   />
                   <h3 className="card__header__title">
-                    {prop.title && prop.title}
+                    {prop.title && prop.title.length > 15
+                      ? prop.title.substr(0, 15) + '...'
+                      : prop.title}
                   </h3>
                 </div>
                 <p className="card__client">{prop.client && prop.client}</p>
