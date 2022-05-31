@@ -137,7 +137,7 @@ const ModaleCooperator = () => {
         ? 'Modifier un coopérateur'
         : 'Ajouter un coopérateur',
     titleFormat: 'h2',
-    className: 'addMission ',
+    className: 'addCoperators ',
     handleClick: e => {
       const payload = {
         firstName,

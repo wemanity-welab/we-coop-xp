@@ -13,7 +13,7 @@ export const LabelInput: React.FC<PropsLabelInput> = ({
   placeholder,
 }) => {
   return (
-    <>
+    <span className="input-label">
       <Label label={label} />
       <Input
         type={type}
@@ -24,6 +24,6 @@ export const LabelInput: React.FC<PropsLabelInput> = ({
         id={id}
         placeholder={placeholder}
       />
-    </>
+    </span>
   );
 };

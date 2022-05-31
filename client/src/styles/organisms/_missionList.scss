@@ -3,6 +3,7 @@
     @media screen and(max-width: 730px) {
         margin: 0 auto; 
         margin-top: 2rem;
+        gap: 1rem;
     }    
     @media screen and(max-width: 380px) {
         padding-top: 2rem;
@@ -19,11 +20,13 @@
         align-items: center;
         justify-items: center;
         margin-top: 5%;
+        gap: 1rem;
     }
     li {
         list-style: none;
         padding-bottom: 5%;
-        flex: 0 0 30%;
+        // flex: 0 0 30%;
         margin-top: 3rem;
+        
     }
 }
