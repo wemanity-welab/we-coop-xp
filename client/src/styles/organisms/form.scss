@@ -10,7 +10,6 @@
     display: flex;
     margin: auto;
 
-    cursor: pointer;
   }
 
   form {
@@ -35,7 +34,6 @@
       display: flex;
       transition: 0.2s;
       z-index: 10;
-      cursor: pointer;
       @media screen and(max-width: 1200px) {
         margin-left: 19rem;
       }
@@ -60,9 +58,7 @@
       color: black1;
 
       &:focus {
-        box-shadow: 10px 5px 5px $color-bleu;
 
-        border: dashed 2px $color-bleu;
       }
 
       @media screen and(max-width: 550px) {
