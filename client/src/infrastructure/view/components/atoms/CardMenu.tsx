@@ -43,10 +43,10 @@ function CardMenu({ prop, position, contextMenu, setDisplay, setProp }) {
               className="option"
               onClick={e => {
                 e.stopPropagation();
-                contextMenu.changeStatus(prop.id);
+                contextMenu.changeStatus(prop.id, prop.disponible);
               }}
             >
-              {prop.disponible ? 'disponible' : 'Indisponible'}
+              {prop.disponible ? 'Rendre indisponible' : 'Rendre disponible'}
             </div>
           )}
 

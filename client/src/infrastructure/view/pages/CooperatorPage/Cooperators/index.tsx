@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 
 import { ListingCards } from 'infrastructure/view/components';
 import { useCooperator } from 'infrastructure/view/hooks/UseCooperators';
@@ -13,6 +13,11 @@ export const Cooperators = ({ setDisplay, setProp }) => {
   const [position, setPosition] = useState({ xPos: 0, yPos: 0 });
   const [idList, setIdList] = useState<any>([]);
   const [idMenuList, setIdMenuList] = useState<any>([]);
+  const [scroll, setScroll] = useState<any>({ scrollx: 0, scrolly: 0 });
+
+  useLayoutEffect(() => {
+    window.scrollTo(scroll.scrollx, scroll.scrolly);
+  });
 
   useEffect(() => {
     const cooperators: any = cooperatorServices
@@ -30,8 +35,10 @@ export const Cooperators = ({ setDisplay, setProp }) => {
     addId: (el: any) => {
       const newList = idList.push(el);
       setIdList([newList, ...idList]);
+      setScroll({ scrollx: window.scrollX, scrolly: window.scrollY });
     },
     removeId: (el: any) => {
+      setScroll({ scrollx: window.scrollX, scrolly: window.scrollY });
       const newList = idList.splice(el, 1);
       setIdList([newList]);
     },
@@ -42,25 +49,27 @@ export const Cooperators = ({ setDisplay, setProp }) => {
     addId: el => {
       idMenuList.push(el);
       setIdMenuList([...idMenuList]);
+      setScroll({ scrollx: window.scrollX, scrolly: window.scrollY });
     },
     removeId: el => {
+      setScroll({ scrollx: window.scrollX, scrolly: window.scrollY });
       const index = idMenuList.indexOf(el);
       idMenuList.splice(index, 1);
       setIdMenuList([...idMenuList]);
     },
     position: (e: React.MouseEvent) => {
       e.preventDefault();
-      setPosition({ xPos: e.pageX, yPos: e.pageY - 80 });
+      setPosition({ xPos: e.pageX - 130, yPos: e.pageY + 10 });
     },
-
-    changeStatus: async id => {
-      const newStatus = { disponible: !status };
+    changeStatus: async (id, propStatus) => {
+      setScroll({ scrollx: window.scrollX, scrolly: window.scrollY });
+      setStatus(propStatus);
+      const newStatus = { disponible: !propStatus };
       await cooperatorServices.updateCooperator(id, newStatus);
       setStatus(newStatus.disponible);
     },
-
     handleClickDelete: async id => {
-      if (window.confirm('Êtes-vous sur de vouloir supprimer cette mission ?'))
+      if (window.confirm('Êtes-vous sur de vouloir supprimer ce coopérateur ?'))
         deleteCooperator(id);
       setIdMenuList([]);
     },
