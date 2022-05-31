@@ -11,6 +11,13 @@ function Card({
   setDisplay,
   setProp,
 }) {
+  function renderNames() {
+    if (prop.firstName && prop.lastName) {
+      const names = `${prop.lastName} ${prop.firstName}`;
+      return names.length > 15 ? names.substr(0, 13) + '...' : names;
+    }
+  }
+
   return (
     <>
       <li>
@@ -56,11 +63,15 @@ function Card({
                   />
                   <h3 className="card__header__title">
                     {prop.title && prop.title.length > 15
-                      ? prop.title.substr(0, 15) + '...'
+                      ? prop.title.substr(0, 13) + '...'
                       : prop.title}
                   </h3>
                 </div>
-                <p className="card__client">{prop.client && prop.client}</p>
+                <p className="card__client">
+                  {prop.client && prop.client.length > 20
+                    ? prop.client.substr(0, 20) + '...'
+                    : prop.client}
+                </p>
                 <img
                   className="card__illustration"
                   src={'/mission_illustration.png'}
@@ -101,9 +112,7 @@ function Card({
                     setProp={setProp}
                   />
                   <h4 className="card__header__title card-header-name">
-                    {prop.firstName && prop.firstName}
-                    &nbsp;
-                    {prop.lastName && prop.lastName}
+                    {renderNames()}
                   </h4>
                 </div>
                 <p className="card__practice">
@@ -124,7 +133,7 @@ function Card({
                         src={'/check.png'}
                         alt="check"
                       />
-                      <span>disponible</span>
+                      <span>Disponible</span>
                     </>
                   ) : (
                     <>
