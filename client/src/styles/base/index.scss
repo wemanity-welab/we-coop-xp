@@ -1,6 +1,11 @@
 
 @import"../atoms/button.scss";
 
+@font-face {
+    font-family: "Avenir";
+    src: url("../typography/Avenir-Medium.ttf");
+    font-weight: 600;
+  }
 
 * {
     margin: 0;
@@ -9,6 +14,8 @@
     list-style-type: none;
     outline: none;
     text-decoration: none;
+    
+    font-family:"Avenir";
 
     &::selection {
         background:$color-opacite3;
