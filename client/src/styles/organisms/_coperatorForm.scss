@@ -1,0 +1,92 @@
+.addCoperators {
+  form {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 7rem;
+    position: relative;
+    padding: 4rem;
+    gap: 1rem;
+    @media screen and(max-width: 600px) {
+      @include colunm;
+    }
+    .input-label {
+      width: 40%;
+      position: relative;
+      margin-bottom: 3rem;
+      border-radius: 10px;
+      border: solid 2px $grey;
+      padding-left: 1rem;
+    padding-bottom: 1rem;
+      color: black1;
+
+      &:focus {
+        box-shadow: 10px 5px 5px $color-bleu;
+
+        border: dashed 2px $color-bleu;
+      }
+
+      cursor: pointer;
+      @media screen and(max-width: 660px) {
+      width: 100%;
+      }
+    }
+    input {
+      border: none;
+      resize: none;
+      position: relative;
+      font-size: clamp(0.1rem, 10vw, 1rem);
+      border-radius: 10px;
+
+    }
+    label {
+      position: absolute;
+      transform: translate(-2%, -140%);
+    }
+  }
+  h2 {
+    margin-bottom: 7rem;
+    color: $color-bleu;
+    position: absolute;
+     font-size: clamp(0.1rem, 10vw, 1.5rem);
+     margin-left: 18rem;
+     bottom: 32rem;
+    @media screen and(max-width: 1000px) {
+       font-size: 1.5rem;
+       margin-left: 12rem;
+    bottom: 28rem;
+} 
+ @media screen and(max-width: 663px) {
+    font-size: 1.3rem;
+    margin-left: 9rem;
+ bottom: 50rem;
+}
+   
+  }
+  button {
+    border-radius: 7px;
+
+    margin-left: 45rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    font-size: clamp(0.1rem, 10vw, 1rem);
+
+    background: $color-night-bleu;
+    width: 20%;
+    @media screen and(max-width: 1000px) {
+      margin: auto;
+      margin-top: 2rem;
+      margin-bottom: 2rem;
+    }
+    @media screen and(max-width: 617px) {
+      margin-top: 0.2rem;
+      font-size: clamp(0.1rem, 10vw, 0.5rem);
+    }
+
+    &:hover {
+      background: $color-2;
+    }
+  }
+}
+#content > div.Home > div.modale > div > form > span:nth-child(8) {
+  margin: auto;
+}

@@ -26,3 +26,8 @@ $shadow: 0 3px 20px rgba(0, 0, 0, 0.356);
 @mixin random-bgr(){
     background: rgb(random(255), random(255), random(255));
   }
+
+  @mixin colunm{
+    display: flex;
+    flex-direction: column;
+  }

@@ -2,6 +2,7 @@
   width: 15rem;
   height: 100%;
   border-radius: 10px;
+ 
   &__content {
     &:hover{
       box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
@@ -36,6 +37,10 @@
     padding-left: 20px;
     font-weight: bold;
   }
+  &__practice {
+    padding-left: 20px;
+    font-weight: bold;
+  }
   &__illustration {
     width: inherit;
   }
@@ -49,5 +54,9 @@
     &__logo{
       width: 1.5rem;
     }
+    
+  }
+  &__statusDisponible {
+      padding-left: 2rem;
   }
 }
