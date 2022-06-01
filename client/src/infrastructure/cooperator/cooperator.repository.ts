@@ -53,9 +53,6 @@ export const cooperatorRepository = (client: Http): ICooperatorRepository => ({
       '/cooperators/search/' + parameterizeArray('criteria', keywords);
 
     const cooperatorFiltred = await client.get<CooperatorDTO[]>(url);
-    console.log('cooperatorFiltred', cooperatorFiltred);
-
-    console.log('url', url);
 
     return cooperatorFiltred.map(
       (CooperatorDto): Cooperator => ({

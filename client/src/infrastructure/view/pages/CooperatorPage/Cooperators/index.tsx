@@ -77,7 +77,6 @@ export const Cooperators = ({ setDisplay, setProp }) => {
 
   const deleteCooperator = async id => {
     const deletedMsg = await cooperatorServices.deleteCooperator(id);
-    console.log(deletedMsg);
     cooperatorServices
       .getCooperators()
       .then(cooperators => dispatch(cooperatorList(cooperators)));
