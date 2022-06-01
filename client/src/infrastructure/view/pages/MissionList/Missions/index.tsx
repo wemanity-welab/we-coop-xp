@@ -4,6 +4,7 @@ import { useMission } from 'infrastructure/view/hooks/UseMissions';
 import { Mission } from 'domain/mission/mission';
 import { missionList } from 'infrastructure/view/store/Mission/mission.actions';
 import ListingCards from 'infrastructure/view/components/organisms/listingCards';
+import { notifySuccess } from 'utils/toastify';
 
 export const Missions = ({ setDisplay, setProp }) => {
   const { state, dispatch } = useMission();
@@ -77,6 +78,8 @@ export const Missions = ({ setDisplay, setProp }) => {
 
   const deleteMission = async id => {
     const deletedMsg = await missionServices.deleteMission(id);
+    notifySuccess('La mission est supprimée');
+
     missionServices
       .getMissions()
       .then(missions => dispatch(missionList(missions)));

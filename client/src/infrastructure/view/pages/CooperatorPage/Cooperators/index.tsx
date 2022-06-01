@@ -5,6 +5,7 @@ import { useCooperator } from 'infrastructure/view/hooks/UseCooperators';
 import { Cooperator } from '../../../../../domain/cooperator/cooperator';
 import cooperatorServices from 'application/cooperator/cooperator.factory';
 import { cooperatorList } from 'infrastructure/view/store/Cooperator/cooperator.actions';
+import { notifySuccess } from 'utils/toastify';
 
 export const Cooperators = ({ setDisplay, setProp }) => {
   const { state, dispatch } = useCooperator();
@@ -77,6 +78,8 @@ export const Cooperators = ({ setDisplay, setProp }) => {
 
   const deleteCooperator = async id => {
     const deletedMsg = await cooperatorServices.deleteCooperator(id);
+    notifySuccess('Le(a) coopérateur(trice) est supprimé(e)');
+
     cooperatorServices
       .getCooperators()
       .then(cooperators => dispatch(cooperatorList(cooperators)));
