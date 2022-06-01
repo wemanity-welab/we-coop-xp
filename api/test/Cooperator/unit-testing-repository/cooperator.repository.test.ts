@@ -69,7 +69,7 @@ describe('Testing Cooperator respository', () => {
     const id = response[0].getId;
 
     const deleted = await repository.remove(id);
-    expect(deleted).toBe(`Cooperateur n°${id} supprimée.`);
+    expect(deleted).toBe(`Cooperateur n°${id} supprimé.`);
   });
 
   it('Should update a cooperators', async () => {
@@ -121,8 +121,19 @@ describe('Testing Cooperator respository', () => {
   });
 
   it('Should display a list of missions with multiple profile keywords search', async () => {
-    const request = await repository.search(['Tech', 'Justinn']);
+    const request = await repository.search(['Tech']);
     const expectedCooperators = [
+      {
+        id: '0',
+        firstName: 'Stearn',
+        lastName: 'Prayer',
+        phoneNumber: '362-471-0429',
+        email: 'sprayer1@google.cn',
+        practice: 'Tech',
+        m3: 'Eléa',
+        mentor: 'Noémie',
+        disponible: false,
+      },
       {
         id: '0',
         firstName: 'Mickaël',
@@ -132,16 +143,7 @@ describe('Testing Cooperator respository', () => {
         practice: 'Tech',
         m3: 'Estève',
         mentor: 'Lóng',
-      },
-      {
-        id: '0',
-        firstName: 'Justinn',
-        lastName: 'Hayton',
-        phoneNumber: '157-232-6965',
-        email: 'jhayton4@pen.io',
-        practice: 'Nader LLC',
-        m3: 'Estève',
-        mentor: 'Lóng',
+        disponible: false,
       },
     ];
 

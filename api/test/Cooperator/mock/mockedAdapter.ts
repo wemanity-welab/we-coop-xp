@@ -5,8 +5,8 @@ import { Cooperator } from '../../utils/types/Cooperator';
 class AdapterMock implements IAdapter<Cooperator, string> {
   datas: any[];
 
-  constructor() {
-    this.datas = [];
+  constructor(datas: any = []) {
+    this.datas = datas;
   }
 
   async save(data: Cooperator): Promise<Cooperator> {
@@ -42,11 +42,11 @@ class AdapterMock implements IAdapter<Cooperator, string> {
     return await this.datas.find((data) => data.id === id);
   }
 
-  search(keywords: any) {
+  async search(keywords: any) {
     const filtered: any = [];
-    this.datas.forEach((mission: any, idx: any) => {
-      for (const property in mission) {
-        const words = mission[property].split(/[\s,]+/);
+    this.datas.forEach((cooperator: any, idx: any) => {
+      for (const property in cooperator) {
+        const words = cooperator[property].split(/[\s,]+/);
         words.forEach((word: any) => {
           keywords.forEach((keyword: any) => {
             if (word === keyword) {

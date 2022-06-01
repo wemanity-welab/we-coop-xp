@@ -140,13 +140,11 @@ describe('Testing Search Method', () => {
 
   it('Should display a  list of missions with profile keyword search', async () => {
     const request = await repository.search(['Java']);
-    console.log(request);
     expect(request.length).toBeGreaterThan(0);
   });
 
   it('Should display a list of missions with multiple profile keywords search', async () => {
     const request = await repository.search(['Dev']);
-    console.log(request);
     expect(request).toEqual(missions);
   });
 

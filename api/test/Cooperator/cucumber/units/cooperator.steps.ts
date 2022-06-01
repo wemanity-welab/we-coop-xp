@@ -131,7 +131,7 @@ When(/^The employer search cooperators with keywords$/, async function (table) {
       this.cooperatorsFiltered = await this.service.search(this.keywords);
     })
     .catch((e) => {
-      console.log(e);
+      console.error(e);
     });
 });
 

@@ -60,24 +60,11 @@ describe('AppController (e2e)', () => {
     await request(app.getHttpServer())
       .post('/missions')
       .send(job)
-      .expect(HttpStatus.CREATED)
-      .then((res) => {
-        console.log(res.text);
-      });
+      .expect(HttpStatus.CREATED);
   });
 
   it('/mission (GET)', async () => {
-    await request(app.getHttpServer())
-      .get('/job')
-      .expect(HttpStatus.NOT_FOUND)
-      .then((res) => {
-        console.log(res.body);
-      });
-    await request(app.getHttpServer())
-      .get('/missions')
-      .expect(HttpStatus.OK)
-      .then((res) => {
-        console.log(res.body);
-      });
+    await request(app.getHttpServer()).get('/job').expect(HttpStatus.NOT_FOUND);
+    await request(app.getHttpServer()).get('/missions').expect(HttpStatus.OK);
   });
 });
