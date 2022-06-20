@@ -14,7 +14,9 @@
         left: 4rem;
       }
   }
-
+  #goBack {
+    z-index: 2;
+  }
   .displayNone {
     display: none;
   }
