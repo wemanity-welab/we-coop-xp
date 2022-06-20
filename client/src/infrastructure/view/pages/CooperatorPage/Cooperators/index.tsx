@@ -1,6 +1,6 @@
 import React, { useEffect, useLayoutEffect, useState } from 'react';
 
-import { ListingCards } from 'infrastructure/view/components';
+import { ListingCards, SearchBar } from 'infrastructure/view/components';
 import { useCooperator } from 'infrastructure/view/hooks/UseCooperators';
 import { Cooperator } from '../../../../../domain/cooperator/cooperator';
 import cooperatorServices from 'application/cooperator/cooperator.factory';
@@ -86,15 +86,18 @@ export const Cooperators = ({ setDisplay, setProp }) => {
   };
 
   return (
-    <ListingCards
-      title="Les Coopérateurs"
-      cardType="cooperator"
-      props={catalog}
-      position={position}
-      contextMenu={contextMenu}
-      details={details}
-      setDisplay={setDisplay}
-      setProp={setProp}
-    />
+    <>
+      <SearchBar />
+      <ListingCards
+        title="Les Coopérateurs"
+        cardType="cooperator"
+        props={catalog}
+        position={position}
+        contextMenu={contextMenu}
+        details={details}
+        setDisplay={setDisplay}
+        setProp={setProp}
+      />
+    </>
   );
 };

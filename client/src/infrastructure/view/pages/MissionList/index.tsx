@@ -8,8 +8,6 @@ import ModaleMission from './modaleMission';
 export const MainMissionList = () => {
   return (
     <MainLayout>
-      <SearchBar />
-
       <ModaleMission />
     </MainLayout>
   );

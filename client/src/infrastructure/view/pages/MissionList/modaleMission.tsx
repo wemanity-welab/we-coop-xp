@@ -12,6 +12,7 @@ import { TextArea } from 'infrastructure/view/components/atoms/TextArea';
 import { FormStructure } from 'infrastructure/view/components/organisms/types/OrganismsPropsTypes';
 import { Form } from 'infrastructure/view/components/organisms/Form';
 import { Missions } from './Missions/Loadable';
+import { SearchBar } from 'infrastructure/view/components';
 
 const ModaleMission: React.FC = () => {
   const [display, setDisplay] = useState('mission-list');

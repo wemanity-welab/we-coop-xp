@@ -7,7 +7,6 @@ export const CooperatorsList = () => {
   return (
     <>
       <MainLayout>
-        <SearchBar />
         <ModaleCooperator />
       </MainLayout>
     </>

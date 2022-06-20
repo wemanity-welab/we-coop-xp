@@ -1,6 +1,5 @@
 .wrapper {
-  margin-top: 2rem;
-  position: relative;
+  position: absolute;
   left: 60%;
   transform: translate(-40%, -50%);
   width: 40%;
@@ -66,6 +65,7 @@
   flex-wrap: wrap;
   margin: auto;
   margin-left: 45%;
+  padding-top: 1.7rem;
 }
 .tag {
   border-radius: 10px;

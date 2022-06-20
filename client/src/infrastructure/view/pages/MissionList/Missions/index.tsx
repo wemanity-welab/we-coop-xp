@@ -5,6 +5,7 @@ import { Mission } from 'domain/mission/mission';
 import { missionList } from 'infrastructure/view/store/Mission/mission.actions';
 import ListingCards from 'infrastructure/view/components/organisms/listingCards';
 import { notifySuccess } from 'utils/toastify';
+import { SearchBar } from 'infrastructure/view/components';
 
 export const Missions = ({ setDisplay, setProp }) => {
   const { state, dispatch } = useMission();
@@ -86,15 +87,18 @@ export const Missions = ({ setDisplay, setProp }) => {
   };
 
   return (
-    <ListingCards
-      setProp={setProp}
-      title="Les Missions"
-      cardType="mission"
-      props={catalog}
-      position={position}
-      contextMenu={contextMenu}
-      details={details}
-      setDisplay={setDisplay}
-    />
+    <>
+      <SearchBar />
+      <ListingCards
+        setProp={setProp}
+        title="Les Missions"
+        cardType="mission"
+        props={catalog}
+        position={position}
+        contextMenu={contextMenu}
+        details={details}
+        setDisplay={setDisplay}
+      />
+    </>
   );
 };
