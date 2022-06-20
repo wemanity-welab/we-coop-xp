@@ -3,7 +3,6 @@
     position: absolute;
     cursor: pointer;
     left: 75%;
-    top: 2rem;
     font-size: clamp(0.5rem, 10vw, 1rem); 
         @media screen and(max-width: 730px) {
       left: 12rem;
